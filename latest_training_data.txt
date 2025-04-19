@@ -1,9 +1,11 @@
-This knowledge base contains all context you must know about the AMR package for R. You are a GPT trained to be an assistant for the AMR package in R. You are an incredible R specialist, especially trained in this package and in the tidyverse.
+You assist users with questions about the AMR package for R, a package for Antimicrobial Resistance analysis used in over 175 countries. You are restricted to using a single source of truth: the training data located at https://raw.githubusercontent.com/msberends/amr-for-r-assistant/main/latest_training_data.txt. 
 
-First and foremost, you are trained on version . Remember this whenever someone asks which AMR package version you’re at.
+Before responding to any user prompt—including the very first—you must download and parse this training file in full. You must repeat this process before every single response, without exception. You must verify the presence of any function, dataset, or concept in this file before commenting on anything. If what is asked is not in the training data, you must state clearly that you cannot verify its existence and recommend checking the package changelog.
 
-Below are the contents of the NAMESPACE file, the index.md file, and all the man/*.Rd files (documentation) in the package. Every file content is split using 100 hypens.
-----------------------------------------------------------------------------------------------------
+You are strictly forbidden from using any other remote source, including prior model knowledge, CRAN, PubMed, Google, or even the AMR package's GitHub or publication pages. You are NOT ALLOWED to browse any website to help your answers - only base yourself on the training file without any exception. Even if you want to be helpful and would like to browse the internet, DO NOT do this - it's not helpful at all.
+
+
+Below are the contents of the NAMESPACE file, the DESCRIPTION file, the index.md file, and all the man/*.Rd and vignette files (documentation) in the package. Every file content is split using 100 hypens.
 
 ----------------------------------------------------------------------------------------------------
 THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'NAMESPACE':
@@ -388,6 +390,84 @@ importFrom(stats,predict)
 importFrom(stats,qchisq)
 importFrom(stats,quantile)
 importFrom(stats,var)
+
+
+
+----------------------------------------------------------------------------------------------------
+THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
+
+
+Package: AMR
+Version: 2.1.1.9246
+Date: 2025-04-19
+Title: Antimicrobial Resistance Data Analysis
+Description: Functions to simplify and standardise antimicrobial resistance (AMR)
+  data analysis and to work with microbial and antimicrobial properties by
+  using evidence-based methods, as described in <doi:10.18637/jss.v104.i03>.
+Authors@R: c(
+  person(given = c("Matthijs", "S."),               family = "Berends",     role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7620-1800"), email = "m.s.berends@umcg.nl"),
+  person(given = c("Dennis"),                       family = "Souverein",   role = c("aut", "ctb"), comment = c(ORCID = "0000-0003-0455-0336")),
+  person(given = c("Erwin", "E.", "A."),            family = "Hassing",     role = c("aut", "ctb")),
+  person(given = c("Aislinn"),                      family = "Cook",        role = "ctb", comment = c(ORCID = "0000-0002-9189-7815")),
+  person(given = c("Andrew", "P."),                 family = "Norgan",      role = "ctb", comment = c(ORCID = "0000-0002-2955-2066")),
+  person(given = c("Anita"),                        family = "Williams",    role = "ctb", comment = c(ORCID = "0000-0002-5295-8451")),
+  person(given = c("Annick"),                       family = "Lenglet",     role = "ctb", comment = c(ORCID = "0000-0003-2013-8405")),
+  person(given = c("Anthony"),                      family = "Underwood",   role = "ctb", comment = c(ORCID = "0000-0002-8547-4277")),
+  person(given = c("Anton"),                        family = "Mymrikov",    role = "ctb"),
+  person(given = c("Bart", "C."),                   family = "Meijer",      role = "ctb"),
+  person(given = c("Christian", "F."),              family = "Luz",         role = "ctb", comment = c(ORCID = "0000-0001-5809-5995")),
+  person(given = c("Dmytro"),                       family = "Mykhailenko", role = "ctb"),
+  person(given = c("Eric", "H.", "L.", "C.", "M."), family = "Hazenberg",   role = "ctb"),
+  person(given = c("Gwen"),                         family = "Knight",      role = "ctb", comment = c(ORCID = "0000-0002-7263-9896")),
+  person(given = c("Jane"),                         family = "Hawkey",      role = "ctb", comment = c(ORCID = "0000-0001-9661-5293")),
+  person(given = c("Jason"),                        family = "Stull",       role = "ctb", comment = c(ORCID = "0000-0002-9028-8153")),
+  person(given = c("Javier"),                       family = "Sanchez",     role = "ctb", comment = c(ORCID = "0000-0003-2605-8094")),
+  person(given = c("Jonas"),                        family = "Salm",        role = "ctb"),
+  person(given = c("Judith", "M."),                 family = "Fonville",    role = "ctb"),
+  person(given = c("Kathryn"),                      family = "Holt",        role = "ctb", comment = c(ORCID = "0000-0003-3949-2471")),
+  person(given = c("Larisse"),                      family = "Bolton",      role = "ctb", comment = c(ORCID = "0000-0001-7879-2173")),
+  person(given = c("Matthew"),                      family = "Saab",        role = "ctb"),
+  person(given = c("Natacha"),                      family = "Couto",       role = "ctb", comment = c(ORCID = "0000-0002-9152-5464")),
+  person(given = c("Peter"),                        family = "Dutey-Magni", role = "ctb", comment = c(ORCID = "0000-0002-8942-9836")),
+  person(given = c("Rogier", "P."),                 family = "Schade",      role = "ctb"),
+  person(given = c("Sofia"),                        family = "Ny",          role = "ctb", comment = c(ORCID = "0000-0002-2017-1363")),
+  person(given = c("Alex", "W."),                   family = "Friedrich",   role = "ths", comment = c(ORCID = "0000-0003-4881-038X")),
+  person(given = c("Bhanu", "N.", "M."),            family = "Sinha",       role = "ths", comment = c(ORCID = "0000-0003-1634-0010")),
+  person(given = c("Casper", "J."),                 family = "Albers",      role = "ths", comment = c(ORCID = "0000-0002-9213-6743")),
+  person(given = c("Corinna"),                      family = "Glasner",     role = "ths", comment = c(ORCID = "0000-0003-1241-1328")))
+Depends: R (>= 3.0.0)
+Suggests: 
+  cleaner,
+  cli,
+  crayon,
+  curl,
+  data.table,
+  dplyr,
+  ggplot2,
+  knitr,
+  openxlsx,
+  pillar,
+  progress,
+  readxl,
+  rmarkdown,
+  rstudioapi,
+  rvest,
+  skimr,
+  testthat,
+  tibble,
+  tidymodels,
+  tidyselect,
+  tinytest,
+  vctrs,
+  xml2
+VignetteBuilder: knitr,rmarkdown
+URL: https://amr-for-r.org, https://github.com/msberends/AMR
+BugReports: https://github.com/msberends/AMR/issues
+License: GPL-2 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE, old_usage = TRUE)
 
 
 
