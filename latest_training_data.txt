@@ -398,8 +398,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9251
-Date: 2025-04-21
+Version: 2.1.1.9252
+Date: 2025-04-25
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -1103,7 +1103,7 @@ A BibTeX entry for LaTeX users is:
 \description{
 Welcome to the \code{AMR} package.
 
-The \code{AMR} package is a \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. \href{https://amr-for-r.org/authors.html}{Many different researchers} from around the globe are continually helping us to make this a successful and durable project!
+The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. \href{https://amr-for-r.org/authors.html}{Many different researchers} from around the globe are continually helping us to make this a successful and durable project!
 
 This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
@@ -4028,7 +4028,7 @@ as.sir(
 )
 
 
-# For CLEANING existing SIR values ------------------------------------
+# For CLEANING existing SIR values -------------------------------------
 
 as.sir(c("S", "SDD", "I", "R", "NI", "A", "B", "C"))
 as.sir("<= 0.002; S") # will return "S"
@@ -6141,7 +6141,6 @@ guess_ab_col(df, "amoxicillin")
 guess_ab_col(df, "J01AA07") # ATC code of tetracycline
 
 guess_ab_col(df, "J01AA07", verbose = TRUE)
-# NOTE: Using column 'tetr' as input for J01AA07 (tetracycline).
 
 # WHONET codes
 df <- data.frame(
@@ -6150,7 +6149,7 @@ df <- data.frame(
 )
 guess_ab_col(df, "ampicillin")
 guess_ab_col(df, "J01CR02")
-guess_ab_col(df, as.ab("augmentin"))
+guess_ab_col(df, "augmentin")
 }
 
 
