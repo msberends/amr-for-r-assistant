@@ -398,8 +398,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9259
-Date: 2025-04-27
+Version: 2.1.1.9262
+Date: 2025-04-29
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -633,7 +633,8 @@ example_isolates %>%
 #> ℹ Using column 'mo' as input for mo_fullname()
 #> ℹ Using column 'mo' as input for mo_is_gram_negative()
 #> ℹ Using column 'mo' as input for mo_is_intrinsic_resistant()
-#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant Phenotypes' v1.2 (2023). This note will be shown once per session.
+#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant Phenotypes' v1.2 (2023). This note will be shown once per
+#>   session.
 #> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB' (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
 #> ℹ For carbapenems() using columns 'IPM' (imipenem) and 'MEM' (meropenem)
 #> # A tibble: 35 × 7
@@ -680,15 +681,15 @@ antibiogram(example_isolates,
 | Pathogen | Amikacin | Gentamicin | Imipenem | Kanamycin | Meropenem | Tobramycin |
 |:---|:---|:---|:---|:---|:---|:---|
 | CoNS | 0% (0-8%,N=43) | 86% (82-90%,N=309) | 52% (37-67%,N=48) | 0% (0-8%,N=43) | 52% (37-67%,N=48) | 22% (12-35%,N=55) |
-| E. coli | 100% (98-100%,N=171) | 98% (96-99%,N=460) | 100% (99-100%,N=422) |  | 100% (99-100%,N=418) | 97% (96-99%,N=462) |
-| E. faecalis | 0% (0-9%,N=39) | 0% (0-9%,N=39) | 100% (91-100%,N=38) | 0% (0-9%,N=39) |  | 0% (0-9%,N=39) |
-| K. pneumoniae |  | 90% (79-96%,N=58) | 100% (93-100%,N=51) |  | 100% (93-100%,N=53) | 90% (79-96%,N=58) |
-| P. aeruginosa |  | 100% (88-100%,N=30) |  | 0% (0-12%,N=30) |  | 100% (88-100%,N=30) |
-| P. mirabilis |  | 94% (80-99%,N=34) | 94% (79-99%,N=32) |  |  | 94% (80-99%,N=34) |
-| S. aureus |  | 99% (97-100%,N=233) |  |  |  | 98% (92-100%,N=86) |
-| S. epidermidis | 0% (0-8%,N=44) | 79% (71-85%,N=163) |  | 0% (0-8%,N=44) |  | 51% (40-61%,N=89) |
-| S. hominis |  | 92% (84-97%,N=80) |  |  |  | 85% (74-93%,N=62) |
-| S. pneumoniae | 0% (0-3%,N=117) | 0% (0-3%,N=117) |  | 0% (0-3%,N=117) |  | 0% (0-3%,N=117) |
+| *E. coli* | 100% (98-100%,N=171) | 98% (96-99%,N=460) | 100% (99-100%,N=422) | NA | 100% (99-100%,N=418) | 97% (96-99%,N=462) |
+| *E. faecalis* | 0% (0-9%,N=39) | 0% (0-9%,N=39) | 100% (91-100%,N=38) | 0% (0-9%,N=39) | NA | 0% (0-9%,N=39) |
+| *K. pneumoniae* | NA | 90% (79-96%,N=58) | 100% (93-100%,N=51) | NA | 100% (93-100%,N=53) | 90% (79-96%,N=58) |
+| *P. aeruginosa* | NA | 100% (88-100%,N=30) | NA | 0% (0-12%,N=30) | NA | 100% (88-100%,N=30) |
+| *P. mirabilis* | NA | 94% (80-99%,N=34) | 94% (79-99%,N=32) | NA | NA | 94% (80-99%,N=34) |
+| *S. aureus* | NA | 99% (97-100%,N=233) | NA | NA | NA | 98% (92-100%,N=86) |
+| *S. epidermidis* | 0% (0-8%,N=44) | 79% (71-85%,N=163) | NA | 0% (0-8%,N=44) | NA | 51% (40-61%,N=89) |
+| *S. hominis* | NA | 92% (84-97%,N=80) | NA | NA | NA | 85% (74-93%,N=62) |
+| *S. pneumoniae* | 0% (0-3%,N=117) | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) |
 
 In combination antibiograms, it is clear that combined antimicrobials
 yield higher empiric coverage:
@@ -1104,11 +1105,11 @@ A BibTeX entry for LaTeX users is:
 \description{
 Welcome to the \code{AMR} package.
 
-The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. \href{https://amr-for-r.org/authors.html}{Many different researchers} from around the globe are continually helping us to make this a successful and durable project!
+The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. We are a team of \href{https://amr-for-r.org/authors.html}{many different researchers} from around the globe to make this a successful and durable project!
 
 This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
-After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 microorganisms}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antibiotic, antimycotic and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI and EUCAST are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the public \href{https://www.rug.nl}{University of Groningen}, in collaboration with non-profit organisations \href{https://www.certe.nl}{Certe Medical Diagnostics and Advice Foundation} and \href{https://www.umcg.nl}{University Medical Center Groningen}.
+After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2025 and EUCAST 2011-2025 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
 
 The \code{AMR} package is available in English, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Italian, Japanese, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 }
@@ -1118,7 +1119,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \seealso{
@@ -1260,7 +1261,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -1480,7 +1481,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -2621,7 +2622,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -2874,7 +2875,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \section{WHOCC}{
@@ -2977,7 +2978,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -3089,7 +3090,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -3564,7 +3565,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -3889,7 +3890,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -4338,7 +4339,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -4579,7 +4580,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -4980,7 +4981,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -5107,7 +5108,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -5188,7 +5189,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -5230,7 +5231,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -6222,7 +6223,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -7047,7 +7048,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -7089,7 +7090,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -7142,7 +7143,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -7226,7 +7227,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -7482,7 +7483,7 @@ All reference data sets in the AMR package - including information on microorgan
 
 For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
 
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw}{our GitHub repository}.
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
 }
 
 \examples{
@@ -10685,42 +10686,42 @@ knitr::opts_chunk$set(
 )
 ```
 
-Note: to keep the package size as small as possible, we only include this vignette on CRAN. You can read more vignettes on our website about how to conduct AMR data analysis, determine MDROs, find explanation of EUCAST and CLSI breakpoints, and much more: <https://amr-for-r.org/articles/>.
+Note: to keep the package size as small as possible, we only include this vignette on CRAN. You can read more vignettes on our website about how to conduct AMR data analysis, determine MDROs, find explanation of EUCAST and CLSI breakpoints, and much more: <https://amr-for-r.org>.
 
 ----
 
-The `AMR` package is a [free and open-source](https://amr-for-r.org/) R package with [zero dependencies](https://en.wikipedia.org/wiki/Dependency_hell) to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. **Our aim is to provide a standard** for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. [Many different researchers](https://amr-for-r.org/authors.html) from around the globe are continually helping us to make this a successful and durable project!
+The `AMR` package is a peer-reviewed, [free and open-source](https://amr-for-r.org/#copyright) R package with [zero dependencies](https://en.wikipedia.org/wiki/Dependency_hell) to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. **Our aim is to provide a standard** for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. We are a team of [many different researchers](https://amr-for-r.org/authors.html) from around the globe to make this a successful and durable project!
 
-This work was published in the Journal of Statistical Software (Volume 104(3); [DOI 10.18637/jss.v104.i03](https://doi.org/10.18637/jss.v104.i03)) and formed the basis of two PhD theses ([DOI 10.33612/diss.177417131](https://doi.org/10.33612/diss.177417131) and [DOI 10.33612/diss.192486375](https://doi.org/10.33612/diss.192486375)).
+This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
-After installing this package, R knows `r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species and all `r AMR:::format_included_data_number(rbind(AMR::antimicrobials[, "atc", drop = FALSE], AMR::antivirals[, "atc", drop = FALSE]))` antibiotic, antimycotic and antiviral drugs by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral breakpoint guidelines from CLSI and EUCAST are included from the last 10 years. It supports and can read any data format, including WHONET data.
+After installing this package, R knows [**`r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species**](https://amr-for-r.org/reference/microorganisms.html) (updated June 2024) and all [**`r AMR:::format_included_data_number(NROW(AMR::antimicrobials) + NROW(AMR::antivirals))` antimicrobial and antiviral drugs**](https://amr-for-r.org/reference/antimicrobials.html) by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))` and EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))` are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl) and the [University Medical Center Groningen](https://www.umcg.nl).
 
-With the help of contributors from all corners of the world, the `AMR` package is available in English, Czech, Chinese, Danish, Dutch, Finnish, French, German, Greek, Italian, Japanese, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
+The `AMR` package is available in `r vector_and(vapply(FUN.VALUE = character(1), LANGUAGES_SUPPORTED_NAMES, function(x) x$exonym), quotes = FALSE, sort = FALSE)`. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 
-This package is fully independent of any other R package and works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. Since its first public release in early 2018, this package has been downloaded from more than 175 countries.
+This package was intended as a comprehensive toolbox for integrated AMR data analysis. This package can be used for:
 
-This package can be used for:
-
-  * Reference for the taxonomy of microorganisms, since the package contains all microbial (sub)species from the List of Prokaryotic names with Standing in Nomenclature (LPSN) and the Global Biodiversity Information Facility (GBIF)
-  * Interpreting raw MIC and disk diffusion values, based on the latest CLSI or EUCAST guidelines
-  * Retrieving antimicrobial drug names, doses and forms of administration from clinical health care records
-  * Determining first isolates to be used for AMR data analysis
-  * Calculating antimicrobial resistance
-  * Determining multi-drug resistance (MDR) / multi-drug resistant organisms (MDRO)
-  * Calculating (empirical) susceptibility of both mono therapy and combination therapies
-  * Predicting future antimicrobial resistance using regression models
-  * Getting properties for any microorganism (like Gram stain, species, genus or family)
-  * Getting properties for any antibiotic (like name, code of EARS-Net/ATC/LOINC/PubChem, defined daily dose or trade name)
-  * Plotting antimicrobial resistance
-  * Applying EUCAST expert rules
-  * Getting SNOMED codes of a microorganism, or getting properties of a microorganism based on a SNOMED code
-  * Getting LOINC codes of an antibiotic, or getting properties of an antibiotic based on a LOINC code
-  * Machine reading the EUCAST and CLSI guidelines from 2011-2020 to translate MIC values and disk diffusion diameters to SIR
-  * Principal component analysis for AMR
+  * Reference for the taxonomy of microorganisms, since the package contains all microbial (sub)species from the List of Prokaryotic names with Standing in Nomenclature ([LPSN]((https://lpsn.dsmz.de))) and the Global Biodiversity Information Facility ([GBIF](https://www.gbif.org)) ([manual](https://amr-for-r.org/reference/mo_property.html))
+  * Interpreting raw MIC and disk diffusion values, based on any CLSI or EUCAST guideline ([manual](https://amr-for-r.org/reference/as.sir.html))
+  * Retrieving antimicrobial drug names, doses and forms of administration from clinical health care records ([manual](https://amr-for-r.org/reference/ab_from_text.html))
+  * Determining first isolates to be used for AMR data analysis ([manual](https://amr-for-r.org/reference/first_isolate.html))
+  * Calculating antimicrobial resistance ([tutorial](https://amr-for-r.org/articles/AMR.html))
+  * Determining multi-drug resistance (MDR) / multi-drug resistant organisms (MDRO) ([tutorial](https://amr-for-r.org/articles/MDR.html))
+  * Calculating (empirical) susceptibility of both mono therapy and combination therapies ([tutorial](https://amr-for-r.org/articles/AMR.html))
+  * Apply AMR function in predictive modelling ([tutorial](https://amr-for-r.org/articles/AMR_with_tidymodels.html))
+  * Getting properties for any microorganism (like Gram stain, species, genus or family) ([manual](https://amr-for-r.org/reference/mo_property.html))
+  * Getting properties for any antimicrobial (like name, code of EARS-Net/ATC/LOINC/PubChem, defined daily dose or trade name) ([manual](https://amr-for-r.org/reference/ab_property.html))
+  * Plotting antimicrobial resistance ([tutorial](https://amr-for-r.org/articles/AMR.html))
+  * Applying EUCAST expert rules ([manual](https://amr-for-r.org/reference/eucast_rules.html))
+  * Getting SNOMED codes of a microorganism, or getting properties of a microorganism based on a SNOMED code ([manual](https://amr-for-r.org/reference/mo_property.html))
+  * Getting LOINC codes of an antibiotic, or getting properties of an antibiotic based on a LOINC code ([manual](https://amr-for-r.org/reference/ab_property.html))
+  * Machine reading the EUCAST and CLSI guidelines from 2011-2021 to translate MIC values and disk diffusion diameters to SIR ([link](https://amr-for-r.org/articles/datasets.html))
+  * Principal component analysis for AMR ([tutorial](https://amr-for-r.org/articles/PCA.html))
   
-All reference data sets (about microorganisms, antimicrobials, SIR interpretation, EUCAST rules, etc.) in this `AMR` package are publicly and freely available. We continually export our data sets to formats for use in R, SPSS, Stata and Excel. We also supply flat files that are machine-readable and suitable for input in any software program, such as laboratory information systems. Please find [all download links on our website](https://amr-for-r.org/articles/datasets.html), which is automatically updated with every code change.
+All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
 
-This R package was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl), in collaboration with non-profit organisations [Certe Medical Diagnostics and Advice Foundation](https://www.certe.nl) and [University Medical Center Groningen](https://www.umcg.nl), and is being [actively and durably maintained](https://amr-for-r.org/news/) by two public healthcare organisations in the Netherlands.
+For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
+
+Visit [our website for direct download links](https://amr-for-r.org/articles/datasets.html), or explore the actual files in [our GitHub repository](https://github.com/msberends/AMR/tree/main/data-raw/datasets).
 
 ----
 
