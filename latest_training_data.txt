@@ -398,8 +398,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9263
-Date: 2025-04-29
+Version: 2.1.1.9266
+Date: 2025-04-30
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -2234,42 +2234,11 @@ You can also use functions from specific 'table reporting' packages to transform
 \section{Explaining WISCA}{
 
 
-WISCA, as outlined by Bielicki \emph{et al.} (\doi{10.1093/jac/dkv397}), stands for Weighted-Incidence Syndromic Combination Antibiogram, which estimates the probability of adequate empirical antimicrobial regimen coverage for specific infection syndromes. This method leverages a Bayesian decision model with random effects for pathogen incidence and susceptibility, enabling robust estimates in the presence of sparse data.
+WISCA (Weighted-Incidence Syndromic Combination Antibiogram) estimates the probability of empirical coverage for combination regimens.
 
-The Bayesian model assumes conjugate priors for parameter estimation. For example, the coverage probability \eqn{\theta} for a given antimicrobial regimen is modelled using a Beta distribution as a prior:
+It weights susceptibility by pathogen prevalence within a clinical syndrome and provides credible intervals around the expected coverage.
 
-\deqn{\theta \sim \text{Beta}(\alpha_0, \beta_0)}
-
-where \eqn{\alpha_0} and \eqn{\beta_0} represent prior successes and failures, respectively, informed by expert knowledge or weakly informative priors (e.g., \eqn{\alpha_0 = 1, \beta_0 = 1}). The likelihood function is constructed based on observed data, where the number of covered cases for a regimen follows a binomial distribution:
-
-\deqn{y \sim \text{Binomial}(n, \theta)}
-
-Posterior parameter estimates are obtained by combining the prior and likelihood using Bayes' theorem. The posterior distribution of \eqn{\theta} is also a Beta distribution:
-
-\deqn{\theta | y \sim \text{Beta}(\alpha_0 + y, \beta_0 + n - y)}
-
-Pathogen incidence, representing the proportion of infections caused by different pathogens, is modelled using a Dirichlet distribution, which is the natural conjugate prior for multinomial outcomes. The Dirichlet distribution is parameterised by a vector of concentration parameters \eqn{\alpha}, where each \eqn{\alpha_i} corresponds to a specific pathogen. The prior is typically chosen to be uniform (\eqn{\alpha_i = 1}), reflecting an assumption of equal prior probability across pathogens.
-
-The posterior distribution of pathogen incidence is then given by:
-
-\deqn{\text{Dirichlet}(\alpha_1 + n_1, \alpha_2 + n_2, \dots, \alpha_K + n_K)}
-
-where \eqn{n_i} is the number of infections caused by pathogen \eqn{i} observed in the data. For practical implementation, pathogen incidences are sampled from their posterior using normalised Gamma-distributed random variables:
-
-\deqn{x_i \sim \text{Gamma}(\alpha_i + n_i, 1)}
-\deqn{p_i = \frac{x_i}{\sum_{j=1}^K x_j}}
-
-where \eqn{x_i} represents unnormalised pathogen counts, and \eqn{p_i} is the normalised proportion for pathogen \eqn{i}.
-
-For hierarchical modelling, pathogen-level effects (e.g., differences in resistance patterns) and regimen-level effects are modelled using Gaussian priors on log-odds. This hierarchical structure ensures partial pooling of estimates across groups, improving stability in strata with small sample sizes. The model is implemented using Hamiltonian Monte Carlo (HMC) sampling.
-
-Stratified results can be provided based on covariates such as age, sex, and clinical complexity (e.g., prior antimicrobial treatments or renal/urological comorbidities) using \code{dplyr}'s \code{\link[dplyr:group_by]{group_by()}} as a pre-processing step before running \code{\link[=wisca]{wisca()}}. Posterior odds ratios (ORs) are derived to quantify the effect of these covariates on coverage probabilities:
-
-\deqn{\text{OR}_{\text{covariate}} = \frac{\exp(\beta_{\text{covariate}})}{\exp(\beta_0)}}
-
-By combining empirical data with prior knowledge, WISCA overcomes the limitations of traditional combination antibiograms, offering disease-specific, patient-stratified estimates with robust uncertainty quantification. This tool is invaluable for antimicrobial stewardship programs and empirical treatment guideline refinement.
-
-\strong{Note:} WISCA never gives an output on the pathogen/species level, as all incidences and susceptibilities are already weighted for all species.
+For more background, interpretation, and examples, see \href{https://amr-for-r.org/articles/WISCA.html}{the WISCA vignette}.
 }
 
 \examples{
@@ -5048,7 +5017,7 @@ eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
 
 \item{custom_rules}{Custom rules to apply, created with \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}.}
 
-\item{overwrite}{A \link{logical} indicating whether to overwrite non-\code{NA} values (default: \code{FALSE}). When \code{FALSE}, only non-SIR values are modified (i.e., any value that is not already S, I or R). To ensure compliance with EUCAST guidelines, \strong{this should remain} \code{FALSE}, as EUCAST notes often state that an organism "should be tested for susceptibility to individual agents or be reported resistant".}
+\item{overwrite}{A \link{logical} indicating whether to overwrite existing SIR values (default: \code{FALSE}). When \code{FALSE}, only non-SIR values are modified (i.e., any value that is not already S, I or R). To ensure compliance with EUCAST guidelines, \strong{this should remain} \code{FALSE}, as EUCAST notes often state that an organism "should be tested for susceptibility to individual agents or be reported resistant".}
 
 \item{...}{Column name of an antimicrobial, see section \emph{Antimicrobials} below.}
 
@@ -10335,6 +10304,236 @@ tryCatch(
   error = function(e) base::invisible()
 )
 ```
+
+
+
+----------------------------------------------------------------------------------------------------
+THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'vignettes/WISCA.Rmd':
+
+
+---
+title: "Estimating Empirical Coverage with WISCA"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Estimating Empirical Coverage with WISCA}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7.5,
+  fig.height = 5
+)
+```
+
+## Introduction
+
+Clinical guidelines for empirical antimicrobial therapy require *probabilistic reasoning*: what is the chance that a regimen will cover the likely infecting organisms, before culture results are available?
+
+This is the purpose of **WISCA**, or:
+
+> **Weighted-Incidence Syndromic Combination Antibiogram**
+
+WISCA is a Bayesian approach that integrates:
+- **Pathogen prevalence** (how often each species causes the syndrome),
+- **Regimen susceptibility** (how often a regimen works *if* the pathogen is known),
+
+to estimate the **overall empirical coverage** of antimicrobial regimens — with quantified uncertainty.
+
+This vignette explains how WISCA works, why it is useful, and how to apply it in **AMR**.
+
+---
+
+## Why traditional antibiograms fall short
+
+A standard antibiogram gives you:
+
+``` Species → Antibiotic → Susceptibility %
+
+But clinicians don’t know the species *a priori*. They need to choose a regimen that covers the **likely pathogens** — without knowing which one is present.
+
+Traditional antibiograms:
+- Fragment information by organism,
+- Do not weight by real-world prevalence,
+- Do not account for combination therapy or sample size,
+- Do not provide uncertainty.
+
+---
+
+## The idea of WISCA
+
+WISCA asks:
+
+> “What is the **probability** that this regimen **will cover** the pathogen, given the syndrome?”
+
+This means combining two things:
+- **Incidence** of each pathogen in the syndrome,
+- **Susceptibility** of each pathogen to the regimen.
+
+We can write this as:
+
+``` coverage = ∑ (pathogen incidence × susceptibility)
+
+For example, suppose:
+- E. coli causes 60% of cases, and 90% of *E. coli* are susceptible to a drug.
+- Klebsiella causes 40% of cases, and 70% of *Klebsiella* are susceptible.
+
+Then:
+
+``` coverage = (0.6 × 0.9) + (0.4 × 0.7) = 0.82
+
+But in real data, incidence and susceptibility are **estimated from samples** — so they carry uncertainty. WISCA models this **probabilistically**, using conjugate Bayesian distributions.
+
+---
+
+## The Bayesian engine behind WISCA
+
+### Pathogen incidence
+
+Let:
+- K be the number of pathogens,
+- ``` α = (1, 1, ..., 1) be a **Dirichlet** prior (uniform),
+- ``` n = (n₁, ..., nₖ) be the observed counts per species.
+
+Then the posterior incidence follows:
+
+``` incidence ∼ Dirichlet(α + n)
+
+In simulations, we draw from this posterior using:
+
+``` xᵢ ∼ Gamma(αᵢ + nᵢ, 1)
+
+``` incidenceᵢ = xᵢ / ∑ xⱼ
+
+---
+
+### Susceptibility
+
+Each pathogen–regimen pair has:
+- ``` prior: Beta(1, 1)
+- ``` data: S susceptible out of N tested
+
+Then:
+
+``` susceptibility ∼ Beta(1 + S, 1 + (N - S))
+
+In each simulation, we draw random susceptibility per species from this Beta distribution.
+
+---
+
+### Final coverage estimate
+
+Putting it together:
+
+``` For each simulation:
+    - Draw incidence ∼ Dirichlet
+    - Draw susceptibility ∼ Beta
+    - Multiply → coverage estimate
+
+We repeat this (e.g. 1000×) and summarise:
+- **Mean**: expected coverage
+- **Quantiles**: credible interval (default 95%)
+
+---
+
+## Practical use in AMR
+
+### Simulate a synthetic syndrome
+
+```{r}
+library(AMR)
+data <- example_isolates
+
+# Add a fake syndrome column for stratification
+data$syndrome <- ifelse(data$mo %like% "coli", "UTI", "Other")
+
+```
+
+### Basic WISCA antibiogram
+
+```{r}
+antibiogram(data,
+            wisca = TRUE)
+```
+
+### Stratify by syndrome
+
+```{r}
+antibiogram(data,
+            syndromic_group = "syndrome",
+            wisca = TRUE)
+```
+
+### Use combination regimens
+
+The `antibiogram()` function supports combination regimens:
+
+```{r}
+antibiogram(data,
+            antimicrobials = c("AMC", "GEN", "AMC + GEN", "CIP"),
+            wisca = TRUE)
+```
+
+---
+
+## Interpretation
+
+Suppose you get this output:
+
+| Regimen     | Coverage | Lower_CI | Upper_CI |
+|-------------|----------|----------|----------|
+| AMC         | 0.72     | 0.65     | 0.78     |
+| AMC + GEN   | 0.88     | 0.83     | 0.93     |
+
+Interpretation:
+
+> *“AMC + GEN covers 88% of expected pathogens for this syndrome, with 95% certainty that the true coverage lies between 83% and 93%.”*
+
+Regimens with few tested isolates will show **wider intervals**.
+
+---
+
+## Sensible defaults, but you can customise
+
+- `minimum = 30`: exclude regimens with <30 isolates tested.
+- `simulations = 1000`: number of Monte Carlo samples.
+- `conf_interval = 0.95`: coverage interval width.
+- `combine_SI = TRUE`: count “I”/“SDD” as susceptible.
+
+---
+
+## Limitations
+
+- WISCA does not model time trends or temporal resistance shifts.
+- It assumes data are representative of current clinical practice.
+- It does not account for patient-level covariates (yet).
+- Species-specific data are abstracted into syndrome-level estimates.
+
+---
+
+## Reference
+
+Bielicki JA et al. (2016).  
+*Weighted-incidence syndromic combination antibiograms to guide empiric treatment in pediatric bloodstream infections.*  
+**J Antimicrob Chemother**, 71(2):529–536. doi:10.1093/jac/dkv397
+
+---
+
+## Conclusion
+
+WISCA shifts empirical therapy from simple percent susceptible toward **probabilistic, syndrome-based decision support**. It is a statistically principled, clinically intuitive method to guide regimen selection — and easy to use via the `antibiogram()` function in the **AMR** package.
+
+For antimicrobial stewardship teams, it enables **disease-specific, reproducible, and data-driven guidance** — even in the face of sparse data.
+
 
 
 
