@@ -398,8 +398,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9268
-Date: 2025-05-01
+Version: 2.1.1.9269
+Date: 2025-05-02
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -483,7 +483,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 
 - Provides an **all-in-one solution** for antimicrobial resistance (AMR)
   data analysis in a One Health approach
-- Peer-reviewed, used in over 175 countries, available in 20 languages
+- Peer-reviewed, used in over 175 countries, available in 27 languages
 - Generates **antibiograms** - traditional, combined, syndromic, and
   even WISCA
 - Provides the **full microbiological taxonomy** of ~79 000 distinct
@@ -553,7 +553,7 @@ research at the Faculty of Medical Sciences of the [University of
 Groningen](https://www.rug.nl) and the [University Medical Center
 Groningen](https://www.umcg.nl).
 
-##### Used in over 175 countries, available in 20 languages
+##### Used in over 175 countries, available in 27 languages
 
 <a href="./countries_large.png" target="_blank"><img src="./countries.png" align="right" style="max-width: 300px;" /></a>
 
@@ -565,10 +565,14 @@ With the help of contributors from all corners of the world, the `AMR`
 package is available in
 <img src="lang_en.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 English,
-<img src="lang_cs.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
-Czech,
+<img src="lang_ar.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Arabic,
+<img src="lang_bn.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Bengali,
 <img src="lang_zh.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Chinese,
+<img src="lang_cs.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Czech,
 <img src="lang_da.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Danish,
 <img src="lang_nl.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
@@ -581,6 +585,10 @@ French,
 German,
 <img src="lang_el.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Greek,
+<img src="lang_hi.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Hindi,
+<img src="lang_id.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Indonesian,
 <img src="lang_it.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Italian,
 <img src="lang_ja.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
@@ -597,13 +605,19 @@ Romanian,
 Russian,
 <img src="lang_es.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Spanish,
+<img src="lang_sw.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Swahili,
 <img src="lang_sv.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
 Swedish,
 <img src="lang_tr.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
-Turkish, and
+Turkish,
 <img src="lang_uk.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
-Ukrainian. Antimicrobial drug (group) names and colloquial microorganism
-names are provided in these languages.
+Ukrainian,
+<img src="lang_ur.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Urdu, and
+<img src="lang_vi.svg" style="height: 13px !important; border: 1px solid #cccccc; vertical-align: initial !important;">
+Vietnamese. Antimicrobial drug (group) names and colloquial
+microorganism names are provided in these languages.
 
 ### Practical examples
 
@@ -633,10 +647,8 @@ example_isolates %>%
 #> ℹ Using column 'mo' as input for mo_fullname()
 #> ℹ Using column 'mo' as input for mo_is_gram_negative()
 #> ℹ Using column 'mo' as input for mo_is_intrinsic_resistant()
-#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant
-#>   Phenotypes' v1.2 (2023). This note will be shown once per session.
-#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
+#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant Phenotypes' v1.2 (2023). This note will be shown once per session.
+#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB' (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
 #> ℹ For carbapenems() using columns 'IPM' (imipenem) and 'MEM' (meropenem)
 #> # A tibble: 35 × 7
 #>    bacteria                     GEN   TOB   AMK   KAN   IPM   MEM  
@@ -674,9 +686,9 @@ output format automatically (such as markdown, LaTeX, HTML, etc.).
 ``` r
 antibiogram(example_isolates,
             antimicrobials = c(aminoglycosides(), carbapenems()))
-#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
+#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB' (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
 #> ℹ For carbapenems() using columns 'IPM' (imipenem) and 'MEM' (meropenem)
+#> ℹ 502 combinations had less than minimum = 30 results and were ignored
 ```
 
 | Pathogen | Amikacin | Gentamicin | Imipenem | Kanamycin | Meropenem | Tobramycin |
@@ -699,6 +711,7 @@ yield higher empiric coverage:
 antibiogram(example_isolates,
             antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
             mo_transform = "gramstain")
+#> ℹ 3 combinations had less than minimum = 30 results and were ignored
 ```
 
 | Pathogen | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
@@ -707,7 +720,7 @@ antibiogram(example_isolates,
 | Gram-positive | 86% (82-89%,N=345) | 98% (96-98%,N=1044) | 95% (93-97%,N=550) |
 
 Like many other functions in this package, `antibiogram()` comes with
-support for 20 languages that are often detected automatically based on
+support for 27 languages that are often detected automatically based on
 system language:
 
 ``` r
@@ -716,6 +729,7 @@ antibiogram(example_isolates,
             mo_transform = "gramstain",
             ab_transform = "name",
             language = "uk") # Ukrainian
+#> ℹ 3 combinations had less than minimum = 30 results and were ignored
 ```
 
 | Збудник       | Гентаміцин          | Тобраміцин         | Ципрофлоксацин     |
@@ -799,15 +813,13 @@ out <- example_isolates %>%
   # calculate AMR using resistance(), over all aminoglycosides and polymyxins:
   summarise(across(c(aminoglycosides(), polymyxins()),
             resistance))
-#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
+#> ℹ For aminoglycosides() using columns 'GEN' (gentamicin), 'TOB' (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
 #> ℹ For polymyxins() using column 'COL' (colistin)
 #> Warning: There was 1 warning in `summarise()`.
 #> ℹ In argument: `across(c(aminoglycosides(), polymyxins()), resistance)`.
 #> ℹ In group 3: `ward = "Outpatient"`.
 #> Caused by warning:
-#> ! Introducing NA: only 23 results available for KAN in group: ward =
-#> "Outpatient" (minimum = 30).
+#> ! Introducing NA: only 23 results available for KAN in group: ward = "Outpatient" (minimum = 30).
 out
 #> # A tibble: 3 × 6
 #>   ward             GEN       TOB       AMK   KAN       COL
@@ -1033,7 +1045,7 @@ This is an overview of all the package-specific \code{\link[=options]{options()}
 \item \code{AMR_substitute_missing_r_breakpoint} \cr A \link{logical} to use in \code{\link[=as.sir]{as.sir()}}, to indicate that missing R breakpoints must be substituted with \code{"R"} - the default is \code{FALSE}.
 \item \code{AMR_include_screening} \cr A \link{logical} to use in \code{\link[=as.sir]{as.sir()}}, to indicate that clinical breakpoints for screening are allowed - the default is \code{FALSE}.
 \item \code{AMR_keep_synonyms} \cr A \link{logical} to use in \code{\link[=as.mo]{as.mo()}} and all \code{\link[=mo_property]{mo_*}} functions, to indicate if old, previously valid taxonomic names must be preserved and not be corrected to currently accepted names. The default is \code{FALSE}.
-\item \code{AMR_locale} \cr A \link{character} to set the language for the \code{AMR} package, can be one of these supported language names or ISO-639-1 codes: English (en), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swedish (sv), Turkish (tr), or Ukrainian (uk). The default is the current system language (if supported, English otherwise).
+\item \code{AMR_locale} \cr A \link{character} to set the language for the \code{AMR} package, can be one of these supported language names or \href{https://en.wikipedia.org/wiki/ISO_639-1}{ISO 639-1 codes}: English (en), Arabic (ar), Bengali (bn), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Hindi (hi), Indonesian (id), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swahili (sw), Swedish (sv), Turkish (tr), Ukrainian (uk), Urdu (ur), or Vietnamese (vi). The default is the current system language (if supported, English otherwise).
 \item \code{AMR_mo_source} \cr A file location for a manual code list to be used in \code{\link[=as.mo]{as.mo()}} and all \code{\link[=mo_property]{mo_*}} functions. This is explained in \code{\link[=set_mo_source]{set_mo_source()}}.
 }
 }
@@ -1112,7 +1124,7 @@ This work was published in the Journal of Statistical Software (Volume 104(3); \
 
 After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2025 and EUCAST 2011-2025 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
 
-The \code{AMR} package is available in English, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Italian, Japanese, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swedish, Turkish, and Ukrainian. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
+The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 }
 \section{Download Our Reference Data}{
 
@@ -2529,7 +2541,7 @@ When used inside selecting or filtering, this returns a \link{character} vector 
 \description{
 These functions allow for filtering rows and selecting columns based on antimicrobial test results that are of a specific antimicrobial class or group, without the need to define the columns or antimicrobial abbreviations. They can be used in base \R, tidyverse, tidymodels, and \code{data.table}.
 
-In short, if you have a column name that resembles an antimicrobial drug, it will be picked up by any of these functions that matches its pharmaceutical class: "cefazolin", "kefzol", "CZO" and "J01DB04" will all be picked up using:
+Simply puy, if you have a column name that resembles an antimicrobial drug, it will be picked up by any of these functions that matches its pharmaceutical class, code or name: column names "cefazolin", "kefzol", "CZO" and "J01DB04" would all be included in the following selection:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(dplyr)
 my_data_with_all_these_columns \%>\%
@@ -2902,7 +2914,7 @@ ab_reset_session()
 
 \item{flag_multiple_results}{A \link{logical} to indicate whether a note should be printed to the console that probably more than one antibiotic drug code or name can be retrieved from a single input value.}
 
-\item{language}{Language to coerce input values from any of the 20 supported languages - default to the system language if supported (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}).}
+\item{language}{Language to coerce input values from any of the 27 supported languages - default to the system language if supported (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}).}
 
 \item{info}{A \link{logical} to indicate whether a progress bar should be printed - the default is \code{TRUE} only in interactive mode.}
 
@@ -3733,7 +3745,7 @@ The default \code{"standard"} setting ensures cautious handling of uncertain val
 
 \item{breakpoint_type}{The type of breakpoints to use, either "ECOFF", "animal", or "human". ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
 
-\item{host}{A vector (or column name) with \link{character}s to indicate the host. Only useful for veterinary breakpoints, as it requires \code{breakpoint_type = "animal"}. The values can be any text resembling the animal species, even in any of the 20 supported languages of this package. For foreign languages, be sure to set the language with \code{\link[=set_AMR_locale]{set_AMR_locale()}} (though it will be automatically guessed based on the system language).}
+\item{host}{A vector (or column name) with \link{character}s to indicate the host. Only useful for veterinary breakpoints, as it requires \code{breakpoint_type = "animal"}. The values can be any text resembling the animal species, even in any of the 27 supported languages of this package. For foreign languages, be sure to set the language with \code{\link[=set_AMR_locale]{set_AMR_locale()}} (though it will be automatically guessed based on the system language).}
 
 \item{verbose}{A \link{logical} to indicate that all notes should be printed during interpretation of MIC values or disk diffusion values.}
 
@@ -7986,7 +7998,7 @@ The functions \code{\link[=scale_x_mic]{scale_x_mic()}}, \code{\link[=scale_y_mi
 
 \subsection{The \verb{scale_*_sir()} Functions}{
 
-The functions \code{\link[=scale_x_sir]{scale_x_sir()}}, \code{\link[=scale_colour_sir]{scale_colour_sir()}}, and \code{\link[=scale_fill_sir]{scale_fill_sir()}} functions allow to plot the \link[=as.sir]{sir} class in the right order (S < SDD < I < R < NI). At default, they translate the S/I/R values to an interpretative text ("Susceptible", "Resistant", etc.) in any of the 20 supported languages (use \code{language = NULL} to keep S/I/R). Also, except for \code{\link[=scale_x_sir]{scale_x_sir()}}, they set colour-blind friendly colours to the \code{colour} and \code{fill} aesthetics.
+The functions \code{\link[=scale_x_sir]{scale_x_sir()}}, \code{\link[=scale_colour_sir]{scale_colour_sir()}}, and \code{\link[=scale_fill_sir]{scale_fill_sir()}} functions allow to plot the \link[=as.sir]{sir} class in the right order (S < SDD < I < R < NI). At default, they translate the S/I/R values to an interpretative text ("Susceptible", "Resistant", etc.) in any of the 27 supported languages (use \code{language = NULL} to keep S/I/R). Also, except for \code{\link[=scale_x_sir]{scale_x_sir()}}, they set colour-blind friendly colours to the \code{colour} and \code{fill} aesthetics.
 }
 
 \subsection{Additional \code{ggplot2} Functions}{
@@ -8020,7 +8032,7 @@ if (require("ggplot2")) {
   autoplot(some_mic_values, mo = "Escherichia coli", ab = "cipro")
 }
 if (require("ggplot2")) {
-  # support for 20 languages, various guidelines, and many options
+  # support for 27 languages, various guidelines, and many options
   autoplot(some_disk_values,
     mo = "Escherichia coli", ab = "cipro",
     guideline = "CLSI 2024", language = "no",
@@ -8137,7 +8149,7 @@ if (require("ggplot2")) {
     scale_y_mic(mic_range = c(0.005, 32), name = "Our MICs!") +
     scale_colour_sir(
       language = "pt",
-      name = "Support in 20 languages"
+      name = "Support in 27 languages"
     )
 }
 }
@@ -8756,7 +8768,7 @@ reset_AMR_locale()
 translate_AMR(x, language = get_AMR_locale())
 }
 \arguments{
-\item{language}{Language to choose. Use one of these supported language names or ISO-639-1 codes: English (en), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swedish (sv), Turkish (tr), or Ukrainian (uk).}
+\item{language}{Language to choose. Use one of these supported language names or \href{https://en.wikipedia.org/wiki/ISO_639-1}{ISO 639-1 codes}: English (en), Arabic (ar), Bengali (bn), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Hindi (hi), Indonesian (id), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swahili (sw), Swedish (sv), Turkish (tr), Ukrainian (uk), Urdu (ur), or Vietnamese (vi).}
 
 \item{x}{Text to translate.}
 }
@@ -8764,7 +8776,7 @@ translate_AMR(x, language = get_AMR_locale())
 For language-dependent output of \code{AMR} functions, such as \code{\link[=mo_name]{mo_name()}}, \code{\link[=mo_gramstain]{mo_gramstain()}}, \code{\link[=mo_type]{mo_type()}} and \code{\link[=ab_name]{ab_name()}}.
 }
 \details{
-The currently 20 supported languages are English (en), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swedish (sv), Turkish (tr), and Ukrainian (uk). All these languages have translations available for all antimicrobial drugs and colloquial microorganism names.
+The currently 27 supported languages are English (en), Arabic (ar), Bengali (bn), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Hindi (hi), Indonesian (id), Italian (it), Japanese (ja), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swahili (sw), Swedish (sv), Turkish (tr), Ukrainian (uk), Urdu (ur), and Vietnamese (vi). All these languages have translations available for all antimicrobial drugs and colloquial microorganism names.
 
 To permanently silence the once-per-session language note on a non-English operating system, you can set the package option \code{\link[=AMR-options]{AMR_locale}} in your \code{.Rprofile} file like this:
 
@@ -8806,7 +8818,7 @@ set_AMR_locale("German")
 ab_name("Ciprofloxacin")
 mo_name("Coagulase-negative Staphylococcus (CoNS)")
 
-# set_AMR_locale() understands endonyms, English exonyms, and ISO-639-1:
+# set_AMR_locale() understands endonyms, English exonyms, and ISO 639-1:
 set_AMR_locale("Deutsch")
 set_AMR_locale("German")
 set_AMR_locale("de")
