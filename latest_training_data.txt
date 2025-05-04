@@ -398,7 +398,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9270
+Version: 2.1.1.9272
 Date: 2025-05-04
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -3671,8 +3671,8 @@ is_sir_eligible(x, threshold = 0.05)
   FALSE), include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  verbose = FALSE, info = interactive(), conserve_capped_values = NULL,
-  ...)
+  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
+  conserve_capped_values = NULL, ...)
 
 \method{as.sir}{disk}(x, mo = NULL, ab = deparse(substitute(x)),
   guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
@@ -3682,7 +3682,8 @@ is_sir_eligible(x, threshold = 0.05)
   FALSE), include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  verbose = FALSE, info = interactive(), ...)
+  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
+  ...)
 
 \method{as.sir}{data.frame}(x, ..., col_mo = NULL,
   guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
@@ -3693,8 +3694,8 @@ is_sir_eligible(x, threshold = 0.05)
   FALSE), include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  verbose = FALSE, info = interactive(), parallel = FALSE,
-  max_cores = -1, conserve_capped_values = NULL)
+  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
+  parallel = FALSE, max_cores = -1, conserve_capped_values = NULL)
 
 sir_interpretation_history(clean = FALSE)
 }
@@ -3758,6 +3759,8 @@ The default \code{"standard"} setting ensures cautious handling of uncertain val
 \item{breakpoint_type}{The type of breakpoints to use, either "ECOFF", "animal", or "human". ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
 
 \item{host}{A vector (or column name) with \link{character}s to indicate the host. Only useful for veterinary breakpoints, as it requires \code{breakpoint_type = "animal"}. The values can be any text resembling the animal species, even in any of the 28 supported languages of this package. For foreign languages, be sure to set the language with \code{\link[=set_AMR_locale]{set_AMR_locale()}} (though it will be automatically guessed based on the system language).}
+
+\item{language}{Language to convert values set in \code{host} when using animal breakpoints. Use one of these supported language names or \href{https://en.wikipedia.org/wiki/ISO_639-1}{ISO 639-1 codes}: English (en), Arabic (ar), Bengali (bn), Chinese (zh), Czech (cs), Danish (da), Dutch (nl), Finnish (fi), French (fr), German (de), Greek (el), Hindi (hi), Indonesian (id), Italian (it), Japanese (ja), Korean (ko), Norwegian (no), Polish (pl), Portuguese (pt), Romanian (ro), Russian (ru), Spanish (es), Swahili (sw), Swedish (sv), Turkish (tr), Ukrainian (uk), Urdu (ur), or Vietnamese (vi).}
 
 \item{verbose}{A \link{logical} to indicate that all notes should be printed during interpretation of MIC values or disk diffusion values.}
 
@@ -7069,9 +7072,9 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.codes.Rd':
 \docType{data}
 \name{microorganisms.codes}
 \alias{microorganisms.codes}
-\title{Data Set with 5 063 Common Microorganism Codes}
+\title{Data Set with 6 036 Common Microorganism Codes}
 \format{
-A \link[tibble:tibble]{tibble} with 5 063 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 6 036 observations and 2 variables:
 \itemize{
 \item \code{code}\cr Commonly used code of a microorganism. \emph{\strong{This is a unique identifier.}}
 \item \code{mo}\cr ID of the microorganism in the \link{microorganisms} data set
@@ -10921,7 +10924,7 @@ This package was intended as a comprehensive toolbox for integrated AMR data ana
   * Calculating antimicrobial resistance ([tutorial](https://amr-for-r.org/articles/AMR.html))
   * Determining multi-drug resistance (MDR) / multi-drug resistant organisms (MDRO) ([tutorial](https://amr-for-r.org/articles/MDR.html))
   * Calculating (empirical) susceptibility of both mono therapy and combination therapies ([tutorial](https://amr-for-r.org/articles/AMR.html))
-  * Apply AMR function in predictive modelling ([tutorial](https://amr-for-r.org/articles/AMR_with_tidymodels.html))
+  * Apply AMR functions in predictive modelling ([tutorial](https://amr-for-r.org/articles/AMR_with_tidymodels.html))
   * Getting properties for any microorganism (like Gram stain, species, genus or family) ([manual](https://amr-for-r.org/reference/mo_property.html))
   * Getting properties for any antimicrobial (like name, code of EARS-Net/ATC/LOINC/PubChem, defined daily dose or trade name) ([manual](https://amr-for-r.org/reference/ab_property.html))
   * Plotting antimicrobial resistance ([tutorial](https://amr-for-r.org/articles/AMR.html))
