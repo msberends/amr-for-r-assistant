@@ -371,6 +371,84 @@ export(translate_AMR)
 export(trimethoprims)
 export(ureidopenicillins)
 export(wisca)
+if(getRversion() >= "3.0.0") S3method(cleaner::freq, mo)
+if(getRversion() >= "3.0.0") S3method(cleaner::freq, sir)
+if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, antibiogram)
+if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, disk)
+if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, mic)
+if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, resistance_predict)
+if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, sir)
+if(getRversion() >= "3.0.0") S3method(ggplot2::fortify, disk)
+if(getRversion() >= "3.0.0") S3method(ggplot2::fortify, mic)
+if(getRversion() >= "3.0.0") S3method(ggplot2::fortify, resistance_predict)
+if(getRversion() >= "3.0.0") S3method(ggplot2::fortify, sir)
+if(getRversion() >= "3.0.0") S3method(knitr::knit_print, antibiogram)
+if(getRversion() >= "3.0.0") S3method(knitr::knit_print, formatted_bug_drug_combinations)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, ab)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, av)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, disk)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, mic)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, mo)
+if(getRversion() >= "3.0.0") S3method(pillar::pillar_shaft, sir)
+if(getRversion() >= "3.0.0") S3method(pillar::tbl_format_footer, antibiogram)
+if(getRversion() >= "3.0.0") S3method(pillar::tbl_sum, antibiogram)
+if(getRversion() >= "3.0.0") S3method(pillar::type_sum, ab)
+if(getRversion() >= "3.0.0") S3method(pillar::type_sum, av)
+if(getRversion() >= "3.0.0") S3method(pillar::type_sum, mic)
+if(getRversion() >= "3.0.0") S3method(pillar::type_sum, mo)
+if(getRversion() >= "3.0.0") S3method(pillar::type_sum, sir)
+if(getRversion() >= "3.0.0") S3method(skimr::get_skimmers, disk)
+if(getRversion() >= "3.0.0") S3method(skimr::get_skimmers, mic)
+if(getRversion() >= "3.0.0") S3method(skimr::get_skimmers, mo)
+if(getRversion() >= "3.0.0") S3method(skimr::get_skimmers, sir)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_arith, mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, ab.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, av.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.ab)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.amr_selector)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.av)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.mo)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, character.sir)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, disk.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, disk.disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, disk.double)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, disk.integer)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, double.disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, double.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, factor.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, integer.disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, integer.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, logical.amr_selector_any_all)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mic.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mic.double)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mic.factor)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mic.integer)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mic.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, mo.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, sir.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_cast, sir.sir)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_math, mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, ab.ab)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, ab.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, amr_selector.character)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, amr_selector_any_all.logical)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, av.av)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, av.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, character.amr_selector)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, character.sir)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, disk.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, disk.disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, logical.amr_selector_any_all)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, mic.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, mic.mic)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, mo.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, mo.mo)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, sir.default)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype2, sir.sir)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype_abbr, disk)
+if(getRversion() >= "3.0.0") S3method(vctrs::vec_ptype_full, disk)
 importFrom(graphics,arrows)
 importFrom(graphics,axis)
 importFrom(graphics,barplot)
@@ -398,7 +476,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 2.1.1.9278
+Version: 2.1.1.9279
 Date: 2025-05-16
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -504,9 +582,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 <div style="display: flex; font-size: 0.8em;">
 
 <p style="text-align:left; width: 50%;">
+
 <small><a href="https://amr-for-r.org/">https://amr-for-r.org</a></small>
 </p>
+
 <p style="text-align:right; width: 50%;">
+
 <small><a href="https://doi.org/10.18637/jss.v104.i03" target="_blank">https://doi.org/10.18637/jss.v104.i03</a></small>
 </p>
 
@@ -516,7 +597,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 
 ------------------------------------------------------------------------
 
-### Introduction
+## Introduction
 
 The `AMR` package is a peer-reviewed, [free and open-source](#copyright)
 R package with [zero
@@ -553,7 +634,7 @@ research at the Faculty of Medical Sciences of the [University of
 Groningen](https://www.rug.nl) and the [University Medical Center
 Groningen](https://www.umcg.nl).
 
-##### Used in over 175 countries, available in 28 languages
+### Used in over 175 countries, available in 28 languages
 
 <a href="./countries_large.png" target="_blank"><img src="./countries.png" align="right" style="max-width: 300px;" /></a>
 
@@ -621,9 +702,9 @@ Urdu, and
 Vietnamese. Antimicrobial drug (group) names and colloquial
 microorganism names are provided in these languages.
 
-### Practical examples
+## Practical examples
 
-#### Filtering and selecting data
+### Filtering and selecting data
 
 One of the most powerful functions of this package, aside from
 calculating and plotting AMR, is selecting and filtering based on
@@ -678,7 +759,7 @@ about [all microorganisms](./reference/microorganisms.html) and [all
 antimicrobials](./reference/antimicrobials.html) in the `AMR` package
 make sure you get what you meant.
 
-#### Generating antibiograms
+### Generating antibiograms
 
 The `AMR` package supports generating traditional, combined, syndromic,
 and even weighted-incidence syndromic combination antibiograms (WISCA).
@@ -739,7 +820,7 @@ antibiogram(example_isolates,
 | Грамнегативні | 96% (95-98%,N=684)  | 96% (94-97%,N=686) | 91% (88-93%,N=684) |
 | Грампозитивні | 63% (60-66%,N=1170) | 34% (31-38%,N=665) | 77% (74-80%,N=724) |
 
-#### Interpreting and plotting MIC and SIR values
+### Interpreting and plotting MIC and SIR values
 
 The `AMR` package allows interpretation of MIC and disk diffusion values
 based on CLSI and EUCAST. Moreover, the `ggplot2` package is extended
@@ -779,7 +860,7 @@ ggplot(data.frame(mic = some_mic_values,
 <img src="./plot_readme.png" style="width: 1400px; max-width: 100%;">
 </a>
 
-#### Calculating resistance per group
+### Calculating resistance per group
 
 For a manual approach, you can use the `resistance` or
 `susceptibility()` function:
@@ -855,7 +936,7 @@ out %>% set_ab_names(property = "atc")
 #> 3 Outpatient 0.2       0.3676471 0.6052632      NA 0.8888889
 ```
 
-### What else can you do with this package?
+## What else can you do with this package?
 
 This package was intended as a comprehensive toolbox for integrated AMR
 data analysis. This package can be used for:
@@ -878,7 +959,7 @@ data analysis. This package can be used for:
   organisms (MDRO) ([tutorial](./reference/mdro.html))
 - Calculating (empirical) susceptibility of both mono therapy and
   combination therapies ([tutorial](./articles/AMR.html))
-- Apply AMR function in predictive modelling
+- Apply AMR functions in predictive modelling
   ([tutorial](./articles/AMR_with_tidymodels.html))
 - Getting properties for any microorganism (like Gram stain, species,
   genus or family) ([manual](./reference/mo_property.html))
@@ -898,9 +979,9 @@ data analysis. This package can be used for:
   ([link](./articles/datasets.html))
 - Principal component analysis for AMR ([tutorial](./articles/PCA.html))
 
-### Get this package
+## Get this package
 
-#### Latest official version
+### Latest official version
 
 [![CRAN](https://www.r-pkg.org/badges/version-ago/AMR)](https://cran.r-project.org/package=AMR)
 [![CRANlogs](https://cranlogs.r-pkg.org/badges/grand-total/AMR)](https://cran.r-project.org/package=AMR)
@@ -921,7 +1002,7 @@ the menu *Tools* \> *Install Packages…* and then type in “AMR” and press
 latest release. To use all functions and data sets mentioned on this
 website, install the latest beta version.
 
-#### Latest beta version
+### Latest beta version
 
 [![check-old](https://github.com/msberends/AMR/actions/workflows/check-old-tinytest.yaml/badge.svg?branch=main)](https://github.com/msberends/AMR/actions/workflows/check-old-tinytest.yaml)
 [![check-recent](https://github.com/msberends/AMR/actions/workflows/check-current-testthat.yaml/badge.svg?branch=main)](https://github.com/msberends/AMR/actions/workflows/check-current-testthat.yaml)
@@ -940,13 +1021,13 @@ install.packages("AMR", repos = "beta.amr-for-r.org")
 remotes::install_github("msberends/AMR")
 ```
 
-### Get started
+## Get started
 
 To find out how to conduct AMR data analysis, please [continue reading
 here to get started](./articles/AMR.html) or click a link in the [‘How
 to’ menu](./articles/).
 
-### Partners
+## Partners
 
 The initial development of this package was part of, related to, or made
 possible by the following non-profit organisations and initiatives:
@@ -961,7 +1042,7 @@ possible by the following non-profit organisations and initiatives:
 
 </div>
 
-### Copyright
+## Copyright
 
 This R package is free, open-source software and licensed under the [GNU
 General Public License v2.0 (GPL-2)](./LICENSE-text.html). In a
@@ -4811,9 +4892,6 @@ Define custom EUCAST rules for your organisation or specific analysis and use th
 }
 \details{
 Some organisations have their own adoption of EUCAST rules. This function can be used to define custom EUCAST rules to be used in the \code{\link[=eucast_rules]{eucast_rules()}} function.
-}
-\section{How it works}{
-
 \subsection{Basics}{
 
 If you are familiar with the \code{\link[dplyr:case_when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
@@ -4845,7 +4923,11 @@ df
 #> 1      Escherichia coli   R    S     S
 #> 2 Klebsiella pneumoniae   R    S     S
 
-eucast_rules(df, rules = "custom", custom_rules = x, info = FALSE, overwrite = TRUE)
+eucast_rules(df,
+             rules = "custom",
+             custom_rules = x,
+             info = FALSE,
+             overwrite = TRUE)
 #>                      mo TZP ampi cipro
 #> 1      Escherichia coli   R    R     S
 #> 2 Klebsiella pneumoniae   R    R     S
@@ -4856,10 +4938,16 @@ eucast_rules(df, rules = "custom", custom_rules = x, info = FALSE, overwrite = T
 
 There is one exception in columns used for the rules: all column names of the \link{microorganisms} data set can also be used, but do not have to exist in the data set. These column names are: "mo", "fullname", "status", "kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies", "rank", "ref", "oxygen_tolerance", "source", "lpsn", "lpsn_parent", "lpsn_renamed_to", "mycobank", "mycobank_parent", "mycobank_renamed_to", "gbif", "gbif_parent", "gbif_renamed_to", "prevalence", and "snomed". Thus, this next example will work as well, despite the fact that the \code{df} data set does not contain a column \code{genus}:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- custom_eucast_rules(TZP == "S" & genus == "Klebsiella" ~ aminopenicillins == "S",
-                         TZP == "R" & genus == "Klebsiella" ~ aminopenicillins == "R")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- custom_eucast_rules(
+  TZP == "S" & genus == "Klebsiella" ~ aminopenicillins == "S",
+  TZP == "R" & genus == "Klebsiella" ~ aminopenicillins == "R"
+)
 
-eucast_rules(df, rules = "custom", custom_rules = y, info = FALSE, overwrite = TRUE)
+eucast_rules(df,
+             rules = "custom",
+             custom_rules = y,
+             info = FALSE,
+             overwrite = TRUE)
 #>                      mo TZP ampi cipro
 #> 1      Escherichia coli   R    S     S
 #> 2 Klebsiella pneumoniae   R    R     S
@@ -4925,7 +5013,6 @@ These 35 antimicrobial groups are allowed in the rules (case-insensitive) and ca
 }
 }
 }
-
 \examples{
 x <- custom_eucast_rules(
   AMC == "R" & genus == "Klebsiella" ~ aminopenicillins == "R",
@@ -4961,21 +5048,18 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/custom_mdro_guideline.Rd':
 \name{custom_mdro_guideline}
 \alias{custom_mdro_guideline}
 \alias{c.custom_mdro_guideline}
-\alias{print.custom_mdro_guideline}
 \title{Define Custom MDRO Guideline}
 \usage{
 custom_mdro_guideline(..., as_factor = TRUE)
 
 \method{c}{custom_mdro_guideline}(x, ..., as_factor = NULL)
-
-\method{print}{custom_mdro_guideline}(x, ...)
 }
 \arguments{
 \item{...}{Guideline rules in \link[base:tilde]{formula} notation, see below for instructions, and in \emph{Examples}.}
 
-\item{as_factor}{A \link{logical} to indicate whether the returned value should be an ordered \link{factor} (\code{TRUE}, default), or otherwise a \link{character} vector.}
+\item{as_factor}{A \link{logical} to indicate whether the returned value should be an ordered \link{factor} (\code{TRUE}, default), or otherwise a \link{character} vector. For combining rules sets (using \code{\link[=c]{c()}}) this value will be inherited from the first set at default.}
 
-\item{x}{A \link{data.frame} with antimicrobials columns, like \code{AMX} or \code{amox}. Can be left blank for automatic determination.}
+\item{x}{Existing custom MDRO rules}
 }
 \value{
 A \link{list} containing the custom rules
@@ -4985,9 +5069,6 @@ Define custom a MDRO guideline for your organisation or specific analysis and us
 }
 \details{
 Using a custom MDRO guideline is of importance if you have custom rules to determine MDROs in your hospital, e.g., rules that are dependent on ward, state of contact isolation or other variables in your data.
-}
-\section{How it works}{
-
 \subsection{Basics}{
 
 If you are familiar with the \code{\link[dplyr:case_when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
@@ -5058,47 +5139,43 @@ You can define antimicrobial groups instead of single antimicrobials for the rul
 )
 }\if{html}{\out{</div>}}
 
-These 35 antimicrobial groups are allowed in the rules (case-insensitive) and can be used in any combination:
+All 35 antimicrobial selectors are supported for use in the rules:
 \itemize{
-\item aminoglycosides\cr(amikacin, amikacin/fosfomycin, apramycin, arbekacin, astromicin, bekanamycin, dibekacin, framycetin, gentamicin, gentamicin-high, habekacin, hygromycin, isepamicin, kanamycin, kanamycin-high, kanamycin/cephalexin, micronomicin, neomycin, netilmicin, pentisomicin, plazomicin, propikacin, ribostamycin, sisomicin, streptoduocin, streptomycin, streptomycin-high, tobramycin, and tobramycin-high)
-\item aminopenicillins\cr(amoxicillin and ampicillin)
-\item antifungals\cr(amorolfine, amphotericin B, amphotericin B-high, anidulafungin, butoconazole, caspofungin, ciclopirox, clotrimazole, econazole, fluconazole, flucytosine, fosfluconazole, griseofulvin, hachimycin, ibrexafungerp, isavuconazole, isoconazole, itraconazole, ketoconazole, manogepix, micafungin, miconazole, nystatin, oteseconazole, pimaricin, posaconazole, rezafungin, ribociclib, sulconazole, terbinafine, terconazole, and voriconazole)
-\item antimycobacterials\cr(4-aminosalicylic acid, calcium aminosalicylate, capreomycin, clofazimine, delamanid, enviomycin, ethambutol, ethambutol/isoniazid, ethionamide, isoniazid, isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, morinamide, p-aminosalicylic acid, pretomanid, protionamide, pyrazinamide, rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, rifapentine, simvastatin/fenofibrate, sodium aminosalicylate, streptomycin/isoniazid, terizidone, thioacetazone, thioacetazone/isoniazid, tiocarlide, and viomycin)
-\item betalactams\cr(amoxicillin, amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin, ampicillin/sulbactam, apalcillin, aspoxicillin, azidocillin, azlocillin, aztreonam, aztreonam/avibactam, aztreonam/nacubactam, bacampicillin, benzathine benzylpenicillin, benzathine phenoxymethylpenicillin, benzylpenicillin, benzylpenicillin screening test, biapenem, carbenicillin, carindacillin, carumonam, cefacetrile, cefaclor, cefadroxil, cefalexin, cefaloridine, cefalotin, cefamandole, cefapirin, cefatrizine, cefazedone, cefazolin, cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetamet, cefetamet pivoxil, cefetecol, cefetrizole, cefiderocol, cefixime, cefmenoxime, cefmetazole, cefodizime, cefonicid, cefoperazone, cefoperazone/sulbactam, ceforanide, cefoselis, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotetan, cefotiam, cefotiam hexetil, cefovecin, cefoxitin, cefoxitin screening test, cefozopran, cefpimizole, cefpiramide, cefpirome, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefprozil, cefquinome, cefroxadine, cefsulodin, cefsumide, ceftaroline, ceftaroline/avibactam, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftezole, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftobiprole, ceftobiprole medocaril, ceftolozane/tazobactam, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, cefuroxime, cefuroxime axetil, cephradine, ciclacillin, clometocillin, cloxacillin, dicloxacillin, doripenem, epicillin, ertapenem, flucloxacillin, hetacillin, imipenem, imipenem/EDTA, imipenem/relebactam, latamoxef, lenampicillin, loracarbef, mecillinam, meropenem, meropenem/nacubactam, meropenem/vaborbactam, metampicillin, meticillin, mezlocillin, mezlocillin/sulbactam, nafcillin, oxacillin, oxacillin screening test, panipenem, penamecillin, penicillin/novobiocin, penicillin/sulbactam, pheneticillin, phenoxymethylpenicillin, piperacillin, piperacillin/sulbactam, piperacillin/tazobactam, piridicillin, pivampicillin, pivmecillinam, procaine benzylpenicillin, propicillin, razupenem, ritipenem, ritipenem acoxil, sarmoxicillin, sulbenicillin, sultamicillin, talampicillin, tebipenem, temocillin, ticarcillin, ticarcillin/clavulanic acid, and tigemonam)
-\item betalactams_with_inhibitor\cr(amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin/sulbactam, aztreonam/avibactam, aztreonam/nacubactam, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefoperazone/sulbactam, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefpodoxime/clavulanic acid, ceftaroline/avibactam, ceftazidime/avibactam, ceftazidime/clavulanic acid, ceftolozane/tazobactam, ceftriaxone/beta-lactamase inhibitor, imipenem/relebactam, meropenem/nacubactam, meropenem/vaborbactam, mezlocillin/sulbactam, penicillin/novobiocin, penicillin/sulbactam, piperacillin/sulbactam, piperacillin/tazobactam, and ticarcillin/clavulanic acid)
-\item carbapenems\cr(biapenem, doripenem, ertapenem, imipenem, imipenem/EDTA, imipenem/relebactam, meropenem, meropenem/nacubactam, meropenem/vaborbactam, panipenem, razupenem, ritipenem, ritipenem acoxil, and tebipenem)
-\item cephalosporins\cr(cefacetrile, cefaclor, cefadroxil, cefalexin, cefaloridine, cefalotin, cefamandole, cefapirin, cefatrizine, cefazedone, cefazolin, cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetamet, cefetamet pivoxil, cefetecol, cefetrizole, cefiderocol, cefixime, cefmenoxime, cefmetazole, cefodizime, cefonicid, cefoperazone, cefoperazone/sulbactam, ceforanide, cefoselis, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotetan, cefotiam, cefotiam hexetil, cefovecin, cefoxitin, cefoxitin screening test, cefozopran, cefpimizole, cefpiramide, cefpirome, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefprozil, cefquinome, cefroxadine, cefsulodin, cefsumide, ceftaroline, ceftaroline/avibactam, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftezole, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftobiprole, ceftobiprole medocaril, ceftolozane/tazobactam, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, cefuroxime, cefuroxime axetil, cephradine, latamoxef, and loracarbef)
-\item cephalosporins_1st\cr(cefacetrile, cefadroxil, cefalexin, cefaloridine, cefalotin, cefapirin, cefatrizine, cefazedone, cefazolin, cefroxadine, ceftezole, and cephradine)
-\item cephalosporins_2nd\cr(cefaclor, cefamandole, cefmetazole, cefonicid, ceforanide, cefotetan, cefotiam, cefoxitin, cefoxitin screening test, cefprozil, cefuroxime, cefuroxime axetil, and loracarbef)
-\item cephalosporins_3rd\cr(cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefetamet, cefetamet pivoxil, cefixime, cefmenoxime, cefodizime, cefoperazone, cefoperazone/sulbactam, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotiam hexetil, cefovecin, cefpimizole, cefpiramide, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefsulodin, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, and latamoxef)
-\item cephalosporins_4th\cr(cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetecol, cefoselis, cefozopran, cefpirome, and cefquinome)
-\item cephalosporins_5th\cr(ceftaroline, ceftaroline/avibactam, ceftobiprole, ceftobiprole medocaril, and ceftolozane/tazobactam)
-\item cephalosporins_except_caz\cr(cefacetrile, cefaclor, cefadroxil, cefalexin, cefaloridine, cefalotin, cefamandole, cefapirin, cefatrizine, cefazedone, cefazolin, cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetamet, cefetamet pivoxil, cefetecol, cefetrizole, cefiderocol, cefixime, cefmenoxime, cefmetazole, cefodizime, cefonicid, cefoperazone, cefoperazone/sulbactam, ceforanide, cefoselis, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotetan, cefotiam, cefotiam hexetil, cefovecin, cefoxitin, cefoxitin screening test, cefozopran, cefpimizole, cefpiramide, cefpirome, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefprozil, cefquinome, cefroxadine, cefsulodin, cefsumide, ceftaroline, ceftaroline/avibactam, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftezole, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftobiprole, ceftobiprole medocaril, ceftolozane/tazobactam, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, cefuroxime, cefuroxime axetil, cephradine, latamoxef, and loracarbef)
-\item fluoroquinolones\cr(besifloxacin, ciprofloxacin, ciprofloxacin/metronidazole, ciprofloxacin/ornidazole, ciprofloxacin/tinidazole, clinafloxacin, danofloxacin, delafloxacin, difloxacin, enoxacin, enrofloxacin, finafloxacin, fleroxacin, garenoxacin, gatifloxacin, gemifloxacin, grepafloxacin, lascufloxacin, levofloxacin, levofloxacin/ornidazole, levonadifloxacin, lomefloxacin, marbofloxacin, metioxate, miloxacin, moxifloxacin, nadifloxacin, nemonoxacin, nifuroquine, nitroxoline, norfloxacin, norfloxacin screening test, norfloxacin/metronidazole, norfloxacin/tinidazole, ofloxacin, ofloxacin/ornidazole, orbifloxacin, pazufloxacin, pefloxacin, pefloxacin screening test, pradofloxacin, premafloxacin, prulifloxacin, rufloxacin, sarafloxacin, sitafloxacin, sparfloxacin, temafloxacin, tilbroquinol, tioxacin, tosufloxacin, and trovafloxacin)
-\item glycopeptides\cr(avoparcin, bleomycin, dalbavancin, norvancomycin, oritavancin, ramoplanin, teicoplanin, teicoplanin-macromethod, telavancin, vancomycin, and vancomycin-macromethod)
-\item glycopeptides_except_lipo\cr(avoparcin, bleomycin, norvancomycin, ramoplanin, teicoplanin, teicoplanin-macromethod, vancomycin, and vancomycin-macromethod)
-\item isoxazolylpenicillins\cr(cloxacillin, dicloxacillin, flucloxacillin, meticillin, oxacillin, and oxacillin screening test)
-\item lincosamides\cr(clindamycin, lincomycin, and pirlimycin)
-\item lipoglycopeptides\cr(dalbavancin, oritavancin, and telavancin)
-\item macrolides\cr(acetylmidecamycin, acetylspiramycin, azithromycin, clarithromycin, dirithromycin, erythromycin, flurithromycin, gamithromycin, josamycin, kitasamycin, meleumycin, midecamycin, miocamycin, nafithromycin, oleandomycin, rokitamycin, roxithromycin, solithromycin, spiramycin, telithromycin, tildipirosin, tilmicosin, troleandomycin, tulathromycin, tylosin, and tylvalosin)
-\item monobactams\cr(aztreonam, aztreonam/avibactam, aztreonam/nacubactam, carumonam, and tigemonam)
-\item nitrofurans\cr(furazidin, furazolidone, nifurtoinol, nitrofurantoin, and nitrofurazone)
-\item oxazolidinones\cr(cadazolid, cycloserine, linezolid, tedizolid, and thiacetazone)
-\item penicillins\cr(amoxicillin, amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin, ampicillin/sulbactam, apalcillin, aspoxicillin, azidocillin, azlocillin, bacampicillin, benzathine benzylpenicillin, benzathine phenoxymethylpenicillin, benzylpenicillin, benzylpenicillin screening test, carbenicillin, carindacillin, ciclacillin, clometocillin, cloxacillin, dicloxacillin, epicillin, flucloxacillin, hetacillin, lenampicillin, mecillinam, metampicillin, meticillin, mezlocillin, mezlocillin/sulbactam, nafcillin, oxacillin, oxacillin screening test, penamecillin, penicillin/novobiocin, penicillin/sulbactam, pheneticillin, phenoxymethylpenicillin, piperacillin, piperacillin/sulbactam, piperacillin/tazobactam, piridicillin, pivampicillin, pivmecillinam, procaine benzylpenicillin, propicillin, sarmoxicillin, sulbenicillin, sultamicillin, talampicillin, temocillin, ticarcillin, and ticarcillin/clavulanic acid)
-\item phenicols\cr(chloramphenicol, florfenicol, and thiamphenicol)
-\item polymyxins\cr(colistin, polymyxin B, and polymyxin B/polysorbate 80)
-\item quinolones\cr(besifloxacin, cinoxacin, ciprofloxacin, ciprofloxacin/metronidazole, ciprofloxacin/ornidazole, ciprofloxacin/tinidazole, clinafloxacin, danofloxacin, delafloxacin, difloxacin, enoxacin, enrofloxacin, finafloxacin, fleroxacin, flumequine, garenoxacin, gatifloxacin, gemifloxacin, grepafloxacin, lascufloxacin, levofloxacin, levofloxacin/ornidazole, levonadifloxacin, lomefloxacin, marbofloxacin, metioxate, miloxacin, moxifloxacin, nadifloxacin, nalidixic acid, nalidixic acid screening test, nemonoxacin, nifuroquine, nitroxoline, norfloxacin, norfloxacin screening test, norfloxacin/metronidazole, norfloxacin/tinidazole, ofloxacin, ofloxacin/ornidazole, orbifloxacin, oxolinic acid, pazufloxacin, pefloxacin, pefloxacin screening test, pipemidic acid, piromidic acid, pradofloxacin, premafloxacin, prulifloxacin, rosoxacin, rufloxacin, sarafloxacin, sitafloxacin, sparfloxacin, temafloxacin, tilbroquinol, tioxacin, tosufloxacin, and trovafloxacin)
-\item rifamycins\cr(rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, and rifapentine)
-\item streptogramins\cr(pristinamycin and quinupristin/dalfopristin)
-\item sulfonamides\cr(brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadimethoxine, sulfadimidine, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfamoxole, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, and sulfathiourea)
-\item tetracyclines\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, and tigecycline)
-\item tetracyclines_except_tgc\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, and tetracycline screening test)
-\item trimethoprims\cr(brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole)
-\item ureidopenicillins\cr(azlocillin, mezlocillin, piperacillin, and piperacillin/tazobactam)
+\item \code{\link[=aminoglycosides]{aminoglycosides()}} can select: \cr amikacin, amikacin/fosfomycin, apramycin, arbekacin, astromicin, bekanamycin, dibekacin, framycetin, gentamicin, gentamicin-high, habekacin, hygromycin, isepamicin, kanamycin, kanamycin-high, kanamycin/cephalexin, micronomicin, neomycin, netilmicin, pentisomicin, plazomicin, propikacin, ribostamycin, sisomicin, streptoduocin, streptomycin, streptomycin-high, tobramycin, and tobramycin-high
+\item \code{\link[=aminopenicillins]{aminopenicillins()}} can select: \cr amoxicillin and ampicillin
+\item \code{\link[=antifungals]{antifungals()}} can select: \cr amorolfine, amphotericin B, amphotericin B-high, anidulafungin, butoconazole, caspofungin, ciclopirox, clotrimazole, econazole, fluconazole, flucytosine, fosfluconazole, griseofulvin, hachimycin, ibrexafungerp, isavuconazole, isoconazole, itraconazole, ketoconazole, manogepix, micafungin, miconazole, nystatin, oteseconazole, pimaricin, posaconazole, rezafungin, ribociclib, sulconazole, terbinafine, terconazole, and voriconazole
+\item \code{\link[=antimycobacterials]{antimycobacterials()}} can select: \cr 4-aminosalicylic acid, calcium aminosalicylate, capreomycin, clofazimine, delamanid, enviomycin, ethambutol, ethambutol/isoniazid, ethionamide, isoniazid, isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, morinamide, p-aminosalicylic acid, pretomanid, protionamide, pyrazinamide, rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, rifapentine, simvastatin/fenofibrate, sodium aminosalicylate, streptomycin/isoniazid, terizidone, thioacetazone, thioacetazone/isoniazid, tiocarlide, and viomycin
+\item \code{\link[=betalactams]{betalactams()}} can select: \cr amoxicillin, amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin, ampicillin/sulbactam, apalcillin, aspoxicillin, azidocillin, azlocillin, aztreonam, aztreonam/avibactam, aztreonam/nacubactam, bacampicillin, benzathine benzylpenicillin, benzathine phenoxymethylpenicillin, benzylpenicillin, benzylpenicillin screening test, biapenem, carbenicillin, carindacillin, carumonam, cefacetrile, cefaclor, cefadroxil, cefalexin, cefaloridine, cefalotin, cefamandole, cefapirin, cefatrizine, cefazedone, cefazolin, cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetamet, cefetamet pivoxil, cefetecol, cefetrizole, cefiderocol, cefixime, cefmenoxime, cefmetazole, cefodizime, cefonicid, cefoperazone, cefoperazone/sulbactam, ceforanide, cefoselis, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotetan, cefotiam, cefotiam hexetil, cefovecin, cefoxitin, cefoxitin screening test, cefozopran, cefpimizole, cefpiramide, cefpirome, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefprozil, cefquinome, cefroxadine, cefsulodin, cefsumide, ceftaroline, ceftaroline/avibactam, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftezole, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftobiprole, ceftobiprole medocaril, ceftolozane/tazobactam, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, cefuroxime, cefuroxime axetil, cephradine, ciclacillin, clometocillin, cloxacillin, dicloxacillin, doripenem, epicillin, ertapenem, flucloxacillin, hetacillin, imipenem, imipenem/EDTA, imipenem/relebactam, latamoxef, lenampicillin, loracarbef, mecillinam, meropenem, meropenem/nacubactam, meropenem/vaborbactam, metampicillin, meticillin, mezlocillin, mezlocillin/sulbactam, nafcillin, oxacillin, oxacillin screening test, panipenem, penamecillin, penicillin/novobiocin, penicillin/sulbactam, pheneticillin, phenoxymethylpenicillin, piperacillin, piperacillin/sulbactam, piperacillin/tazobactam, piridicillin, pivampicillin, pivmecillinam, procaine benzylpenicillin, propicillin, razupenem, ritipenem, ritipenem acoxil, sarmoxicillin, sulbenicillin, sultamicillin, talampicillin, tebipenem, temocillin, ticarcillin, ticarcillin/clavulanic acid, and tigemonam
+\item \code{\link[=betalactams_with_inhibitor]{betalactams_with_inhibitor()}} can select: \cr amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin/sulbactam, aztreonam/avibactam, aztreonam/nacubactam, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefoperazone/sulbactam, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefpodoxime/clavulanic acid, ceftaroline/avibactam, ceftazidime/avibactam, ceftazidime/clavulanic acid, ceftolozane/tazobactam, ceftriaxone/beta-lactamase inhibitor, imipenem/relebactam, meropenem/nacubactam, meropenem/vaborbactam, mezlocillin/sulbactam, penicillin/novobiocin, penicillin/sulbactam, piperacillin/sulbactam, piperacillin/tazobactam, and ticarcillin/clavulanic acid
+\item \code{\link[=carbapenems]{carbapenems()}} can select: \cr biapenem, doripenem, ertapenem, imipenem, imipenem/EDTA, imipenem/relebactam, meropenem, meropenem/nacubactam, meropenem/vaborbactam, panipenem, razupenem, ritipenem, ritipenem acoxil, and tebipenem
+\item \code{\link[=cephalosporins]{cephalosporins()}} can select: \cr cefacetrile, cefaclor, cefadroxil, cefalexin, cefaloridine, cefalotin, cefamandole, cefapirin, cefatrizine, cefazedone, cefazolin, cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetamet, cefetamet pivoxil, cefetecol, cefetrizole, cefiderocol, cefixime, cefmenoxime, cefmetazole, cefodizime, cefonicid, cefoperazone, cefoperazone/sulbactam, ceforanide, cefoselis, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotetan, cefotiam, cefotiam hexetil, cefovecin, cefoxitin, cefoxitin screening test, cefozopran, cefpimizole, cefpiramide, cefpirome, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefprozil, cefquinome, cefroxadine, cefsulodin, cefsumide, ceftaroline, ceftaroline/avibactam, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftezole, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftobiprole, ceftobiprole medocaril, ceftolozane/tazobactam, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, cefuroxime, cefuroxime axetil, cephradine, latamoxef, and loracarbef
+\item \code{\link[=cephalosporins_1st]{cephalosporins_1st()}} can select: \cr cefacetrile, cefadroxil, cefalexin, cefaloridine, cefalotin, cefapirin, cefatrizine, cefazedone, cefazolin, cefroxadine, ceftezole, and cephradine
+\item \code{\link[=cephalosporins_2nd]{cephalosporins_2nd()}} can select: \cr cefaclor, cefamandole, cefmetazole, cefonicid, ceforanide, cefotetan, cefotiam, cefoxitin, cefoxitin screening test, cefprozil, cefuroxime, cefuroxime axetil, and loracarbef
+\item \code{\link[=cephalosporins_3rd]{cephalosporins_3rd()}} can select: \cr cefcapene, cefcapene pivoxil, cefdinir, cefditoren, cefditoren pivoxil, cefetamet, cefetamet pivoxil, cefixime, cefmenoxime, cefodizime, cefoperazone, cefoperazone/sulbactam, cefotaxime, cefotaxime screening test, cefotaxime/clavulanic acid, cefotaxime/sulbactam, cefotiam hexetil, cefovecin, cefpimizole, cefpiramide, cefpodoxime, cefpodoxime proxetil, cefpodoxime/clavulanic acid, cefsulodin, ceftazidime, ceftazidime/avibactam, ceftazidime/clavulanic acid, cefteram, cefteram pivoxil, ceftibuten, ceftiofur, ceftizoxime, ceftizoxime alapivoxil, ceftriaxone, ceftriaxone/beta-lactamase inhibitor, and latamoxef
+\item \code{\link[=cephalosporins_4th]{cephalosporins_4th()}} can select: \cr cefepime, cefepime/amikacin, cefepime/clavulanic acid, cefepime/enmetazobactam, cefepime/nacubactam, cefepime/tazobactam, cefepime/zidebactam, cefetecol, cefoselis, cefozopran, cefpirome, and cefquinome
+\item \code{\link[=cephalosporins_5th]{cephalosporins_5th()}} can select: \cr ceftaroline, ceftaroline/avibactam, ceftobiprole, ceftobiprole medocaril, and ceftolozane/tazobactam
+\item \code{\link[=fluoroquinolones]{fluoroquinolones()}} can select: \cr besifloxacin, ciprofloxacin, ciprofloxacin/metronidazole, ciprofloxacin/ornidazole, ciprofloxacin/tinidazole, clinafloxacin, danofloxacin, delafloxacin, difloxacin, enoxacin, enrofloxacin, finafloxacin, fleroxacin, garenoxacin, gatifloxacin, gemifloxacin, grepafloxacin, lascufloxacin, levofloxacin, levofloxacin/ornidazole, levonadifloxacin, lomefloxacin, marbofloxacin, metioxate, miloxacin, moxifloxacin, nadifloxacin, nemonoxacin, nifuroquine, nitroxoline, norfloxacin, norfloxacin screening test, norfloxacin/metronidazole, norfloxacin/tinidazole, ofloxacin, ofloxacin/ornidazole, orbifloxacin, pazufloxacin, pefloxacin, pefloxacin screening test, pradofloxacin, premafloxacin, prulifloxacin, rufloxacin, sarafloxacin, sitafloxacin, sparfloxacin, temafloxacin, tilbroquinol, tioxacin, tosufloxacin, and trovafloxacin
+\item \code{\link[=glycopeptides]{glycopeptides()}} can select: \cr avoparcin, bleomycin, dalbavancin, norvancomycin, oritavancin, ramoplanin, teicoplanin, teicoplanin-macromethod, telavancin, vancomycin, and vancomycin-macromethod
+\item \code{\link[=isoxazolylpenicillins]{isoxazolylpenicillins()}} can select: \cr cloxacillin, dicloxacillin, flucloxacillin, meticillin, oxacillin, and oxacillin screening test
+\item \code{\link[=lincosamides]{lincosamides()}} can select: \cr clindamycin, lincomycin, and pirlimycin
+\item \code{\link[=lipoglycopeptides]{lipoglycopeptides()}} can select: \cr dalbavancin, oritavancin, and telavancin
+\item \code{\link[=macrolides]{macrolides()}} can select: \cr acetylmidecamycin, acetylspiramycin, azithromycin, clarithromycin, dirithromycin, erythromycin, flurithromycin, gamithromycin, josamycin, kitasamycin, meleumycin, midecamycin, miocamycin, nafithromycin, oleandomycin, rokitamycin, roxithromycin, solithromycin, spiramycin, telithromycin, tildipirosin, tilmicosin, troleandomycin, tulathromycin, tylosin, and tylvalosin
+\item \code{\link[=monobactams]{monobactams()}} can select: \cr aztreonam, aztreonam/avibactam, aztreonam/nacubactam, carumonam, and tigemonam
+\item \code{\link[=nitrofurans]{nitrofurans()}} can select: \cr furazidin, furazolidone, nifurtoinol, nitrofurantoin, and nitrofurazone
+\item \code{\link[=oxazolidinones]{oxazolidinones()}} can select: \cr cadazolid, cycloserine, linezolid, tedizolid, and thiacetazone
+\item \code{\link[=penicillins]{penicillins()}} can select: \cr amoxicillin, amoxicillin/clavulanic acid, amoxicillin/sulbactam, ampicillin, ampicillin/sulbactam, apalcillin, aspoxicillin, azidocillin, azlocillin, bacampicillin, benzathine benzylpenicillin, benzathine phenoxymethylpenicillin, benzylpenicillin, benzylpenicillin screening test, carbenicillin, carindacillin, ciclacillin, clometocillin, cloxacillin, dicloxacillin, epicillin, flucloxacillin, hetacillin, lenampicillin, mecillinam, metampicillin, meticillin, mezlocillin, mezlocillin/sulbactam, nafcillin, oxacillin, oxacillin screening test, penamecillin, penicillin/novobiocin, penicillin/sulbactam, pheneticillin, phenoxymethylpenicillin, piperacillin, piperacillin/sulbactam, piperacillin/tazobactam, piridicillin, pivampicillin, pivmecillinam, procaine benzylpenicillin, propicillin, sarmoxicillin, sulbenicillin, sultamicillin, talampicillin, temocillin, ticarcillin, and ticarcillin/clavulanic acid
+\item \code{\link[=phenicols]{phenicols()}} can select: \cr chloramphenicol, florfenicol, and thiamphenicol
+\item \code{\link[=polymyxins]{polymyxins()}} can select: \cr colistin, polymyxin B, and polymyxin B/polysorbate 80
+\item \code{\link[=quinolones]{quinolones()}} can select: \cr besifloxacin, cinoxacin, ciprofloxacin, ciprofloxacin/metronidazole, ciprofloxacin/ornidazole, ciprofloxacin/tinidazole, clinafloxacin, danofloxacin, delafloxacin, difloxacin, enoxacin, enrofloxacin, finafloxacin, fleroxacin, flumequine, garenoxacin, gatifloxacin, gemifloxacin, grepafloxacin, lascufloxacin, levofloxacin, levofloxacin/ornidazole, levonadifloxacin, lomefloxacin, marbofloxacin, metioxate, miloxacin, moxifloxacin, nadifloxacin, nalidixic acid, nalidixic acid screening test, nemonoxacin, nifuroquine, nitroxoline, norfloxacin, norfloxacin screening test, norfloxacin/metronidazole, norfloxacin/tinidazole, ofloxacin, ofloxacin/ornidazole, orbifloxacin, oxolinic acid, pazufloxacin, pefloxacin, pefloxacin screening test, pipemidic acid, piromidic acid, pradofloxacin, premafloxacin, prulifloxacin, rosoxacin, rufloxacin, sarafloxacin, sitafloxacin, sparfloxacin, temafloxacin, tilbroquinol, tioxacin, tosufloxacin, and trovafloxacin
+\item \code{\link[=rifamycins]{rifamycins()}} can select: \cr rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, and rifapentine
+\item \code{\link[=streptogramins]{streptogramins()}} can select: \cr pristinamycin and quinupristin/dalfopristin
+\item \code{\link[=sulfonamides]{sulfonamides()}} can select: \cr brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadimethoxine, sulfadimidine, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfamoxole, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, and sulfathiourea
+\item \code{\link[=tetracyclines]{tetracyclines()}} can select: \cr cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, and tigecycline
+\item \code{\link[=trimethoprims]{trimethoprims()}} can select: \cr brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole
+\item \code{\link[=ureidopenicillins]{ureidopenicillins()}} can select: \cr azlocillin, mezlocillin, piperacillin, and piperacillin/tazobactam
 }
 }
 }
-
 \examples{
 x <- custom_mdro_guideline(
   CIP == "R" & age > 60 ~ "Elderly Type A",
@@ -5231,7 +5308,7 @@ eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
 
 \item{overwrite}{A \link{logical} indicating whether to overwrite existing SIR values (default: \code{FALSE}). When \code{FALSE}, only non-SIR values are modified (i.e., any value that is not already S, I or R). To ensure compliance with EUCAST guidelines, \strong{this should remain} \code{FALSE}, as EUCAST notes often state that an organism "should be tested for susceptibility to individual agents or be reported resistant".}
 
-\item{...}{Column name of an antimicrobial, see section \emph{Antimicrobials} below.}
+\item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
 
 \item{ab}{Any (vector of) text that can be coerced to a valid antimicrobial drug code with \code{\link[=as.ab]{as.ab()}}.}
 
@@ -5274,13 +5351,6 @@ Important examples include amoxicillin and amoxicillin/clavulanic acid, and trim
 Since these rules are not officially approved by EUCAST, they are not applied at default. To use these rules, include \code{"other"} to the \code{rules} argument, or use \code{eucast_rules(..., rules = "all")}. You can also set the package option \code{\link[=AMR-options]{AMR_eucastrules}}, i.e. run \code{options(AMR_eucastrules = "all")}.
 }
 }
-\section{Antimicrobials}{
-
-To let the function automatically detect antimicrobial column names, do not provide any named arguments. It will then use \code{\link[=guess_ab_col]{guess_ab_col()}} to find them.
-
-To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.
-}
-
 \section{Download Our Reference Data}{
 
 All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
@@ -6865,9 +6935,7 @@ eucast_exceptional_phenotypes(x = NULL, only_sir_columns = any(is.sir(x)),
 
 \item{only_sir_columns}{A \link{logical} to indicate whether only antimicrobial columns must be included that were transformed to class \link[=as.sir]{sir} on beforehand. Defaults to \code{FALSE} if no columns of \code{x} have a class \link[=as.sir]{sir}.}
 
-\item{...}{In case of \code{\link[=custom_mdro_guideline]{custom_mdro_guideline()}}: a set of rules, see section \emph{Using Custom Guidelines} below. Otherwise: column name of an antibiotic, see section \emph{Antimicrobials} below.}
-
-\item{as_factor}{A \link{logical} to indicate whether the returned value should be an ordered \link{factor} (\code{TRUE}, default), or otherwise a \link{character} vector.}
+\item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
 }
 \value{
 \itemize{
@@ -6940,13 +7008,6 @@ Using a custom MDRO guideline is of importance if you have custom rules to deter
 Custom guidelines can be set with the \code{\link[=custom_mdro_guideline]{custom_mdro_guideline()}} function.
 }
 }
-\section{Antimicrobials}{
-
-To let the function automatically detect antimicrobial column names, do not provide any named arguments. It will then use \code{\link[=guess_ab_col]{guess_ab_col()}} to find them.
-
-To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.
-}
-
 \section{Interpretation of SIR}{
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
