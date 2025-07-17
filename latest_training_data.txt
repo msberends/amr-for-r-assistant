@@ -494,8 +494,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.0.9004
-Date: 2025-06-13
+Version: 3.0.0.9008
+Date: 2025-07-17
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -603,12 +603,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 
 <p style="text-align:left; width: 50%;">
 
-<small><a href="https://amr-for-r.org/">https://amr-for-r.org</a></small>
+<small><a href="https://amr-for-r.org/">amr-for-r.org</a></small>
 </p>
 
 <p style="text-align:right; width: 50%;">
 
-<small><a href="https://doi.org/10.18637/jss.v104.i03" target="_blank">https://doi.org/10.18637/jss.v104.i03</a></small>
+<small><a href="https://doi.org/10.18637/jss.v104.i03" target="_blank">doi.org/10.18637/jss.v104.i03</a></small>
 </p>
 
 </div>
@@ -897,9 +897,9 @@ example_isolates %>%
 #> # A tibble: 3 × 5
 #>   ward       GEN_total_R GEN_conf_int TOB_total_R TOB_conf_int
 #>   <chr>            <dbl> <chr>              <dbl> <chr>       
-#> 1 Clinical     0.2289362 0.205-0.254    0.3147503 0.284-0.347 
-#> 2 ICU          0.2902655 0.253-0.33     0.4004739 0.353-0.449 
-#> 3 Outpatient   0.2       0.131-0.285    0.3676471 0.254-0.493
+#> 1 Clinical         0.229 0.205-0.254        0.315 0.284-0.347 
+#> 2 ICU              0.290 0.253-0.33         0.400 0.353-0.449 
+#> 3 Outpatient       0.2   0.131-0.285        0.368 0.254-0.493
 ```
 
 Or use [antimicrobial
@@ -927,33 +927,33 @@ out <- example_isolates %>%
 #> "Outpatient" (minimum = 30).
 out
 #> # A tibble: 3 × 6
-#>   ward             GEN       TOB       AMK   KAN       COL
-#>   <chr>          <dbl>     <dbl>     <dbl> <dbl>     <dbl>
-#> 1 Clinical   0.2289362 0.3147503 0.6258993     1 0.7802956
-#> 2 ICU        0.2902655 0.4004739 0.6624473     1 0.8574144
-#> 3 Outpatient 0.2       0.3676471 0.6052632    NA 0.8888889
+#>   ward         GEN   TOB   AMK   KAN   COL
+#>   <chr>      <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 Clinical   0.229 0.315 0.626     1 0.780
+#> 2 ICU        0.290 0.400 0.662     1 0.857
+#> 3 Outpatient 0.2   0.368 0.605    NA 0.889
 ```
 
 ``` r
 # transform the antibiotic columns to names:
 out %>% set_ab_names()
 #> # A tibble: 3 × 6
-#>   ward       gentamicin tobramycin  amikacin kanamycin  colistin
-#>   <chr>           <dbl>      <dbl>     <dbl>     <dbl>     <dbl>
-#> 1 Clinical    0.2289362  0.3147503 0.6258993         1 0.7802956
-#> 2 ICU         0.2902655  0.4004739 0.6624473         1 0.8574144
-#> 3 Outpatient  0.2        0.3676471 0.6052632        NA 0.8888889
+#>   ward       gentamicin tobramycin amikacin kanamycin colistin
+#>   <chr>           <dbl>      <dbl>    <dbl>     <dbl>    <dbl>
+#> 1 Clinical        0.229      0.315    0.626         1    0.780
+#> 2 ICU             0.290      0.400    0.662         1    0.857
+#> 3 Outpatient      0.2        0.368    0.605        NA    0.889
 ```
 
 ``` r
 # transform the antibiotic column to ATC codes:
 out %>% set_ab_names(property = "atc")
 #> # A tibble: 3 × 6
-#>   ward         J01GB03   J01GB01   J01GB06 J01GB04   J01XB01
-#>   <chr>          <dbl>     <dbl>     <dbl>   <dbl>     <dbl>
-#> 1 Clinical   0.2289362 0.3147503 0.6258993       1 0.7802956
-#> 2 ICU        0.2902655 0.4004739 0.6624473       1 0.8574144
-#> 3 Outpatient 0.2       0.3676471 0.6052632      NA 0.8888889
+#>   ward       J01GB03 J01GB01 J01GB06 J01GB04 J01XB01
+#>   <chr>        <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 Clinical     0.229   0.315   0.626       1   0.780
+#> 2 ICU          0.290   0.400   0.662       1   0.857
+#> 3 Outpatient   0.2     0.368   0.605      NA   0.889
 ```
 
 ## What else can you do with this package?
@@ -3934,7 +3934,9 @@ sir_interpretation_history(clean = FALSE)
 \arguments{
 \item{x}{Vector of values (for class \code{\link{mic}}: MIC values in mg/L, for class \code{\link{disk}}: a disk diffusion radius in millimetres).}
 
-\item{...}{For using on a \link{data.frame}: names of columns to apply \code{\link[=as.sir]{as.sir()}} on (supports tidy selection such as \code{column1:column4}). Otherwise: arguments passed on to methods.}
+\item{...}{For using on a \link{data.frame}: selection of columns to apply \code{as.sir()} to. Supports \link[tidyselect:starts_with]{tidyselect language} such as \code{where(is.mic)}, \code{starts_with(...)}, or \code{column1:column4}, and can thus also be \link[=amr_selector]{antimicrobial selectors} such as \code{as.sir(df, penicillins())}.
+
+Otherwise: arguments passed on to methods.}
 
 \item{threshold}{Maximum fraction of invalid antimicrobial interpretations of \code{x}, see \emph{Examples}.}
 
@@ -4173,8 +4175,11 @@ if (require("dplyr")) {
   df_wide \%>\% mutate_if(is.mic, as.sir)
   df_wide \%>\% mutate_if(function(x) is.mic(x) | is.disk(x), as.sir)
   df_wide \%>\% mutate(across(where(is.mic), as.sir))
+
   df_wide \%>\% mutate_at(vars(amoxicillin:tobra), as.sir)
   df_wide \%>\% mutate(across(amoxicillin:tobra, as.sir))
+
+  df_wide \%>\% mutate(across(aminopenicillins(), as.sir))
 
   # approaches that all work with additional arguments:
   df_long \%>\%
@@ -6390,10 +6395,10 @@ ggplot_sir(data, position = NULL, x = "antibiotic",
   fill = "interpretation", facet = NULL, breaks = seq(0, 1, 0.1),
   limits = NULL, translate_ab = "name", combine_SI = TRUE,
   minimum = 30, language = get_AMR_locale(), nrow = NULL, colours = c(S
-  = "#3CAEA3", SI = "#3CAEA3", I = "#F6D55C", IR = "#ED553B", R = "#ED553B"),
-  datalabels = TRUE, datalabels.size = 2.5, datalabels.colour = "grey15",
-  title = NULL, subtitle = NULL, caption = NULL,
-  x.title = "Antimicrobial", y.title = "Proportion", ...)
+  = "#3CAEA3", SI = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", IR = "#ED553B",
+  R = "#ED553B"), datalabels = TRUE, datalabels.size = 2.5,
+  datalabels.colour = "grey15", title = NULL, subtitle = NULL,
+  caption = NULL, x.title = "Antimicrobial", y.title = "Proportion", ...)
 
 geom_sir(position = NULL, x = c("antibiotic", "interpretation"),
   fill = "interpretation", translate_ab = "name", minimum = 30,
@@ -7247,7 +7252,7 @@ amr_distance_from_row(amr_distance, row)
 \arguments{
 \item{x}{A vector of class \link[=as.sir]{sir}, \link[=as.mic]{mic} or \link[=as.disk]{disk}, or a \link{data.frame} containing columns of any of these classes.}
 
-\item{...}{Variables to select. Supports \link[tidyselect:language]{tidyselect language} (such as \code{column1:column4} and \code{where(is.mic)}), and can thus also be \link[=amr_selector]{antimicrobial selectors}.}
+\item{...}{Variables to select. Supports \link[tidyselect:starts_with]{tidyselect language} such as \code{where(is.mic)}, \code{starts_with(...)}, or \code{column1:column4}, and can thus also be \link[=amr_selector]{antimicrobial selectors}.}
 
 \item{combine_SI}{A \link{logical} to indicate whether all values of S, SDD, and I must be merged into one, so the input only consists of S+I vs. R (susceptible vs. resistant) - the default is \code{TRUE}.}
 
@@ -8243,25 +8248,25 @@ scale_colour_mic(keep_operators = "edges", mic_range = NULL, ...)
 
 scale_fill_mic(keep_operators = "edges", mic_range = NULL, ...)
 
-scale_x_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), eucast_I = getOption("AMR_guideline",
-  "EUCAST") == "EUCAST", ...)
+scale_x_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
+  = "#ED553B"), language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
 
-scale_colour_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), eucast_I = getOption("AMR_guideline",
-  "EUCAST") == "EUCAST", ...)
+scale_colour_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I =
+  "#F6D55C", R = "#ED553B"), language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
 
-scale_fill_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), eucast_I = getOption("AMR_guideline",
-  "EUCAST") == "EUCAST", ...)
+scale_fill_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C",
+  R = "#ED553B"), language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
 
 \method{plot}{mic}(x, mo = NULL, ab = NULL,
   guideline = getOption("AMR_guideline", "EUCAST"),
   main = deparse(substitute(x)), ylab = translate_AMR("Frequency", language
   = language),
   xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language =
-  language), colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), expand = TRUE,
+  language), colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
+  = "#ED553B"), language = get_AMR_locale(), expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
 
@@ -8270,8 +8275,8 @@ scale_fill_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
   title = deparse(substitute(object)), ylab = translate_AMR("Frequency",
   language = language),
   xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language =
-  language), colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), expand = TRUE,
+  language), colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
+  = "#ED553B"), language = get_AMR_locale(), expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
 
@@ -8279,8 +8284,8 @@ scale_fill_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
   ylab = translate_AMR("Frequency", language = language),
   xlab = translate_AMR("Disk diffusion diameter (mm)", language = language),
   mo = NULL, ab = NULL, guideline = getOption("AMR_guideline", "EUCAST"),
-  colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), expand = TRUE,
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R =
+  "#ED553B"), language = get_AMR_locale(), expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
 
@@ -8288,8 +8293,8 @@ scale_fill_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
   title = deparse(substitute(object)), ylab = translate_AMR("Frequency",
   language = language), xlab = translate_AMR("Disk diffusion diameter (mm)",
   language = language), guideline = getOption("AMR_guideline", "EUCAST"),
-  colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
-  language = get_AMR_locale(), expand = TRUE,
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R =
+  "#ED553B"), language = get_AMR_locale(), expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
   breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
 
@@ -8300,8 +8305,8 @@ scale_fill_sir(colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
 
 \method{autoplot}{sir}(object, title = deparse(substitute(object)),
   xlab = translate_AMR("Antimicrobial Interpretation", language = language),
-  ylab = translate_AMR("Frequency", language = language),
-  colours_SIR = c("#3CAEA3", "#F6D55C", "#ED553B"),
+  ylab = translate_AMR("Frequency", language = language), colours_SIR = c(S
+  = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
   language = get_AMR_locale(), ...)
 
 facet_sir(facet = c("interpretation", "antibiotic"), nrow = NULL)
@@ -8309,8 +8314,8 @@ facet_sir(facet = c("interpretation", "antibiotic"), nrow = NULL)
 scale_y_percent(breaks = function(x) seq(0, max(x, na.rm = TRUE), 0.1),
   limits = c(0, NA))
 
-scale_sir_colours(..., aesthetics, colours_SIR = c("#3CAEA3", "#F6D55C",
-  "#ED553B"))
+scale_sir_colours(..., aesthetics, colours_SIR = c(S = "#3CAEA3", SDD =
+  "#8FD6C4", I = "#F6D55C", R = "#ED553B"))
 
 theme_sir()
 
