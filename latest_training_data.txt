@@ -494,7 +494,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.0.9010
+Version: 3.0.0.9011
 Date: 2025-07-17
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -1961,12 +1961,15 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/age_groups.Rd':
 \alias{age_groups}
 \title{Split Ages into Age Groups}
 \usage{
-age_groups(x, split_at = c(12, 25, 55, 75), na.rm = FALSE)
+age_groups(x, split_at = c(0, 12, 25, 55, 75), names = NULL,
+  na.rm = FALSE)
 }
 \arguments{
 \item{x}{Age, e.g. calculated with \code{\link[=age]{age()}}.}
 
 \item{split_at}{Values to split \code{x} at - the default is age groups 0-11, 12-24, 25-54, 55-74 and 75+. See \emph{Details}.}
+
+\item{names}{Optional names to be given to the various age groups.}
 
 \item{na.rm}{A \link{logical} to indicate whether missing values should be removed.}
 }
@@ -1974,7 +1977,7 @@ age_groups(x, split_at = c(12, 25, 55, 75), na.rm = FALSE)
 Ordered \link{factor}
 }
 \description{
-Split ages into age groups defined by the \code{split} argument. This allows for easier demographic (antimicrobial resistance) analysis.
+Split ages into age groups defined by the \code{split} argument. This allows for easier demographic (antimicrobial resistance) analysis. The function returns an ordered \link{factor}.
 }
 \details{
 To split ages, the input for the \code{split_at} argument can be:
@@ -1998,6 +2001,7 @@ age_groups(ages, 50)
 
 # split into 0-19, 20-49 and 50+
 age_groups(ages, c(20, 50))
+age_groups(ages, c(20, 50), names = c("Under 20 years", "20 to 50 years", "Over 50 years"))
 
 # split into groups of ten years
 age_groups(ages, 1:10 * 10)
@@ -2105,56 +2109,59 @@ Pre-processing pipeline steps include:
 These steps integrate with \code{recipes::recipe()} and work like standard preprocessing steps. They are useful for preparing data for modelling, especially with classification models.
 }
 \examples{
-library(tidymodels)
+if (require("tidymodels")) {
 
-# The below approach formed the basis for this paper: DOI 10.3389/fmicb.2025.1582703
-# Presence of ESBL genes was predicted based on raw MIC values.
+  # The below approach formed the basis for this paper: DOI 10.3389/fmicb.2025.1582703
+  # Presence of ESBL genes was predicted based on raw MIC values.
 
 
-# example data set in the AMR package
-esbl_isolates
+  # example data set in the AMR package
+  esbl_isolates
 
-# Prepare a binary outcome and convert to ordered factor
-data <- esbl_isolates \%>\%
-  mutate(esbl = factor(esbl, levels = c(FALSE, TRUE), ordered = TRUE))
+  # Prepare a binary outcome and convert to ordered factor
+  data <- esbl_isolates \%>\%
+    mutate(esbl = factor(esbl, levels = c(FALSE, TRUE), ordered = TRUE))
 
-# Split into training and testing sets
-split <- initial_split(data)
-training_data <- training(split)
-testing_data <- testing(split)
+  # Split into training and testing sets
+  split <- initial_split(data)
+  training_data <- training(split)
+  testing_data <- testing(split)
 
-# Create and prep a recipe with MIC log2 transformation
-mic_recipe <- recipe(esbl ~ ., data = training_data) \%>\%
-  # Optionally remove non-predictive variables
-  remove_role(genus, old_role = "predictor") \%>\%
-  # Apply the log2 transformation to all MIC predictors
-  step_mic_log2(all_mic_predictors()) \%>\%
-  prep()
+  # Create and prep a recipe with MIC log2 transformation
+  mic_recipe <- recipe(esbl ~ ., data = training_data) \%>\%
 
-# View prepped recipe
-mic_recipe
+    # Optionally remove non-predictive variables
+    remove_role(genus, old_role = "predictor") \%>\%
 
-# Apply the recipe to training and testing data
-out_training <- bake(mic_recipe, new_data = NULL)
-out_testing <- bake(mic_recipe, new_data = testing_data)
+    # Apply the log2 transformation to all MIC predictors
+    step_mic_log2(all_mic_predictors()) \%>\%
 
-# Fit a logistic regression model
-fitted <- logistic_reg(mode = "classification") \%>\%
-  set_engine("glm") \%>\%
-  fit(esbl ~ ., data = out_training)
+    # And apply the preparation steps
+    prep()
 
-# Generate predictions on the test set
-predictions <- predict(fitted, out_testing) \%>\%
-  bind_cols(out_testing)
+  # View prepped recipe
+  mic_recipe
 
-# Evaluate predictions using standard classification metrics
-our_metrics <- metric_set(accuracy, kap, ppv, npv)
-metrics <- our_metrics(predictions, truth = esbl, estimate = .pred_class)
+  # Apply the recipe to training and testing data
+  out_training <- bake(mic_recipe, new_data = NULL)
+  out_testing <- bake(mic_recipe, new_data = testing_data)
 
-# Show performance:
-# - negative predictive value (NPV) of ~98\%
-# - positive predictive value (PPV) of ~94\%
-metrics
+  # Fit a logistic regression model
+  fitted <- logistic_reg(mode = "classification") \%>\%
+    set_engine("glm") \%>\%
+    fit(esbl ~ ., data = out_training)
+
+  # Generate predictions on the test set
+  predictions <- predict(fitted, out_testing) \%>\%
+    bind_cols(out_testing)
+
+  # Evaluate predictions using standard classification metrics
+  our_metrics <- metric_set(accuracy, kap, ppv, npv)
+  metrics <- our_metrics(predictions, truth = esbl, estimate = .pred_class)
+
+  # Show performance
+  metrics
+}
 }
 \seealso{
 \code{\link[recipes:recipe]{recipes::recipe()}}, \code{\link[=as.mic]{as.mic()}}, \code{\link[=as.sir]{as.sir()}}
