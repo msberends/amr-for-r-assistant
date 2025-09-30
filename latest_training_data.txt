@@ -483,8 +483,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1
-Date: 2025-09-20
+Version: 3.0.1.9001
+Date: 2025-09-30
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -511,10 +511,10 @@ Authors@R: c(
   person(given = c("Judith", "M."),                 family = "Fonville",    role = "ctb"),
   person(given = c("Kathryn"),                      family = "Holt",        role = "ctb", comment = c(ORCID = "0000-0003-3949-2471")),
   person(given = c("Larisse"),                      family = "Bolton",      role = "ctb", comment = c(ORCID = "0000-0001-7879-2173")),
-  person(given = c("Matthew"),                      family = "Saab",        role = "ctb"),
+  person(given = c("Matthew"),                      family = "Saab",        role = "ctb", comment = c(ORCID = "0009-0008-6626-7919")),
   person(given = c("Natacha"),                      family = "Couto",       role = "ctb", comment = c(ORCID = "0000-0002-9152-5464")),
   person(given = c("Peter"),                        family = "Dutey-Magni", role = "ctb", comment = c(ORCID = "0000-0002-8942-9836")),
-  person(given = c("Rogier", "P."),                 family = "Schade",      role = "ctb"),
+  person(given = c("Rogier", "P."),                 family = "Schade",      role = "ctb", comment = c(ORCID = "0000-0002-9487-4467")),
   person(given = c("Sofia"),                        family = "Ny",          role = "ctb", comment = c(ORCID = "0000-0002-2017-1363")),
   person(given = c("Alex", "W."),                   family = "Friedrich",   role = "ths", comment = c(ORCID = "0000-0003-4881-038X")),
   person(given = c("Bhanu", "N.", "M."),            family = "Sinha",       role = "ths", comment = c(ORCID = "0000-0003-1634-0010")),
@@ -1261,10 +1261,10 @@ Other contributors:
   \item Judith M. Fonville [contributor]
   \item Kathryn Holt (\href{https://orcid.org/0000-0003-3949-2471}{ORCID}) [contributor]
   \item Larisse Bolton (\href{https://orcid.org/0000-0001-7879-2173}{ORCID}) [contributor]
-  \item Matthew Saab [contributor]
+  \item Matthew Saab (\href{https://orcid.org/0009-0008-6626-7919}{ORCID}) [contributor]
   \item Natacha Couto (\href{https://orcid.org/0000-0002-9152-5464}{ORCID}) [contributor]
   \item Peter Dutey-Magni (\href{https://orcid.org/0000-0002-8942-9836}{ORCID}) [contributor]
-  \item Rogier P. Schade [contributor]
+  \item Rogier P. Schade (\href{https://orcid.org/0000-0002-9487-4467}{ORCID}) [contributor]
   \item Sofia Ny (\href{https://orcid.org/0000-0002-2017-1363}{ORCID}) [contributor]
   \item Alex W. Friedrich (\href{https://orcid.org/0000-0003-4881-038X}{ORCID}) [thesis advisor]
   \item Bhanu N. M. Sinha (\href{https://orcid.org/0000-0003-1634-0010}{ORCID}) [thesis advisor]
@@ -8371,7 +8371,7 @@ if (require("ggplot2")) {
     geom_boxplot(fill = NA, colour = "grey30") +
     geom_jitter(width = 0.25)
     labs(title = "scale_y_mic()/scale_colour_sir() automatically applied")
-    
+
   mic_sir_plot
 }
 if (require("ggplot2")) {
