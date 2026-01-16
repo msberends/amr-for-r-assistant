@@ -501,8 +501,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9017
-Date: 2026-01-08
+Version: 3.0.1.9018
+Date: 2026-01-16
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -1593,7 +1593,7 @@ The function \code{\link[=set_ab_names]{set_ab_names()}} is a special column ren
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
 }
 
 \section{Download Our Reference Data}{
@@ -2825,7 +2825,7 @@ The \code{\link[=administrable_per_os]{administrable_per_os()}} and \code{\link[
 
 The \code{\link[=amr_selector]{amr_selector()}} function can be used to internally filter the \link{antimicrobials} data set on any results, see \emph{Examples}. It allows for filtering on a (part of) a certain name, and/or a group name or even a minimum of DDDs for oral treatment. This function yields the highest flexibility, but is also the least user-friendly, since it requires a hard-coded filter to set.
 
-The \code{\link[=not_intrinsic_resistant]{not_intrinsic_resistant()}} function can be used to only select antimicrobials that pose no intrinsic resistance for the microorganisms in the data set. For example, if a data set contains only microorganism codes or names of \emph{E. coli} and \emph{K. pneumoniae} and contains a column "vancomycin", this column will be removed (or rather, unselected) using this function. It currently applies \href{https://www.eucast.org/expert_rules_and_expected_phenotypes}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023) to determine intrinsic resistance, using the \code{\link[=eucast_rules]{eucast_rules()}} function internally. Because of this determination, this function is quite slow in terms of performance.
+The \code{\link[=not_intrinsic_resistant]{not_intrinsic_resistant()}} function can be used to only select antimicrobials that pose no intrinsic resistance for the microorganisms in the data set. For example, if a data set contains only microorganism codes or names of \emph{E. coli} and \emph{K. pneumoniae} and contains a column "vancomycin", this column will be removed (or rather, unselected) using this function. It currently applies \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023) to determine intrinsic resistance, using the \code{\link[=eucast_rules]{eucast_rules()}} function internally. Because of this determination, this function is quite slow in terms of performance.
 }
 \section{Full list of supported (antimicrobial) classes}{
 
@@ -2860,9 +2860,9 @@ The \code{\link[=not_intrinsic_resistant]{not_intrinsic_resistant()}} function c
 \item \code{\link[=rifamycins]{rifamycins()}} can select: \cr rifabutin (RIB), rifampicin (RIF), rifampicin/ethambutol/isoniazid (REI), rifampicin/isoniazid (RFI), rifampicin/pyrazinamide/ethambutol/isoniazid (RPEI), rifampicin/pyrazinamide/isoniazid (RPI), rifamycin (RFM), and rifapentine (RFP)
 \item \code{\link[=spiropyrimidinetriones]{spiropyrimidinetriones()}} can select: \cr zoliflodacin (ZFD)
 \item \code{\link[=streptogramins]{streptogramins()}} can select: \cr pristinamycin (PRI) and quinupristin/dalfopristin (QDA)
-\item \code{\link[=sulfonamides]{sulfonamides()}} can select: \cr brodimoprim (BDP), sulfadiazine (SDI), sulfadiazine/tetroxoprim (SLT), sulfadimethoxine (SUD), sulfadimidine (SDM), sulfafurazole (SLF), sulfaisodimidine (SLF1), sulfalene (SLF2), sulfamazone (SZO), sulfamerazine (SLF3), sulfamethizole (SLF4), sulfamethoxazole (SMX), sulfamethoxypyridazine (SLF5), sulfametomidine (SLF6), sulfametoxydiazine (SLF7), sulfamoxole (SLF8), sulfanilamide (SLF9), sulfaperin (SLF10), sulfaphenazole (SLF11), sulfapyridine (SLF12), sulfathiazole (SUT), and sulfathiourea (SLF13)
-\item \code{\link[=tetracyclines]{tetracyclines()}} can select: \cr cetocycline (CTO), chlortetracycline (CTE), clomocycline (CLM1), demeclocycline (DEM), doxycycline (DOX), eravacycline (ERV), lymecycline (LYM), metacycline (MTC), minocycline (MNO), omadacycline (OMC), oxytetracycline (OXY), penimepicycline (PNM1), rolitetracycline (RLT), sarecycline (SRC), tetracycline (TCY), tetracycline screening test (TCY-S), and tigecycline (TGC)
-\item \code{\link[=trimethoprims]{trimethoprims()}} can select: \cr brodimoprim (BDP), sulfadiazine (SDI), sulfadiazine/tetroxoprim (SLT), sulfadiazine/trimethoprim (SLT1), sulfadimethoxine (SUD), sulfadimidine (SDM), sulfadimidine/trimethoprim (SLT2), sulfafurazole (SLF), sulfaisodimidine (SLF1), sulfalene (SLF2), sulfamazone (SZO), sulfamerazine (SLF3), sulfamerazine/trimethoprim (SLT3), sulfamethizole (SLF4), sulfamethoxazole (SMX), sulfamethoxypyridazine (SLF5), sulfametomidine (SLF6), sulfametoxydiazine (SLF7), sulfametrole/trimethoprim (SLT4), sulfamoxole (SLF8), sulfamoxole/trimethoprim (SLT5), sulfanilamide (SLF9), sulfaperin (SLF10), sulfaphenazole (SLF11), sulfapyridine (SLF12), sulfathiazole (SUT), sulfathiourea (SLF13), trimethoprim (TMP), and trimethoprim/sulfamethoxazole (SXT)
+\item \code{\link[=sulfonamides]{sulfonamides()}} can select: \cr isoniazid/sulfamethoxazole/trimethoprim/pyridoxine (IST), ormetroprim/sulfamethoxazole (ORS), sulfachlorpyridazine (SUP), sulfadiazine (SDI), sulfadiazine/tetroxoprim (SLT), sulfadiazine/trimethoprim (SLT1), sulfadimethoxine (SUD), sulfadimidine (SDM), sulfadimidine/trimethoprim (SLT2), sulfafurazole (SLF), sulfaisodimidine (SLF1), sulfalene (SLF2), sulfamazone (SZO), sulfamerazine (SLF3), sulfamerazine/trimethoprim (SLT3), sulfamethazine (SUM), sulfamethizole (SLF4), sulfamethoxazole (SMX), sulfamethoxypyridazine (SLF5), sulfametomidine (SLF6), sulfametoxydiazine (SLF7), sulfametrole/trimethoprim (SLT4), sulfamoxole (SLF8), sulfamoxole/trimethoprim (SLT5), sulfanilamide (SLF9), sulfaperin (SLF10), sulfaphenazole (SLF11), sulfapyridine (SLF12), sulfasuccinamide (SNA), sulfathiazole (SUT), sulfathiourea (SLF13), sulfisoxazole (SOX), sulfonamide (SSS), and trimethoprim/sulfamethoxazole (SXT)
+\item \code{\link[=tetracyclines]{tetracyclines()}} can select: \cr cetocycline (CTO), chlortetracycline (CTE), clomocycline (CLM1), demeclocycline (DEM), doxycycline (DOX), eravacycline (ERV), lymecycline (LYM), metacycline (MTC), minocycline (MNO), omadacycline (OMC), oxytetracycline (OXY), penimepicycline (PNM1), rolitetracycline (RLT), sarecycline (SRC), tetracycline (TCY), tetracycline screening test (TCY-S), tetracycline/oleandomycin (TOL), and tigecycline (TGC)
+\item \code{\link[=trimethoprims]{trimethoprims()}} can select: \cr brodimoprim (BDP), iclaprim (ICL), isoniazid/sulfamethoxazole/trimethoprim/pyridoxine (IST), ormetroprim/sulfamethoxazole (ORS), sulfadiazine (SDI), sulfadiazine/tetroxoprim (SLT), sulfadiazine/trimethoprim (SLT1), sulfadimethoxine (SUD), sulfadimidine (SDM), sulfadimidine/trimethoprim (SLT2), sulfafurazole (SLF), sulfaisodimidine (SLF1), sulfalene (SLF2), sulfamazone (SZO), sulfamerazine (SLF3), sulfamerazine/trimethoprim (SLT3), sulfamethizole (SLF4), sulfamethoxazole (SMX), sulfamethoxypyridazine (SLF5), sulfametomidine (SLF6), sulfametoxydiazine (SLF7), sulfametrole/trimethoprim (SLT4), sulfamoxole (SLF8), sulfamoxole/trimethoprim (SLT5), sulfanilamide (SLF9), sulfaperin (SLF10), sulfaphenazole (SLF11), sulfapyridine (SLF12), sulfathiazole (SUT), sulfathiourea (SLF13), trimethoprim (TMP), and trimethoprim/sulfamethoxazole (SXT)
 \item \code{\link[=ureidopenicillins]{ureidopenicillins()}} can select: \cr azlocillin (AZL), mezlocillin (MEZ), piperacillin (PIP), and piperacillin/tazobactam (TZP)
 }
 }
@@ -3228,7 +3228,7 @@ You can add your own manual codes to be considered by \code{\link[=as.ab]{as.ab(
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
 }
 
 \section{WHOCC}{
@@ -3340,7 +3340,7 @@ Note: the \code{\link[=as.av]{as.av()}} and \code{\link[=av_property]{av_*}} fun
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
 }
 
 \section{WHOCC}{
@@ -3915,7 +3915,7 @@ For interpretations of minimum inhibitory concentration (MIC) values and disk di
 \item \strong{CLSI M39: Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data}, 2011-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
 \item \strong{CLSI M100: Performance Standard for Antimicrobial Susceptibility Testing}, 2011-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m100/}.
 \item \strong{CLSI VET01: Performance Standards for Antimicrobial Disk and Dilution Susceptibility Tests for Bacteria Isolated From Animals}, 2019-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/veterinary-medicine/documents/vet01/}.
-\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2025, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/clinical_breakpoints}.
+\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2025, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/}.
 \item \strong{WHONET} as a source for machine-reading the clinical breakpoints (\href{https://amr-for-r.org/reference/clinical_breakpoints.html#imported-from-whonet}{read more here}), 1989-2025, \emph{WHO Collaborating Centre for Surveillance of Antimicrobial Resistance}. \url{https://whonet.org/}.
 }
 }
@@ -4018,7 +4018,7 @@ Otherwise: arguments passed on to methods.}
 
 The default \code{"conservative"} setting ensures cautious handling of uncertain values while preserving interpretability. This option can also be set with the package option \code{\link[=AMR-options]{AMR_capped_mic_handling}}.}
 
-\item{add_intrinsic_resistance}{\emph{(only useful when using a EUCAST guideline)} a \link{logical} to indicate whether intrinsic antibiotic resistance must also be considered for applicable bug-drug combinations, meaning that e.g. ampicillin will always return "R" in \emph{Klebsiella} species. Determination is based on the \link{intrinsic_resistant} data set, that itself is based on \href{https://www.eucast.org/expert_rules_and_expected_phenotypes}{'EUCAST Expert Rules' and 'EUCAST Intrinsic Resistance and Unusual Phenotypes' v3.3} (2021).}
+\item{add_intrinsic_resistance}{\emph{(only useful when using a EUCAST guideline)} a \link{logical} to indicate whether intrinsic antibiotic resistance must also be considered for applicable bug-drug combinations, meaning that e.g. ampicillin will always return "R" in \emph{Klebsiella} species. Determination is based on the \link{intrinsic_resistant} data set, that itself is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expert Rules' and 'EUCAST Intrinsic Resistance and Unusual Phenotypes' v3.3} (2021).}
 
 \item{reference_data}{A \link{data.frame} to be used for interpretation, which defaults to the \link{clinical_breakpoints} data set. Changing this argument allows for using own interpretation guidelines. This argument must contain a data set that is equal in structure to the \link{clinical_breakpoints} data set (same column names and column types). Please note that the \code{guideline} argument will be ignored when \code{reference_data} is manually set.}
 
@@ -4155,7 +4155,7 @@ The function \code{\link[=is_sir_eligible]{is_sir_eligible()}} returns \code{TRU
 }
 \section{Interpretation of SIR}{
 
-In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
 This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
 }
@@ -4611,7 +4611,7 @@ The function \code{\link[=av_url]{av_url()}} will return the direct URL to the o
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
 }
 
 \section{Download Our Reference Data}{
@@ -4947,7 +4947,7 @@ The function \code{\link[=count_df]{count_df()}} takes any variable from \code{d
 }
 \section{Interpretation of SIR}{
 
-In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
 This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
 }
@@ -5206,10 +5206,10 @@ These 38 antimicrobial groups are allowed in the rules (case-insensitive) and ca
 \item rifamycins\cr(rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, and rifapentine)
 \item spiropyrimidinetriones\cr(zoliflodacin)
 \item streptogramins\cr(pristinamycin and quinupristin/dalfopristin)
-\item sulfonamides\cr(brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadimethoxine, sulfadimidine, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfamoxole, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, and sulfathiourea)
-\item tetracyclines\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, and tigecycline)
-\item tetracyclines_except_tgc\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, and tetracycline screening test)
-\item trimethoprims\cr(brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole)
+\item sulfonamides\cr(isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, ormetroprim/sulfamethoxazole, sulfachlorpyridazine, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfasuccinamide, sulfathiazole, sulfathiourea, sulfisoxazole, sulfonamide, and trimethoprim/sulfamethoxazole)
+\item tetracyclines\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, tetracycline/oleandomycin, and tigecycline)
+\item tetracyclines_except_tgc\cr(cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, and tetracycline/oleandomycin)
+\item trimethoprims\cr(brodimoprim, iclaprim, isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, ormetroprim/sulfamethoxazole, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole)
 \item ureidopenicillins\cr(azlocillin, mezlocillin, piperacillin, and piperacillin/tazobactam)
 }
 }
@@ -5372,9 +5372,9 @@ All 38 antimicrobial selectors are supported for use in the rules:
 \item \code{\link[=rifamycins]{rifamycins()}} can select: \cr rifabutin, rifampicin, rifampicin/ethambutol/isoniazid, rifampicin/isoniazid, rifampicin/pyrazinamide/ethambutol/isoniazid, rifampicin/pyrazinamide/isoniazid, rifamycin, and rifapentine
 \item \code{\link[=spiropyrimidinetriones]{spiropyrimidinetriones()}} can select: \cr zoliflodacin
 \item \code{\link[=streptogramins]{streptogramins()}} can select: \cr pristinamycin and quinupristin/dalfopristin
-\item \code{\link[=sulfonamides]{sulfonamides()}} can select: \cr brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadimethoxine, sulfadimidine, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfamoxole, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, and sulfathiourea
-\item \code{\link[=tetracyclines]{tetracyclines()}} can select: \cr cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, and tigecycline
-\item \code{\link[=trimethoprims]{trimethoprims()}} can select: \cr brodimoprim, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole
+\item \code{\link[=sulfonamides]{sulfonamides()}} can select: \cr isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, ormetroprim/sulfamethoxazole, sulfachlorpyridazine, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethazine, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfasuccinamide, sulfathiazole, sulfathiourea, sulfisoxazole, sulfonamide, and trimethoprim/sulfamethoxazole
+\item \code{\link[=tetracyclines]{tetracyclines()}} can select: \cr cetocycline, chlortetracycline, clomocycline, demeclocycline, doxycycline, eravacycline, lymecycline, metacycline, minocycline, omadacycline, oxytetracycline, penimepicycline, rolitetracycline, sarecycline, tetracycline, tetracycline screening test, tetracycline/oleandomycin, and tigecycline
+\item \code{\link[=trimethoprims]{trimethoprims()}} can select: \cr brodimoprim, iclaprim, isoniazid/sulfamethoxazole/trimethoprim/pyridoxine, ormetroprim/sulfamethoxazole, sulfadiazine, sulfadiazine/tetroxoprim, sulfadiazine/trimethoprim, sulfadimethoxine, sulfadimidine, sulfadimidine/trimethoprim, sulfafurazole, sulfaisodimidine, sulfalene, sulfamazone, sulfamerazine, sulfamerazine/trimethoprim, sulfamethizole, sulfamethoxazole, sulfamethoxypyridazine, sulfametomidine, sulfametoxydiazine, sulfametrole/trimethoprim, sulfamoxole, sulfamoxole/trimethoprim, sulfanilamide, sulfaperin, sulfaphenazole, sulfapyridine, sulfathiazole, sulfathiourea, trimethoprim, and trimethoprim/sulfamethoxazole
 \item \code{\link[=ureidopenicillins]{ureidopenicillins()}} can select: \cr azlocillin, mezlocillin, piperacillin, and piperacillin/tazobactam
 }
 }
@@ -6699,7 +6699,7 @@ intrinsic_resistant
 Data set containing 'EUCAST Expected Resistant Phenotypes' of \emph{all} bug-drug combinations between the \link{microorganisms} and \link{antimicrobials} data sets.
 }
 \details{
-This data set is currently based on \href{https://www.eucast.org/expert_rules_and_expected_phenotypes}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023).
+This data set is currently based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023).
 
 This data set is internally used by:
 \itemize{
@@ -7251,7 +7251,7 @@ Custom guidelines can be set with the \code{\link[=custom_mdro_guideline]{custom
 }
 \section{Interpretation of SIR}{
 
-In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
 This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
 }
@@ -7879,7 +7879,7 @@ Determination of the Gram stain (\code{\link[=mo_gramstain]{mo_gramstain()}}) wi
 
 Determination of yeasts (\code{\link[=mo_is_yeast]{mo_is_yeast()}}) will be based on the taxonomic kingdom and class. \emph{Budding yeasts} are yeasts that reproduce asexually through a process called budding, where a new cell develops from a small protrusion on the parent cell. Taxonomically, these are members of the phylum Ascomycota, class Saccharomycetes (also called Hemiascomycetes) or Pichiomycetes. \emph{True yeasts} quite specifically refers to yeasts in the underlying order Saccharomycetales (such as \emph{Saccharomyces cerevisiae}). Thus, for all microorganisms that are member of the taxonomic class Saccharomycetes or Pichiomycetes, the function will return \code{TRUE}. It returns \code{FALSE} otherwise (or \code{NA} when the input is \code{NA} or the MO code is \code{UNKNOWN}).
 
-Determination of intrinsic resistance (\code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}) will be based on the \link{intrinsic_resistant} data set, which is based on \href{https://www.eucast.org/expert_rules_and_expected_phenotypes}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023). The \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}} function can be vectorised over both argument \code{x} (input for microorganisms) and \code{ab} (input for antimicrobials).
+Determination of intrinsic resistance (\code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}) will be based on the \link{intrinsic_resistant} data set, which is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023). The \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}} function can be vectorised over both argument \code{x} (input for microorganisms) and \code{ab} (input for antimicrobials).
 
 Determination of bacterial oxygen tolerance (\code{\link[=mo_oxygen_tolerance]{mo_oxygen_tolerance()}}) will be based on BacDive, see \emph{Source}. The function \code{\link[=mo_is_anaerobic]{mo_is_anaerobic()}} only returns \code{TRUE} if the oxygen tolerance is \code{"anaerobe"}, indicting an obligate anaerobic species or genus. It always returns \code{FALSE} for species outside the taxonomic kingdom of Bacteria.
 
@@ -8758,7 +8758,7 @@ Using \code{only_all_tested} has no impact when only using one antibiotic as inp
 
 \section{Interpretation of SIR}{
 
-In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
 This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
 }
@@ -9058,7 +9058,7 @@ Valid options for the statistical model (argument \code{model}) are:
 }
 \section{Interpretation of SIR}{
 
-In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/newsiandr}).
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
 This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
 }
