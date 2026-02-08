@@ -227,6 +227,7 @@ export(cephalosporins_4th)
 export(cephalosporins_5th)
 export(clear_custom_antimicrobials)
 export(clear_custom_microorganisms)
+export(clsi_rules)
 export(count_I)
 export(count_IR)
 export(count_R)
@@ -257,6 +258,7 @@ export(ggplot_sir_predict)
 export(glycopeptides)
 export(guess_ab_col)
 export(inner_join_microorganisms)
+export(interpretive_rules)
 export(is.ab)
 export(is.av)
 export(is.disk)
@@ -501,8 +503,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9018
-Date: 2026-01-16
+Version: 3.0.1.9019
+Date: 2026-02-08
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -842,10 +844,10 @@ antibiogram(example_isolates,
             language = "uk") # Ukrainian
 ```
 
-| Збудник       | Ciprofloxacin      | Гентаміцин          | Тобраміцин         |
-|:--------------|:-------------------|:--------------------|:-------------------|
-| Gram-negative | 91% (88-93%,N=684) | 96% (95-98%,N=684)  | 96% (94-97%,N=686) |
-| Gram-positive | 77% (74-80%,N=724) | 63% (60-66%,N=1170) | 34% (31-38%,N=665) |
+| Збудник       | Гентаміцин          | Тобраміцин         | Ципрофлоксацин     |
+|:--------------|:--------------------|:-------------------|:-------------------|
+| Грамнегативні | 96% (95-98%,N=684)  | 96% (94-97%,N=686) | 91% (88-93%,N=684) |
+| Грампозитивні | 63% (60-66%,N=1170) | 34% (31-38%,N=665) | 77% (74-80%,N=724) |
 
 ### Interpreting and plotting MIC and SIR values
 
@@ -2270,7 +2272,7 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): "ab", "cid", "name", "group", "atc", "atc_group1", "atc_group2", "abbreviations", "synonyms", "oral_ddd", "oral_units", "iv_ddd", "iv_units", or "loinc". Can also be \code{NULL} to not transform the input.}
 
-\item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case_when]{case_when()}}. See \emph{Examples}.}
+\item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case-and-replace-when]{case_when()}}. See \emph{Examples}.}
 
 \item{add_total_n}{\emph{(deprecated in favour of \code{formatting_type})} A \link{logical} to indicate whether \code{n_tested} available numbers per pathogen should be added to the table (default is \code{TRUE}). This will add the lowest and highest number of available isolates per antimicrobial (e.g, if for \emph{E. coli} 200 isolates are available for ciprofloxacin and 150 for amoxicillin, the returned number will be "150-200"). This option is unavailable when \code{wisca = TRUE}; in that case, use \code{\link[=retrieve_wisca_parameters]{retrieve_wisca_parameters()}} to get the parameters used for WISCA.}
 
@@ -3487,13 +3489,15 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.mic.Rd':
 \alias{droplevels.mic}
 \title{Transform Input to Minimum Inhibitory Concentrations (MIC)}
 \usage{
-as.mic(x, na.rm = FALSE, keep_operators = "all")
+as.mic(x, na.rm = FALSE, keep_operators = "all",
+  round_to_next_log2 = FALSE)
 
 is.mic(x)
 
 NA_mic_
 
-rescale_mic(x, mic_range, keep_operators = "edges", as.mic = TRUE)
+rescale_mic(x, mic_range, keep_operators = "edges", as.mic = TRUE,
+  round_to_next_log2 = FALSE)
 
 mic_p50(x, na.rm = FALSE, ...)
 
@@ -3507,6 +3511,8 @@ mic_p90(x, na.rm = FALSE, ...)
 \item{na.rm}{A \link{logical} indicating whether missing values should be removed.}
 
 \item{keep_operators}{A \link{character} specifying how to handle operators (such as \code{>} and \code{<=}) in the input. Accepts one of three values: \code{"all"} (or \code{TRUE}) to keep all operators, \code{"none"} (or \code{FALSE}) to remove all operators, or \code{"edges"} to keep operators only at both ends of the range.}
+
+\item{round_to_next_log2}{A \link{logical} to round up all values to the next log2 level, that are not either 0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.004, 0.008, 0.016, 0.032, 0.064, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, or 4096. Values that are already in this list (with or without operators), are left unchanged (including any operators).}
 
 \item{mic_range}{A manual range to rescale the MIC values, e.g., \code{mic_range = c(0.001, 32)}. Use \code{NA} to prevent rescaling on one side, e.g., \code{mic_range = c(NA, 32)}.}
 
@@ -3930,11 +3936,13 @@ is_sir_eligible(x, threshold = 0.05)
 
 \method{as.sir}{default}(x, S = "^(S|U|1)+$", I = "^(I|2)+$",
   R = "^(R|3)+$", NI = "^(N|NI|V|4)+$", SDD = "^(SDD|D|H|5)+$",
+  WT = "^(WT|6)+$", NWT = "^(NWT|7)+$", NS = "^(NS|8)+$",
   info = interactive(), ...)
 
 \method{as.sir}{mic}(x, mo = NULL, ab = deparse(substitute(x)),
   guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
   capped_mic_handling = getOption("AMR_capped_mic_handling", "standard"),
+  as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
@@ -3946,6 +3954,7 @@ is_sir_eligible(x, threshold = 0.05)
 
 \method{as.sir}{disk}(x, mo = NULL, ab = deparse(substitute(x)),
   guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
+  as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
@@ -3958,6 +3967,7 @@ is_sir_eligible(x, threshold = 0.05)
 \method{as.sir}{data.frame}(x, ..., col_mo = NULL,
   guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
   capped_mic_handling = getOption("AMR_capped_mic_handling", "standard"),
+  as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
@@ -3978,7 +3988,7 @@ Otherwise: arguments passed on to methods.}
 
 \item{threshold}{Maximum fraction of invalid antimicrobial interpretations of \code{x}, see \emph{Examples}.}
 
-\item{S, I, R, NI, SDD}{A case-independent \link[base:regex]{regular expression} to translate input to this result. This regular expression will be run \emph{after} all non-letters and whitespaces are removed from the input.}
+\item{S, I, R, NI, SDD, WT, NWT, NS}{A case-independent \link[base:regex]{regular expression} to translate input to this result. This regular expression will be run \emph{after} all non-letters and whitespaces are removed from the input.}
 
 \item{info}{A \link{logical} to print information about the process, defaults to \code{TRUE} only in \link[base:interactive]{interactive sessions}.}
 
@@ -4017,6 +4027,8 @@ Otherwise: arguments passed on to methods.}
 }
 
 The default \code{"conservative"} setting ensures cautious handling of uncertain values while preserving interpretability. This option can also be set with the package option \code{\link[=AMR-options]{AMR_capped_mic_handling}}.}
+
+\item{as_wt_nwt}{A \link{logical} to return \code{"WT"}/\code{"NWT"} instead of \code{"S"}/\code{"R"}. Defaults to \code{TRUE} when using ECOFFs, i.e., when \code{breakpoint_type} is set to \code{"ECOFF"}.}
 
 \item{add_intrinsic_resistance}{\emph{(only useful when using a EUCAST guideline)} a \link{logical} to indicate whether intrinsic antibiotic resistance must also be considered for applicable bug-drug combinations, meaning that e.g. ampicillin will always return "R" in \emph{Klebsiella} species. Determination is based on the \link{intrinsic_resistant} data set, that itself is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expert Rules' and 'EUCAST Intrinsic Resistance and Unusual Phenotypes' v3.3} (2021).}
 
@@ -4750,7 +4762,7 @@ bug_drug_combinations(x, col_mo = NULL, FUN = mo_shortname,
     decimal point.}
 }
 \value{
-The function \code{\link[=bug_drug_combinations]{bug_drug_combinations()}} returns a \link{data.frame} with columns "mo", "ab", "S", "SDD", "I", "R", and "total".
+The function \code{\link[=bug_drug_combinations]{bug_drug_combinations()}} returns a \link{data.frame} with columns "mo", "ab", "S", "SDD", "I", "R", "WT, "NWT", and "total".
 }
 \description{
 Determine antimicrobial resistance (AMR) of all bug-drug combinations in your data set where at least 30 (default) isolates are available per species. Use \code{\link[=format]{format()}} on the result to prettify it to a publishable/printable format, see \emph{Examples}.
@@ -5092,7 +5104,7 @@ Define custom EUCAST rules for your organisation or specific analysis and use th
 Some organisations have their own adoption of EUCAST rules. This function can be used to define custom EUCAST rules to be used in the \code{\link[=eucast_rules]{eucast_rules()}} function.
 \subsection{Basics}{
 
-If you are familiar with the \code{\link[dplyr:case_when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
+If you are familiar with the \code{\link[dplyr:case-and-replace-when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- custom_eucast_rules(TZP == "S" ~ aminopenicillins == "S",
                          TZP == "R" ~ aminopenicillins == "R")
@@ -5272,7 +5284,7 @@ Define custom a MDRO guideline for your organisation or specific analysis and us
 Using a custom MDRO guideline is of importance if you have custom rules to determine MDROs in your hospital, e.g., rules that are dependent on ward, state of contact isolation or other variables in your data.
 \subsection{Basics}{
 
-If you are familiar with the \code{\link[dplyr:case_when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
+If you are familiar with the \code{\link[dplyr:case-and-replace-when]{case_when()}} function of the \code{dplyr} package, you will recognise the input method to set your own rules. Rules must be set using what \R considers to be the 'formula notation'. The rule itself is written \emph{before} the tilde (\code{~}) and the consequence of the rule is written \emph{after} the tilde:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{custom <- custom_mdro_guideline(CIP == "R" & age > 60 ~ "Elderly Type A",
                                 ERY == "R" & age > 60 ~ "Elderly Type B")
@@ -5424,7 +5436,7 @@ A \link[tibble:tibble]{tibble} with 759 observations and 9 variables:
 \item \code{type}\cr Type of the dosage, either "high_dosage", "standard_dosage", or "uncomplicated_uti"
 \item \code{dose}\cr Dose, such as "2 g" or "25 mg/kg"
 \item \code{dose_times}\cr Number of times a dose must be administered
-\item \code{administration}\cr Route of administration, either "", "im", "iv", or "oral"
+\item \code{administration}\cr Route of administration, either "", "im", "iv", "oral", or NA
 \item \code{notes}\cr Additional dosage notes
 \item \code{original_txt}\cr Original text in the PDF file of EUCAST
 \item \code{eucast_version}\cr Version number of the EUCAST Clinical Breakpoints guideline to which these dosages apply, either 15, 14, 13.1, 12, or 11
@@ -5483,161 +5495,6 @@ See our \link[=amr-tidymodels]{tidymodels integration} for an example using this
 esbl_isolates
 }
 \keyword{datasets}
-
-
-
-----------------------------------------------------------------------------------------------------
-THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/eucast_rules.Rd':
-
-
-% Generated by roxygen2: do not edit by hand
-% Please edit documentation in R/eucast_rules.R
-\name{eucast_rules}
-\alias{eucast_rules}
-\alias{EUCAST}
-\alias{eucast_dosage}
-\title{Apply EUCAST Rules}
-\source{
-\itemize{
-\item EUCAST Expert Rules. Version 2.0, 2012.\cr
-Leclercq et al. \strong{EUCAST expert rules in antimicrobial susceptibility testing.} \emph{Clin Microbiol Infect.} 2013;19(2):141-60; \doi{https://doi.org/10.1111/j.1469-0691.2011.03703.x}
-\item EUCAST Expert Rules, Intrinsic Resistance and Exceptional Phenotypes Tables. Version 3.1, 2016. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/Expert_rules_intrinsic_exceptional_V3.1.pdf}{(link)}
-\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.2, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2020/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.2_20200225.pdf}{(link)}
-\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.3, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2021/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.3_20211018.pdf}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 9.0, 2019. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_9.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 10.0, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_10.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 11.0, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_11.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 12.0, 2022. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_12.0_Breakpoint_Tables.xlsx}{(link)}
-}
-}
-\usage{
-eucast_rules(x, col_mo = NULL, info = interactive(),
-  rules = getOption("AMR_eucastrules", default = c("breakpoints",
-  "expected_phenotypes")), verbose = FALSE, version_breakpoints = 15,
-  version_expected_phenotypes = 1.2, version_expertrules = 3.3,
-  ampc_cephalosporin_resistance = NA, only_sir_columns = any(is.sir(x)),
-  custom_rules = NULL, overwrite = FALSE, ...)
-
-eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
-}
-\arguments{
-\item{x}{A data set with antimicrobials columns, such as \code{amox}, \code{AMX} and \code{AMC}.}
-
-\item{col_mo}{Column name of the names or codes of the microorganisms (see \code{\link[=as.mo]{as.mo()}}) - the default is the first column of class \code{\link{mo}}. Values will be coerced using \code{\link[=as.mo]{as.mo()}}.}
-
-\item{info}{A \link{logical} to indicate whether progress should be printed to the console - the default is only print while in interactive sessions.}
-
-\item{rules}{A \link{character} vector that specifies which rules should be applied. Must be one or more of \code{"breakpoints"}, \code{"expected_phenotypes"}, \code{"expert"}, \code{"other"}, \code{"custom"}, \code{"all"}, and defaults to \code{c("breakpoints", "expected_phenotypes")}. The default value can be set to another value using the package option \code{\link[=AMR-options]{AMR_eucastrules}}: \code{options(AMR_eucastrules = "all")}. If using \code{"custom"}, be sure to fill in argument \code{custom_rules} too. Custom rules can be created with \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}.}
-
-\item{verbose}{A \link{logical} to turn Verbose mode on and off (default is off). In Verbose mode, the function does not apply rules to the data, but instead returns a data set in logbook form with extensive info about which rows and columns would be effected and in which way. Using Verbose mode takes a lot more time.}
-
-\item{version_breakpoints}{The version number to use for the EUCAST Clinical Breakpoints guideline. Can be "15.0", "14.0", "13.1", "12.0", "11.0", or "10.0".}
-
-\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be "1.2".}
-
-\item{version_expertrules}{The version number to use for the EUCAST Expert Rules and Intrinsic Resistance guideline. Can be "3.3", "3.2", or "3.1".}
-
-\item{ampc_cephalosporin_resistance}{(only applies when \code{rules} contains \code{"expert"} or \code{"all"}) a \link{character} value that should be applied to cefotaxime, ceftriaxone and ceftazidime for AmpC de-repressed cephalosporin-resistant mutants - the default is \code{NA}. Currently only works when \code{version_expertrules} is \code{3.2} and higher; these versions of '\emph{EUCAST Expert Rules on Enterobacterales}' state that results of cefotaxime, ceftriaxone and ceftazidime should be reported with a note, or results should be suppressed (emptied) for these three drugs. A value of \code{NA} (the default) for this argument will remove results for these three drugs, while e.g. a value of \code{"R"} will make the results for these drugs resistant. Use \code{NULL} or \code{FALSE} to not alter results for these three drugs of AmpC de-repressed cephalosporin-resistant mutants. Using \code{TRUE} is equal to using \code{"R"}. \cr For \emph{EUCAST Expert Rules} v3.2, this rule applies to: \emph{Citrobacter braakii}, \emph{Citrobacter freundii}, \emph{Citrobacter gillenii}, \emph{Citrobacter murliniae}, \emph{Citrobacter rodenticum}, \emph{Citrobacter sedlakii}, \emph{Citrobacter werkmanii}, \emph{Citrobacter youngae}, \emph{Enterobacter}, \emph{Hafnia alvei}, \emph{Klebsiella aerogenes}, \emph{Morganella morganii}, \emph{Providencia}, and \emph{Serratia}.}
-
-\item{only_sir_columns}{A \link{logical} to indicate whether only antimicrobial columns must be included that were transformed to class \link[=as.sir]{sir} on beforehand. Defaults to \code{FALSE} if no columns of \code{x} have a class \link[=as.sir]{sir}.}
-
-\item{custom_rules}{Custom rules to apply, created with \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}.}
-
-\item{overwrite}{A \link{logical} indicating whether to overwrite existing SIR values (default: \code{FALSE}). When \code{FALSE}, only non-SIR values are modified (i.e., any value that is not already S, I or R). To ensure compliance with EUCAST guidelines, \strong{this should remain} \code{FALSE}, as EUCAST notes often state that an organism "should be tested for susceptibility to individual agents or be reported resistant".}
-
-\item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
-
-\item{ab}{Any (vector of) text that can be coerced to a valid antimicrobial drug code with \code{\link[=as.ab]{as.ab()}}.}
-
-\item{administration}{Route of administration, either "", "im", "iv", or "oral".}
-}
-\value{
-The input of \code{x}, possibly with edited values of antimicrobials. Or, if \code{verbose = TRUE}, a \link{data.frame} with all original and new values of the affected bug-drug combinations.
-}
-\description{
-Apply rules from clinical breakpoints notes and expected resistant phenotypes as defined by the European Committee on Antimicrobial Susceptibility Testing (EUCAST, \url{https://www.eucast.org}), see \emph{Source}. Use \code{\link[=eucast_dosage]{eucast_dosage()}} to get a \link{data.frame} with advised dosages of a certain bug-drug combination, which is based on the \link{dosage} data set.
-
-To improve the interpretation of the antibiogram before EUCAST rules are applied, some non-EUCAST rules can applied at default, see \emph{Details}.
-}
-\details{
-\strong{Note:} This function does not translate MIC values to SIR values. Use \code{\link[=as.sir]{as.sir()}} for that. \cr
-\strong{Note:} When ampicillin (AMP, J01CA01) is not available but amoxicillin (AMX, J01CA04) is, the latter will be used for all rules where there is a dependency on ampicillin. These drugs are interchangeable when it comes to expression of antimicrobial resistance. \cr
-
-The file containing all EUCAST rules is located here: \url{https://github.com/msberends/AMR/blob/main/data-raw/eucast_rules.tsv}.  \strong{Note:} Old taxonomic names are replaced with the current taxonomy where applicable. For example, \emph{Ochrobactrum anthropi} was renamed to \emph{Brucella anthropi} in 2020; the original EUCAST rules v3.1 and v3.2 did not yet contain this new taxonomic name. The \code{AMR} package contains the full microbial taxonomy updated until June 24th, 2024, see \link{microorganisms}.
-\subsection{Custom Rules}{
-
-Custom rules can be created using \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}, e.g.:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- custom_eucast_rules(AMC == "R" & genus == "Klebsiella" ~ aminopenicillins == "R",
-                         AMC == "I" & genus == "Klebsiella" ~ aminopenicillins == "I")
-
-eucast_rules(example_isolates, rules = "custom", custom_rules = x)
-}\if{html}{\out{</div>}}
-}
-
-\subsection{'Other' Rules}{
-
-Before further processing, two non-EUCAST rules about drug combinations can be applied to improve the efficacy of the EUCAST rules, and the reliability of your data (analysis). These rules are:
-\enumerate{
-\item A drug \strong{with} enzyme inhibitor will be set to S if the same drug \strong{without} enzyme inhibitor is S
-\item A drug \strong{without} enzyme inhibitor will be set to R if the same drug \strong{with} enzyme inhibitor is R
-}
-
-Important examples include amoxicillin and amoxicillin/clavulanic acid, and trimethoprim and trimethoprim/sulfamethoxazole. Needless to say, for these rules to work, both drugs must be available in the data set.
-
-Since these rules are not officially approved by EUCAST, they are not applied at default. To use these rules, include \code{"other"} to the \code{rules} argument, or use \code{eucast_rules(..., rules = "all")}. You can also set the package option \code{\link[=AMR-options]{AMR_eucastrules}}, i.e. run \code{options(AMR_eucastrules = "all")}.
-}
-}
-\section{Download Our Reference Data}{
-
-All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
-
-For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
-
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
-}
-
-\examples{
-\donttest{
-a <- data.frame(
-  mo = c(
-    "Staphylococcus aureus",
-    "Enterococcus faecalis",
-    "Escherichia coli",
-    "Klebsiella pneumoniae",
-    "Pseudomonas aeruginosa"
-  ),
-  VAN = "-", # Vancomycin
-  AMX = "-", # Amoxicillin
-  COL = "-", # Colistin
-  CAZ = "-", # Ceftazidime
-  CXM = "-", # Cefuroxime
-  PEN = "S", # Benzylpenicillin
-  FOX = "S", # Cefoxitin
-  stringsAsFactors = FALSE
-)
-
-head(a)
-
-
-# apply EUCAST rules: some results wil be changed
-b <- eucast_rules(a, overwrite = TRUE)
-
-head(b)
-
-
-# do not apply EUCAST rules, but rather get a data.frame
-# containing all details about the transformations:
-c <- eucast_rules(a, overwrite = TRUE, verbose = TRUE)
-head(c)
-}
-
-# Dosage guidelines:
-
-eucast_dosage(c("tobra", "genta", "cipro"), "iv")
-
-eucast_dosage(c("tobra", "genta", "cipro"), "iv", version_breakpoints = 10)
-}
 
 
 
@@ -6676,6 +6533,176 @@ guess_ab_col(df, "augmentin")
 
 
 ----------------------------------------------------------------------------------------------------
+THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/interpretive_rules.Rd':
+
+
+% Generated by roxygen2: do not edit by hand
+% Please edit documentation in R/interpretive_rules.R
+\name{interpretive_rules}
+\alias{interpretive_rules}
+\alias{EUCAST}
+\alias{eucast_rules}
+\alias{clsi_rules}
+\alias{eucast_dosage}
+\title{Apply Interpretive Rules}
+\source{
+\itemize{
+\item EUCAST Expert Rules. Version 2.0, 2012.\cr
+Leclercq et al. \strong{EUCAST expert rules in antimicrobial susceptibility testing.} \emph{Clin Microbiol Infect.} 2013;19(2):141-60; \doi{https://doi.org/10.1111/j.1469-0691.2011.03703.x}
+\item EUCAST Expert Rules, Intrinsic Resistance and Exceptional Phenotypes Tables. Version 3.1, 2016. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/Expert_rules_intrinsic_exceptional_V3.1.pdf}{(link)}
+\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.2, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2020/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.2_20200225.pdf}{(link)}
+\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.3, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2021/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.3_20211018.pdf}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 9.0, 2019. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_9.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 10.0, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_10.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 11.0, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_11.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 12.0, 2022. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_12.0_Breakpoint_Tables.xlsx}{(link)}
+}
+}
+\usage{
+interpretive_rules(x, col_mo = NULL, guideline = getOption("AMR_guideline",
+  "EUCAST"), info = interactive(),
+  rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
+  "expected_phenotypes")), verbose = FALSE, version_breakpoints = 15,
+  version_expected_phenotypes = 1.2, version_expertrules = 3.3,
+  ampc_cephalosporin_resistance = NA, only_sir_columns = any(is.sir(x)),
+  custom_rules = NULL, overwrite = FALSE, ...)
+
+eucast_rules(x, rules = getOption("AMR_interpretive_rules", default =
+  c("breakpoints", "expected_phenotypes")), ...)
+
+clsi_rules(x, rules = getOption("AMR_interpretive_rules", default =
+  c("breakpoints", "expected_phenotypes")), ...)
+
+eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
+}
+\arguments{
+\item{x}{A data set with antimicrobials columns, such as \code{amox}, \code{AMX} and \code{AMC}.}
+
+\item{col_mo}{Column name of the names or codes of the microorganisms (see \code{\link[=as.mo]{as.mo()}}) - the default is the first column of class \code{\link{mo}}. Values will be coerced using \code{\link[=as.mo]{as.mo()}}.}
+
+\item{guideline}{A guideline name, either "EUCAST" (default) or "CLSI". This can be set with the package option \code{\link[=AMR-options]{AMR_guideline}}.}
+
+\item{info}{A \link{logical} to indicate whether progress should be printed to the console - the default is only print while in interactive sessions.}
+
+\item{rules}{A \link{character} vector that specifies which rules should be applied. Must be one or more of \code{"breakpoints"}, \code{"expected_phenotypes"}, \code{"expert"}, \code{"other"}, \code{"custom"}, \code{"all"}, and defaults to \code{c("breakpoints", "expected_phenotypes")}. The default value can be set to another value using the package option \code{\link[=AMR-options]{AMR_interpretive_rules}}: \code{options(AMR_interpretive_rules = "all")}. If using \code{"custom"}, be sure to fill in argument \code{custom_rules} too. Custom rules can be created with \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}.}
+
+\item{verbose}{A \link{logical} to turn Verbose mode on and off (default is off). In Verbose mode, the function does not apply rules to the data, but instead returns a data set in logbook form with extensive info about which rows and columns would be effected and in which way. Using Verbose mode takes a lot more time.}
+
+\item{version_breakpoints}{The version number to use for the EUCAST Clinical Breakpoints guideline. Can be "15.0", "14.0", "13.1", "12.0", "11.0", or "10.0".}
+
+\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be "1.2".}
+
+\item{version_expertrules}{The version number to use for the EUCAST Expert Rules and Intrinsic Resistance guideline. Can be "3.3", "3.2", or "3.1".}
+
+\item{ampc_cephalosporin_resistance}{(only applies when \code{rules} contains \code{"expert"} or \code{"all"}) a \link{character} value that should be applied to cefotaxime, ceftriaxone and ceftazidime for AmpC de-repressed cephalosporin-resistant mutants - the default is \code{NA}. Currently only works when \code{version_expertrules} is \code{3.2} and higher; these versions of '\emph{EUCAST Expert Rules on Enterobacterales}' state that results of cefotaxime, ceftriaxone and ceftazidime should be reported with a note, or results should be suppressed (emptied) for these three drugs. A value of \code{NA} (the default) for this argument will remove results for these three drugs, while e.g. a value of \code{"R"} will make the results for these drugs resistant. Use \code{NULL} or \code{FALSE} to not alter results for these three drugs of AmpC de-repressed cephalosporin-resistant mutants. Using \code{TRUE} is equal to using \code{"R"}. \cr For \emph{EUCAST Expert Rules} v3.2, this rule applies to: \emph{Citrobacter braakii}, \emph{Citrobacter freundii}, \emph{Citrobacter gillenii}, \emph{Citrobacter murliniae}, \emph{Citrobacter rodenticum}, \emph{Citrobacter sedlakii}, \emph{Citrobacter werkmanii}, \emph{Citrobacter youngae}, \emph{Enterobacter}, \emph{Hafnia alvei}, \emph{Klebsiella aerogenes}, \emph{Morganella morganii}, \emph{Providencia}, and \emph{Serratia}.}
+
+\item{only_sir_columns}{A \link{logical} to indicate whether only antimicrobial columns must be included that were transformed to class \link[=as.sir]{sir} on beforehand. Defaults to \code{FALSE} if no columns of \code{x} have a class \link[=as.sir]{sir}.}
+
+\item{custom_rules}{Custom rules to apply, created with \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}.}
+
+\item{overwrite}{A \link{logical} indicating whether to overwrite existing SIR values (default: \code{FALSE}). When \code{FALSE}, only non-SIR values are modified (i.e., any value that is not already S, I or R). To ensure compliance with EUCAST guidelines, \strong{this should remain} \code{FALSE}, as EUCAST notes often state that an organism "should be tested for susceptibility to individual agents or be reported resistant".}
+
+\item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
+
+\item{ab}{Any (vector of) text that can be coerced to a valid antimicrobial drug code with \code{\link[=as.ab]{as.ab()}}.}
+
+\item{administration}{Route of administration, either "", "im", "iv", "oral", or NA.}
+}
+\value{
+The input of \code{x}, possibly with edited values of antimicrobials. Or, if \code{verbose = TRUE}, a \link{data.frame} with all original and new values of the affected bug-drug combinations.
+}
+\description{
+\strong{WORK IN PROGRESS}
+
+\strong{The \code{interpretive_rules()} function is new, to allow CLSI 'rules' too. The old \code{eucast_rules()} function will stay as a wrapper, but we need to generalise more parts of the underlying code to allow more than just EUCAST.}
+
+Apply rules from clinical breakpoints notes and expected resistant phenotypes as defined by e.g. the European Committee on Antimicrobial Susceptibility Testing (EUCAST, \url{https://www.eucast.org}), see \emph{Source}. Use \code{\link[=eucast_dosage]{eucast_dosage()}} to get a \link{data.frame} with advised dosages of a certain bug-drug combination, which is based on the \link{dosage} data set.
+
+To improve the interpretation of the antibiogram before CLSI/EUCAST interpretive rules are applied, some AMR-specific rules can be applied at default, see \emph{Details}.
+}
+\details{
+\strong{Note:} This function does not translate MIC values to SIR values. Use \code{\link[=as.sir]{as.sir()}} for that. \cr
+\strong{Note:} When ampicillin (AMP, J01CA01) is not available but amoxicillin (AMX, J01CA04) is, the latter will be used for all rules where there is a dependency on ampicillin. These drugs are interchangeable when it comes to expression of antimicrobial resistance. \cr
+
+The file containing all EUCAST rules is located here: \url{https://github.com/msberends/AMR/blob/main/data-raw/eucast_rules.tsv}.  \strong{Note:} Old taxonomic names are replaced with the current taxonomy where applicable. For example, \emph{Ochrobactrum anthropi} was renamed to \emph{Brucella anthropi} in 2020; the original EUCAST rules v3.1 and v3.2 did not yet contain this new taxonomic name. The \code{AMR} package contains the full microbial taxonomy updated until June 24th, 2024, see \link{microorganisms}.
+\subsection{Custom Rules}{
+
+Custom rules can be created using \code{\link[=custom_eucast_rules]{custom_eucast_rules()}}, e.g.:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- custom_eucast_rules(AMC == "R" & genus == "Klebsiella" ~ aminopenicillins == "R",
+                         AMC == "I" & genus == "Klebsiella" ~ aminopenicillins == "I")
+
+eucast_rules(example_isolates, rules = "custom", custom_rules = x)
+}\if{html}{\out{</div>}}
+}
+
+\subsection{'Other' Rules}{
+
+Before further processing, two non-EUCAST rules about drug combinations can be applied to improve the efficacy of the EUCAST rules, and the reliability of your data (analysis). These rules are:
+\enumerate{
+\item A drug \strong{with} enzyme inhibitor will be set to S if the same drug \strong{without} enzyme inhibitor is S
+\item A drug \strong{without} enzyme inhibitor will be set to R if the same drug \strong{with} enzyme inhibitor is R
+}
+
+Important examples include amoxicillin and amoxicillin/clavulanic acid, and trimethoprim and trimethoprim/sulfamethoxazole. Needless to say, for these rules to work, both drugs must be available in the data set.
+
+Since these rules are not officially approved by EUCAST, they are not applied at default. To use these rules, include \code{"other"} to the \code{rules} argument, or use \code{eucast_rules(..., rules = "all")}. You can also set the package option \code{\link[=AMR-options]{AMR_interpretive_rules}}, i.e. run \code{options(AMR_interpretive_rules = "all")}.
+}
+}
+\section{Download Our Reference Data}{
+
+All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
+
+For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
+
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
+}
+
+\examples{
+\donttest{
+a <- data.frame(
+  mo = c(
+    "Staphylococcus aureus",
+    "Enterococcus faecalis",
+    "Escherichia coli",
+    "Klebsiella pneumoniae",
+    "Pseudomonas aeruginosa"
+  ),
+  VAN = "-", # Vancomycin
+  AMX = "-", # Amoxicillin
+  COL = "-", # Colistin
+  CAZ = "-", # Ceftazidime
+  CXM = "-", # Cefuroxime
+  PEN = "S", # Benzylpenicillin
+  FOX = "S", # Cefoxitin
+  stringsAsFactors = FALSE
+)
+
+head(a)
+
+
+# apply EUCAST rules: some results wil be changed
+b <- eucast_rules(a, overwrite = TRUE)
+
+head(b)
+
+
+# do not apply EUCAST rules, but rather get a data.frame
+# containing all details about the transformations:
+c <- eucast_rules(a, overwrite = TRUE, verbose = TRUE)
+head(c)
+}
+
+# Dosage guidelines:
+
+eucast_dosage(c("tobra", "genta", "cipro"), "iv")
+
+eucast_dosage(c("tobra", "genta", "cipro"), "iv", version_breakpoints = 10)
+}
+
+
+
+----------------------------------------------------------------------------------------------------
 THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/intrinsic_resistant.Rd':
 
 
@@ -7397,7 +7424,7 @@ A \link[tibble:tibble]{tibble} with 78 679 observations and 26 variables:
 \item \code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{subspecies}\cr Taxonomic rank of the microorganism. Note that for fungi, \emph{phylum} is equal to their taxonomic \emph{division}. Also, for fungi, \emph{subkingdom} and \emph{subdivision} were left out since they do not occur in the bacterial taxonomy.
 \item \code{rank}\cr Text of the taxonomic rank of the microorganism, such as \code{"species"} or \code{"genus"}
 \item \code{ref}\cr Author(s) and year of related scientific publication. This contains only the \emph{first surname} and year of the \emph{latest} authors, e.g. "Wallis \emph{et al.} 2006 \emph{emend.} Smith and Jones 2018" becomes "Smith \emph{et al.}, 2018". This field is directly retrieved from the source specified in the column \code{source}. Moreover, accents were removed to comply with CRAN that only allows ASCII characters.
-\item \code{oxygen_tolerance} \cr Oxygen tolerance, either "aerobe", "anaerobe", "anaerobe/microaerophile", "facultative anaerobe", "likely facultative anaerobe", or "microaerophile". These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 68.3\% of all ~39 000 bacteria in the data set contain an oxygen tolerance.
+\item \code{oxygen_tolerance} \cr Oxygen tolerance, either "aerobe", "anaerobe", "anaerobe/microaerophile", "facultative anaerobe", "likely facultative anaerobe", "microaerophile", or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 68.3\% of all ~39 000 bacteria in the data set contain an oxygen tolerance.
 \item \code{source}\cr Either "GBIF", "LPSN", "Manually added", "MycoBank", or "manually added" (see \emph{Source})
 \item \code{lpsn}\cr Identifier ('Record number') of List of Prokaryotic names with Standing in Nomenclature (LPSN). This will be the first/highest LPSN identifier to keep one identifier per row. For example, \emph{Acetobacter ascendens} has LPSN Record number 7864 and 11011. Only the first is available in the \code{microorganisms} data set. \emph{\strong{This is a unique identifier}}, though available for only ~33 000 records.
 \item \code{lpsn_parent}\cr LPSN identifier of the parent taxon
@@ -8447,7 +8474,7 @@ When manually added though, they allow to rescale the MIC range with an 'inside'
 
 \subsection{The \verb{scale_*_sir()} Functions}{
 
-The functions \code{\link[=scale_x_sir]{scale_x_sir()}}, \code{\link[=scale_colour_sir]{scale_colour_sir()}}, and \code{\link[=scale_fill_sir]{scale_fill_sir()}} functions allow to plot the \link[=as.sir]{sir} class in the right order (S < SDD < I < R < NI).
+The functions \code{\link[=scale_x_sir]{scale_x_sir()}}, \code{\link[=scale_colour_sir]{scale_colour_sir()}}, and \code{\link[=scale_fill_sir]{scale_fill_sir()}} functions allow to plot the \link[=as.sir]{sir} class in the right order (S < SDD < I < R < NI < WT < NWT < NS).
 
 There is normally no need to add these scale functions to your plot, as they are applied automatically when plotting values of class \link[=as.sir]{sir}.
 
