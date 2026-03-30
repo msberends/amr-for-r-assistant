@@ -508,8 +508,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9040
-Date: 2026-03-24
+Version: 3.0.1.9041
+Date: 2026-03-30
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -601,7 +601,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
   even WISCA
 - Provides the **full microbiological taxonomy** of ~79 000 distinct
   species and extensive info of ~620 antimicrobial drugs
-- Applies **CLSI 2011-2025** and **EUCAST 2011-2025** clinical and
+- Applies **CLSI 2011-2026** and **EUCAST 2011-2026** clinical and
   veterinary breakpoints, and ECOFFs, for MIC and disk zone
   interpretation
 - Corrects for duplicate isolates, **calculates** and **predicts** AMR
@@ -659,7 +659,7 @@ species**](./reference/microorganisms.html) (updated June 2024) and all
 drugs**](./reference/antimicrobials.html) by name and code (including
 ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all
 about valid SIR and MIC values. The integral clinical breakpoint
-guidelines from CLSI 2011-2025 and EUCAST 2011-2025 are included, even
+guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even
 with epidemiological cut-off (ECOFF) values. It supports and can read
 any data format, including WHONET data. This package works on Windows,
 macOS and Linux with all versions of R since R-3.0 (April 2013). **It
@@ -762,14 +762,14 @@ example_isolates %>%
   select(bacteria,
          aminoglycosides(),
          carbapenems())
-#> ℹ Using column 'mo' as input for `mo_fullname()`
-#> ℹ Using column 'mo' as input for `mo_is_gram_negative()`
-#> ℹ Using column 'mo' as input for `mo_is_intrinsic_resistant()`
+#> ℹ Using column mo as input for `mo_fullname()`
+#> ℹ Using column mo as input for `mo_is_gram_negative()`
+#> ℹ Using column mo as input for `mo_is_intrinsic_resistant()`
 #> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant
 #>   Phenotypes' v1.2 (2023). This note will be shown once per session.
-#> ℹ For `aminoglycosides()` using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
-#> ℹ For `carbapenems()` using columns 'IPM' (imipenem) and 'MEM' (meropenem)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 #> # A tibble: 35 × 7
 #>    bacteria                     GEN   TOB   AMK   KAN   IPM   MEM  
 #>    <chr>                        <sir> <sir> <sir> <sir> <sir> <sir>
@@ -806,9 +806,9 @@ output format automatically (such as markdown, LaTeX, HTML, etc.).
 ``` r
 antibiogram(example_isolates,
             antimicrobials = c(aminoglycosides(), carbapenems()))
-#> ℹ For `aminoglycosides()` using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
-#> ℹ For `carbapenems()` using columns 'IPM' (imipenem) and 'MEM' (meropenem)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 ```
 
 | Pathogen | Amikacin | Gentamicin | Imipenem | Kanamycin | Meropenem | Tobramycin |
@@ -935,15 +935,15 @@ out <- example_isolates %>%
   # calculate AMR using resistance(), over all aminoglycosides and polymyxins:
   summarise(across(c(aminoglycosides(), polymyxins()),
             resistance))
-#> ℹ For `aminoglycosides()` using columns 'GEN' (gentamicin), 'TOB'
-#>   (tobramycin), 'AMK' (amikacin), and 'KAN' (kanamycin)
-#> ℹ For `polymyxins()` using column 'COL' (colistin)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
+#> ℹ For `polymyxins()` using column COL (colistin)
 #> Warning: There was 1 warning in `summarise()`.
 #> ℹ In argument: `across(c(aminoglycosides(), polymyxins()), resistance)`.
 #> ℹ In group 3: `ward = "Outpatient"`.
 #> Caused by warning:
-#> ! Introducing NA: only 23 results available for KAN in group: ward =
-#> "Outpatient" (`minimum` = 30).
+#> ! Introducing NA: only 23 results available for KAN in group: ward = "Outpatient"
+#> (whilst `minimum = 30`).
 out
 #> # A tibble: 3 × 6
 #>   ward         GEN   TOB   AMK   KAN   COL
@@ -1159,14 +1159,14 @@ This is an overview of all the package-specific options you can set in the \code
 \item \code{AMR_custom_ab} \cr A file location to an RDS file, to use custom antimicrobial drugs with this package. This is explained in \code{\link[=add_custom_antimicrobials]{add_custom_antimicrobials()}}.
 \item \code{AMR_custom_mo} \cr A file location to an RDS file, to use custom microorganisms with this package. This is explained in \code{\link[=add_custom_microorganisms]{add_custom_microorganisms()}}.
 \item \code{AMR_eucastrules} \cr A \link{character} to set the default types of rules for \code{\link[=eucast_rules]{eucast_rules()}} function, must be one or more of: \code{"breakpoints"}, \code{"expert"}, \code{"other"}, \code{"custom"}, \code{"all"}, and defaults to \code{c("breakpoints", "expert")}.
-\item \code{AMR_guideline} \cr A \link{character} to set the default guideline used throughout the \code{AMR} package wherever a \code{guideline} argument is available. This option is used as the default in e.g. \code{\link[=as.sir]{as.sir()}}, \code{\link[=resistance]{resistance()}}, \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=interpretive_rules]{interpretive_rules()}} and many plotting functions. \strong{While unset}, the AMR package uses the latest implemented EUCAST guideline (currently EUCAST 2025).
+\item \code{AMR_guideline} \cr A \link{character} to set the default guideline used throughout the \code{AMR} package wherever a \code{guideline} argument is available. This option is used as the default in e.g. \code{\link[=as.sir]{as.sir()}}, \code{\link[=resistance]{resistance()}}, \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=interpretive_rules]{interpretive_rules()}} and many plotting functions. \strong{While unset}, the AMR package uses the latest implemented EUCAST guideline (currently EUCAST 2026).
 \itemize{
-\item For \code{\link[=as.sir]{as.sir()}}, this determines which clinical breakpoint guideline is used to interpret MIC values and disk diffusion diameters. It can be either the guideline name (e.g., \code{"CLSI"} or \code{"EUCAST"}) or the name including a year (e.g., \code{"CLSI 2019"}). Supported guidelines are EUCAST 2011 to 2025, and CLSI 2011 to 2025.
+\item For \code{\link[=as.sir]{as.sir()}}, this determines which clinical breakpoint guideline is used to interpret MIC values and disk diffusion diameters. It can be either the guideline name (e.g., \code{"CLSI"} or \code{"EUCAST"}) or the name including a year (e.g., \code{"CLSI 2019"}). Supported guidelines are EUCAST 2011 to 2026, and CLSI 2011 to 2026.
 \item For \code{\link[=resistance]{resistance()}} and \code{\link[=susceptibility]{susceptibility()}}, this setting determines how the \code{"I"} (Intermediate / Increased exposure) category is handled in calculations. Under CLSI, \code{"I"} is considered \emph{resistant} in susceptibility calculations; under EUCAST, \code{"I"} is considered \emph{susceptible} in susceptibility calculations. Explicitly setting this option ensures reproducible AMR proportion estimates.
 \item For \code{\link[=interpretive_rules]{interpretive_rules()}}, this determines which guideline-specific interpretive (expert) rules are applied to antimicrobial test results, either EUCAST or CLSI.
-\item For many plotting functions (e.g., for MIC or disk diffusion values), supplying \code{mo} and \code{ab} enables automatic SIR-based interpretative colouring. These colours are derived from \code{\link[=as.sir]{as.sir()}} in the background and therefore depend on the active \code{guideline} setting, which again uses EUCAST 2025 if not set explicitly.
+\item For many plotting functions (e.g., for MIC or disk diffusion values), supplying \code{mo} and \code{ab} enables automatic SIR-based interpretative colouring. These colours are derived from \code{\link[=as.sir]{as.sir()}} in the background and therefore depend on the active \code{guideline} setting, which again uses EUCAST 2026 if not set explicitly.
 }
-\item \code{AMR_guideline} \cr A \link{character} to set the default guideline for interpreting MIC values and disk diffusion diameters with \code{\link[=as.sir]{as.sir()}}. Can be only the guideline name (e.g., \code{"CLSI"}) or the name with a year (e.g. \code{"CLSI 2019"}). The default to the latest implemented EUCAST guideline, currently \code{"EUCAST 2025"}. Supported guideline are currently EUCAST (2011-2025) and CLSI (2011-2025).
+\item \code{AMR_guideline} \cr A \link{character} to set the default guideline for interpreting MIC values and disk diffusion diameters with \code{\link[=as.sir]{as.sir()}}. Can be only the guideline name (e.g., \code{"CLSI"}) or the name with a year (e.g. \code{"CLSI 2019"}). The default to the latest implemented EUCAST guideline, currently \code{"EUCAST 2026"}. Supported guideline are currently EUCAST (2011-2026) and CLSI (2011-2026).
 \item \code{AMR_ignore_pattern} \cr A \link[base:regex]{regular expression} to ignore (i.e., make \code{NA}) any match given in \code{\link[=as.mo]{as.mo()}} and all \code{\link[=mo_property]{mo_*}} functions.
 \item \code{AMR_include_PKPD} \cr A \link{logical} to use in \code{\link[=as.sir]{as.sir()}}, to indicate that PK/PD clinical breakpoints must be applied as a last resort - the default is \code{TRUE}.
 \item \code{AMR_substitute_missing_r_breakpoint} \cr A \link{logical} to use in \code{\link[=as.sir]{as.sir()}}, to indicate that missing R breakpoints must be substituted with \code{"R"} - the default is \code{FALSE}.
@@ -1249,7 +1249,7 @@ The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyrigh
 
 This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
-After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2025 and EUCAST 2011-2025 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
+After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
 
 The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 }
@@ -3605,7 +3605,7 @@ Ordered \link{factor} with additional class \code{\link{mic}}, that in mathemati
 This transforms vectors to a new class \code{\link{mic}}, which treats the input as decimal numbers, while maintaining operators (such as ">=") and only allowing valid MIC values known to the field of (medical) microbiology.
 }
 \details{
-To interpret MIC values as SIR values, use \code{\link[=as.sir]{as.sir()}} on MIC values. It supports guidelines from EUCAST (2011-2025) and CLSI (2011-2025).
+To interpret MIC values as SIR values, use \code{\link[=as.sir]{as.sir()}} on MIC values. It supports guidelines from EUCAST (2011-2026) and CLSI (2011-2026).
 
 This class for MIC values is a quite a special data type: formally it is an ordered \link{factor} with valid MIC values as \link{factor} levels (to make sure only valid MIC values are retained), but for any mathematical operation it acts as decimal numbers:
 
@@ -4009,11 +4009,11 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.sir.Rd':
 \source{
 For interpretations of minimum inhibitory concentration (MIC) values and disk diffusion diameters:
 \itemize{
-\item \strong{CLSI M39: Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data}, 2011-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
-\item \strong{CLSI M100: Performance Standard for Antimicrobial Susceptibility Testing}, 2011-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m100/}.
-\item \strong{CLSI VET01: Performance Standards for Antimicrobial Disk and Dilution Susceptibility Tests for Bacteria Isolated From Animals}, 2019-2025, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/veterinary-medicine/documents/vet01/}.
-\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2025, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/}.
-\item \strong{WHONET} as a source for machine-reading the clinical breakpoints (\href{https://amr-for-r.org/reference/clinical_breakpoints.html#imported-from-whonet}{read more here}), 1989-2025, \emph{WHO Collaborating Centre for Surveillance of Antimicrobial Resistance}. \url{https://whonet.org/}.
+\item \strong{CLSI M39: Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
+\item \strong{CLSI M100: Performance Standard for Antimicrobial Susceptibility Testing}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m100/}.
+\item \strong{CLSI VET01: Performance Standards for Antimicrobial Disk and Dilution Susceptibility Tests for Bacteria Isolated From Animals}, 2019-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/veterinary-medicine/documents/vet01/}.
+\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2026, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/}.
+\item \strong{WHONET} as a source for machine-reading the clinical breakpoints (\href{https://amr-for-r.org/reference/clinical_breakpoints.html#imported-from-whonet}{read more here}), 1989-2026, \emph{WHO Collaborating Centre for Surveillance of Antimicrobial Resistance}. \url{https://whonet.org/}.
 }
 }
 \usage{
@@ -4087,7 +4087,7 @@ Otherwise: arguments passed on to methods.}
 
 \item{ab}{A vector (or column name) with \link{character}s that can be coerced to a valid antimicrobial drug code with \code{\link[=as.ab]{as.ab()}}.}
 
-\item{guideline}{A guideline name (or column name) to use for SIR interpretation. Defaults to EUCAST 2025 (the latest implemented EUCAST guideline in the \link{clinical_breakpoints} data set), but can be set with the package option \code{\link[=AMR-options]{AMR_guideline}}. Currently supports EUCAST (2011-2025) and CLSI (2011-2025), see \emph{Details}. Using a column name allows for straightforward interpretation of historical data, which must be analysed in the context of, for example, different years.}
+\item{guideline}{A guideline name (or column name) to use for SIR interpretation. Defaults to EUCAST 2026 (the latest implemented EUCAST guideline in the \link{clinical_breakpoints} data set), but can be set with the package option \code{\link[=AMR-options]{AMR_guideline}}. Currently supports EUCAST (2011-2026) and CLSI (2011-2026), see \emph{Details}. Using a column name allows for straightforward interpretation of historical data, which must be analysed in the context of, for example, different years.}
 
 \item{uti}{(Urinary Tract Infection) a vector (or column name) with \link{logical}s (\code{TRUE} or \code{FALSE}) to specify whether a UTI specific interpretation from the guideline should be chosen. For using \code{\link[=as.sir]{as.sir()}} on a \link{data.frame}, this can also be a column containing \link{logical}s or when left blank, the data set will be searched for a column 'specimen', and rows within this column containing 'urin' (such as 'urine', 'urina') will be regarded isolates from a UTI. See \emph{Examples}.}
 
@@ -4155,7 +4155,7 @@ Ordered \link{factor} with new class \code{sir}
 \description{
 Clean up existing SIR values, or interpret minimum inhibitory concentration (MIC) values and disk diffusion diameters according to EUCAST or CLSI. \code{\link[=as.sir]{as.sir()}} transforms the input to a new class \code{\link{sir}}, which is an ordered \link{factor} containing the levels \code{S}, \code{SDD}, \code{I}, \code{R}, \code{NI}.
 
-Breakpoints are currently implemented from EUCAST 2011-2025 and CLSI 2011-2025, see \emph{Details}. All breakpoints used for interpretation are available in our \link{clinical_breakpoints} data set.
+Breakpoints are currently implemented from EUCAST 2011-2026 and CLSI 2011-2026, see \emph{Details}. All breakpoints used for interpretation are available in our \link{clinical_breakpoints} data set.
 }
 \details{
 \emph{Note: The clinical breakpoints in this package were validated through, and imported from, \href{https://whonet.org}{WHONET}. The public use of this \code{AMR} package has been endorsed by both CLSI and EUCAST. See \link{clinical_breakpoints} for more information.}
@@ -4208,12 +4208,12 @@ as.sir(your_data, ..., parallel = TRUE)
 
 For interpreting MIC values as well as disk diffusion diameters, currently implemented guidelines are:
 \itemize{
-\item For \strong{clinical microbiology}: EUCAST 2011-2025 and CLSI 2011-2025;
-\item For \strong{veterinary microbiology}: EUCAST 2021-2025 and CLSI 2019-2025;
-\item For \strong{ECOFFs} (Epidemiological Cut-off Values): EUCAST 2020-2025 and CLSI 2022-2025.
+\item For \strong{clinical microbiology}: EUCAST 2011-2026 and CLSI 2011-2026;
+\item For \strong{veterinary microbiology}: EUCAST 2021-2026 and CLSI 2019-2026;
+\item For \strong{ECOFFs} (Epidemiological Cut-off Values): EUCAST 2020-2026 and CLSI 2022-2026.
 }
 
-The \code{guideline} argument must be set to e.g., \code{"EUCAST 2025"} or \code{"CLSI 2025"}. By simply using \code{"EUCAST"} (the default) or \code{"CLSI"} as input, the latest included version of that guideline will automatically be selected. Importantly, using a column name of your data instead, allows for straightforward interpretation of historical data that must be analysed in the context of, for example, different years.
+The \code{guideline} argument must be set to e.g., \code{"EUCAST 2026"} or \code{"CLSI 2026"}. By simply using \code{"EUCAST"} (the default) or \code{"CLSI"} as input, the latest included version of that guideline will automatically be selected. Importantly, using a column name of your data instead, allows for straightforward interpretation of historical data that must be analysed in the context of, for example, different years.
 
 You can set your own data set using the \code{reference_data} argument. The \code{guideline} argument will then be ignored.
 
@@ -4900,7 +4900,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/clinical_breakpoints.Rd':
 \alias{clinical_breakpoints}
 \title{Data Set with Clinical Breakpoints for SIR Interpretation}
 \format{
-A \link[tibble:tibble]{tibble} with 40 217 observations and 14 variables:
+A \link[tibble:tibble]{tibble} with 45 797 observations and 14 variables:
 \itemize{
 \item \code{guideline}\cr Name of the guideline
 \item \code{type}\cr Breakpoint type, either "ECOFF", "animal", or "human"
@@ -4915,7 +4915,7 @@ A \link[tibble:tibble]{tibble} with 40 217 observations and 14 variables:
 \item \code{breakpoint_S}\cr Lowest MIC value or highest number of millimetres that leads to "S"
 \item \code{breakpoint_R}\cr Highest MIC value or lowest number of millimetres that leads to "R", can be \code{NA}
 \item \code{uti}\cr A \link{logical} value (\code{TRUE}/\code{FALSE}) to indicate whether the rule applies to a urinary tract infection (UTI)
-\item \code{is_SDD}\cr A \link{logical} value (\code{TRUE}/\code{FALSE}) to indicate whether the intermediate range between "S" and "R" should be interpreted as "SDD", instead of "I". This currently applies to 48 breakpoints.
+\item \code{is_SDD}\cr A \link{logical} value (\code{TRUE}/\code{FALSE}) to indicate whether the intermediate range between "S" and "R" should be interpreted as "SDD", instead of "I". This currently applies to 72 breakpoints.
 }
 }
 \usage{
@@ -4926,9 +4926,9 @@ Data set containing clinical breakpoints to interpret MIC and disk diffusion to 
 
 These breakpoints are currently implemented:
 \itemize{
-\item For \strong{clinical microbiology}: EUCAST 2011-2025 and CLSI 2011-2025;
-\item For \strong{veterinary microbiology}: EUCAST 2021-2025 and CLSI 2019-2025;
-\item For \strong{ECOFFs} (Epidemiological Cut-off Values): EUCAST 2020-2025 and CLSI 2022-2025.
+\item For \strong{clinical microbiology}: EUCAST 2011-2026 and CLSI 2011-2026;
+\item For \strong{veterinary microbiology}: EUCAST 2021-2026 and CLSI 2019-2026;
+\item For \strong{ECOFFs} (Epidemiological Cut-off Values): EUCAST 2020-2026 and CLSI 2022-2026.
 }
 
 Use \code{\link[=as.sir]{as.sir()}} to transform MICs or disks measurements to SIR values.
@@ -7636,9 +7636,9 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.codes.Rd':
 \docType{data}
 \name{microorganisms.codes}
 \alias{microorganisms.codes}
-\title{Data Set with 6 036 Common Microorganism Codes}
+\title{Data Set with 6 050 Common Microorganism Codes}
 \format{
-A \link[tibble:tibble]{tibble} with 6 036 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 6 050 observations and 2 variables:
 \itemize{
 \item \code{code}\cr Commonly used code of a microorganism. \emph{\strong{This is a unique identifier.}}
 \item \code{mo}\cr ID of the microorganism in the \link{microorganisms} data set
@@ -8603,7 +8603,7 @@ This package contains more functions that extend the \code{ggplot2} package, to 
 
 The interpretation of "I" will be named "Increased exposure" for all EUCAST guidelines since 2019, and will be named "Intermediate" in all other cases.
 
-For interpreting MIC values as well as disk diffusion diameters, the default guideline is EUCAST 2025, unless the package option \code{\link[=AMR-options]{AMR_guideline}} is set. See \code{\link[=as.sir]{as.sir()}} for more information.
+For interpreting MIC values as well as disk diffusion diameters, the default guideline is EUCAST 2026, unless the package option \code{\link[=AMR-options]{AMR_guideline}} is set. See \code{\link[=as.sir]{as.sir()}} for more information.
 }
 }
 \examples{
