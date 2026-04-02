@@ -508,8 +508,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9041
-Date: 2026-03-30
+Version: 3.0.1.9042
+Date: 2026-04-02
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -1153,7 +1153,7 @@ This is an overview of all the package-specific options you can set in the \code
 
 \itemize{
 \item \code{AMR_antibiogram_formatting_type} \cr A \link{numeric} (1-22) to use in \code{\link[=antibiogram]{antibiogram()}}, to indicate which formatting type to use.
-\item \code{AMR_breakpoint_type} \cr A \link{character} to use in \code{\link[=as.sir]{as.sir()}}, to indicate which breakpoint type to use. This must be either "ECOFF", "animal", or "human".
+\item \code{AMR_breakpoint_type} \cr A \link{character} to use in \code{\link[=as.sir]{as.sir()}}, to indicate which breakpoint type to use. This must be either {.val ECOFF}, {.val animal}, or {.val human}.
 \item \code{AMR_capped_mic_handling} \cr A \link{character} to use in \code{\link[=as.sir]{as.sir()}}, to indicate how capped MIC values (\code{<}, \code{<=}, \code{>}, \code{>=}) should be interpreted. Must be one of \code{"none"}, \code{"conservative"}, \code{"standard"}, or \code{"lenient"} - the default is \code{"conservative"}.
 \item \code{AMR_cleaning_regex} \cr A \link[base:regex]{regular expression} (case-insensitive) to use in \code{\link[=as.mo]{as.mo()}} and all \code{\link[=mo_property]{mo_*}} functions, to clean the user input. The default is the outcome of \code{\link[=mo_cleaning_regex]{mo_cleaning_regex()}}, which removes texts between brackets and texts such as "species" and "serovar".
 \item \code{AMR_custom_ab} \cr A file location to an RDS file, to use custom antimicrobial drugs with this package. This is explained in \code{\link[=add_custom_antimicrobials]{add_custom_antimicrobials()}}.
@@ -2331,9 +2331,9 @@ retrieve_wisca_parameters(wisca_model, ...)
 }
 }}
 
-\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: "mo", "fullname", "status", "kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies", "rank", "ref", "oxygen_tolerance", "source", "lpsn", "lpsn_parent", "lpsn_renamed_to", "mycobank", "mycobank_parent", "mycobank_renamed_to", "gbif", "gbif_parent", "gbif_renamed_to", "prevalence", or "snomed". Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
+\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: {.val mo}, {.val fullname}, {.val status}, {.val kingdom}, {.val phylum}, {.val class}, {.val order}, {.val family}, {.val genus}, {.val species}, {.val subspecies}, {.val rank}, {.val ref}, {.val oxygen_tolerance}, {.val source}, {.val lpsn}, {.val lpsn_parent}, {.val lpsn_renamed_to}, {.val mycobank}, {.val mycobank_parent}, {.val mycobank_renamed_to}, {.val gbif}, {.val gbif_parent}, {.val gbif_renamed_to}, {.val prevalence}, or {.val snomed}. Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
 
-\item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): "ab", "cid", "name", "group", "atc", "atc_group1", "atc_group2", "abbreviations", "synonyms", "oral_ddd", "oral_units", "iv_ddd", "iv_units", or "loinc". Can also be \code{NULL} to not transform the input.}
+\item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): {.val ab}, {.val cid}, {.val name}, {.val group}, {.val atc}, {.val atc_group1}, {.val atc_group2}, {.val abbreviations}, {.val synonyms}, {.val oral_ddd}, {.val oral_units}, {.val iv_ddd}, {.val iv_units}, or {.val loinc}. Can also be \code{NULL} to not transform the input.}
 
 \item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case-and-replace-when]{case_when()}}. See \emph{Examples}.}
 
@@ -2868,7 +2868,7 @@ not_intrinsic_resistant(only_sir_columns = FALSE, col_mo = NULL,
 
 \item{col_mo}{Column name of the names or codes of the microorganisms (see \code{\link[=as.mo]{as.mo()}}) - the default is the first column of class \code{\link{mo}}. Values will be coerced using \code{\link[=as.mo]{as.mo()}}.}
 
-\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be "1.2".}
+\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be {.val 1.2}.}
 }
 \value{
 When used inside selecting or filtering, this returns a \link{character} vector of column names, with additional class \code{"amr_selector"}. When used individually, this returns an \link[=as.ab]{'ab' vector} with all possible antimicrobials that the function would be able to select or filter.
@@ -4131,7 +4131,7 @@ The default \code{"conservative"} setting ensures cautious handling of uncertain
 
 \item{include_PKPD}{A \link{logical} to indicate that PK/PD clinical breakpoints must be applied as a last resort - the default is \code{TRUE}. Can also be set with the package option \code{\link[=AMR-options]{AMR_include_PKPD}}.}
 
-\item{breakpoint_type}{The type of breakpoints to use, either "ECOFF", "animal", or "human". ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
+\item{breakpoint_type}{The type of breakpoints to use, either {.val ECOFF}, {.val animal}, or {.val human}. ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
 
 \item{host}{A vector (or column name) with \link{character}s to indicate the host. Only useful for veterinary breakpoints, as it requires \code{breakpoint_type = "animal"}. The values can be any text resembling the animal species, even in any of the 28 supported languages of this package. For foreign languages, be sure to set the language with \code{\link[=set_AMR_locale]{set_AMR_locale()}} (though it will be automatically guessed based on the system language).}
 
@@ -4900,12 +4900,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/clinical_breakpoints.Rd':
 \alias{clinical_breakpoints}
 \title{Data Set with Clinical Breakpoints for SIR Interpretation}
 \format{
-A \link[tibble:tibble]{tibble} with 45 797 observations and 14 variables:
+A \link[tibble:tibble]{tibble} with 45 730 observations and 14 variables:
 \itemize{
 \item \code{guideline}\cr Name of the guideline
-\item \code{type}\cr Breakpoint type, either "ECOFF", "animal", or "human"
-\item \code{host}\cr Host of infectious agent. This is mostly useful for veterinary breakpoints and is either "ECOFF", "aquatic", "cats", "cattle", "dogs", "horse", "human", "poultry", or "swine"
-\item \code{method}\cr Testing method, either "DISK" or "MIC"
+\item \code{type}\cr Breakpoint type, either {.val ECOFF}, {.val animal}, or {.val human}
+\item \code{host}\cr Host of infectious agent. This is mostly useful for veterinary breakpoints and is either {.val ECOFF}, {.val aquatic}, {.val cats}, {.val cattle}, {.val dogs}, {.val horse}, {.val human}, {.val poultry}, or {.val swine}
+\item \code{method}\cr Testing method, either {.val DISK} or {.val MIC}
 \item \code{site}\cr Body site for which the breakpoint must be applied, e.g. "Oral" or "Respiratory"
 \item \code{mo}\cr Microbial ID, see \code{\link[=as.mo]{as.mo()}}
 \item \code{rank_index}\cr Taxonomic rank index of \code{mo} from 1 (subspecies/infraspecies) to 5 (unknown microorganism)
@@ -5539,10 +5539,10 @@ A \link[tibble:tibble]{tibble} with 759 observations and 9 variables:
 \itemize{
 \item \code{ab}\cr Antimicrobial ID as used in this package (such as \code{AMC}), using the official EARS-Net (European Antimicrobial Resistance Surveillance Network) codes where available
 \item \code{name}\cr Official name of the antimicrobial drug as used by WHONET/EARS-Net or the WHO
-\item \code{type}\cr Type of the dosage, either "high_dosage", "standard_dosage", or "uncomplicated_uti"
+\item \code{type}\cr Type of the dosage, either {.val high_dosage}, {.val standard_dosage}, or {.val uncomplicated_uti}
 \item \code{dose}\cr Dose, such as "2 g" or "25 mg/kg"
 \item \code{dose_times}\cr Number of times a dose must be administered
-\item \code{administration}\cr Route of administration, either "", "im", "iv", "oral", or NA
+\item \code{administration}\cr Route of administration, either {.val }, {.val im}, {.val iv}, {.val oral}, or NA
 \item \code{notes}\cr Additional dosage notes
 \item \code{original_txt}\cr Original text in the PDF file of EUCAST
 \item \code{eucast_version}\cr Version number of the EUCAST Clinical Breakpoints guideline to which these dosages apply, either 15, 14, 13.1, 12, or 11
@@ -5620,8 +5620,8 @@ A \link[tibble:tibble]{tibble} with 2 000 observations and 46 variables:
 \item \code{date}\cr Date of receipt at the laboratory
 \item \code{patient}\cr ID of the patient
 \item \code{age}\cr Age of the patient
-\item \code{gender}\cr Gender of the patient, either "F" or "M"
-\item \code{ward}\cr Ward type where the patient was admitted, either "Clinical", "ICU", or "Outpatient"
+\item \code{gender}\cr Gender of the patient, either {.val F} or {.val M}
+\item \code{ward}\cr Ward type where the patient was admitted, either {.val Clinical}, {.val ICU}, or {.val Outpatient}
 \item \code{mo}\cr ID of microorganism created with \code{\link[=as.mo]{as.mo()}}, see also the \link{microorganisms} data set
 \item \code{PEN:RIF}\cr 40 different antimicrobials with class \code{\link{sir}} (see \code{\link[=as.sir]{as.sir()}}); these column names occur in the \link{antimicrobials} data set and can be translated with \code{\link[=set_ab_names]{set_ab_names()}} or \code{\link[=ab_name]{ab_name()}}
 }
@@ -6668,7 +6668,7 @@ Leclercq et al. \strong{EUCAST expert rules in antimicrobial susceptibility test
 interpretive_rules(x, col_mo = NULL, info = interactive(),
   rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
   "expected_phenotypes")), guideline = getOption("AMR_guideline", "EUCAST"),
-  verbose = FALSE, version_breakpoints = 15,
+  verbose = FALSE, version_breakpoints = 16,
   version_expected_phenotypes = 1.2, version_expertrules = 3.3,
   ampc_cephalosporin_resistance = NA, only_sir_columns = any(is.sir(x)),
   custom_rules = NULL, overwrite = FALSE, ...)
@@ -6696,11 +6696,11 @@ eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
 
 \item{verbose}{A \link{logical} to turn Verbose mode on and off (default is off). In Verbose mode, the function does not apply rules to the data, but instead returns a data set in logbook form with extensive info about which rows and columns would be effected and in which way. Using Verbose mode takes a lot more time.}
 
-\item{version_breakpoints}{The version number to use for the EUCAST Clinical Breakpoints guideline. Can be "15.0", "14.0", "13.1", "12.0", "11.0", or "10.0".}
+\item{version_breakpoints}{The version number to use for the EUCAST Clinical Breakpoints guideline. Can be {.val 16.0}, {.val 15.0}, {.val 14.0}, {.val 13.1}, {.val 12.0}, {.val 11.0}, or {.val 10.0}.}
 
-\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be "1.2".}
+\item{version_expected_phenotypes}{The version number to use for the EUCAST Expected Phenotypes. Can be {.val 1.2}.}
 
-\item{version_expertrules}{The version number to use for the EUCAST Expert Rules and Intrinsic Resistance guideline. Can be "3.3", "3.2", or "3.1".}
+\item{version_expertrules}{The version number to use for the EUCAST Expert Rules and Intrinsic Resistance guideline. Can be {.val 3.3}, {.val 3.2}, or {.val 3.1}.}
 
 \item{ampc_cephalosporin_resistance}{(only applies when \code{rules} contains \code{"expert"} or \code{"all"}) a \link{character} value that should be applied to cefotaxime, ceftriaxone and ceftazidime for AmpC de-repressed cephalosporin-resistant mutants - the default is \code{NA}. Currently only works when \code{version_expertrules} is \code{3.2} and higher; these versions of '\emph{EUCAST Expert Rules on Enterobacterales}' state that results of cefotaxime, ceftriaxone and ceftazidime should be reported with a note, or results should be suppressed (emptied) for these three drugs. A value of \code{NA} (the default) for this argument will remove results for these three drugs, while e.g. a value of \code{"R"} will make the results for these drugs resistant. Use \code{NULL} or \code{FALSE} to not alter results for these three drugs of AmpC de-repressed cephalosporin-resistant mutants. Using \code{TRUE} is equal to using \code{"R"}. \cr For \emph{EUCAST Expert Rules} v3.2, this rule applies to: \emph{Citrobacter braakii}, \emph{Citrobacter freundii}, \emph{Citrobacter gillenii}, \emph{Citrobacter murliniae}, \emph{Citrobacter rodenticum}, \emph{Citrobacter sedlakii}, \emph{Citrobacter werkmanii}, \emph{Citrobacter youngae}, \emph{Enterobacter}, \emph{Hafnia alvei}, \emph{Klebsiella aerogenes}, \emph{Morganella morganii}, \emph{Providencia}, and \emph{Serratia}.}
 
@@ -6714,7 +6714,7 @@ eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
 
 \item{ab}{Any (vector of) text that can be coerced to a valid antimicrobial drug code with \code{\link[=as.ab]{as.ab()}}.}
 
-\item{administration}{Route of administration, either "", "im", "iv", "oral", or NA.}
+\item{administration}{Route of administration, either {.val }, {.val im}, {.val iv}, {.val oral}, or NA.}
 }
 \value{
 The input of \code{x}, possibly with edited values of antimicrobials. Or, if \code{verbose = TRUE}, a \link{data.frame} with all original and new values of the affected bug-drug combinations.
@@ -6725,7 +6725,7 @@ Apply rules from clinical breakpoints notes and expected resistant phenotypes as
 To improve the interpretation of the antibiogram before CLSI/EUCAST interpretive rules are applied, some AMR-specific rules can be applied at default, see \emph{Details}.
 }
 \details{
-\strong{Note:} This function does not translate MIC values to SIR values. Use \code{\link[=as.sir]{as.sir()}} for that. \cr
+\strong{Note:} This function does not translate MIC or disk values to SIR values. Use \code{\link[=as.sir]{as.sir()}} for that. \cr
 \strong{Note:} When ampicillin (AMP, J01CA01) is not available but amoxicillin (AMX, J01CA04) is, the latter will be used for all rules where there is a dependency on ampicillin. These drugs are interchangeable when it comes to expression of antimicrobial resistance. \cr
 
 The file containing all EUCAST rules is located here: \url{https://github.com/msberends/AMR/blob/main/data-raw/eucast_rules.tsv}.  \strong{Note:} Old taxonomic names are replaced with the current taxonomy where applicable. For example, \emph{Ochrobactrum anthropi} was renamed to \emph{Brucella anthropi} in 2020; the original EUCAST rules v3.1 and v3.2 did not yet contain this new taxonomic name. The \code{AMR} package contains the full microbial taxonomy updated until June 24th, 2024, see \link{microorganisms}.
@@ -7527,12 +7527,12 @@ A \link[tibble:tibble]{tibble} with 78 679 observations and 26 variables:
 \itemize{
 \item \code{mo}\cr ID of microorganism as used by this package. \emph{\strong{This is a unique identifier.}}
 \item \code{fullname}\cr Full name, like \code{"Escherichia coli"}. For the taxonomic ranks genus, species and subspecies, this is the 'pasted' text of genus, species, and subspecies. For all taxonomic ranks higher than genus, this is the name of the taxon. \emph{\strong{This is a unique identifier.}}
-\item \code{status} \cr Status of the taxon, either "accepted", "not validly published", "synonym", or "unknown"
+\item \code{status} \cr Status of the taxon, either {.val accepted}, {.val not validly published}, {.val synonym}, or {.val unknown}
 \item \code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{subspecies}\cr Taxonomic rank of the microorganism. Note that for fungi, \emph{phylum} is equal to their taxonomic \emph{division}. Also, for fungi, \emph{subkingdom} and \emph{subdivision} were left out since they do not occur in the bacterial taxonomy.
 \item \code{rank}\cr Text of the taxonomic rank of the microorganism, such as \code{"species"} or \code{"genus"}
 \item \code{ref}\cr Author(s) and year of related scientific publication. This contains only the \emph{first surname} and year of the \emph{latest} authors, e.g. "Wallis \emph{et al.} 2006 \emph{emend.} Smith and Jones 2018" becomes "Smith \emph{et al.}, 2018". This field is directly retrieved from the source specified in the column \code{source}. Moreover, accents were removed to comply with CRAN that only allows ASCII characters.
-\item \code{oxygen_tolerance} \cr Oxygen tolerance, either "aerobe", "anaerobe", "anaerobe/microaerophile", "facultative anaerobe", "likely facultative anaerobe", "microaerophile", or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 68.3\% of all ~39 000 bacteria in the data set contain an oxygen tolerance.
-\item \code{source}\cr Either "GBIF", "LPSN", "Manually added", "MycoBank", or "manually added" (see \emph{Source})
+\item \code{oxygen_tolerance} \cr Oxygen tolerance, either {.val aerobe}, {.val anaerobe}, {.val anaerobe/microaerophile}, {.val facultative anaerobe}, {.val likely facultative anaerobe}, {.val microaerophile}, or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 68.3\% of all ~39 000 bacteria in the data set contain an oxygen tolerance.
+\item \code{source}\cr Either {.val GBIF}, {.val LPSN}, {.val Manually added}, {.val MycoBank}, or {.val manually added} (see \emph{Source})
 \item \code{lpsn}\cr Identifier ('Record number') of List of Prokaryotic names with Standing in Nomenclature (LPSN). This will be the first/highest LPSN identifier to keep one identifier per row. For example, \emph{Acetobacter ascendens} has LPSN Record number 7864 and 11011. Only the first is available in the \code{microorganisms} data set. \emph{\strong{This is a unique identifier}}, though available for only ~33 000 records.
 \item \code{lpsn_parent}\cr LPSN identifier of the parent taxon
 \item \code{lpsn_renamed_to}\cr LPSN identifier of the currently valid taxon
@@ -7981,7 +7981,7 @@ The default is \code{FALSE}, which will return a note if outdated taxonomic name
 
 \item{open}{Browse the URL using \code{\link[utils:browseURL]{browseURL()}}.}
 
-\item{property}{One of the column names of the \link{microorganisms} data set: "mo", "fullname", "status", "kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies", "rank", "ref", "oxygen_tolerance", "source", "lpsn", "lpsn_parent", "lpsn_renamed_to", "mycobank", "mycobank_parent", "mycobank_renamed_to", "gbif", "gbif_parent", "gbif_renamed_to", "prevalence", or "snomed", or must be \code{"shortname"}.}
+\item{property}{One of the column names of the \link{microorganisms} data set: {.val mo}, {.val fullname}, {.val status}, {.val kingdom}, {.val phylum}, {.val class}, {.val order}, {.val family}, {.val genus}, {.val species}, {.val subspecies}, {.val rank}, {.val ref}, {.val oxygen_tolerance}, {.val source}, {.val lpsn}, {.val lpsn_parent}, {.val lpsn_renamed_to}, {.val mycobank}, {.val mycobank_parent}, {.val mycobank_renamed_to}, {.val gbif}, {.val gbif_parent}, {.val gbif_renamed_to}, {.val prevalence}, or {.val snomed}, or must be \code{"shortname"}.}
 }
 \value{
 \itemize{
@@ -8539,7 +8539,7 @@ labels_sir_count(position = NULL, x = "antibiotic",
 
 \item{include_PKPD}{A \link{logical} to indicate that PK/PD clinical breakpoints must be applied as a last resort - the default is \code{TRUE}. Can also be set with the package option \code{\link[=AMR-options]{AMR_include_PKPD}}.}
 
-\item{breakpoint_type}{The type of breakpoints to use, either "ECOFF", "animal", or "human". ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
+\item{breakpoint_type}{The type of breakpoints to use, either {.val ECOFF}, {.val animal}, or {.val human}. ECOFF stands for Epidemiological Cut-Off values. The default is \code{"human"}, which can also be set with the package option \code{\link[=AMR-options]{AMR_breakpoint_type}}. If \code{host} is set to values of veterinary species, this will automatically be set to \code{"animal"}.}
 
 \item{facet}{Variable to split plots by, either \code{"interpretation"} (default) or \code{"antibiotic"} or a grouping variable.}
 
@@ -9316,7 +9316,7 @@ top_n_microorganisms(x, n, property = "species", n_for_each = NULL,
 
 \item{n}{An integer specifying the maximum number of unique values of the \code{property} to include in the output.}
 
-\item{property}{A character string indicating the microorganism property to use for filtering. Must be one of the column names of the \link{microorganisms} data set: "mo", "fullname", "status", "kingdom", "phylum", "class", "order", "family", "genus", "species", "subspecies", "rank", "ref", "oxygen_tolerance", "source", "lpsn", "lpsn_parent", "lpsn_renamed_to", "mycobank", "mycobank_parent", "mycobank_renamed_to", "gbif", "gbif_parent", "gbif_renamed_to", "prevalence", or "snomed". If \code{NULL}, the raw values from \code{col_mo} will be used without transformation. When using \code{"species"} (default) or \code{"subpecies"}, the genus will be added to make sure each (sub)species still belongs to the right genus.}
+\item{property}{A character string indicating the microorganism property to use for filtering. Must be one of the column names of the \link{microorganisms} data set: {.val mo}, {.val fullname}, {.val status}, {.val kingdom}, {.val phylum}, {.val class}, {.val order}, {.val family}, {.val genus}, {.val species}, {.val subspecies}, {.val rank}, {.val ref}, {.val oxygen_tolerance}, {.val source}, {.val lpsn}, {.val lpsn_parent}, {.val lpsn_renamed_to}, {.val mycobank}, {.val mycobank_parent}, {.val mycobank_renamed_to}, {.val gbif}, {.val gbif_parent}, {.val gbif_renamed_to}, {.val prevalence}, or {.val snomed}. If \code{NULL}, the raw values from \code{col_mo} will be used without transformation. When using \code{"species"} (default) or \code{"subpecies"}, the genus will be added to make sure each (sub)species still belongs to the right genus.}
 
 \item{n_for_each}{An optional integer specifying the maximum number of rows to retain for each value of the selected property. If \code{NULL}, all rows within the top \emph{n} groups will be included.}
 
