@@ -508,8 +508,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9047
-Date: 2026-04-21
+Version: 3.0.1.9048
+Date: 2026-04-22
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -6817,7 +6817,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/intrinsic_resistant.Rd':
 \alias{intrinsic_resistant}
 \title{Data Set Denoting Bacterial Intrinsic Resistance}
 \format{
-A \link[tibble:tibble]{tibble} with 271 905 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 285 928 observations and 2 variables:
 \itemize{
 \item \code{mo}\cr Microorganism ID which occurs in \code{\link[=microorganisms]{microorganisms$mo}}. Names can be retrieved using \code{\link[=mo_name]{mo_name()}}.
 \item \code{ab}\cr Antimicrobial ID which occurs in \code{\link[=antimicrobials]{antimicrobials$ab}}. Names can be retrieved using \code{\link[=ab_name]{ab_name()}}.
@@ -7365,7 +7365,7 @@ The international guideline for multi-drug resistant tuberculosis - World Health
 The German national guideline - Mueller et al. (2015) Antimicrobial Resistance and Infection Control 4:7; \doi{10.1186/s13756-015-0047-6}
 \item \code{guideline = "BRMO 2024"} (or simply \code{guideline = "BRMO"})
 
-The Dutch national guideline - Samenwerkingverband Richtlijnen Infectiepreventie (SRI) (2024) "Bijzonder Resistente Micro-Organismen (BRMO)" (\href{https://www.sri-richtlijnen.nl/brmo}{link})
+The Dutch national guideline - Samenwerkingverband Richtlijnen Infectiepreventie (SRI) (2024) "Bijzonder Resistente Micro-Organismen (BRMO)" (\href{https://richtlijnendatabase.nl/richtlijn/bijzonder_resistente_micro-organismen_brmo}{link})
 
 Also:
 \itemize{
