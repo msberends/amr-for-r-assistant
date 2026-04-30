@@ -508,8 +508,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9053
-Date: 2026-04-27
+Version: 3.0.1.9055
+Date: 2026-04-30
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -2291,7 +2291,8 @@ antibiogram(x, antimicrobials = where(is.sir), mo_transform = "shortname",
   ifelse(wisca, 14, 18)), col_mo = NULL, language = get_AMR_locale(),
   minimum = 30, combine_SI = TRUE, sep = " + ", sort_columns = TRUE,
   wisca = FALSE, simulations = 1000, conf_interval = 0.95,
-  interval_side = "two-tailed", info = interactive(), ...)
+  interval_side = "two-tailed", info = interactive(), parallel = FALSE,
+  ...)
 
 wisca(x, antimicrobials = where(is.sir), ab_transform = "name",
   syndromic_group = NULL, only_all_tested = FALSE, digits = 1,
@@ -2299,7 +2300,7 @@ wisca(x, antimicrobials = where(is.sir), ab_transform = "name",
   col_mo = NULL, language = get_AMR_locale(), combine_SI = TRUE,
   sep = " + ", sort_columns = TRUE, simulations = 1000,
   conf_interval = 0.95, interval_side = "two-tailed",
-  info = interactive(), ...)
+  info = interactive(), parallel = FALSE, ...)
 
 retrieve_wisca_parameters(wisca_model, ...)
 
@@ -2346,7 +2347,7 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \item{digits}{Number of digits to use for rounding the antimicrobial coverage, defaults to 1 for WISCA and 0 otherwise.}
 
-\item{formatting_type}{Numeric value (1–22 for WISCA, 1-12 for non-WISCA) indicating how the 'cells' of the antibiogram table should be formatted. See \emph{Details} > \emph{Formatting Type} for a list of options.}
+\item{formatting_type}{Numeric value (1-22 for WISCA, 1-12 for non-WISCA) indicating how the 'cells' of the antibiogram table should be formatted. See \emph{Details} > \emph{Formatting Type} for a list of options.}
 
 \item{col_mo}{Column name of the names or codes of the microorganisms (see \code{\link[=as.mo]{as.mo()}}) - the default is the first column of class \code{\link{mo}}. Values will be coerced using \code{\link[=as.mo]{as.mo()}}.}
 
@@ -2369,6 +2370,8 @@ retrieve_wisca_parameters(wisca_model, ...)
 \item{interval_side}{The side of the confidence interval, either \code{"two-tailed"} (default), \code{"left"} or \code{"right"}.}
 
 \item{info}{A \link{logical} to indicate info should be printed - the default is \code{TRUE} only in interactive mode.}
+
+\item{parallel}{A \link{logical} to indicate if parallel computing must be used, defaults to \code{FALSE}. Requires the \code{\link[future.apply:future_lapply]{future.apply}} package. For WISCA, Monte Carlo simulations are distributed across workers; for grouped antibiograms, each group is processed by a separate worker. \strong{A non-sequential \code{\link[future:plan]{future::plan()}} must already be active before setting \code{parallel = TRUE}} -- for example, \code{future::plan(future::multisession)}. An error is thrown if \code{parallel = TRUE} is used without a plan set by the user.}
 
 \item{...}{When used in \link[knitr:kable]{R Markdown or Quarto}: arguments passed on to \code{\link[knitr:kable]{knitr::kable()}} (otherwise, has no use).}
 
@@ -5957,9 +5960,8 @@ A list with class \code{"htest"} containing the following
   \item{residuals}{the Pearson residuals,
     \code{(observed - expected) / sqrt(expected)}.}
   \item{stdres}{standardized residuals,
-    \code{(observed - expected) / sqrt(V)}, where \code{V} is the
-    residual cell variance (Agresti, 2007, section 2.4.5
-    for the case where \code{x} is a matrix, \code{n * p * (1 - p)} otherwise).}
+    \code{(observed - expected) / sqrt(V)}, where \code{V} is the residual cell variance (Agresti, 2007,
+    section 2.4.5 for the case where \code{x} is a matrix, \code{n * p * (1 - p)} otherwise).}
 }
 \description{
 \code{\link[=g.test]{g.test()}} performs chi-squared contingency table tests and goodness-of-fit tests, just like \code{\link[=chisq.test]{chisq.test()}} but is more reliable (1). A \emph{G}-test can be used to see whether the number of observations in each category fits a theoretical expectation (called a \strong{\emph{G}-test of goodness-of-fit}), or to see whether the proportions of one variable are different for different values of the other variable (called a \strong{\emph{G}-test of independence}).
@@ -8337,7 +8339,7 @@ pca(x, ..., retx = TRUE, center = TRUE, scale. = TRUE, tol = NULL,
     standard deviations are less than or equal to \code{tol} times the
     standard deviation of the first component.)  With the default null
     setting, no components are omitted (unless \code{rank.} is specified
-    less than \code{min(dim(x))}.).  Other settings for \code{tol} could be
+    less than \code{min(dim(x))}.).  Other settings for tol could be
     \code{tol = 0} or \code{tol = sqrt(.Machine$double.eps)}, which
     would omit essentially constant components.}
 
