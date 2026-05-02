@@ -512,8 +512,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9056
-Date: 2026-04-30
+Version: 3.0.1.9057
+Date: 2026-05-02
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -2017,10 +2017,10 @@ age_groups(x, split_at = c(0, 12, 25, 55, 75), names = NULL,
 \item{na.rm}{A \link{logical} to indicate whether missing values should be removed.}
 }
 \value{
-Ordered \link{factor}
+Ordered [factor]
 }
 \description{
-Split ages into age groups defined by the \code{split} argument. This allows for easier demographic (antimicrobial resistance) analysis. The function returns an ordered \link{factor}.
+Split ages into age groups defined by the `split` argument. This allows for easier demographic (antimicrobial resistance) analysis. The function returns an ordered [factor].
 }
 \details{
 To split ages, the input for the \code{split_at} argument can be:
@@ -2116,26 +2116,6 @@ step_mic_log2(recipe, ..., role = NA, trained = FALSE, columns = NULL,
 
 step_sir_numeric(recipe, ..., role = NA, trained = FALSE, columns = NULL,
   skip = FALSE, id = recipes::rand_id("sir_numeric"))
-}
-\arguments{
-\item{recipe}{A recipe object. The step will be added to the sequence of
-operations for this recipe.}
-
-\item{...}{One or more selector functions to choose variables for this step.
-See \code{\link[recipes:selections]{selections()}} for more details.}
-
-\item{role}{Not used by this step since no new variables are created.}
-
-\item{trained}{A logical to indicate if the quantities for preprocessing have
-been estimated.}
-
-\item{skip}{A logical. Should the step be skipped when the recipe is baked by
-\code{\link[recipes:bake]{bake()}}? While all operations are baked when \code{\link[recipes:prep]{prep()}} is run, some
-operations may not be able to be conducted on new data (e.g. processing the
-outcome variable(s)). Care should be taken when using \code{skip = TRUE} as it
-may affect the computations for subsequent operations.}
-
-\item{id}{A character string that is unique to this step to identify it.}
 }
 \description{
 This family of functions allows using AMR-specific data types such as \verb{<sir>} and \verb{<mic>} inside \code{tidymodels} pipelines.
@@ -2346,7 +2326,7 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): \code{"ab"}, \code{"cid"}, \code{"name"}, \code{"group"}, \code{"atc"}, \code{"atc_group1"}, \code{"atc_group2"}, \code{"abbreviations"}, \code{"synonyms"}, \code{"oral_ddd"}, \code{"oral_units"}, \code{"iv_ddd"}, \code{"iv_units"}, or \code{"loinc"}. Can also be \code{NULL} to not transform the input.}
 
-\item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case-and-replace-when]{case_when()}}. See \emph{Examples}.}
+\item{syndromic_group}{A column name of `x`, or values calculated to split rows of `x`, e.g. by using [ifelse()] or [`case_when()`][dplyr::case_when()]. See *Examples*.}
 
 \item{add_total_n}{\emph{(deprecated in favour of \code{formatting_type})} A \link{logical} to indicate whether \code{n_tested} available numbers per pathogen should be added to the table (default is \code{TRUE}). This will add the lowest and highest number of available isolates per antimicrobial (e.g, if for \emph{E. coli} 200 isolates are available for ciprofloxacin and 150 for amoxicillin, the returned number will be "150-200"). This option is unavailable when \code{wisca = TRUE}; in that case, use \code{\link[=retrieve_wisca_parameters]{retrieve_wisca_parameters()}} to get the parameters used for WISCA.}
 
@@ -3607,22 +3587,23 @@ mic_p90(x, na.rm = FALSE, ...)
 
 \item{mic_range}{A manual range to rescale the MIC values, e.g., \code{mic_range = c(0.001, 32)}. Use \code{NA} to prevent rescaling on one side, e.g., \code{mic_range = c(NA, 32)}.}
 
-\item{as.mic}{A \link{logical} to indicate whether the \code{mic} class should be kept - the default is \code{TRUE} for \code{\link[=rescale_mic]{rescale_mic()}} and \code{FALSE} for \code{\link[=droplevels]{droplevels()}}. When setting this to \code{FALSE} in \code{\link[=rescale_mic]{rescale_mic()}}, the output will have factor levels that acknowledge \code{mic_range}.}
+\item{as.mic}{A [logical] to indicate whether the `mic` class should be kept - the default is `TRUE` for [rescale_mic()] and `FALSE` for [droplevels()]. When setting this to `FALSE` in [rescale_mic()], the output will have factor levels that acknowledge `mic_range`.}
 
 \item{...}{Arguments passed on to methods.}
 }
 \value{
-Ordered \link{factor} with additional class \code{\link{mic}}, that in mathematical operations acts as a \link{numeric} vector. Bear in mind that the outcome of any mathematical operation on MICs will return a \link{numeric} value.
+Ordered [factor] with additional class [`mic`], that in mathematical operations acts as a [numeric] vector. Bear in mind that the outcome of any mathematical operation on MICs will return a [numeric] value.
 }
 \description{
 This transforms vectors to a new class \code{\link{mic}}, which treats the input as decimal numbers, while maintaining operators (such as ">=") and only allowing valid MIC values known to the field of (medical) microbiology.
 }
 \details{
-To interpret MIC values as SIR values, use \code{\link[=as.sir]{as.sir()}} on MIC values. It supports guidelines from EUCAST (2011-2026) and CLSI (2011-2026).
+To interpret MIC values as SIR values, use [as.sir()] on MIC values. It supports guidelines from EUCAST (`r min(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`) and CLSI (`r min(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "CLSI")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "CLSI")$guideline)))`).
 
-This class for MIC values is a quite a special data type: formally it is an ordered \link{factor} with valid MIC values as \link{factor} levels (to make sure only valid MIC values are retained), but for any mathematical operation it acts as decimal numbers:
+This class for MIC values is a quite a special data type: formally it is an ordered [factor] with valid MIC values as [factor] levels (to make sure only valid MIC values are retained), but for any mathematical operation it acts as decimal numbers:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{x <- random_mic(10)
+```
+x <- random_mic(10)
 x
 #> Class <mic>
 #>  [1] 16     1      8      8      64     >=128  0.0625 32     32     16
@@ -3635,16 +3616,17 @@ x[1] * 2
 
 median(x)
 #> [1] 26
-}\if{html}{\out{</div>}}
+```
 
-This makes it possible to maintain operators that often come with MIC values, such ">=" and "<=", even when filtering using \link{numeric} values in data analysis, e.g.:
+This makes it possible to maintain operators that often come with MIC values, such ">=" and "<=", even when filtering using [numeric] values in data analysis, e.g.:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{x[x > 4]
+```
+x[x > 4]
 #> Class <mic>
 #> [1] 16    8     8     64    >=128 32    32    16
 
 df <- data.frame(x, hospital = "A")
-subset(df, x > 4) # or with dplyr: df \%>\% filter(x > 4)
+subset(df, x > 4) # or with dplyr: df %>% filter(x > 4)
 #>        x hospital
 #> 1     16        A
 #> 5     64        A
@@ -3652,19 +3634,19 @@ subset(df, x > 4) # or with dplyr: df \%>\% filter(x > 4)
 #> 8     32        A
 #> 9     32        A
 #> 10    16        A
-}\if{html}{\out{</div>}}
+```
 
-All so-called \link[=groupGeneric]{group generic functions} are implemented for the MIC class (such as \code{!}, \code{!=}, \code{<}, \code{>=}, \code{\link[=exp]{exp()}}, \code{\link[=log2]{log2()}}). Some mathematical functions are also implemented (such as \code{\link[=quantile]{quantile()}}, \code{\link[=median]{median()}}, \code{\link[=fivenum]{fivenum()}}). Since \code{\link[=sd]{sd()}} and \code{\link[=var]{var()}} are non-generic functions, these could not be extended. Use \code{\link[=mad]{mad()}} as an alternative, or use e.g. \code{sd(as.numeric(x))} where \code{x} is your vector of MIC values.
+All so-called [group generic functions][groupGeneric()] are implemented for the MIC class (such as `!`, `!=`, `<`, `>=`, [exp()], [log2()]). Some mathematical functions are also implemented (such as [quantile()], [median()], [fivenum()]). Since [sd()] and [var()] are non-generic functions, these could not be extended. Use [mad()] as an alternative, or use e.g. `sd(as.numeric(x))` where `x` is your vector of MIC values.
 
-Using \code{\link[=as.double]{as.double()}} or \code{\link[=as.numeric]{as.numeric()}} on MIC values will remove the operators and return a numeric vector. Do \strong{not} use \code{\link[=as.integer]{as.integer()}} on MIC values as by the \R convention on \link{factor}s, it will return the index of the factor levels (which is often useless for regular users).
+Using [as.double()] or [as.numeric()] on MIC values will remove the operators and return a numeric vector. Do **not** use [as.integer()] on MIC values as by the \R convention on [factor]s, it will return the index of the factor levels (which is often useless for regular users).
 
-The function \code{\link[=is.mic]{is.mic()}} detects if the input contains class \code{mic}. If the input is a \link{data.frame} or \link{list}, it iterates over all columns/items and returns a \link{logical} vector.
+The function [is.mic()] detects if the input contains class `mic`. If the input is a [data.frame] or [list], it iterates over all columns/items and returns a [logical] vector.
 
-Use \code{\link[=droplevels]{droplevels()}} to drop unused levels. At default, it will return a plain factor. Use \code{droplevels(..., as.mic = TRUE)} to maintain the \code{mic} class.
+Use [droplevels()] to drop unused levels. At default, it will return a plain factor. Use `droplevels(..., as.mic = TRUE)` to maintain the `mic` class.
 
-With \code{\link[=rescale_mic]{rescale_mic()}}, existing MIC ranges can be limited to a defined range of MIC values. This can be useful to better compare MIC distributions.
+With [rescale_mic()], existing MIC ranges can be limited to a defined range of MIC values. This can be useful to better compare MIC distributions.
 
-For \code{ggplot2}, use one of the \code{\link[=scale_x_mic]{scale_*_mic()}} functions to plot MIC values. They allows custom MIC ranges and to plot intermediate log2 levels for missing MIC values.
+For `ggplot2`, use one of the [`scale_*_mic()`][scale_x_mic()] functions to plot MIC values. They allows custom MIC ranges and to plot intermediate log2 levels for missing MIC values.
 
 \code{NA_mic_} is a missing value of the new \code{mic} class, analogous to e.g. base \R's \code{\link[base:NA]{NA_character_}}.
 
@@ -4161,12 +4143,12 @@ The default \code{"conservative"} setting ensures cautious handling of uncertain
 \item{clean}{A \link{logical} to indicate whether previously stored results should be forgotten after returning the 'logbook' with results.}
 }
 \value{
-Ordered \link{factor} with new class \code{sir}
+Ordered [factor] with new class `sir`
 }
 \description{
-Clean up existing SIR values, or interpret minimum inhibitory concentration (MIC) values and disk diffusion diameters according to EUCAST or CLSI. \code{\link[=as.sir]{as.sir()}} transforms the input to a new class \code{\link{sir}}, which is an ordered \link{factor} containing the levels \code{S}, \code{SDD}, \code{I}, \code{R}, \code{NI}.
+Clean up existing SIR values, or interpret minimum inhibitory concentration (MIC) values and disk diffusion diameters according to EUCAST or CLSI. [as.sir()] transforms the input to a new class [`sir`], which is an ordered [factor] containing the levels `S`, `SDD`, `I`, `R`, `NI`.
 
-Breakpoints are currently implemented from EUCAST 2011-2026 and CLSI 2011-2026, see \emph{Details}. All breakpoints used for interpretation are available in our \link{clinical_breakpoints} data set.
+Breakpoints are currently implemented from EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "EUCAST")$guideline)))` and CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "CLSI")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "CLSI")$guideline)))`, see *Details*. All breakpoints used for interpretation are available in our [clinical_breakpoints] data set.
 }
 \details{
 \emph{Note: The clinical breakpoints in this package were validated through, and imported from, \href{https://whonet.org}{WHONET}. The public use of this \code{AMR} package has been endorsed by both CLSI and EUCAST. See \link{clinical_breakpoints} for more information.}
@@ -5382,7 +5364,7 @@ custom_mdro_guideline(..., as_factor = TRUE)
 \arguments{
 \item{...}{Guideline rules in \link[base:tilde]{formula} notation, see below for instructions, and in \emph{Examples}.}
 
-\item{as_factor}{A \link{logical} to indicate whether the returned value should be an ordered \link{factor} (\code{TRUE}, default), or otherwise a \link{character} vector. For combining rules sets (using \code{\link[=c]{c()}}) this value will be inherited from the first set at default.}
+\item{as_factor}{A [logical] to indicate whether the returned value should be an ordered [factor] (`TRUE`, default), or otherwise a [character] vector. For combining rules sets (using [c()]) this value will be inherited from the first set at default.}
 
 \item{x}{Existing custom MDRO rules}
 }
@@ -5968,7 +5950,7 @@ A list with class \code{"htest"} containing the following
     \code{(observed - expected) / sqrt(expected)}.}
   \item{stdres}{standardized residuals,
     \code{(observed - expected) / sqrt(V)}, where \code{V} is the
-    residual cell variance (Agresti, 2007, section 2.4.5
+    residual cell variance {(\if{html}{\out{<a href="#reference+chisq.test.Rd+R+3AAgresti+3A2007" class="citation">}}Agresti 2007\if{html}{\out{</a>}}, section 2.4.5)}
     for the case where \code{x} is a matrix, \code{n * p * (1 - p)} otherwise).}
 }
 \description{
@@ -6312,8 +6294,9 @@ ggplot_pca(x, choices = 1:2, scale = 1, pc.biplot = TRUE,
   }
 
 \item{pc.biplot}{
-    If true, use what Gabriel (1971) refers to as a "principal component
-    biplot", with \code{lambda = 1} and observations scaled up by sqrt(n) and
+    If true, use what {\if{html}{\cite{}\out{<a href="#reference+biplot.princomp.Rd+R+3AGabriel+3A1971" class="citation">}}Gabriel (1971)\if{html}{\out{</a>}}} refers to as a
+    \dQuote{principal component biplot},
+    with \code{lambda = 1} and observations scaled up by sqrt(n) and
     variables scaled down by sqrt(n).  Then inner products between
     variables approximate covariances and distances between observations
     approximate Mahalanobis distance.
@@ -6948,9 +6931,9 @@ a \link{data.frame}
 Join the data set \link{microorganisms} easily to an existing data set or to a \link{character} vector.
 }
 \details{
-\strong{Note:} As opposed to the \code{join()} functions of \code{dplyr}, \link{character} vectors are supported and at default existing columns will get a suffix \code{"2"} and the newly joined columns will not get a suffix.
+**Note:** As opposed to the `join()` functions of `dplyr`, [character] vectors are supported and at default existing columns will get a suffix `"2"` and the newly joined columns will not get a suffix.
 
-If the \code{dplyr} package is installed, their join functions will be used. Otherwise, the much slower \code{\link[=merge]{merge()}} and \code{\link[=interaction]{interaction()}} functions from base \R will be used.
+If the `dplyr` package is installed, their join functions will be used. Otherwise, the much slower [merge()] and [interaction()] functions from base \R will be used.
 }
 \examples{
 left_join_microorganisms(as.mo("K. pneumoniae"))
@@ -7323,18 +7306,16 @@ eucast_exceptional_phenotypes(x = NULL, only_sir_columns = any(is.sir(x)),
 \item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
 }
 \value{
-\itemize{
-\item If \code{verbose} is set to \code{TRUE}:\cr
-A \link{data.frame} containing columns \code{row_number}, \code{microorganism}, \code{MDRO}, \code{reason}, \code{all_nonsusceptible_columns}, \code{guideline}
-\item CMI 2012 paper - function \code{\link[=mdr_cmi2012]{mdr_cmi2012()}} or \code{\link[=mdro]{mdro()}}:\cr
-Ordered \link{factor} with levels \code{Negative} < \code{Multi-drug-resistant (MDR)} < \verb{Extensively drug-resistant (XDR)} < \code{Pandrug-resistant (PDR)}
-\item TB guideline - function \code{\link[=mdr_tb]{mdr_tb()}} or \code{\link[=mdro]{mdro(..., guideline = "TB")}}:\cr
-Ordered \link{factor} with levels \code{Negative} < \code{Mono-resistant} < \code{Poly-resistant} < \code{Multi-drug-resistant} < \verb{Extensively drug-resistant}
-\item German guideline - function \code{\link[=mrgn]{mrgn()}} or \code{\link[=mdro]{mdro(..., guideline = "MRGN")}}:\cr
-Ordered \link{factor} with levels \code{Negative} < \verb{3MRGN} < \verb{4MRGN}
-\item Everything else, except for custom guidelines:\cr
-Ordered \link{factor} with levels \code{Negative} < \verb{Positive, unconfirmed} < \code{Positive}. The value \code{"Positive, unconfirmed"} means that, according to the guideline, it is not entirely sure if the isolate is multi-drug resistant and this should be confirmed with additional (e.g. genotypic) tests
-}
+- If `verbose` is set to `TRUE`:\cr
+  A [data.frame] containing columns `row_number`, `microorganism`, `MDRO`, `reason`, `all_nonsusceptible_columns`, `guideline`
+- CMI 2012 paper - function [mdr_cmi2012()] or [mdro()]:\cr
+  Ordered [factor] with levels `Negative` < `Multi-drug-resistant (MDR)` < `Extensively drug-resistant (XDR)` < `Pandrug-resistant (PDR)`
+- TB guideline - function [mdr_tb()] or [`mdro(..., guideline = "TB")`][mdro()]:\cr
+  Ordered [factor] with levels `Negative` < `Mono-resistant` < `Poly-resistant` < `Multi-drug-resistant` < `Extensively drug-resistant`
+- German guideline - function [mrgn()] or [`mdro(..., guideline = "MRGN")`][mdro()]:\cr
+  Ordered [factor] with levels `Negative` < `3MRGN` < `4MRGN`
+- Everything else, except for custom guidelines:\cr
+  Ordered [factor] with levels `Negative` < `Positive, unconfirmed` < `Positive`. The value `"Positive, unconfirmed"` means that, according to the guideline, it is not entirely sure if the isolate is multi-drug resistant and this should be confirmed with additional (e.g. genotypic) tests
 }
 \description{
 Determine which isolates are multidrug-resistant organisms (MDRO) according to international, national, or custom guidelines.
@@ -7994,48 +7975,44 @@ The default is \code{FALSE}, which will return a note if outdated taxonomic name
 \item{property}{One of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}, or must be \code{"shortname"}.}
 }
 \value{
-\itemize{
-\item An \link{integer} in case of \code{\link[=mo_year]{mo_year()}}
-\item An \link[=factor]{ordered factor} in case of \code{\link[=mo_pathogenicity]{mo_pathogenicity()}}
-\item A \link{list} in case of \code{\link[=mo_taxonomy]{mo_taxonomy()}}, \code{\link[=mo_synonyms]{mo_synonyms()}}, \code{\link[=mo_snomed]{mo_snomed()}}, and \code{\link[=mo_info]{mo_info()}}
-\item A \link{logical} in case of \code{\link[=mo_is_anaerobic]{mo_is_anaerobic()}}, \code{\link[=mo_is_gram_negative]{mo_is_gram_negative()}}, \code{\link[=mo_is_gram_positive]{mo_is_gram_positive()}}, \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}, and \code{\link[=mo_is_yeast]{mo_is_yeast()}}
-\item A named \link{character} in case of \code{\link[=mo_synonyms]{mo_synonyms()}} and \code{\link[=mo_url]{mo_url()}}
-\item A \link{character} in all other cases
-}
+- An [integer] in case of [mo_year()]
+- An [ordered factor][factor] in case of [mo_pathogenicity()]
+- A [list] in case of [mo_taxonomy()], [mo_synonyms()], [mo_snomed()], and [mo_info()]
+- A [logical] in case of [mo_is_anaerobic()], [mo_is_gram_negative()], [mo_is_gram_positive()], [mo_is_intrinsic_resistant()], and [mo_is_yeast()]
+- A named [character] in case of [mo_synonyms()] and [mo_url()]
+- A [character] in all other cases
 }
 \description{
 Use these functions to return a specific property of a microorganism based on the latest accepted taxonomy. All input values will be evaluated internally with \code{\link[=as.mo]{as.mo()}}, which makes it possible to use microbial abbreviations, codes and names as input. See \emph{Examples}.
 }
 \details{
-All functions will, at default, \strong{not} keep old taxonomic properties, as synonyms are automatically replaced with the current taxonomy. Take for example \emph{Enterobacter aerogenes}, which was initially named in 1960 but renamed to \emph{Klebsiella aerogenes} in 2017:
-\itemize{
-\item \code{mo_genus("Enterobacter aerogenes")} will return \code{"Klebsiella"} (with a note about the renaming)
-\item \code{mo_genus("Enterobacter aerogenes", keep_synonyms = TRUE)} will return \code{"Enterobacter"} (with a once-per-session warning that the name is outdated)
-\item \code{mo_ref("Enterobacter aerogenes")} will return \code{"Tindall et al., 2017"} (with a note about the renaming)
-\item \code{mo_ref("Enterobacter aerogenes", keep_synonyms = TRUE)} will return \code{"Hormaeche et al., 1960"} (with a once-per-session warning that the name is outdated)
-}
+All functions will, at default, **not** keep old taxonomic properties, as synonyms are automatically replaced with the current taxonomy. Take for example *Enterobacter aerogenes*, which was initially named in 1960 but renamed to *Klebsiella aerogenes* in 2017:
+- `mo_genus("Enterobacter aerogenes")` will return `"Klebsiella"` (with a note about the renaming)
+- `mo_genus("Enterobacter aerogenes", keep_synonyms = TRUE)` will return `"Enterobacter"` (with a once-per-session warning that the name is outdated)
+- `mo_ref("Enterobacter aerogenes")` will return `"Tindall et al., 2017"` (with a note about the renaming)
+- `mo_ref("Enterobacter aerogenes", keep_synonyms = TRUE)` will return `"Hormaeche et al., 1960"` (with a once-per-session warning that the name is outdated)
 
-The short name (\code{\link[=mo_shortname]{mo_shortname()}}) returns the first character of the genus and the full species, such as \code{"E. coli"}, for species and subspecies. Exceptions are abbreviations of staphylococci (such as \emph{"CoNS"}, Coagulase-Negative Staphylococci) and beta-haemolytic streptococci (such as \emph{"GBS"}, Group B Streptococci). Please bear in mind that e.g. \emph{E. coli} could mean \emph{Escherichia coli} (kingdom of Bacteria) as well as \emph{Entamoeba coli} (kingdom of Protozoa). Returning to the full name will be done using \code{\link[=as.mo]{as.mo()}} internally, giving priority to bacteria and human pathogens, i.e. \code{"E. coli"} will be considered \emph{Escherichia coli}. As a result, \code{mo_fullname(mo_shortname("Entamoeba coli"))} returns \code{"Escherichia coli"}.
+The short name ([mo_shortname()]) returns the first character of the genus and the full species, such as `"E. coli"`, for species and subspecies. Exceptions are abbreviations of staphylococci (such as *"CoNS"*, Coagulase-Negative Staphylococci) and beta-haemolytic streptococci (such as *"GBS"*, Group B Streptococci). Please bear in mind that e.g. *E. coli* could mean *Escherichia coli* (kingdom of Bacteria) as well as *Entamoeba coli* (kingdom of Protozoa). Returning to the full name will be done using [as.mo()] internally, giving priority to bacteria and human pathogens, i.e. `"E. coli"` will be considered *Escherichia coli*. As a result, `mo_fullname(mo_shortname("Entamoeba coli"))` returns `"Escherichia coli"`.
 
-Since the top-level of the taxonomy is sometimes referred to as 'kingdom' and sometimes as 'domain', the functions \code{\link[=mo_kingdom]{mo_kingdom()}} and \code{\link[=mo_domain]{mo_domain()}} return the exact same results.
+Since the top-level of the taxonomy is sometimes referred to as 'kingdom' and sometimes as 'domain', the functions [mo_kingdom()] and [mo_domain()] return the exact same results.
 
-Determination of human pathogenicity (\code{\link[=mo_pathogenicity]{mo_pathogenicity()}}) is strongly based on Bartlett \emph{et al.} (2022, \doi{10.1099/mic.0.001269}). This function returns a \link{factor} with the levels \emph{Pathogenic}, \emph{Potentially pathogenic}, \emph{Non-pathogenic}, and \emph{Unknown}.
+Determination of human pathogenicity ([mo_pathogenicity()]) is strongly based on Bartlett *et al.* (2022, \doi{10.1099/mic.0.001269}). This function returns a [factor] with the levels *Pathogenic*, *Potentially pathogenic*, *Non-pathogenic*, and *Unknown*.
 
-Determination of the Gram stain (\code{\link[=mo_gramstain]{mo_gramstain()}}) will be based on the taxonomic kingdom and phylum. Originally, Cavalier-Smith defined the so-called subkingdoms Negibacteria and Posibacteria (2002, \href{https://pubmed.ncbi.nlm.nih.gov/11837318/}{PMID 11837318}), and only considered these phyla as Posibacteria: Actinobacteria, Chloroflexi, Firmicutes, and Tenericutes. These phyla were later renamed to Actinomycetota, Chloroflexota, Bacillota, and Mycoplasmatota (2021, \href{https://pubmed.ncbi.nlm.nih.gov/34694987/}{PMID 34694987}). Bacteria in these phyla are considered Gram-positive in this \code{AMR} package, except for members of the class Negativicutes (within phylum Bacillota) which are Gram-negative. All other bacteria are considered Gram-negative. Species outside the kingdom of Bacteria will return a value \code{NA}. Functions \code{\link[=mo_is_gram_negative]{mo_is_gram_negative()}} and \code{\link[=mo_is_gram_positive]{mo_is_gram_positive()}} always return \code{TRUE} or \code{FALSE} (or \code{NA} when the input is \code{NA} or the MO code is \code{UNKNOWN}), thus always return \code{FALSE} for species outside the taxonomic kingdom of Bacteria.
+Determination of the Gram stain ([mo_gramstain()]) will be based on the taxonomic kingdom and phylum. Originally, Cavalier-Smith defined the so-called subkingdoms Negibacteria and Posibacteria (2002, [PMID 11837318](https://pubmed.ncbi.nlm.nih.gov/11837318/)), and only considered these phyla as Posibacteria: Actinobacteria, Chloroflexi, Firmicutes, and Tenericutes. These phyla were later renamed to Actinomycetota, Chloroflexota, Bacillota, and Mycoplasmatota (2021, [PMID 34694987](https://pubmed.ncbi.nlm.nih.gov/34694987/)). Bacteria in these phyla are considered Gram-positive in this `AMR` package, except for members of the class Negativicutes (within phylum Bacillota) which are Gram-negative. All other bacteria are considered Gram-negative. Species outside the kingdom of Bacteria will return a value `NA`. Functions [mo_is_gram_negative()] and [mo_is_gram_positive()] always return `TRUE` or `FALSE` (or `NA` when the input is `NA` or the MO code is `UNKNOWN`), thus always return `FALSE` for species outside the taxonomic kingdom of Bacteria.
 
-Determination of yeasts (\code{\link[=mo_is_yeast]{mo_is_yeast()}}) will be based on the taxonomic kingdom and class. \emph{Budding yeasts} are yeasts that reproduce asexually through a process called budding, where a new cell develops from a small protrusion on the parent cell. Taxonomically, these are members of the phylum Ascomycota, class Saccharomycetes (also called Hemiascomycetes) or Pichiomycetes. \emph{True yeasts} quite specifically refers to yeasts in the underlying order Saccharomycetales (such as \emph{Saccharomyces cerevisiae}). Thus, for all microorganisms that are member of the taxonomic class Saccharomycetes or Pichiomycetes, the function will return \code{TRUE}. It returns \code{FALSE} otherwise (or \code{NA} when the input is \code{NA} or the MO code is \code{UNKNOWN}).
+Determination of yeasts ([mo_is_yeast()]) will be based on the taxonomic kingdom and class. *Budding yeasts* are yeasts that reproduce asexually through a process called budding, where a new cell develops from a small protrusion on the parent cell. Taxonomically, these are members of the phylum Ascomycota, class Saccharomycetes (also called Hemiascomycetes) or Pichiomycetes. *True yeasts* quite specifically refers to yeasts in the underlying order Saccharomycetales (such as *Saccharomyces cerevisiae*). Thus, for all microorganisms that are member of the taxonomic class Saccharomycetes or Pichiomycetes, the function will return `TRUE`. It returns `FALSE` otherwise (or `NA` when the input is `NA` or the MO code is `UNKNOWN`).
 
-Determination of intrinsic resistance (\code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}) will be based on the \link{intrinsic_resistant} data set, which is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023). The \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}} function can be vectorised over both argument \code{x} (input for microorganisms) and \code{ab} (input for antimicrobials).
+Determination of intrinsic resistance ([mo_is_intrinsic_resistant()]) will be based on the [intrinsic_resistant] data set, which is based on `r format_eucast_version_nr(names(EUCAST_VERSION_EXPECTED_PHENOTYPES[1]))`. The [mo_is_intrinsic_resistant()] function can be vectorised over both argument `x` (input for microorganisms) and `ab` (input for antimicrobials).
 
-Determination of bacterial oxygen tolerance (\code{\link[=mo_oxygen_tolerance]{mo_oxygen_tolerance()}}) will be based on BacDive, see \emph{Source}. The function \code{\link[=mo_is_anaerobic]{mo_is_anaerobic()}} only returns \code{TRUE} if the oxygen tolerance is \code{"anaerobe"}, indicting an obligate anaerobic species or genus. It always returns \code{FALSE} for species outside the taxonomic kingdom of Bacteria.
+Determination of bacterial oxygen tolerance ([mo_oxygen_tolerance()]) will be based on BacDive, see *Source*. The function [mo_is_anaerobic()] only returns `TRUE` if the oxygen tolerance is `"anaerobe"`, indicting an obligate anaerobic species or genus. It always returns `FALSE` for species outside the taxonomic kingdom of Bacteria.
 
-The function \code{\link[=mo_url]{mo_url()}} will return the direct URL to the online database entry, which also shows the scientific reference of the concerned species. \href{https://www.mycobank.org}{This MycoBank URL} will be used for fungi wherever available , \href{https://www.mycobank.org}{this LPSN URL} for bacteria wherever available, and \href{https://www.gbif.org}{this GBIF link} otherwise.
+The function [mo_url()] will return the direct URL to the online database entry, which also shows the scientific reference of the concerned species. [This MycoBank URL](`r TAXONOMY_VERSION$MycoBank$url`) will be used for fungi wherever available , [this LPSN URL](`r TAXONOMY_VERSION$MycoBank$url`) for bacteria wherever available, and [this GBIF link](`r TAXONOMY_VERSION$GBIF$url`) otherwise.
 
-SNOMED codes (\code{\link[=mo_snomed]{mo_snomed()}}) was last updated on July 16th, 2024. See \emph{Source} and the \link{microorganisms} data set for more info.
+SNOMED codes ([mo_snomed()]) was last updated on `r documentation_date(TAXONOMY_VERSION$SNOMED$accessed_date)`. See *Source* and the [microorganisms] data set for more info.
 
-Old taxonomic names (so-called 'synonyms') can be retrieved with \code{\link[=mo_synonyms]{mo_synonyms()}} (which will have the scientific reference as \link[base:names]{name}), the current taxonomic name can be retrieved with \code{\link[=mo_current]{mo_current()}}. Both functions return full names.
+Old taxonomic names (so-called 'synonyms') can be retrieved with [mo_synonyms()] (which will have the scientific reference as [name][base::names()]), the current taxonomic name can be retrieved with [mo_current()]. Both functions return full names.
 
-All output \link[=translate]{will be translated} where possible.
+All output [will be translated][translate] where possible.
 }
 \section{Matching Score for Microorganisms}{
 
