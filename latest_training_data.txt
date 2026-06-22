@@ -313,6 +313,7 @@ export(mo_is_yeast)
 export(mo_kingdom)
 export(mo_lpsn)
 export(mo_matching_score)
+export(mo_morphology)
 export(mo_mycobank)
 export(mo_name)
 export(mo_order)
@@ -398,6 +399,7 @@ export(translate_AMR)
 export(trimethoprims)
 export(ureidopenicillins)
 export(wisca)
+export(wisca_plot)
 if(getRversion() >= "3.0.0") S3method(cleaner::freq, mo)
 if(getRversion() >= "3.0.0") S3method(cleaner::freq, sir)
 if(getRversion() >= "3.0.0") S3method(ggplot2::autoplot, antibiogram)
@@ -512,8 +514,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9057
-Date: 2026-05-02
+Version: 3.0.1.9059
+Date: 2026-06-23
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -604,7 +606,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 - Peer-reviewed, used in over 175 countries, available in 28 languages
 - Generates **antibiograms** - traditional, combined, syndromic, and
   even WISCA
-- Provides the **full microbiological taxonomy** of ~79 000 distinct
+- Provides the **full microbiological taxonomy** of ~97 000 distinct
   species and extensive info of ~620 antimicrobial drugs
 - Applies **CLSI 2011-2026** and **EUCAST 2011-2026** clinical and
   veterinary breakpoints, and ECOFFs, for MIC and disk zone
@@ -655,7 +657,7 @@ formed the basis of two PhD theses ([DOI
 10.33612/diss.177417131](https://doi.org/10.33612/diss.177417131) and
 [DOI 10.33612/diss.192486375](https://doi.org/10.33612/diss.192486375)).
 
-After installing this package, R knows [**~79 000 distinct microbial
+After installing this package, R knows [**~97 000 distinct microbial
 species**](./reference/microorganisms.html) (updated June 2024) and all
 [**~620 antimicrobial and antiviral
 drugs**](./reference/antimicrobials.html) by name and code (including
@@ -1234,7 +1236,27 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/AMR.Rd':
 \alias{AMR-package}
 \alias{AMR}
 \title{The \code{AMR} Package}
-\source{
+\description{
+Welcome to the \code{AMR} package.
+
+The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. We are a team of \href{https://amr-for-r.org/authors.html}{many different researchers} from around the globe to make this a successful and durable project!
+
+This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
+
+After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~97 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
+
+The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
+}
+\section{Download Our Reference Data}{
+
+All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
+
+For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
+
+Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
+}
+
+\references{
 To cite AMR in publications use:
 
 Berends MS, Luz CF, Friedrich AW, Sinha BNM, Albers CJ, Glasner C (2022). "AMR: An R Package for Working with Antimicrobial Resistance Data." \emph{Journal of Statistical Software}, \emph{104}(3), 1-31. \doi{10.18637/jss.v104.i03}
@@ -1254,26 +1276,6 @@ A BibTeX entry for LaTeX users is:
 }
 }
 }
-\description{
-Welcome to the \code{AMR} package.
-
-The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyright}{free and open-source} R package with \href{https://en.wikipedia.org/wiki/Dependency_hell}{zero dependencies} to simplify the analysis and prediction of Antimicrobial Resistance (AMR) and to work with microbial and antimicrobial data and properties, by using evidence-based methods. \strong{Our aim is to provide a standard} for clean and reproducible AMR data analysis, that can therefore empower epidemiological analyses to continuously enable surveillance and treatment evaluation in any setting. We are a team of \href{https://amr-for-r.org/authors.html}{many different researchers} from around the globe to make this a successful and durable project!
-
-This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
-
-After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~79 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
-
-The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
-}
-\section{Download Our Reference Data}{
-
-All reference data sets in the AMR package - including information on microorganisms, antimicrobials, and clinical breakpoints - are freely available for download in multiple formats: R, MS Excel, Apache Feather, Apache Parquet, SPSS, and Stata.
-
-For maximum compatibility, we also provide machine-readable, tab-separated plain text files suitable for use in any software, including laboratory information systems.
-
-Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct download links}, or explore the actual files in \href{https://github.com/msberends/AMR/tree/main/data-raw/datasets}{our GitHub repository}.
-}
-
 \seealso{
 Useful links:
 \itemize{
@@ -1342,7 +1344,7 @@ All antimicrobial drugs and their official names, ATC codes, ATC groups and defi
 }
 \section{WHOCC}{
 
-This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}).
+This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/index_en.htm}).
 
 These have become the gold standard for international drug utilisation monitoring and research.
 
@@ -1626,7 +1628,7 @@ The function \code{\link[=set_ab_names]{set_ab_names()}} is a special column ren
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/index_en.htm}
 }
 
 \section{Download Our Reference Data}{
@@ -2017,10 +2019,10 @@ age_groups(x, split_at = c(0, 12, 25, 55, 75), names = NULL,
 \item{na.rm}{A \link{logical} to indicate whether missing values should be removed.}
 }
 \value{
-Ordered [factor]
+Ordered \link{factor}
 }
 \description{
-Split ages into age groups defined by the `split` argument. This allows for easier demographic (antimicrobial resistance) analysis. The function returns an ordered [factor].
+Split ages into age groups defined by the \code{split} argument. This allows for easier demographic (antimicrobial resistance) analysis. The function returns an ordered \link{factor}.
 }
 \details{
 To split ages, the input for the \code{split_at} argument can be:
@@ -2116,6 +2118,26 @@ step_mic_log2(recipe, ..., role = NA, trained = FALSE, columns = NULL,
 
 step_sir_numeric(recipe, ..., role = NA, trained = FALSE, columns = NULL,
   skip = FALSE, id = recipes::rand_id("sir_numeric"))
+}
+\arguments{
+\item{recipe}{A recipe object. The step will be added to the sequence of
+operations for this recipe.}
+
+\item{...}{One or more selector functions to choose variables for this step.
+See \code{\link[recipes:selections]{selections()}} for more details.}
+
+\item{role}{Not used by this step since no new variables are created.}
+
+\item{trained}{A logical to indicate if the quantities for preprocessing have
+been estimated.}
+
+\item{skip}{A logical. Should the step be skipped when the recipe is baked by
+\code{\link[recipes:bake]{bake()}}? While all operations are baked when \code{\link[recipes:prep]{prep()}} is run, some
+operations may not be able to be conducted on new data (e.g. processing the
+outcome variable(s)). Care should be taken when using \code{skip = TRUE} as it
+may affect the computations for subsequent operations.}
+
+\item{id}{A character string that is unique to this step to identify it.}
 }
 \description{
 This family of functions allows using AMR-specific data types such as \verb{<sir>} and \verb{<mic>} inside \code{tidymodels} pipelines.
@@ -2259,17 +2281,9 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/antibiogram.Rd':
 \alias{retrieve_wisca_parameters}
 \alias{plot.antibiogram}
 \alias{autoplot.antibiogram}
+\alias{wisca_plot}
 \alias{knit_print.antibiogram}
 \title{Generate Traditional, Combination, Syndromic, or WISCA Antibiograms}
-\source{
-\itemize{
-\item Bielicki JA \emph{et al.} (2016). \strong{Selecting appropriate empirical antibiotic regimens for paediatric bloodstream infections: application of a Bayesian decision model to local and pooled antimicrobial resistance surveillance data} \emph{Journal of Antimicrobial Chemotherapy} 71(3); \doi{10.1093/jac/dkv397}
-\item Bielicki JA \emph{et al.} (2020). \strong{Evaluation of the coverage of 3 antibiotic regimens for neonatal sepsis in the hospital setting across Asian countries} \emph{JAMA Netw Open.} 3(2):e1921124; \doi{10.1001/jamanetworkopen.2019.21124}
-\item Klinker KP \emph{et al.} (2021). \strong{Antimicrobial stewardship and antibiograms: importance of moving beyond traditional antibiograms}. \emph{Therapeutic Advances in Infectious Disease}, May 5;8:20499361211011373; \doi{10.1177/20499361211011373}
-\item Barbieri E \emph{et al.} (2021). \strong{Development of a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) to guide the choice of the empiric antibiotic treatment for urinary tract infection in paediatric patients: a Bayesian approach} \emph{Antimicrobial Resistance & Infection Control} May 1;10(1):74; \doi{10.1186/s13756-021-00939-2}
-\item \strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
-}
-}
 \usage{
 antibiogram(x, antimicrobials = where(is.sir), mo_transform = "shortname",
   ab_transform = "name", syndromic_group = NULL, add_total_n = FALSE,
@@ -2293,7 +2307,12 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \method{plot}{antibiogram}(x, ...)
 
-\method{autoplot}{antibiogram}(object, ...)
+\method{autoplot}{antibiogram}(object, geom = c("pointrange", "point", "col",
+  "bar", "errorbar"), ci = TRUE, sort = TRUE, flip = NULL,
+  caption = NULL, ...)
+
+wisca_plot(wisca_model, wisca_plot_type = c("susceptibility_incidence",
+  "posterior_coverage"), ...)
 
 \method{knit_print}{antibiogram}(x, italicise = TRUE,
   na = getOption("knitr.kable.NA", default = ""), ...)
@@ -2322,11 +2341,11 @@ retrieve_wisca_parameters(wisca_model, ...)
 }
 }}
 
-\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
+\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
 
 \item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): \code{"ab"}, \code{"cid"}, \code{"name"}, \code{"group"}, \code{"atc"}, \code{"atc_group1"}, \code{"atc_group2"}, \code{"abbreviations"}, \code{"synonyms"}, \code{"oral_ddd"}, \code{"oral_units"}, \code{"iv_ddd"}, \code{"iv_units"}, or \code{"loinc"}. Can also be \code{NULL} to not transform the input.}
 
-\item{syndromic_group}{A column name of `x`, or values calculated to split rows of `x`, e.g. by using [ifelse()] or [`case_when()`][dplyr::case_when()]. See *Examples*.}
+\item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case-and-replace-when]{case_when()}}. See \emph{Examples}.}
 
 \item{add_total_n}{\emph{(deprecated in favour of \code{formatting_type})} A \link{logical} to indicate whether \code{n_tested} available numbers per pathogen should be added to the table (default is \code{TRUE}). This will add the lowest and highest number of available isolates per antimicrobial (e.g, if for \emph{E. coli} 200 isolates are available for ciprofloxacin and 150 for amoxicillin, the returned number will be "150-200"). This option is unavailable when \code{wisca = TRUE}; in that case, use \code{\link[=retrieve_wisca_parameters]{retrieve_wisca_parameters()}} to get the parameters used for WISCA.}
 
@@ -2348,7 +2367,9 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \item{sort_columns}{A \link{logical} to indicate whether the antimicrobial columns must be sorted on name.}
 
-\item{wisca}{A \link{logical} to indicate whether a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) must be generated (default is \code{FALSE}). This will use a Bayesian decision model to estimate regimen coverage probabilities using \href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo simulations}. Set \code{simulations}, \code{conf_interval}, and \code{interval_side} to adjust.}
+\item{wisca}{A \link{logical} to indicate whether a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) must be generated (default is \code{FALSE}). This will use a Bayesian decision model to estimate regimen coverage probabilities using \href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo simulations}. Per \doi{10.1093/jac/dkv397}, susceptibility priors are \eqn{\beta(0.5, 0.5)} (Jeffreys) and intrinsically resistant pairs (based on \link{intrinsic_resistant}) use \eqn{\beta(1, 9999)}.
+
+Set \code{simulations}, \code{conf_interval}, and \code{interval_side} to adjust.}
 
 \item{simulations}{(for WISCA) a numerical value to set the number of Monte Carlo simulations.}
 
@@ -2360,11 +2381,23 @@ retrieve_wisca_parameters(wisca_model, ...)
 
 \item{parallel}{A \link{logical} to indicate if parallel computing must be used, defaults to \code{FALSE}. Requires the \code{\link[future.apply:future_lapply]{future.apply}} package. For WISCA, Monte Carlo simulations are distributed across workers; for grouped antibiograms, each group is processed by a separate worker. \strong{A non-sequential \code{\link[future:plan]{future::plan()}} must already be active before setting \code{parallel = TRUE}} -- for example, \code{future::plan(future::multisession)}. An error is thrown if \code{parallel = TRUE} is used without a plan set by the user.}
 
-\item{...}{When used in \link[knitr:kable]{R Markdown or Quarto}: arguments passed on to \code{\link[knitr:kable]{knitr::kable()}} (otherwise, has no use).}
+\item{...}{Currently unused.}
 
 \item{wisca_model}{The outcome of \code{\link[=wisca]{wisca()}} or \code{\link[=antibiogram]{antibiogram(..., wisca = TRUE)}}.}
 
 \item{object}{An \code{\link[=antibiogram]{antibiogram()}} object.}
+
+\item{geom}{The plotting style for the point estimate. One of \code{"pointrange"} (default), \code{"point"}, \code{"col"}/\code{"bar"}, or \code{"errorbar"}. \code{"pointrange"} is recommended for coverage data: bars imply a meaningful baseline at zero, which coverage estimates rarely have.}
+
+\item{ci}{Logical, whether to draw the credible/confidence interval. Defaults to \code{TRUE}. Ignored (forced \code{TRUE}) when \code{geom = "pointrange"} or \code{"errorbar"}, since the interval is intrinsic to those geoms.}
+
+\item{sort}{Logical, whether to order regimens by coverage. Defaults to \code{TRUE}. When faceted (per pathogen) or grouped (syndromic), ordering is applied within each panel/group.}
+
+\item{flip}{Logical, whether to draw regimens on the y-axis (horizontal). Defaults to \code{NULL}, which flips automatically when any regimen label exceeds 20 characters (long combination names read poorly on the x-axis). Set \code{TRUE}/\code{FALSE} to override.}
+
+\item{caption}{Text to show as caption, will explain non-inferiority for WISCA models.}
+
+\item{wisca_plot_type}{Either \code{"susceptibility_incidence"} (default) or \code{"posterior_coverage"}.}
 
 \item{italicise}{A \link{logical} to indicate whether the microorganism names in the \link[knitr:kable]{knitr} table should be made italic, using \code{\link[=italicise_taxonomy]{italicise_taxonomy()}}.}
 
@@ -2466,6 +2499,10 @@ wisca(your_data,
 }\if{html}{\out{</div>}}
 
 WISCA uses a sophisticated Bayesian decision model to combine both local and pooled antimicrobial resistance data. This approach not only evaluates local patterns but can also draw on multi-centre data sets to improve regimen accuracy, even in low-incidence infections like paediatric bloodstream infections (BSIs).
+
+\strong{Prior Distributions}
+
+When \code{wisca = TRUE} or when using \code{wisca()}, pathogen incidence is modelled with a non-informative \eqn{Dirichlet(1, 1, \ldots, 1)} prior. Susceptibility proportions use the Jeffreys prior, \eqn{\beta(0.5, 0.5)}, except for bug-drug combinations with known intrinsic resistance, which use a strongly informative \eqn{\beta(1, 9999)} prior that forces near-zero susceptibility regardless of observed data (Bielicki \emph{et al.}, 2016). Intrinsic resistance is determined using the \link{intrinsic_resistant} data set, which is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023).
 }
 }
 
@@ -2690,6 +2727,15 @@ if (requireNamespace("ggplot2")) {
 
 plot(ab1)
 plot(ab2)
+}
+}
+\references{
+\itemize{
+\item Bielicki JA \emph{et al.} (2016). \strong{Selecting appropriate empirical antibiotic regimens for paediatric bloodstream infections: application of a Bayesian decision model to local and pooled antimicrobial resistance surveillance data} \emph{Journal of Antimicrobial Chemotherapy} 71(3); \doi{10.1093/jac/dkv397}
+\item Bielicki JA \emph{et al.} (2020). \strong{Evaluation of the coverage of 3 antibiotic regimens for neonatal sepsis in the hospital setting across Asian countries} \emph{JAMA Netw Open.} 3(2):e1921124; \doi{10.1001/jamanetworkopen.2019.21124}
+\item Klinker KP \emph{et al.} (2021). \strong{Antimicrobial stewardship and antibiograms: importance of moving beyond traditional antibiograms}. \emph{Therapeutic Advances in Infectious Disease}, May 5;8:20499361211011373; \doi{10.1177/20499361211011373}
+\item Barbieri E \emph{et al.} (2021). \strong{Development of a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) to guide the choice of the empiric antibiotic treatment for urinary tract infection in paediatric patients: a Bayesian approach} \emph{Antimicrobial Resistance & Infection Control} May 1;10(1):74; \doi{10.1186/s13756-021-00939-2}
+\item \strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
 }
 }
 \author{
@@ -3136,14 +3182,14 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/antimicrobials.Rd':
 \item \code{cid}\cr Compound ID as found in PubChem. \emph{\strong{This is a unique identifier.}}
 \item \code{name}\cr Official name as used by WHONET/EARS-Net or the WHO. \emph{\strong{This is a unique identifier.}}
 \item \code{group}\cr One or more short and concise group names, based on WHONET and WHOCC definitions
-\item \code{atc}\cr ATC codes (Anatomical Therapeutic Chemical) as defined by the WHOCC, like \code{J01CR02} (last updated May 4th, 2025):
+\item \code{atc}\cr ATC codes (Anatomical Therapeutic Chemical) as defined by the WHOCC, like \code{J01CR02} (last updated 4th of May, 2025):
 \item \code{atc_group1}\cr Official pharmacological subgroup (3rd level ATC code) as defined by the WHOCC, like \code{"Macrolides, lincosamides and streptogramins"}
 \item \code{atc_group2}\cr Official chemical subgroup (4th level ATC code) as defined by the WHOCC, like \code{"Macrolides"}
 \item \code{abbr}\cr List of abbreviations as used in many countries, also for antimicrobial susceptibility testing (AST)
 \item \code{synonyms}\cr Synonyms (often trade names) of a drug, as found in PubChem based on their compound ID
 }
 
-ATC properties (last updated May 4th, 2025):
+ATC properties (last updated 4th of May, 2025):
 \itemize{
 \item \code{oral_ddd}\cr Defined Daily Dose (DDD), oral treatment, currently available for 180 drugs
 \item \code{oral_units}\cr Units of \code{oral_ddd}
@@ -3177,13 +3223,6 @@ An object of class \code{deprecated_amr_dataset} (inherits from \code{tbl_df}, \
 
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 120 rows and 11 columns.
 }
-\source{
-\itemize{
-\item WHO Collaborating Centre for Drug Statistics Methodology, Guidelines for ATC classification and DDD assignment, Oslo Accessed from \url{https://atcddd.fhi.no/atc_ddd_index/} on May 4th, 2025.
-\item Logical Observation Identifiers Names and Codes (LOINC), Version 2.76 (18 September, 2023). Accessed from \url{https://loinc.org} on October 19th, 2023.
-\item European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}
-}
-}
 \usage{
 antimicrobials
 
@@ -3216,7 +3255,7 @@ Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct
 
 \section{WHOCC}{
 
-This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}).
+This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/index_en.htm}).
 
 These have become the gold standard for international drug utilisation monitoring and research.
 
@@ -3228,6 +3267,13 @@ The WHOCC is located in Oslo at the Norwegian Institute of Public Health and fun
 \examples{
 antimicrobials
 antivirals
+}
+\references{
+\itemize{
+\item WHO Collaborating Centre for Drug Statistics Methodology, Guidelines for ATC classification and DDD assignment, Oslo Accessed from \url{https://atcddd.fhi.no/atc_ddd_index/} on 4th of May, 2025.
+\item Logical Observation Identifiers Names and Codes (LOINC), Version 2.76 (18 September, 2023). Accessed from \url{https://loinc.org} on 19th of October, 2023.
+\item European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://ec.europa.eu/health/documents/community-register/html/index_en.htm}
+}
 }
 \seealso{
 \link{microorganisms}, \link{intrinsic_resistant}
@@ -3300,12 +3346,12 @@ You can add your own manual codes to be considered by \code{\link[=as.ab]{as.ab(
 
 World Health Organization (WHO) Collaborating Centre for Drug Statistics Methodology: \url{https://atcddd.fhi.no/atc_ddd_index/}
 
-European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/reg_hum_atc.htm}
+European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{https://health.ec.europa.eu/documents/community-register/html/index_en.htm}
 }
 
 \section{WHOCC}{
 
-This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}).
+This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/index_en.htm}).
 
 These have become the gold standard for international drug utilisation monitoring and research.
 
@@ -3418,7 +3464,7 @@ European Commission Public Health PHARMACEUTICALS - COMMUNITY REGISTER: \url{htt
 
 \section{WHOCC}{
 
-This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/reg_hum_atc.htm}).
+This package contains \strong{all ~550 antibiotic, antimycotic and antiviral drugs} and their Anatomical Therapeutic Chemical (ATC) codes, ATC groups and Defined Daily Dose (DDD) from the World Health Organization Collaborating Centre for Drug Statistics Methodology (WHOCC, \url{https://atcddd.fhi.no}) and the Pharmaceuticals Community Register of the European Commission (\url{https://ec.europa.eu/health/documents/community-register/html/index_en.htm}).
 
 These have become the gold standard for international drug utilisation monitoring and research.
 
@@ -3587,23 +3633,22 @@ mic_p90(x, na.rm = FALSE, ...)
 
 \item{mic_range}{A manual range to rescale the MIC values, e.g., \code{mic_range = c(0.001, 32)}. Use \code{NA} to prevent rescaling on one side, e.g., \code{mic_range = c(NA, 32)}.}
 
-\item{as.mic}{A [logical] to indicate whether the `mic` class should be kept - the default is `TRUE` for [rescale_mic()] and `FALSE` for [droplevels()]. When setting this to `FALSE` in [rescale_mic()], the output will have factor levels that acknowledge `mic_range`.}
+\item{as.mic}{A \link{logical} to indicate whether the \code{mic} class should be kept - the default is \code{TRUE} for \code{\link[=rescale_mic]{rescale_mic()}} and \code{FALSE} for \code{\link[=droplevels]{droplevels()}}. When setting this to \code{FALSE} in \code{\link[=rescale_mic]{rescale_mic()}}, the output will have factor levels that acknowledge \code{mic_range}.}
 
 \item{...}{Arguments passed on to methods.}
 }
 \value{
-Ordered [factor] with additional class [`mic`], that in mathematical operations acts as a [numeric] vector. Bear in mind that the outcome of any mathematical operation on MICs will return a [numeric] value.
+Ordered \link{factor} with additional class \code{\link{mic}}, that in mathematical operations acts as a \link{numeric} vector. Bear in mind that the outcome of any mathematical operation on MICs will return a \link{numeric} value.
 }
 \description{
 This transforms vectors to a new class \code{\link{mic}}, which treats the input as decimal numbers, while maintaining operators (such as ">=") and only allowing valid MIC values known to the field of (medical) microbiology.
 }
 \details{
-To interpret MIC values as SIR values, use [as.sir()] on MIC values. It supports guidelines from EUCAST (`r min(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`) and CLSI (`r min(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "CLSI")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(clinical_breakpoints, guideline %like% "CLSI")$guideline)))`).
+To interpret MIC values as SIR values, use \code{\link[=as.sir]{as.sir()}} on MIC values. It supports guidelines from EUCAST (2011-2026) and CLSI (2011-2026).
 
-This class for MIC values is a quite a special data type: formally it is an ordered [factor] with valid MIC values as [factor] levels (to make sure only valid MIC values are retained), but for any mathematical operation it acts as decimal numbers:
+This class for MIC values is a quite a special data type: formally it is an ordered \link{factor} with valid MIC values as \link{factor} levels (to make sure only valid MIC values are retained), but for any mathematical operation it acts as decimal numbers:
 
-```
-x <- random_mic(10)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{x <- random_mic(10)
 x
 #> Class <mic>
 #>  [1] 16     1      8      8      64     >=128  0.0625 32     32     16
@@ -3616,17 +3661,16 @@ x[1] * 2
 
 median(x)
 #> [1] 26
-```
+}\if{html}{\out{</div>}}
 
-This makes it possible to maintain operators that often come with MIC values, such ">=" and "<=", even when filtering using [numeric] values in data analysis, e.g.:
+This makes it possible to maintain operators that often come with MIC values, such ">=" and "<=", even when filtering using \link{numeric} values in data analysis, e.g.:
 
-```
-x[x > 4]
+\if{html}{\out{<div class="sourceCode">}}\preformatted{x[x > 4]
 #> Class <mic>
 #> [1] 16    8     8     64    >=128 32    32    16
 
 df <- data.frame(x, hospital = "A")
-subset(df, x > 4) # or with dplyr: df %>% filter(x > 4)
+subset(df, x > 4) # or with dplyr: df \%>\% filter(x > 4)
 #>        x hospital
 #> 1     16        A
 #> 5     64        A
@@ -3634,19 +3678,19 @@ subset(df, x > 4) # or with dplyr: df %>% filter(x > 4)
 #> 8     32        A
 #> 9     32        A
 #> 10    16        A
-```
+}\if{html}{\out{</div>}}
 
-All so-called [group generic functions][groupGeneric()] are implemented for the MIC class (such as `!`, `!=`, `<`, `>=`, [exp()], [log2()]). Some mathematical functions are also implemented (such as [quantile()], [median()], [fivenum()]). Since [sd()] and [var()] are non-generic functions, these could not be extended. Use [mad()] as an alternative, or use e.g. `sd(as.numeric(x))` where `x` is your vector of MIC values.
+All so-called \link[=groupGeneric]{group generic functions} are implemented for the MIC class (such as \code{!}, \code{!=}, \code{<}, \code{>=}, \code{\link[=exp]{exp()}}, \code{\link[=log2]{log2()}}). Some mathematical functions are also implemented (such as \code{\link[=quantile]{quantile()}}, \code{\link[=median]{median()}}, \code{\link[=fivenum]{fivenum()}}). Since \code{\link[=sd]{sd()}} and \code{\link[=var]{var()}} are non-generic functions, these could not be extended. Use \code{\link[=mad]{mad()}} as an alternative, or use e.g. \code{sd(as.numeric(x))} where \code{x} is your vector of MIC values.
 
-Using [as.double()] or [as.numeric()] on MIC values will remove the operators and return a numeric vector. Do **not** use [as.integer()] on MIC values as by the \R convention on [factor]s, it will return the index of the factor levels (which is often useless for regular users).
+Using \code{\link[=as.double]{as.double()}} or \code{\link[=as.numeric]{as.numeric()}} on MIC values will remove the operators and return a numeric vector. Do \strong{not} use \code{\link[=as.integer]{as.integer()}} on MIC values as by the \R convention on \link{factor}s, it will return the index of the factor levels (which is often useless for regular users).
 
-The function [is.mic()] detects if the input contains class `mic`. If the input is a [data.frame] or [list], it iterates over all columns/items and returns a [logical] vector.
+The function \code{\link[=is.mic]{is.mic()}} detects if the input contains class \code{mic}. If the input is a \link{data.frame} or \link{list}, it iterates over all columns/items and returns a \link{logical} vector.
 
-Use [droplevels()] to drop unused levels. At default, it will return a plain factor. Use `droplevels(..., as.mic = TRUE)` to maintain the `mic` class.
+Use \code{\link[=droplevels]{droplevels()}} to drop unused levels. At default, it will return a plain factor. Use \code{droplevels(..., as.mic = TRUE)} to maintain the \code{mic} class.
 
-With [rescale_mic()], existing MIC ranges can be limited to a defined range of MIC values. This can be useful to better compare MIC distributions.
+With \code{\link[=rescale_mic]{rescale_mic()}}, existing MIC ranges can be limited to a defined range of MIC values. This can be useful to better compare MIC distributions.
 
-For `ggplot2`, use one of the [`scale_*_mic()`][scale_x_mic()] functions to plot MIC values. They allows custom MIC ranges and to plot intermediate log2 levels for missing MIC values.
+For \code{ggplot2}, use one of the \code{\link[=scale_x_mic]{scale_*_mic()}} functions to plot MIC values. They allows custom MIC ranges and to plot intermediate log2 levels for missing MIC values.
 
 \code{NA_mic_} is a missing value of the new \code{mic} class, analogous to e.g. base \R's \code{\link[base:NA]{NA_character_}}.
 
@@ -3757,7 +3801,7 @@ This excludes \emph{Staphylococcus aureus} at default, use \code{Becker = "all"}
 
 This excludes enterococci at default (who are in group D), use \code{Lancefield = "all"} to also categorise all enterococci as group D.}
 
-\item{minimum_matching_score}{A numeric value to set as the lower limit for the \link[=mo_matching_score]{MO matching score}. When left blank, this will be determined automatically based on the character length of \code{x}, its \link[=microorganisms]{taxonomic kingdom} and \link[=mo_matching_score]{human pathogenicity}.}
+\item{minimum_matching_score}{A numeric value to set as the lower limit for the \link[=mo_matching_score]{MO matching score}. When left blank, this will be determined automatically based on the character length of \code{x}, its \link[=microorganisms]{taxonomic domain} and \link[=mo_matching_score]{human pathogenicity}.}
 
 \item{keep_synonyms}{A \link{logical} to indicate if outdated, previously valid taxonomic names must be preserved and not be corrected to currently accepted names. Do note that the term "synonym" is in this case jargon from the field of microbial taxonomy - it is not in place to denote that e.g. "Streptococcus Group A" is a synonym of \emph{S. pyogenes}. Though this is practically the case, taxonomically it is not as "Streptococcus Group A" is not even a valid taxonomic name.
 
@@ -3769,7 +3813,7 @@ The default is \code{FALSE}, which will return a note if outdated taxonomic name
 
 \item{cleaning_regex}{A Perl-compatible \link[base:regex]{regular expression} (case-insensitive) to clean the input of \code{x}. Every matched part in \code{x} will be removed. At default, this is the outcome of \code{\link[=mo_cleaning_regex]{mo_cleaning_regex()}}, which removes texts between brackets and texts such as "species" and "serovar". The default can be set with the package option \code{\link[=AMR-options]{AMR_cleaning_regex}}.}
 
-\item{only_fungi}{A \link{logical} to indicate if only fungi must be found, making sure that e.g. misspellings always return records from the kingdom of Fungi. This can be set globally for \link[=mo_property]{all microorganism functions} with the package option \code{\link[=AMR-options]{AMR_only_fungi}}, i.e. \code{options(AMR_only_fungi = TRUE)}.}
+\item{only_fungi}{A \link{logical} to indicate if only fungi must be found, making sure that e.g. misspellings always return records from the domain of Fungi. This can be set globally for \link[=mo_property]{all microorganism functions} with the package option \code{\link[=AMR-options]{AMR_only_fungi}}, i.e. \code{options(AMR_only_fungi = TRUE)}.}
 
 \item{language}{Language to translate text like "no growth", which defaults to the system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}).}
 
@@ -3781,7 +3825,7 @@ The default is \code{FALSE}, which will return a note if outdated taxonomic name
 A \link{character} \link{vector} with additional class \code{\link{mo}}
 }
 \description{
-Use this function to get a valid microorganism code (\code{\link{mo}}) based on arbitrary user input. Determination is done using intelligent rules and the complete taxonomic tree of the kingdoms Animalia, Archaea, Bacteria, Chromista, and Protozoa, and most microbial species from the kingdom Fungi (see \emph{Source}). The input can be almost anything: a full name (like \code{"Staphylococcus aureus"}), an abbreviated name (such as \code{"S. aureus"}), an abbreviation known in the field (such as \code{"MRSA"}), or just a genus. See \emph{Examples}.
+Use this function to get a valid microorganism code (\code{\link{mo}}) based on arbitrary user input. Determination is done using intelligent rules and the complete taxonomic tree of the domains Animalia, Archaea, Bacteria, Chromista, Plantae, and Protozoa, and most microbial species from the domain Fungi (see \emph{Source}). The input can be almost anything: a full name (like \code{"Staphylococcus aureus"}), an abbreviated name (such as \code{"S. aureus"}), an abbreviation known in the field (such as \code{"MRSA"}), or just a genus. See \emph{Examples}.
 }
 \details{
 A microorganism (MO) code from this package (class: \code{\link{mo}}) is human-readable and typically looks like these examples:
@@ -3796,7 +3840,7 @@ A microorganism (MO) code from this package (class: \code{\link{mo}}) is human-r
   |   |    |    \\---> subspecies, a 3-5 letter acronym
   |   |    \\----> species, a 3-6 letter acronym
   |   \\----> genus, a 4-8 letter acronym
-  \\----> kingdom: A (Archaea), AN (Animalia), B (Bacteria),
+  \\----> domain: A (Archaea), AN (Animalia), B (Bacteria),
                   C (Chromista), F (Fungi), PL (Plantae),
                   P (Protozoa)
 }\if{html}{\out{</div>}}
@@ -3808,7 +3852,7 @@ Use the \code{\link[=mo_property]{mo_*}} functions to get properties based on th
 The \code{\link[=as.mo]{as.mo()}} function uses a novel and scientifically validated (\doi{10.18637/jss.v104.i03}) matching score algorithm (see \emph{Matching Score for Microorganisms} below) to match input against the \link[=microorganisms]{available microbial taxonomy} in this package. This implicates that e.g. \code{"E. coli"} (a microorganism highly prevalent in humans) will return the microbial ID of \emph{Escherichia coli} and not \emph{Entamoeba coli} (a microorganism less prevalent in humans), although the latter would alphabetically come first.
 \subsection{Coping with Uncertain Results}{
 
-Results of non-exact taxonomic input are based on their \link[=mo_matching_score]{matching score}. The lowest allowed score can be set with the \code{minimum_matching_score} argument. At default this will be determined based on the character length of the input, the \link[=microorganisms]{taxonomic kingdom}, and the \link[=mo_matching_score]{human pathogenicity} of the taxonomic outcome. If values are matched with uncertainty, a message will be shown to suggest the user to inspect the results with \code{\link[=mo_uncertainties]{mo_uncertainties()}}, which returns a \link{data.frame} with all specifications.
+Results of non-exact taxonomic input are based on their \link[=mo_matching_score]{matching score}. The lowest allowed score can be set with the \code{minimum_matching_score} argument. At default this will be determined based on the character length of the input, the \link[=microorganisms]{taxonomic domain}, and the \link[=mo_matching_score]{human pathogenicity} of the taxonomic outcome. If values are matched with uncertainty, a message will be shown to suggest the user to inspect the results with \code{\link[=mo_uncertainties]{mo_uncertainties()}}, which returns a \link{data.frame} with all specifications.
 
 To increase the quality of matching, the \code{cleaning_regex} argument is used to clean the input. This must be a \link[base:regex]{regular expression} that matches parts of the input that should be removed before the input is matched against the \link[=microorganisms]{available microbial taxonomy}. It will be matched Perl-compatible and case-insensitive. The default value of \code{cleaning_regex} is the outcome of the helper function \code{\link[=mo_cleaning_regex]{mo_cleaning_regex()}}.
 
@@ -3834,8 +3878,8 @@ This will make sure that no bacteria or other 'non-fungi' will be returned by \c
 
 With \code{Becker = TRUE}, the following staphylococci will be converted to their corresponding coagulase group:
 \itemize{
-\item Coagulase-negative: \emph{S. americanisciuri}, \emph{S. argensis}, \emph{S. arlettae}, \emph{S. auricularis}, \emph{S. borealis}, \emph{S. brunensis}, \emph{S. caeli}, \emph{S. caledonicus}, \emph{S. canis}, \emph{S. capitis}, \emph{S. capitis capitis}, \emph{S. capitis urealyticus}, \emph{S. capitis ureolyticus}, \emph{S. caprae}, \emph{S. carnosus}, \emph{S. carnosus carnosus}, \emph{S. carnosus utilis}, \emph{S. casei}, \emph{S. caseolyticus}, \emph{S. chromogenes}, \emph{S. cohnii}, \emph{S. cohnii cohnii}, \emph{S. cohnii urealyticum}, \emph{S. cohnii urealyticus}, \emph{S. condimenti}, \emph{S. croceilyticus}, \emph{S. debuckii}, \emph{S. devriesei}, \emph{S. durrellii}, \emph{S. edaphicus}, \emph{S. epidermidis}, \emph{S. equorum}, \emph{S. equorum equorum}, \emph{S. equorum linens}, \emph{S. felis}, \emph{S. fleurettii}, \emph{S. gallinarum}, \emph{S. haemolyticus}, \emph{S. hominis}, \emph{S. hominis hominis}, \emph{S. hominis novobiosepticus}, \emph{S. jettensis}, \emph{S. kloosii}, \emph{S. lentus}, \emph{S. lloydii}, \emph{S. lugdunensis}, \emph{S. marylandisciuri}, \emph{S. massiliensis}, \emph{S. microti}, \emph{S. muscae}, \emph{S. nepalensis}, \emph{S. pasteuri}, \emph{S. petrasii}, \emph{S. petrasii croceilyticus}, \emph{S. petrasii jettensis}, \emph{S. petrasii petrasii}, \emph{S. petrasii pragensis}, \emph{S. pettenkoferi}, \emph{S. piscifermentans}, \emph{S. pragensis}, \emph{S. pseudoxylosus}, \emph{S. pulvereri}, \emph{S. ratti}, \emph{S. rostri}, \emph{S. saccharolyticus}, \emph{S. saprophyticus}, \emph{S. saprophyticus bovis}, \emph{S. saprophyticus saprophyticus}, \emph{S. schleiferi}, \emph{S. schleiferi schleiferi}, \emph{S. sciuri}, \emph{S. sciuri carnaticus}, \emph{S. sciuri lentus}, \emph{S. sciuri rodentium}, \emph{S. sciuri sciuri}, \emph{S. shinii}, \emph{S. simulans}, \emph{S. stepanovicii}, \emph{S. succinus}, \emph{S. succinus casei}, \emph{S. succinus succinus}, \emph{S. taiwanensis}, \emph{S. urealyticus}, \emph{S. ureilyticus}, \emph{S. veratri}, \emph{S. vitulinus}, \emph{S. vitulus}, \emph{S. warneri}, and \emph{S. xylosus}
-\item Coagulase-positive: \emph{S. agnetis}, \emph{S. argenteus}, \emph{S. coagulans}, \emph{S. cornubiensis}, \emph{S. delphini}, \emph{S. hyicus}, \emph{S. hyicus chromogenes}, \emph{S. hyicus hyicus}, \emph{S. intermedius}, \emph{S. lutrae}, \emph{S. pseudintermedius}, \emph{S. roterodami}, \emph{S. schleiferi coagulans}, \emph{S. schweitzeri}, \emph{S. simiae}, and \emph{S. singaporensis}
+\item Coagulase-negative: \emph{S. americanisciuri}, \emph{S. argensis}, \emph{S. arlettae}, \emph{S. auricularis}, \emph{S. borealis}, \emph{S. brunensis}, \emph{S. caeli}, \emph{S. caledonicus}, \emph{S. canis}, \emph{S. capitis}, \emph{S. capitis capitis}, \emph{S. capitis urealyticus}, \emph{S. capitis ureolyticus}, \emph{S. caprae}, \emph{S. carnosus}, \emph{S. carnosus carnosus}, \emph{S. carnosus utilis}, \emph{S. casei}, \emph{S. caseolyticus}, \emph{S. caseorum}, \emph{S. chromogenes}, \emph{S. cohnii}, \emph{S. cohnii cohnii}, \emph{S. cohnii urealyticum}, \emph{S. cohnii urealyticus}, \emph{S. cohnii ureilyticus}, \emph{S. condimenti}, \emph{S. croceilyticus}, \emph{S. debuckii}, \emph{S. devriesei}, \emph{S. durrellii}, \emph{S. edaphicus}, \emph{S. epidermidis}, \emph{S. equorum}, \emph{S. equorum equorum}, \emph{S. equorum linens}, \emph{S. felis}, \emph{S. fleurettii}, \emph{S. gallinarum}, \emph{S. haemolyticus}, \emph{S. halotolerans}, \emph{S. hominis}, \emph{S. hominis hominis}, \emph{S. hominis novobiosepticus}, \emph{S. hsinchuensis}, \emph{S. jettensis}, \emph{S. kloosii}, \emph{S. lentus}, \emph{S. lloydii}, \emph{S. lugdunensis}, \emph{S. marylandisciuri}, \emph{S. massiliensis}, \emph{S. microti}, \emph{S. muscae}, \emph{S. nepalensis}, \emph{S. pasteuri}, \emph{S. petrasii}, \emph{S. petrasii croceilyticus}, \emph{S. petrasii jettensis}, \emph{S. petrasii petrasii}, \emph{S. petrasii pragensis}, \emph{S. pettenkoferi}, \emph{S. piscifermentans}, \emph{S. pragensis}, \emph{S. pseudoxylosus}, \emph{S. pulvereri}, \emph{S. ratti}, \emph{S. rostri}, \emph{S. saccharolyticus}, \emph{S. saprophyticus}, \emph{S. saprophyticus bovis}, \emph{S. saprophyticus saprophyticus}, \emph{S. schleiferi}, \emph{S. schleiferi schleiferi}, \emph{S. sciuri}, \emph{S. sciuri carnaticus}, \emph{S. sciuri lentus}, \emph{S. sciuri rodentium}, \emph{S. sciuri sciuri}, \emph{S. shinii}, \emph{S. simulans}, \emph{S. stepanovicii}, \emph{S. succinus}, \emph{S. succinus casei}, \emph{S. succinus succinus}, \emph{S. taiwanensis}, \emph{S. urealyticus}, \emph{S. ureilyticus}, \emph{S. veratri}, \emph{S. vitulinus}, \emph{S. vitulus}, \emph{S. warneri}, and \emph{S. xylosus}
+\item Coagulase-positive: \emph{S. agnetis}, \emph{S. argenteus}, \emph{S. coagulans}, \emph{S. cornubiensis}, \emph{S. delphini}, \emph{S. hyicus}, \emph{S. hyicus chromogenes}, \emph{S. hyicus hyicus}, \emph{S. intermedius}, \emph{S. lutrae}, \emph{S. pseudintermedius}, \emph{S. roterodami}, \emph{S. schleiferi coagulans}, \emph{S. schweitzeri}, \emph{S. simiae}, \emph{S. singaporensis}, and \emph{S. ursi}
 }
 
 This is based on:
@@ -3874,10 +3918,10 @@ This is based on:
 
 \itemize{
 \item Berends MS \emph{et al.} (2022). \strong{AMR: An R Package for Working with Antimicrobial Resistance Data}. \emph{Journal of Statistical Software}, 104(3), 1-31; \doi{10.18637/jss.v104.i03}
-\item Parte, AC \emph{et al.} (2020). \strong{List of Prokaryotic names with Standing in Nomenclature (LPSN) moves to the DSMZ.} International Journal of Systematic and Evolutionary Microbiology, 70, 5607-5612; \doi{10.1099/ijsem.0.004332}. Accessed from \url{https://lpsn.dsmz.de} on June 24th, 2024.
-\item Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on June 24th, 2024.
-\item GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset \doi{10.15468/39omei}. Accessed from \url{https://www.gbif.org} on June 24th, 2024.
-\item Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on July 16th, 2024.
+\item Freese, HM \emph{et al.} (2026). \strong{TYGS and LPSN in 2025: a Global Core Biodata Resource for genome-based classification and nomenclature of prokaryotes within DSMZ Digital Diversity.} Nucleic Acids Research, 54, D884–D891; \doi{10.1093/nar/gkaf1110}. Accessed from \url{https://lpsn.dsmz.de} on 7th of May, 2026.
+\item Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on 7th of May, 2026.
+\item Banki, O. \emph{et al.} (2026). Catalogue of Life (2026-04-18 XR). Catalogue of Life Foundation, Amsterdam, Netherlands. \doi{10.48580/dgxjw}. Accessed from \url{https://www.gbif.org} on 7th of May, 2026.
+\item Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on 7th of May, 2026.
 \item Public Health Information Network Vocabulary Access and Distribution System (PHIN VADS). US Edition of SNOMED CT from 1 September 2020. Value Set Name 'Microorganism', OID 2.16.840.1.114222.4.11.1009 (v12). URL: \url{https://www.cdc.gov/phin/php/phinvads/}
 \item Bartlett A \emph{et al.} (2022). \strong{A comprehensive list of bacterial pathogens infecting humans} \emph{Microbiology} 168:001269; \doi{10.1099/mic.0.001269}
 }
@@ -3896,7 +3940,7 @@ where:
 \item \eqn{l_n} is the length of \eqn{n};
 \item \eqn{lev} is the \href{https://en.wikipedia.org/wiki/Levenshtein_distance}{Levenshtein distance function} (counting any insertion as 1, and any deletion or substitution as 2) that is needed to change \eqn{x} into \eqn{n};
 \item \eqn{p_n} is the human pathogenic prevalence group of \eqn{n}, as described below;
-\item \eqn{k_n} is the taxonomic kingdom of \eqn{n}, set as Bacteria = 1, Fungi = 1.25, Protozoa = 1.5, Chromista = 1.75, Archaea = 2, others = 3.
+\item \eqn{k_n} is the taxonomic domain ('kingdom' until taxonomic reclassification of 2024) of \eqn{n}, set as Bacteria = 1, Fungi = 1.25, Protozoa = 1.5, Chromista = 1.75, Archaea = 2, others = 3.
 }
 
 The grouping into human pathogenic prevalence \eqn{p} is based on recent work from Bartlett \emph{et al.} (2022, \doi{10.1099/mic.0.001269}) who extensively studied medical-scientific literature to categorise all bacterial species into these groups:
@@ -3911,7 +3955,7 @@ Furthermore,
 \item Any genus present in the \strong{established} list also has \code{prevalence = 1.15} in the \link{microorganisms} data set;
 \item Any other genus present in the \strong{putative} list has \code{prevalence = 1.25} in the \link{microorganisms} data set;
 \item Any other species or subspecies of which the genus is present in the two aforementioned groups, has \code{prevalence = 1.5} in the \link{microorganisms} data set;
-\item Any \emph{non-bacterial} genus, species or subspecies of which the genus is present in the following list, has \code{prevalence = 1.25} in the \link{microorganisms} data set: \emph{Absidia}, \emph{Acanthamoeba}, \emph{Acremonium}, \emph{Actinomucor}, \emph{Aedes}, \emph{Alternaria}, \emph{Amoeba}, \emph{Ancylostoma}, \emph{Angiostrongylus}, \emph{Anisakis}, \emph{Anopheles}, \emph{Apophysomyces}, \emph{Arthroderma}, \emph{Aspergillus}, \emph{Aureobasidium}, \emph{Basidiobolus}, \emph{Beauveria}, \emph{Bipolaris}, \emph{Blastobotrys}, \emph{Blastocystis}, \emph{Blastomyces}, \emph{Candida}, \emph{Capillaria}, \emph{Chaetomium}, \emph{Chilomastix}, \emph{Chrysonilia}, \emph{Chrysosporium}, \emph{Cladophialophora}, \emph{Cladosporium}, \emph{Clavispora}, \emph{Coccidioides}, \emph{Cokeromyces}, \emph{Conidiobolus}, \emph{Coniochaeta}, \emph{Contracaecum}, \emph{Cordylobia}, \emph{Cryptococcus}, \emph{Cryptosporidium}, \emph{Cunninghamella}, \emph{Curvularia}, \emph{Cyberlindnera}, \emph{Debaryozyma}, \emph{Demodex}, \emph{Dermatobia}, \emph{Dientamoeba}, \emph{Diphyllobothrium}, \emph{Dirofilaria}, \emph{Echinostoma}, \emph{Entamoeba}, \emph{Enterobius}, \emph{Epidermophyton}, \emph{Exidia}, \emph{Exophiala}, \emph{Exserohilum}, \emph{Fasciola}, \emph{Fonsecaea}, \emph{Fusarium}, \emph{Geotrichum}, \emph{Giardia}, \emph{Graphium}, \emph{Haloarcula}, \emph{Halobacterium}, \emph{Halococcus}, \emph{Hansenula}, \emph{Hendersonula}, \emph{Heterophyes}, \emph{Histomonas}, \emph{Histoplasma}, \emph{Hortaea}, \emph{Hymenolepis}, \emph{Hypomyces}, \emph{Hysterothylacium}, \emph{Kloeckera}, \emph{Kluyveromyces}, \emph{Kodamaea}, \emph{Lacazia}, \emph{Leishmania}, \emph{Lichtheimia}, \emph{Lodderomyces}, \emph{Lomentospora}, \emph{Madurella}, \emph{Malassezia}, \emph{Malbranchea}, \emph{Metagonimus}, \emph{Meyerozyma}, \emph{Microsporidium}, \emph{Microsporum}, \emph{Millerozyma}, \emph{Mortierella}, \emph{Mucor}, \emph{Mycocentrospora}, \emph{Nannizzia}, \emph{Necator}, \emph{Nectria}, \emph{Ochroconis}, \emph{Oesophagostomum}, \emph{Oidiodendron}, \emph{Opisthorchis}, \emph{Paecilomyces}, \emph{Paracoccidioides}, \emph{Pediculus}, \emph{Penicillium}, \emph{Phaeoacremonium}, \emph{Phaeomoniella}, \emph{Phialophora}, \emph{Phlebotomus}, \emph{Phoma}, \emph{Pichia}, \emph{Piedraia}, \emph{Pithomyces}, \emph{Pityrosporum}, \emph{Pneumocystis}, \emph{Pseudallescheria}, \emph{Pseudoscopulariopsis}, \emph{Pseudoterranova}, \emph{Pulex}, \emph{Purpureocillium}, \emph{Quambalaria}, \emph{Rhinocladiella}, \emph{Rhizomucor}, \emph{Rhizopus}, \emph{Rhodotorula}, \emph{Saccharomyces}, \emph{Saksenaea}, \emph{Saprochaete}, \emph{Sarcoptes}, \emph{Scedosporium}, \emph{Schistosoma}, \emph{Schizosaccharomyces}, \emph{Scolecobasidium}, \emph{Scopulariopsis}, \emph{Scytalidium}, \emph{Spirometra}, \emph{Sporobolomyces}, \emph{Sporopachydermia}, \emph{Sporothrix}, \emph{Sporotrichum}, \emph{Stachybotrys}, \emph{Strongyloides}, \emph{Syncephalastrum}, \emph{Syngamus}, \emph{Taenia}, \emph{Talaromyces}, \emph{Teleomorph}, \emph{Toxocara}, \emph{Trichinella}, \emph{Trichobilharzia}, \emph{Trichoderma}, \emph{Trichomonas}, \emph{Trichophyton}, \emph{Trichosporon}, \emph{Trichostrongylus}, \emph{Trichuris}, \emph{Tritirachium}, \emph{Trombicula}, \emph{Trypanosoma}, \emph{Tunga}, \emph{Ulocladium}, \emph{Ustilago}, \emph{Verticillium}, \emph{Wallemia}, \emph{Wangiella}, \emph{Wickerhamomyces}, \emph{Wuchereria}, \emph{Yarrowia}, or \emph{Zygosaccharomyces};
+\item Any \emph{non-bacterial} genus, species or subspecies of which the genus is present in the following list, has \code{prevalence = 1.25} in the \link{microorganisms} data set: \emph{Absidia}, \emph{Acanthamoeba}, \emph{Acremonium}, \emph{Actinomucor}, \emph{Aedes}, \emph{Alternaria}, \emph{Amoeba}, \emph{Ancylostoma}, \emph{Angiostrongylus}, \emph{Anisakis}, \emph{Anopheles}, \emph{Apophysomyces}, \emph{Arthroderma}, \emph{Aspergillus}, \emph{Aureobasidium}, \emph{Basidiobolus}, \emph{Beauveria}, \emph{Bipolaris}, \emph{Blastobotrys}, \emph{Blastocystis}, \emph{Blastomyces}, \emph{Candida}, \emph{Capillaria}, \emph{Chaetomium}, \emph{Chilomastix}, \emph{Chrysonilia}, \emph{Chrysosporium}, \emph{Cladophialophora}, \emph{Cladosporium}, \emph{Clavispora}, \emph{Coccidioides}, \emph{Cokeromyces}, \emph{Conidiobolus}, \emph{Coniochaeta}, \emph{Contracaecum}, \emph{Cordylobia}, \emph{Cryptococcus}, \emph{Cryptosporidium}, \emph{Cunninghamella}, \emph{Curvularia}, \emph{Cyberlindnera}, \emph{Debaryozyma}, \emph{Demodex}, \emph{Dermatobia}, \emph{Dientamoeba}, \emph{Diphyllobothrium}, \emph{Dirofilaria}, \emph{Echinostoma}, \emph{Entamoeba}, \emph{Enterobius}, \emph{Epidermophyton}, \emph{Exidia}, \emph{Exophiala}, \emph{Exserohilum}, \emph{Fasciola}, \emph{Fonsecaea}, \emph{Fusarium}, \emph{Geotrichum}, \emph{Giardia}, \emph{Graphium}, \emph{Haloarcula}, \emph{Halobacterium}, \emph{Halococcus}, \emph{Hansenula}, \emph{Hendersonula}, \emph{Heterophyes}, \emph{Histomonas}, \emph{Histoplasma}, \emph{Hortaea}, \emph{Hymenolepis}, \emph{Hypomyces}, \emph{Hysterothylacium}, \emph{Kloeckera}, \emph{Kluyveromyces}, \emph{Kodamaea}, \emph{Lacazia}, \emph{Leishmania}, \emph{Lichtheimia}, \emph{Lodderomyces}, \emph{Lomentospora}, \emph{Madurella}, \emph{Malassezia}, \emph{Malbranchea}, \emph{Metagonimus}, \emph{Meyerozyma}, \emph{Microascus}, \emph{Microsporidium}, \emph{Microsporum}, \emph{Millerozyma}, \emph{Mortierella}, \emph{Mucor}, \emph{Mycocentrospora}, \emph{Nannizzia}, \emph{Necator}, \emph{Nectria}, \emph{Ochroconis}, \emph{Oesophagostomum}, \emph{Oidiodendron}, \emph{Opisthorchis}, \emph{Paecilomyces}, \emph{Paracoccidioides}, \emph{Pediculus}, \emph{Penicillium}, \emph{Phaeoacremonium}, \emph{Phaeomoniella}, \emph{Phialophora}, \emph{Phlebotomus}, \emph{Phoma}, \emph{Pichia}, \emph{Piedraia}, \emph{Pithomyces}, \emph{Pityrosporum}, \emph{Plasmodium}, \emph{Pneumocystis}, \emph{Pseudallescheria}, \emph{Pseudoscopulariopsis}, \emph{Pseudoterranova}, \emph{Pulex}, \emph{Purpureocillium}, \emph{Quambalaria}, \emph{Rhinocladiella}, \emph{Rhizomucor}, \emph{Rhizopus}, \emph{Rhodotorula}, \emph{Saccharomyces}, \emph{Saksenaea}, \emph{Saprochaete}, \emph{Sarcoptes}, \emph{Scedosporium}, \emph{Schistosoma}, \emph{Schizophyllum}, \emph{Schizosaccharomyces}, \emph{Scolecobasidium}, \emph{Scopulariopsis}, \emph{Scytalidium}, \emph{Spirometra}, \emph{Sporobolomyces}, \emph{Sporopachydermia}, \emph{Sporothrix}, \emph{Sporotrichum}, \emph{Stachybotrys}, \emph{Strongyloides}, \emph{Syncephalastrum}, \emph{Syngamus}, \emph{Taenia}, \emph{Talaromyces}, \emph{Teleomorph}, \emph{Toxocara}, \emph{Trichinella}, \emph{Trichobilharzia}, \emph{Trichoderma}, \emph{Trichomonas}, \emph{Trichophyton}, \emph{Trichosporon}, \emph{Trichostrongylus}, \emph{Trichuris}, \emph{Tritirachium}, \emph{Trombicula}, \emph{Trypanosoma}, \emph{Tunga}, \emph{Ulocladium}, \emph{Ustilago}, \emph{Verticillium}, \emph{Wallemia}, \emph{Wangiella}, \emph{Wickerhamomyces}, \emph{Wuchereria}, \emph{Yarrowia}, or \emph{Zygosaccharomyces};
 \item All other records have \code{prevalence = 2.0} in the \link{microorganisms} data set.
 }
 
@@ -4001,16 +4045,6 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.sir.Rd':
 \alias{as.sir.data.frame}
 \alias{sir_interpretation_history}
 \title{Interpret MIC and Disk Diffusion as SIR, or Clean Existing SIR Data}
-\source{
-For interpretations of minimum inhibitory concentration (MIC) values and disk diffusion diameters:
-\itemize{
-\item \strong{CLSI M39: Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
-\item \strong{CLSI M100: Performance Standard for Antimicrobial Susceptibility Testing}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m100/}.
-\item \strong{CLSI VET01: Performance Standards for Antimicrobial Disk and Dilution Susceptibility Tests for Bacteria Isolated From Animals}, 2019-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/veterinary-medicine/documents/vet01/}.
-\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2026, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/}.
-\item \strong{WHONET} as a source for machine-reading the clinical breakpoints (\href{https://amr-for-r.org/reference/clinical_breakpoints.html#imported-from-whonet}{read more here}), 1989-2026, \emph{WHO Collaborating Centre for Surveillance of Antimicrobial Resistance}. \url{https://whonet.org/}.
-}
-}
 \usage{
 as.sir(x, ...)
 
@@ -4143,12 +4177,12 @@ The default \code{"conservative"} setting ensures cautious handling of uncertain
 \item{clean}{A \link{logical} to indicate whether previously stored results should be forgotten after returning the 'logbook' with results.}
 }
 \value{
-Ordered [factor] with new class `sir`
+Ordered \link{factor} with new class \code{sir}
 }
 \description{
-Clean up existing SIR values, or interpret minimum inhibitory concentration (MIC) values and disk diffusion diameters according to EUCAST or CLSI. [as.sir()] transforms the input to a new class [`sir`], which is an ordered [factor] containing the levels `S`, `SDD`, `I`, `R`, `NI`.
+Clean up existing SIR values, or interpret minimum inhibitory concentration (MIC) values and disk diffusion diameters according to EUCAST or CLSI. \code{\link[=as.sir]{as.sir()}} transforms the input to a new class \code{\link{sir}}, which is an ordered \link{factor} containing the levels \code{S}, \code{SDD}, \code{I}, \code{R}, \code{NI}.
 
-Breakpoints are currently implemented from EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "EUCAST")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "EUCAST")$guideline)))` and CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "CLSI")$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, guideline %like% "CLSI")$guideline)))`, see *Details*. All breakpoints used for interpretation are available in our [clinical_breakpoints] data set.
+Breakpoints are currently implemented from EUCAST 2011-2026 and CLSI 2011-2026, see \emph{Details}. All breakpoints used for interpretation are available in our \link{clinical_breakpoints} data set.
 }
 \details{
 \emph{Note: The clinical breakpoints in this package were validated through, and imported from, \href{https://whonet.org}{WHONET}. The public use of this \code{AMR} package has been endorsed by both CLSI and EUCAST. See \link{clinical_breakpoints} for more information.}
@@ -4463,6 +4497,16 @@ if (require("dplyr")) {
   # example_isolates \%>\%
   #   mutate(across(where(is_sir_eligible), as.sir))
 }
+}
+}
+\references{
+For interpretations of minimum inhibitory concentration (MIC) values and disk diffusion diameters:
+\itemize{
+\item \strong{CLSI M39: Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
+\item \strong{CLSI M100: Performance Standard for Antimicrobial Susceptibility Testing}, 2011-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/microbiology/documents/m100/}.
+\item \strong{CLSI VET01: Performance Standards for Antimicrobial Disk and Dilution Susceptibility Tests for Bacteria Isolated From Animals}, 2019-2026, \emph{Clinical and Laboratory Standards Institute} (CLSI). \url{https://clsi.org/standards/products/veterinary-medicine/documents/vet01/}.
+\item \strong{EUCAST Breakpoint tables for interpretation of MICs and zone diameters}, 2011-2026, \emph{European Committee on Antimicrobial Susceptibility Testing} (EUCAST). \url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/}.
+\item \strong{WHONET} as a source for machine-reading the clinical breakpoints (\href{https://amr-for-r.org/reference/clinical_breakpoints.html#imported-from-whonet}{read more here}), 1989-2026, \emph{WHO Collaborating Centre for Surveillance of Antimicrobial Resistance}. \url{https://whonet.org/}.
 }
 }
 \seealso{
@@ -4890,7 +4934,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/clinical_breakpoints.Rd':
 \alias{clinical_breakpoints}
 \title{Data Set with Clinical Breakpoints for SIR Interpretation}
 \format{
-A \link[tibble:tibble]{tibble} with 45 730 observations and 14 variables:
+A \link[tibble:tibble]{tibble} with 45 555 observations and 14 variables:
 \itemize{
 \item \code{guideline}\cr Name of the guideline
 \item \code{type}\cr Breakpoint type, either \code{"ECOFF"}, \code{"animal"}, or \code{"human"}
@@ -5235,7 +5279,7 @@ interpretive_rules(df,
 
 \subsection{Using taxonomic properties in rules}{
 
-There is one exception in columns used for the rules: all column names of the \link{microorganisms} data set can also be used, but do not have to exist in the data set. These column names are: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, and \code{"snomed"}. Thus, this next example will work as well, despite the fact that the \code{df} data set does not contain a column \code{genus}:
+There is one exception in columns used for the rules: all column names of the \link{microorganisms} data set can also be used, but do not have to exist in the data set. These column names are: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, and \code{"snomed"}. Thus, this next example will work as well, despite the fact that the \code{df} data set does not contain a column \code{genus}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- custom_interpretive_rules(
   TZP == "S" & genus == "Klebsiella" ~ aminopenicillins == "S",
@@ -5364,7 +5408,7 @@ custom_mdro_guideline(..., as_factor = TRUE)
 \arguments{
 \item{...}{Guideline rules in \link[base:tilde]{formula} notation, see below for instructions, and in \emph{Examples}.}
 
-\item{as_factor}{A [logical] to indicate whether the returned value should be an ordered [factor] (`TRUE`, default), or otherwise a [character] vector. For combining rules sets (using [c()]) this value will be inherited from the first set at default.}
+\item{as_factor}{A \link{logical} to indicate whether the returned value should be an ordered \link{factor} (\code{TRUE}, default), or otherwise a \link{character} vector. For combining rules sets (using \code{\link[=c]{c()}}) this value will be inherited from the first set at default.}
 
 \item{x}{Existing custom MDRO rules}
 }
@@ -5718,13 +5762,6 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/first_isolate.Rd':
 \alias{first_isolate}
 \alias{filter_first_isolate}
 \title{Determine First Isolates}
-\source{
-Methodology of these functions is strictly based on:
-\itemize{
-\item \strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
-\item Hindler JF and Stelling J (2007). \strong{Analysis and Presentation of Cumulative Antibiograms: A New Consensus Guideline from the Clinical and Laboratory Standards Institute.} Clinical Infectious Diseases, 44(6), 867-873. \doi{10.1086/511864}
-}
-}
 \usage{
 first_isolate(x = NULL, col_date = NULL, col_patient_id = NULL,
   col_mo = NULL, col_testcode = NULL, col_specimen = NULL,
@@ -5890,6 +5927,13 @@ if (require("dplyr")) {
     mutate(first = first_isolate(info = TRUE)) \%>\%
     select(ward, date, patient, mo, first)
 }
+}
+}
+\references{
+Methodology of these functions is strictly based on:
+\itemize{
+\item \strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
+\item Hindler JF and Stelling J (2007). \strong{Analysis and Presentation of Cumulative Antibiograms: A New Consensus Guideline from the Clinical and Laboratory Standards Institute.} Clinical Infectious Diseases, 44(6), 867-873. \doi{10.1086/511864}
 }
 }
 \seealso{
@@ -6642,19 +6686,6 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/interpretive_rules.Rd':
 \alias{clsi_rules}
 \alias{eucast_dosage}
 \title{Apply Interpretive Rules}
-\source{
-\itemize{
-\item EUCAST Expert Rules. Version 2.0, 2012.\cr
-Leclercq et al. \strong{EUCAST expert rules in antimicrobial susceptibility testing.} \emph{Clin Microbiol Infect.} 2013;19(2):141-60; \doi{https://doi.org/10.1111/j.1469-0691.2011.03703.x}
-\item EUCAST Expert Rules, Intrinsic Resistance and Exceptional Phenotypes Tables. Version 3.1, 2016. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/Expert_rules_intrinsic_exceptional_V3.1.pdf}{(link)}
-\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.2, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2020/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.2_20200225.pdf}{(link)}
-\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.3, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2021/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.3_20211018.pdf}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 9.0, 2019. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_9.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 10.0, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_10.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 11.0, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_11.0_Breakpoint_Tables.xlsx}{(link)}
-\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 12.0, 2022. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_12.0_Breakpoint_Tables.xlsx}{(link)}
-}
-}
 \usage{
 interpretive_rules(x, col_mo = NULL, info = interactive(),
   rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
@@ -6721,7 +6752,7 @@ To improve the interpretation of the antibiogram before CLSI/EUCAST interpretive
 \strong{Note:} This function does not translate MIC or disk values to SIR values. Use \code{\link[=as.sir]{as.sir()}} for that. \cr
 \strong{Note:} When ampicillin (AMP, J01CA01) is not available but amoxicillin (AMX, J01CA04) is, the latter will be used for all rules where there is a dependency on ampicillin. These drugs are interchangeable when it comes to expression of antimicrobial resistance. \cr
 
-The file containing all interpretive rules is located here: \url{https://github.com/msberends/AMR/blob/main/data-raw/interpretive_rules.tsv}.  \strong{Note:} Old taxonomic names are replaced with the current taxonomy where applicable. For example, \emph{Ochrobactrum anthropi} was renamed to \emph{Brucella anthropi} in 2020; the original EUCAST rules v3.1 and v3.2 did not yet contain this new taxonomic name. The \code{AMR} package contains the full microbial taxonomy updated until June 24th, 2024, see \link{microorganisms}.
+The file containing all interpretive rules is located here: \url{https://github.com/msberends/AMR/blob/main/data-raw/interpretive_rules.tsv}.  \strong{Note:} Old taxonomic names are replaced with the current taxonomy where applicable. For example, \emph{Ochrobactrum anthropi} was renamed to \emph{Brucella anthropi} in 2020; the original EUCAST rules v3.1 and v3.2 did not yet contain this new taxonomic name. The \code{AMR} package contains the full microbial taxonomy updated until 7th of May, 2026, see \link{microorganisms}.
 \subsection{Custom Rules}{
 
 Custom rules can be created using \code{\link[=custom_interpretive_rules]{custom_interpretive_rules()}}, e.g.:
@@ -6796,6 +6827,19 @@ eucast_dosage(c("tobra", "genta", "cipro"), "iv")
 
 eucast_dosage(c("tobra", "genta", "cipro"), "iv", version_breakpoints = 10)
 }
+\references{
+\itemize{
+\item EUCAST Expert Rules. Version 2.0, 2012.\cr
+Leclercq et al. \strong{EUCAST expert rules in antimicrobial susceptibility testing.} \emph{Clin Microbiol Infect.} 2013;19(2):141-60; \doi{https://doi.org/10.1111/j.1469-0691.2011.03703.x}
+\item EUCAST Expert Rules, Intrinsic Resistance and Exceptional Phenotypes Tables. Version 3.1, 2016. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/Expert_rules_intrinsic_exceptional_V3.1.pdf}{(link)}
+\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.2, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2020/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.2_20200225.pdf}{(link)}
+\item EUCAST Intrinsic Resistance and Unusual Phenotypes. Version 3.3, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Expert_Rules/2021/Intrinsic_Resistance_and_Unusual_Phenotypes_Tables_v3.3_20211018.pdf}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 9.0, 2019. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_9.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 10.0, 2020. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_10.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 11.0, 2021. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_11.0_Breakpoint_Tables.xlsx}{(link)}
+\item EUCAST Breakpoint tables for interpretation of MICs and zone diameters. Version 12.0, 2022. \href{https://www.eucast.org/fileadmin/src/media/PDFs/EUCAST_files/Breakpoint_tables/v_12.0_Breakpoint_Tables.xlsx}{(link)}
+}
+}
 
 
 
@@ -6810,7 +6854,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/intrinsic_resistant.Rd':
 \alias{intrinsic_resistant}
 \title{Data Set Denoting Bacterial Intrinsic Resistance}
 \format{
-A \link[tibble:tibble]{tibble} with 285 928 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 294 079 observations and 2 variables:
 \itemize{
 \item \code{mo}\cr Microorganism ID which occurs in \code{\link[=microorganisms]{microorganisms$mo}}. Names can be retrieved using \code{\link[=mo_name]{mo_name()}}.
 \item \code{ab}\cr Antimicrobial ID which occurs in \code{\link[=antimicrobials]{antimicrobials$ab}}. Names can be retrieved using \code{\link[=ab_name]{ab_name()}}.
@@ -6829,6 +6873,7 @@ This data set is internally used by:
 \itemize{
 \item \code{\link[=not_intrinsic_resistant]{not_intrinsic_resistant()}} (an \link[=antimicrobial_selectors]{antimicrobial selector})
 \item \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}
+\item \code{\link[=wisca]{wisca()}} to model \eqn{\beta(1, 9999)} for resistant bug-drug combinations, per \doi{10.1093/jac/dkv397}
 }
 }
 \section{Download Our Reference Data}{
@@ -6931,9 +6976,9 @@ a \link{data.frame}
 Join the data set \link{microorganisms} easily to an existing data set or to a \link{character} vector.
 }
 \details{
-**Note:** As opposed to the `join()` functions of `dplyr`, [character] vectors are supported and at default existing columns will get a suffix `"2"` and the newly joined columns will not get a suffix.
+\strong{Note:} As opposed to the \code{join()} functions of \code{dplyr}, \link{character} vectors are supported and at default existing columns will get a suffix \code{"2"} and the newly joined columns will not get a suffix.
 
-If the `dplyr` package is installed, their join functions will be used. Otherwise, the much slower [merge()] and [interaction()] functions from base \R will be used.
+If the \code{dplyr} package is installed, their join functions will be used. Otherwise, the much slower \code{\link[=merge]{merge()}} and \code{\link[=interaction]{interaction()}} functions from base \R will be used.
 }
 \examples{
 left_join_microorganisms(as.mo("K. pneumoniae"))
@@ -7306,16 +7351,18 @@ eucast_exceptional_phenotypes(x = NULL, only_sir_columns = any(is.sir(x)),
 \item{...}{Column names of antimicrobials. To automatically detect antimicrobial column names, do not provide any named arguments; \code{\link[=guess_ab_col]{guess_ab_col()}} will then be used for detection. To manually specify a column, provide its name (case-insensitive) as an argument, e.g. \code{AMX = "amoxicillin"}. To skip a specific antimicrobial, set it to \code{NULL}, e.g. \code{TIC = NULL} to exclude ticarcillin. If a manually defined column does not exist in the data, it will be skipped with a warning.}
 }
 \value{
-- If `verbose` is set to `TRUE`:\cr
-  A [data.frame] containing columns `row_number`, `microorganism`, `MDRO`, `reason`, `all_nonsusceptible_columns`, `guideline`
-- CMI 2012 paper - function [mdr_cmi2012()] or [mdro()]:\cr
-  Ordered [factor] with levels `Negative` < `Multi-drug-resistant (MDR)` < `Extensively drug-resistant (XDR)` < `Pandrug-resistant (PDR)`
-- TB guideline - function [mdr_tb()] or [`mdro(..., guideline = "TB")`][mdro()]:\cr
-  Ordered [factor] with levels `Negative` < `Mono-resistant` < `Poly-resistant` < `Multi-drug-resistant` < `Extensively drug-resistant`
-- German guideline - function [mrgn()] or [`mdro(..., guideline = "MRGN")`][mdro()]:\cr
-  Ordered [factor] with levels `Negative` < `3MRGN` < `4MRGN`
-- Everything else, except for custom guidelines:\cr
-  Ordered [factor] with levels `Negative` < `Positive, unconfirmed` < `Positive`. The value `"Positive, unconfirmed"` means that, according to the guideline, it is not entirely sure if the isolate is multi-drug resistant and this should be confirmed with additional (e.g. genotypic) tests
+\itemize{
+\item If \code{verbose} is set to \code{TRUE}:\cr
+A \link{data.frame} containing columns \code{row_number}, \code{microorganism}, \code{MDRO}, \code{reason}, \code{all_nonsusceptible_columns}, \code{guideline}
+\item CMI 2012 paper - function \code{\link[=mdr_cmi2012]{mdr_cmi2012()}} or \code{\link[=mdro]{mdro()}}:\cr
+Ordered \link{factor} with levels \code{Negative} < \code{Multi-drug-resistant (MDR)} < \verb{Extensively drug-resistant (XDR)} < \code{Pandrug-resistant (PDR)}
+\item TB guideline - function \code{\link[=mdr_tb]{mdr_tb()}} or \code{\link[=mdro]{mdro(..., guideline = "TB")}}:\cr
+Ordered \link{factor} with levels \code{Negative} < \code{Mono-resistant} < \code{Poly-resistant} < \code{Multi-drug-resistant} < \verb{Extensively drug-resistant}
+\item German guideline - function \code{\link[=mrgn]{mrgn()}} or \code{\link[=mdro]{mdro(..., guideline = "MRGN")}}:\cr
+Ordered \link{factor} with levels \code{Negative} < \verb{3MRGN} < \verb{4MRGN}
+\item Everything else, except for custom guidelines:\cr
+Ordered \link{factor} with levels \code{Negative} < \verb{Positive, unconfirmed} < \code{Positive}. The value \code{"Positive, unconfirmed"} means that, according to the guideline, it is not entirely sure if the isolate is multi-drug resistant and this should be confirmed with additional (e.g. genotypic) tests
+}
 }
 \description{
 Determine which isolates are multidrug-resistant organisms (MDRO) according to international, national, or custom guidelines.
@@ -7512,59 +7559,39 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.Rd':
 \docType{data}
 \name{microorganisms}
 \alias{microorganisms}
-\title{Data Set with 78 679 Taxonomic Records of Microorganisms}
+\title{Data Set with 96 982 Taxonomic Records of Microorganisms}
 \format{
-A \link[tibble:tibble]{tibble} with 78 679 observations and 26 variables:
+A \link[tibble:tibble]{tibble} with 96 982 observations and 28 variables:
 \itemize{
 \item \code{mo}\cr ID of microorganism as used by this package. \emph{\strong{This is a unique identifier.}}
 \item \code{fullname}\cr Full name, like \code{"Escherichia coli"}. For the taxonomic ranks genus, species and subspecies, this is the 'pasted' text of genus, species, and subspecies. For all taxonomic ranks higher than genus, this is the name of the taxon. \emph{\strong{This is a unique identifier.}}
-\item \code{status} \cr Status of the taxon, either \code{"accepted"}, \code{"not validly published"}, \code{"synonym"}, or \code{"unknown"}
-\item \code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{subspecies}\cr Taxonomic rank of the microorganism. Note that for fungi, \emph{phylum} is equal to their taxonomic \emph{division}. Also, for fungi, \emph{subkingdom} and \emph{subdivision} were left out since they do not occur in the bacterial taxonomy.
+\item \code{status} \cr Status of the taxon, either \code{"accepted"}, \code{"synonym"}, or \code{"unknown"}
+\item \code{domain}, \code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{subspecies}\cr Taxonomic rank of the microorganism. Note that for fungi, \emph{phylum} is used for their taxonomic \emph{division}. Also, for fungi, \emph{subkingdom} and \emph{subdivision} were left out since they do not occur in the bacterial taxonomy. For all species outside the domains of Bacteria and Archaea, the \code{domain} and \code{kingdom} are identical.
 \item \code{rank}\cr Text of the taxonomic rank of the microorganism, such as \code{"species"} or \code{"genus"}
-\item \code{ref}\cr Author(s) and year of related scientific publication. This contains only the \emph{first surname} and year of the \emph{latest} authors, e.g. "Wallis \emph{et al.} 2006 \emph{emend.} Smith and Jones 2018" becomes "Smith \emph{et al.}, 2018". This field is directly retrieved from the source specified in the column \code{source}. Moreover, accents were removed to comply with CRAN that only allows ASCII characters.
-\item \code{oxygen_tolerance} \cr Oxygen tolerance, either \code{"aerobe"}, \code{"anaerobe"}, \code{"anaerobe/microaerophile"}, \code{"facultative anaerobe"}, \code{"likely facultative anaerobe"}, \code{"microaerophile"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 68.3\% of all ~39 000 bacteria in the data set contain an oxygen tolerance.
-\item \code{source}\cr Either \code{"GBIF"}, \code{"LPSN"}, \code{"Manually added"}, \code{"MycoBank"}, or \code{"manually added"} (see \emph{Source})
-\item \code{lpsn}\cr Identifier ('Record number') of List of Prokaryotic names with Standing in Nomenclature (LPSN). This will be the first/highest LPSN identifier to keep one identifier per row. For example, \emph{Acetobacter ascendens} has LPSN Record number 7864 and 11011. Only the first is available in the \code{microorganisms} data set. \emph{\strong{This is a unique identifier}}, though available for only ~33 000 records.
+\item \code{ref}\cr Abbreviated authority citation for the nomenclatural act that established the current name combination, following ICNP conventions. For species described in their current genus (\emph{sp. nov.}), this is the original description author(s) and year. For species transferred to a different genus (\emph{comb. nov.}), this is the reclassification author(s) and year. Emendations are excluded. For synonyms, this is the authority under which the synonym was originally published. This field is directly retrieved from the source specified in the column \code{source}. Diacritics were removed to comply with CRAN, that only allows ASCII characters.
+\item \code{oxygen_tolerance} \cr Oxygen tolerance, either \code{"aerobe"}, \code{"anaerobe"}, \code{"anaerobe/microaerophile"}, \code{"facultative anaerobe"}, \code{"likely facultative anaerobe"}, \code{"microaerophile"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 1.3784 × 10\if{html}{\out{<sup>}}6\if{html}{\out{</sup>}}\% of all 2 bacteria in the data set contain an oxygen tolerance.
+\item \code{morphology} \cr Morphology (cell shape), either \code{"cocci"}, \code{"coccobacilli"}, \code{"filamentous"}, \code{"likely cocci"}, \code{"likely coccobacilli"}, \code{"likely filamentous"}, \code{"likely rods"}, \code{"likely spirilla"}, \code{"rods"}, \code{"spirilla"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Genera that are clinically established as coccobacilli (the HACEK group and beyond, such as \emph{Haemophilus} and \emph{Acinetobacter}) are classified as such regardless of BacDive majority vote. Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus. Currently 1.3232 × 10\if{html}{\out{<sup>}}6\if{html}{\out{</sup>}}\% of all 2 bacteria in the data set contain a morphology.
+\item \code{source}\cr Either \code{"GBIF"}, \code{"LPSN"}, \code{"MycoBank"}, or \code{"manually added"} (see \emph{Source})
+\item \code{lpsn}\cr Identifier ('Record number') of List of Prokaryotic names with Standing in Nomenclature (LPSN). This will be the first/highest LPSN identifier to keep one identifier per row. For example, \emph{Acetobacter ascendens} has LPSN Record number 7864 and 11011. Only the first is available in the \code{microorganisms} data set. \emph{\strong{This is a unique identifier}}, though available for only ~36 000 records.
 \item \code{lpsn_parent}\cr LPSN identifier of the parent taxon
 \item \code{lpsn_renamed_to}\cr LPSN identifier of the currently valid taxon
-\item \code{mycobank}\cr Identifier ('MycoBank #') of MycoBank. \emph{\strong{This is a unique identifier}}, though available for only ~19 000 records.
+\item \code{mycobank}\cr Identifier ('MycoBank #') of MycoBank. \emph{\strong{This is a unique identifier}}, though available for only ~25 000 records.
 \item \code{mycobank_parent}\cr MycoBank identifier of the parent taxon
 \item \code{mycobank_renamed_to}\cr MycoBank identifier of the currently valid taxon
-\item \code{gbif}\cr Identifier ('taxonID') of Global Biodiversity Information Facility (GBIF). \emph{\strong{This is a unique identifier}}, though available for only ~49 000 records.
+\item \code{gbif}\cr Identifier ('taxonID') of Global Biodiversity Information Facility (GBIF), via Catalogue of Life (COL). \emph{\strong{This is a unique identifier}}, though available for only ~79 000 records.
 \item \code{gbif_parent}\cr GBIF identifier of the parent taxon
 \item \code{gbif_renamed_to}\cr GBIF identifier of the currently valid taxon
 \item \code{prevalence}\cr Prevalence of the microorganism based on Bartlett \emph{et al.} (2022, \doi{10.1099/mic.0.001269}), see \code{\link[=mo_matching_score]{mo_matching_score()}} for the full explanation
-\item \code{snomed}\cr Systematized Nomenclature of Medicine (SNOMED) code of the microorganism, version of July 16th, 2024 (see \emph{Source}). Use \code{\link[=mo_snomed]{mo_snomed()}} to retrieve it quickly, see \code{\link[=mo_property]{mo_property()}}.
-}
-}
-\source{
-Taxonomic entries were imported in this order of importance:
-\enumerate{
-\item List of Prokaryotic names with Standing in Nomenclature (LPSN):\cr\cr
-Parte, AC \emph{et al.} (2020). \strong{List of Prokaryotic names with Standing in Nomenclature (LPSN) moves to the DSMZ.} International Journal of Systematic and Evolutionary Microbiology, 70, 5607-5612; \doi{10.1099/ijsem.0.004332}. Accessed from \url{https://lpsn.dsmz.de} on June 24th, 2024.
-\item MycoBank:\cr\cr
-Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on June 24th, 2024.
-\item Global Biodiversity Information Facility (GBIF):\cr\cr
-GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset \doi{10.15468/39omei}. Accessed from \url{https://www.gbif.org} on June 24th, 2024.
-}
-
-Furthermore, these sources were used for additional details:
-\itemize{
-\item BacDive:\cr\cr
-Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on July 16th, 2024.
-\item Systematized Nomenclature of Medicine - Clinical Terms (SNOMED-CT):\cr\cr
-Public Health Information Network Vocabulary Access and Distribution System (PHIN VADS). US Edition of SNOMED CT from 1 September 2020. Value Set Name 'Microorganism', OID 2.16.840.1.114222.4.11.1009 (v12). Accessed from \url{https://www.cdc.gov/phin/php/phinvads/} on July 16th, 2024.
-\item Grimont \emph{et al.} (2007). Antigenic Formulae of the Salmonella Serovars, 9th Edition. WHO Collaborating Centre for Reference and Research on \emph{Salmonella} (WHOCC-SALM).
-\item Bartlett \emph{et al.} (2022). \strong{A comprehensive list of bacterial pathogens infecting humans} \emph{Microbiology} 168:001269; \doi{10.1099/mic.0.001269}
+\item \code{snomed}\cr Systematized Nomenclature of Medicine (SNOMED) code of the microorganism, version of 16th of July, 2024 (see \emph{Source}). Use \code{\link[=mo_snomed]{mo_snomed()}} to retrieve it quickly, see \code{\link[=mo_property]{mo_property()}}.
 }
 }
 \usage{
 microorganisms
 }
 \description{
-A data set containing the full microbial taxonomy (\strong{last updated: June 24th, 2024}) of six kingdoms. This data set is the backbone of this \code{AMR} package. MO codes can be looked up using \code{\link[=as.mo]{as.mo()}} and microorganism properties can be looked up using any of the \code{\link[=mo_property]{mo_*}} functions.
+A data set containing the full microbial taxonomy (\strong{last updated: 7th of May, 2026}) of 15 kingdoms. This data set is the backbone of this \code{AMR} package. MO codes can be looked up using \code{\link[=as.mo]{as.mo()}} and microorganism properties can be looked up using any of the \code{\link[=mo_property]{mo_*}} functions.
 
-This data set is carefully crafted, yet made 100\% reproducible from public and authoritative taxonomic sources (using \href{https://github.com/msberends/AMR/blob/main/data-raw/_reproduction_scripts/reproduction_of_microorganisms.R}{this script}), namely: \emph{List of Prokaryotic names with Standing in Nomenclature (LPSN)} for bacteria, \emph{MycoBank} for fungi, and \emph{Global Biodiversity Information Facility (GBIF)} for all others taxons.
+This data set is carefully crafted, yet made 100\% reproducible from public and authoritative taxonomic sources (using \href{https://github.com/msberends/AMR/blob/main/data-raw/_reproduction_scripts/reproduction_of_microorganisms.R}{this script}), namely: \emph{List of Prokaryotic names with Standing in Nomenclature (LPSN)} for bacteria, \emph{MycoBank} for fungi, and \emph{Global Biodiversity Information Facility (GBIF), via Catalogue of Life (COL)} for all others taxons.
 }
 \details{
 Please note that entries are only based on LPSN, MycoBank, and GBIF (see below). Since these sources incorporate entries based on (recent) publications in the International Journal of Systematic and Evolutionary Microbiology (IJSEM), it can happen that the year of publication is sometimes later than one might expect.
@@ -7575,11 +7602,11 @@ For example, \emph{Staphylococcus pettenkoferi} was described for the first time
 
 Included taxonomic data from \href{https://lpsn.dsmz.de}{LPSN}, \href{https://www.mycobank.org}{MycoBank}, and \href{https://www.gbif.org}{GBIF} are:
 \itemize{
-\item All ~39 000 (sub)species from the kingdoms of Archaea and Bacteria
-\item ~28 000 species from the kingdom of Fungi. The kingdom of Fungi is a very large taxon with almost 300,000 different (sub)species, of which most are not microbial (but rather macroscopic, like mushrooms). Because of this, not all fungi fit the scope of this package. Only relevant fungi are covered (such as all species of \emph{Aspergillus}, \emph{Candida}, \emph{Cryptococcus}, \emph{Histoplasma}, \emph{Pneumocystis}, \emph{Saccharomyces} and \emph{Trichophyton}).
-\item ~8 100 (sub)species from the kingdom of Protozoa
-\item ~1 600 (sub)species from 39 other relevant genera from the kingdom of Animalia (such as \emph{Strongyloides} and \emph{Taenia})
-\item All ~26 000 previously accepted names of all included (sub)species (these were taxonomically renamed)
+\item All 2 (sub)species from the kingdoms of Archaea and Bacteria
+\item ~36 000 species from the kingdom of Fungi. The kingdom of Fungi is a very large taxon with almost 300,000 different (sub)species, of which most are not microbial (but rather macroscopic, like mushrooms). Because of this, not all fungi fit the scope of this package. Only relevant fungi are covered (such as all species of \emph{Aspergillus}, \emph{Candida}, \emph{Cryptococcus}, \emph{Histoplasma}, \emph{Pneumocystis}, \emph{Saccharomyces} and \emph{Trichophyton}).
+\item ~11 000 (sub)species from the kingdom of Protozoa
+\item ~2 000 (sub)species from ~60 other relevant genera from the kingdom of Animalia (such as \emph{Strongyloides} and \emph{Taenia})
+\item All ~31 000 previously accepted names of all included (sub)species (these were taxonomically renamed)
 \item The complete taxonomic tree of all included (sub)species: from kingdom to subspecies
 \item The identifier of the parent taxons
 \item The year and first author of the related scientific publication
@@ -7611,6 +7638,27 @@ Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct
 \examples{
 microorganisms
 }
+\references{
+Taxonomic entries were imported in this order of importance:
+\enumerate{
+\item List of Prokaryotic names with Standing in Nomenclature (LPSN):\cr\cr
+Freese, HM \emph{et al.} (2026). \strong{TYGS and LPSN in 2025: a Global Core Biodata Resource for genome-based classification and nomenclature of prokaryotes within DSMZ Digital Diversity.} Nucleic Acids Research, 54, D884–D891; \doi{10.1093/nar/gkaf1110}. Accessed from \url{https://lpsn.dsmz.de} on 7th of May, 2026.
+\item MycoBank:\cr\cr
+Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on 7th of May, 2026.
+\item Global Biodiversity Information Facility (GBIF), via Catalogue of Life (COL):\cr\cr
+Banki, O. \emph{et al.} (2026). Catalogue of Life (2026-04-18 XR). Catalogue of Life Foundation, Amsterdam, Netherlands. \doi{10.48580/dgxjw}. Accessed from \url{https://www.gbif.org} on 7th of May, 2026.
+}
+
+Furthermore, these sources were used for additional details:
+\itemize{
+\item BacDive:\cr\cr
+Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on 7th of May, 2026.
+\item Systematized Nomenclature of Medicine - Clinical Terms (SNOMED-CT):\cr\cr
+Public Health Information Network Vocabulary Access and Distribution System (PHIN VADS). US Edition of SNOMED CT from 1 September 2020. Value Set Name 'Microorganism', OID 2.16.840.1.114222.4.11.1009 (v12). Accessed from \url{https://www.cdc.gov/phin/php/phinvads/} on 16th of July, 2024.
+\item Grimont \emph{et al.} (2007). Antigenic Formulae of the Salmonella Serovars, 9th Edition. WHO Collaborating Centre for Reference and Research on \emph{Salmonella} (WHOCC-SALM).
+\item Bartlett \emph{et al.} (2022). \strong{A comprehensive list of bacterial pathogens infecting humans} \emph{Microbiology} 168:001269; \doi{10.1099/mic.0.001269}
+}
+}
 \seealso{
 \code{\link[=as.mo]{as.mo()}}, \code{\link[=mo_property]{mo_property()}}, \link{microorganisms.groups}, \link{microorganisms.codes}, \link{intrinsic_resistant}
 }
@@ -7627,9 +7675,9 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.codes.Rd':
 \docType{data}
 \name{microorganisms.codes}
 \alias{microorganisms.codes}
-\title{Data Set with 6 050 Common Microorganism Codes}
+\title{Data Set with 6 029 Common Microorganism Codes}
 \format{
-A \link[tibble:tibble]{tibble} with 6 050 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 6 029 observations and 2 variables:
 \itemize{
 \item \code{code}\cr Commonly used code of a microorganism. \emph{\strong{This is a unique identifier.}}
 \item \code{mo}\cr ID of the microorganism in the \link{microorganisms} data set
@@ -7678,9 +7726,9 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.groups.Rd':
 \docType{data}
 \name{microorganisms.groups}
 \alias{microorganisms.groups}
-\title{Data Set with 534 Microorganisms In Species Groups}
+\title{Data Set with 530 Microorganisms In Species Groups}
 \format{
-A \link[tibble:tibble]{tibble} with 534 observations and 4 variables:
+A \link[tibble:tibble]{tibble} with 530 observations and 4 variables:
 \itemize{
 \item \code{mo_group}\cr ID of the species group / microbiological complex
 \item \code{mo}\cr ID of the microorganism belonging in the species group / microbiological complex
@@ -7754,7 +7802,7 @@ where:
 \item \eqn{l_n} is the length of \eqn{n};
 \item \eqn{lev} is the \href{https://en.wikipedia.org/wiki/Levenshtein_distance}{Levenshtein distance function} (counting any insertion as 1, and any deletion or substitution as 2) that is needed to change \eqn{x} into \eqn{n};
 \item \eqn{p_n} is the human pathogenic prevalence group of \eqn{n}, as described below;
-\item \eqn{k_n} is the taxonomic kingdom of \eqn{n}, set as Bacteria = 1, Fungi = 1.25, Protozoa = 1.5, Chromista = 1.75, Archaea = 2, others = 3.
+\item \eqn{k_n} is the taxonomic domain ('kingdom' until taxonomic reclassification of 2024) of \eqn{n}, set as Bacteria = 1, Fungi = 1.25, Protozoa = 1.5, Chromista = 1.75, Archaea = 2, others = 3.
 }
 
 The grouping into human pathogenic prevalence \eqn{p} is based on recent work from Bartlett \emph{et al.} (2022, \doi{10.1099/mic.0.001269}) who extensively studied medical-scientific literature to categorise all bacterial species into these groups:
@@ -7769,7 +7817,7 @@ Furthermore,
 \item Any genus present in the \strong{established} list also has \code{prevalence = 1.15} in the \link{microorganisms} data set;
 \item Any other genus present in the \strong{putative} list has \code{prevalence = 1.25} in the \link{microorganisms} data set;
 \item Any other species or subspecies of which the genus is present in the two aforementioned groups, has \code{prevalence = 1.5} in the \link{microorganisms} data set;
-\item Any \emph{non-bacterial} genus, species or subspecies of which the genus is present in the following list, has \code{prevalence = 1.25} in the \link{microorganisms} data set: \emph{Absidia}, \emph{Acanthamoeba}, \emph{Acremonium}, \emph{Actinomucor}, \emph{Aedes}, \emph{Alternaria}, \emph{Amoeba}, \emph{Ancylostoma}, \emph{Angiostrongylus}, \emph{Anisakis}, \emph{Anopheles}, \emph{Apophysomyces}, \emph{Arthroderma}, \emph{Aspergillus}, \emph{Aureobasidium}, \emph{Basidiobolus}, \emph{Beauveria}, \emph{Bipolaris}, \emph{Blastobotrys}, \emph{Blastocystis}, \emph{Blastomyces}, \emph{Candida}, \emph{Capillaria}, \emph{Chaetomium}, \emph{Chilomastix}, \emph{Chrysonilia}, \emph{Chrysosporium}, \emph{Cladophialophora}, \emph{Cladosporium}, \emph{Clavispora}, \emph{Coccidioides}, \emph{Cokeromyces}, \emph{Conidiobolus}, \emph{Coniochaeta}, \emph{Contracaecum}, \emph{Cordylobia}, \emph{Cryptococcus}, \emph{Cryptosporidium}, \emph{Cunninghamella}, \emph{Curvularia}, \emph{Cyberlindnera}, \emph{Debaryozyma}, \emph{Demodex}, \emph{Dermatobia}, \emph{Dientamoeba}, \emph{Diphyllobothrium}, \emph{Dirofilaria}, \emph{Echinostoma}, \emph{Entamoeba}, \emph{Enterobius}, \emph{Epidermophyton}, \emph{Exidia}, \emph{Exophiala}, \emph{Exserohilum}, \emph{Fasciola}, \emph{Fonsecaea}, \emph{Fusarium}, \emph{Geotrichum}, \emph{Giardia}, \emph{Graphium}, \emph{Haloarcula}, \emph{Halobacterium}, \emph{Halococcus}, \emph{Hansenula}, \emph{Hendersonula}, \emph{Heterophyes}, \emph{Histomonas}, \emph{Histoplasma}, \emph{Hortaea}, \emph{Hymenolepis}, \emph{Hypomyces}, \emph{Hysterothylacium}, \emph{Kloeckera}, \emph{Kluyveromyces}, \emph{Kodamaea}, \emph{Lacazia}, \emph{Leishmania}, \emph{Lichtheimia}, \emph{Lodderomyces}, \emph{Lomentospora}, \emph{Madurella}, \emph{Malassezia}, \emph{Malbranchea}, \emph{Metagonimus}, \emph{Meyerozyma}, \emph{Microsporidium}, \emph{Microsporum}, \emph{Millerozyma}, \emph{Mortierella}, \emph{Mucor}, \emph{Mycocentrospora}, \emph{Nannizzia}, \emph{Necator}, \emph{Nectria}, \emph{Ochroconis}, \emph{Oesophagostomum}, \emph{Oidiodendron}, \emph{Opisthorchis}, \emph{Paecilomyces}, \emph{Paracoccidioides}, \emph{Pediculus}, \emph{Penicillium}, \emph{Phaeoacremonium}, \emph{Phaeomoniella}, \emph{Phialophora}, \emph{Phlebotomus}, \emph{Phoma}, \emph{Pichia}, \emph{Piedraia}, \emph{Pithomyces}, \emph{Pityrosporum}, \emph{Pneumocystis}, \emph{Pseudallescheria}, \emph{Pseudoscopulariopsis}, \emph{Pseudoterranova}, \emph{Pulex}, \emph{Purpureocillium}, \emph{Quambalaria}, \emph{Rhinocladiella}, \emph{Rhizomucor}, \emph{Rhizopus}, \emph{Rhodotorula}, \emph{Saccharomyces}, \emph{Saksenaea}, \emph{Saprochaete}, \emph{Sarcoptes}, \emph{Scedosporium}, \emph{Schistosoma}, \emph{Schizosaccharomyces}, \emph{Scolecobasidium}, \emph{Scopulariopsis}, \emph{Scytalidium}, \emph{Spirometra}, \emph{Sporobolomyces}, \emph{Sporopachydermia}, \emph{Sporothrix}, \emph{Sporotrichum}, \emph{Stachybotrys}, \emph{Strongyloides}, \emph{Syncephalastrum}, \emph{Syngamus}, \emph{Taenia}, \emph{Talaromyces}, \emph{Teleomorph}, \emph{Toxocara}, \emph{Trichinella}, \emph{Trichobilharzia}, \emph{Trichoderma}, \emph{Trichomonas}, \emph{Trichophyton}, \emph{Trichosporon}, \emph{Trichostrongylus}, \emph{Trichuris}, \emph{Tritirachium}, \emph{Trombicula}, \emph{Trypanosoma}, \emph{Tunga}, \emph{Ulocladium}, \emph{Ustilago}, \emph{Verticillium}, \emph{Wallemia}, \emph{Wangiella}, \emph{Wickerhamomyces}, \emph{Wuchereria}, \emph{Yarrowia}, or \emph{Zygosaccharomyces};
+\item Any \emph{non-bacterial} genus, species or subspecies of which the genus is present in the following list, has \code{prevalence = 1.25} in the \link{microorganisms} data set: \emph{Absidia}, \emph{Acanthamoeba}, \emph{Acremonium}, \emph{Actinomucor}, \emph{Aedes}, \emph{Alternaria}, \emph{Amoeba}, \emph{Ancylostoma}, \emph{Angiostrongylus}, \emph{Anisakis}, \emph{Anopheles}, \emph{Apophysomyces}, \emph{Arthroderma}, \emph{Aspergillus}, \emph{Aureobasidium}, \emph{Basidiobolus}, \emph{Beauveria}, \emph{Bipolaris}, \emph{Blastobotrys}, \emph{Blastocystis}, \emph{Blastomyces}, \emph{Candida}, \emph{Capillaria}, \emph{Chaetomium}, \emph{Chilomastix}, \emph{Chrysonilia}, \emph{Chrysosporium}, \emph{Cladophialophora}, \emph{Cladosporium}, \emph{Clavispora}, \emph{Coccidioides}, \emph{Cokeromyces}, \emph{Conidiobolus}, \emph{Coniochaeta}, \emph{Contracaecum}, \emph{Cordylobia}, \emph{Cryptococcus}, \emph{Cryptosporidium}, \emph{Cunninghamella}, \emph{Curvularia}, \emph{Cyberlindnera}, \emph{Debaryozyma}, \emph{Demodex}, \emph{Dermatobia}, \emph{Dientamoeba}, \emph{Diphyllobothrium}, \emph{Dirofilaria}, \emph{Echinostoma}, \emph{Entamoeba}, \emph{Enterobius}, \emph{Epidermophyton}, \emph{Exidia}, \emph{Exophiala}, \emph{Exserohilum}, \emph{Fasciola}, \emph{Fonsecaea}, \emph{Fusarium}, \emph{Geotrichum}, \emph{Giardia}, \emph{Graphium}, \emph{Haloarcula}, \emph{Halobacterium}, \emph{Halococcus}, \emph{Hansenula}, \emph{Hendersonula}, \emph{Heterophyes}, \emph{Histomonas}, \emph{Histoplasma}, \emph{Hortaea}, \emph{Hymenolepis}, \emph{Hypomyces}, \emph{Hysterothylacium}, \emph{Kloeckera}, \emph{Kluyveromyces}, \emph{Kodamaea}, \emph{Lacazia}, \emph{Leishmania}, \emph{Lichtheimia}, \emph{Lodderomyces}, \emph{Lomentospora}, \emph{Madurella}, \emph{Malassezia}, \emph{Malbranchea}, \emph{Metagonimus}, \emph{Meyerozyma}, \emph{Microascus}, \emph{Microsporidium}, \emph{Microsporum}, \emph{Millerozyma}, \emph{Mortierella}, \emph{Mucor}, \emph{Mycocentrospora}, \emph{Nannizzia}, \emph{Necator}, \emph{Nectria}, \emph{Ochroconis}, \emph{Oesophagostomum}, \emph{Oidiodendron}, \emph{Opisthorchis}, \emph{Paecilomyces}, \emph{Paracoccidioides}, \emph{Pediculus}, \emph{Penicillium}, \emph{Phaeoacremonium}, \emph{Phaeomoniella}, \emph{Phialophora}, \emph{Phlebotomus}, \emph{Phoma}, \emph{Pichia}, \emph{Piedraia}, \emph{Pithomyces}, \emph{Pityrosporum}, \emph{Plasmodium}, \emph{Pneumocystis}, \emph{Pseudallescheria}, \emph{Pseudoscopulariopsis}, \emph{Pseudoterranova}, \emph{Pulex}, \emph{Purpureocillium}, \emph{Quambalaria}, \emph{Rhinocladiella}, \emph{Rhizomucor}, \emph{Rhizopus}, \emph{Rhodotorula}, \emph{Saccharomyces}, \emph{Saksenaea}, \emph{Saprochaete}, \emph{Sarcoptes}, \emph{Scedosporium}, \emph{Schistosoma}, \emph{Schizophyllum}, \emph{Schizosaccharomyces}, \emph{Scolecobasidium}, \emph{Scopulariopsis}, \emph{Scytalidium}, \emph{Spirometra}, \emph{Sporobolomyces}, \emph{Sporopachydermia}, \emph{Sporothrix}, \emph{Sporotrichum}, \emph{Stachybotrys}, \emph{Strongyloides}, \emph{Syncephalastrum}, \emph{Syngamus}, \emph{Taenia}, \emph{Talaromyces}, \emph{Teleomorph}, \emph{Toxocara}, \emph{Trichinella}, \emph{Trichobilharzia}, \emph{Trichoderma}, \emph{Trichomonas}, \emph{Trichophyton}, \emph{Trichosporon}, \emph{Trichostrongylus}, \emph{Trichuris}, \emph{Tritirachium}, \emph{Trombicula}, \emph{Trypanosoma}, \emph{Tunga}, \emph{Ulocladium}, \emph{Ustilago}, \emph{Verticillium}, \emph{Wallemia}, \emph{Wangiella}, \emph{Wickerhamomyces}, \emph{Wuchereria}, \emph{Yarrowia}, or \emph{Zygosaccharomyces};
 \item All other records have \code{prevalence = 2.0} in the \link{microorganisms} data set.
 }
 
@@ -7831,6 +7879,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/mo_property.Rd':
 \alias{mo_is_intrinsic_resistant}
 \alias{mo_oxygen_tolerance}
 \alias{mo_is_anaerobic}
+\alias{mo_morphology}
 \alias{mo_snomed}
 \alias{mo_ref}
 \alias{mo_authors}
@@ -7893,7 +7942,8 @@ mo_pathogenicity(x, language = get_AMR_locale(),
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
 
 mo_gramstain(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  add_morphology = FALSE, ...)
 
 mo_is_gram_negative(x, language = get_AMR_locale(),
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
@@ -7911,6 +7961,9 @@ mo_oxygen_tolerance(x, language = get_AMR_locale(),
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
 
 mo_is_anaerobic(x, language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+
+mo_morphology(x, language = get_AMR_locale(),
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
 
 mo_snomed(x, language = get_AMR_locale(),
@@ -7968,51 +8021,59 @@ The default is \code{FALSE}, which will return a note if outdated taxonomic name
 
 \item{...}{Other arguments passed on to \code{\link[=as.mo]{as.mo()}}, such as 'minimum_matching_score', 'ignore_pattern', and 'remove_from_input'.}
 
+\item{add_morphology}{a \link{logical} to indicate whether the morphology (from \code{\link[=mo_morphology]{mo_morphology()}}) should be added to the Gram stain result, e.g. \code{"Gram-negative rods"} instead of \code{"Gram-negative"}. The default is \code{FALSE}.}
+
 \item{ab}{Any (vector of) text that can be coerced to a valid antibiotic drug code with \code{\link[=as.ab]{as.ab()}}.}
 
 \item{open}{Browse the URL using \code{\link[utils:browseURL]{browseURL()}}.}
 
-\item{property}{One of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}, or must be \code{"shortname"}.}
+\item{property}{One of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}, or must be \code{"shortname"}.}
 }
 \value{
-- An [integer] in case of [mo_year()]
-- An [ordered factor][factor] in case of [mo_pathogenicity()]
-- A [list] in case of [mo_taxonomy()], [mo_synonyms()], [mo_snomed()], and [mo_info()]
-- A [logical] in case of [mo_is_anaerobic()], [mo_is_gram_negative()], [mo_is_gram_positive()], [mo_is_intrinsic_resistant()], and [mo_is_yeast()]
-- A named [character] in case of [mo_synonyms()] and [mo_url()]
-- A [character] in all other cases
+\itemize{
+\item An \link{integer} in case of \code{\link[=mo_year]{mo_year()}}
+\item An \link[=factor]{ordered factor} in case of \code{\link[=mo_pathogenicity]{mo_pathogenicity()}}
+\item A \link{list} in case of \code{\link[=mo_taxonomy]{mo_taxonomy()}}, \code{\link[=mo_synonyms]{mo_synonyms()}}, \code{\link[=mo_snomed]{mo_snomed()}}, and \code{\link[=mo_info]{mo_info()}}
+\item A \link{logical} in case of \code{\link[=mo_is_anaerobic]{mo_is_anaerobic()}}, \code{\link[=mo_is_gram_negative]{mo_is_gram_negative()}}, \code{\link[=mo_is_gram_positive]{mo_is_gram_positive()}}, \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}, and \code{\link[=mo_is_yeast]{mo_is_yeast()}}
+\item A named \link{character} in case of \code{\link[=mo_synonyms]{mo_synonyms()}} and \code{\link[=mo_url]{mo_url()}}
+\item A \link{character} in all other cases
+}
 }
 \description{
 Use these functions to return a specific property of a microorganism based on the latest accepted taxonomy. All input values will be evaluated internally with \code{\link[=as.mo]{as.mo()}}, which makes it possible to use microbial abbreviations, codes and names as input. See \emph{Examples}.
 }
 \details{
-All functions will, at default, **not** keep old taxonomic properties, as synonyms are automatically replaced with the current taxonomy. Take for example *Enterobacter aerogenes*, which was initially named in 1960 but renamed to *Klebsiella aerogenes* in 2017:
-- `mo_genus("Enterobacter aerogenes")` will return `"Klebsiella"` (with a note about the renaming)
-- `mo_genus("Enterobacter aerogenes", keep_synonyms = TRUE)` will return `"Enterobacter"` (with a once-per-session warning that the name is outdated)
-- `mo_ref("Enterobacter aerogenes")` will return `"Tindall et al., 2017"` (with a note about the renaming)
-- `mo_ref("Enterobacter aerogenes", keep_synonyms = TRUE)` will return `"Hormaeche et al., 1960"` (with a once-per-session warning that the name is outdated)
+All functions will, at default, \strong{not} keep old taxonomic properties, as synonyms are automatically replaced with the current taxonomy. Take for example \emph{Enterobacter aerogenes}, which was initially named in 1960 but renamed to \emph{Klebsiella aerogenes} in 2017:
+\itemize{
+\item \code{mo_genus("Enterobacter aerogenes")} will return \code{"Klebsiella"} (with a note about the renaming)
+\item \code{mo_genus("Enterobacter aerogenes", keep_synonyms = TRUE)} will return \code{"Enterobacter"} (with a once-per-session warning that the name is outdated)
+\item \code{mo_ref("Enterobacter aerogenes")} will return \code{"Tindall et al., 2017"} (with a note about the renaming)
+\item \code{mo_ref("Enterobacter aerogenes", keep_synonyms = TRUE)} will return \code{"Hormaeche et al., 1960"} (with a once-per-session warning that the name is outdated)
+}
 
-The short name ([mo_shortname()]) returns the first character of the genus and the full species, such as `"E. coli"`, for species and subspecies. Exceptions are abbreviations of staphylococci (such as *"CoNS"*, Coagulase-Negative Staphylococci) and beta-haemolytic streptococci (such as *"GBS"*, Group B Streptococci). Please bear in mind that e.g. *E. coli* could mean *Escherichia coli* (kingdom of Bacteria) as well as *Entamoeba coli* (kingdom of Protozoa). Returning to the full name will be done using [as.mo()] internally, giving priority to bacteria and human pathogens, i.e. `"E. coli"` will be considered *Escherichia coli*. As a result, `mo_fullname(mo_shortname("Entamoeba coli"))` returns `"Escherichia coli"`.
+\code{\link[=mo_ref]{mo_ref()}} returns the abbreviated authority of the nomenclatural act that created the queried name combination. When \code{keep_synonyms = FALSE} (default), this is the authority of the currently accepted name. When \code{keep_synonyms = TRUE}, this is the authority under which the queried (possibly outdated) name was published. Emendations (changes to the species description without a name change) are not reflected; only the combination or original description authority is returned.
 
-Since the top-level of the taxonomy is sometimes referred to as 'kingdom' and sometimes as 'domain', the functions [mo_kingdom()] and [mo_domain()] return the exact same results.
+The short name (\code{\link[=mo_shortname]{mo_shortname()}}) returns the first character of the genus and the full species, such as \code{"E. coli"}, for species and subspecies. Exceptions are abbreviations of staphylococci (such as \emph{"CoNS"}, Coagulase-Negative Staphylococci) and beta-haemolytic streptococci (such as \emph{"GBS"}, Group B Streptococci). Please bear in mind that e.g. \emph{E. coli} could mean \emph{Escherichia coli} (kingdom of Bacteria) as well as \emph{Entamoeba coli} (kingdom of Protozoa). Returning to the full name will be done using \code{\link[=as.mo]{as.mo()}} internally, giving priority to bacteria and human pathogens, i.e. \code{"E. coli"} will always be considered \emph{Escherichia coli}. As a result, \code{mo_fullname(mo_shortname("Entamoeba coli"))} returns \code{"Escherichia coli"}.
 
-Determination of human pathogenicity ([mo_pathogenicity()]) is strongly based on Bartlett *et al.* (2022, \doi{10.1099/mic.0.001269}). This function returns a [factor] with the levels *Pathogenic*, *Potentially pathogenic*, *Non-pathogenic*, and *Unknown*.
+Following the formal introduction of the new kingdom rank into prokaryotic nomenclature by G"{o}ker and Oren (2024, \doi{10.1099/ijsem.0.006242}), \code{\link[=mo_kingdom]{mo_kingdom()}} and \code{\link[=mo_domain]{mo_domain()}} return different results for bacteria and archaea: \code{\link[=mo_kingdom]{mo_kingdom()}} returns the new formal kingdom (e.g. "Pseudomonadati", "Bacillati"), while \code{\link[=mo_domain]{mo_domain()}} returns the new domain (e.g. "Bacteria", "Archaea"). For non-prokaryotic organisms, both functions return identical results.
 
-Determination of the Gram stain ([mo_gramstain()]) will be based on the taxonomic kingdom and phylum. Originally, Cavalier-Smith defined the so-called subkingdoms Negibacteria and Posibacteria (2002, [PMID 11837318](https://pubmed.ncbi.nlm.nih.gov/11837318/)), and only considered these phyla as Posibacteria: Actinobacteria, Chloroflexi, Firmicutes, and Tenericutes. These phyla were later renamed to Actinomycetota, Chloroflexota, Bacillota, and Mycoplasmatota (2021, [PMID 34694987](https://pubmed.ncbi.nlm.nih.gov/34694987/)). Bacteria in these phyla are considered Gram-positive in this `AMR` package, except for members of the class Negativicutes (within phylum Bacillota) which are Gram-negative. All other bacteria are considered Gram-negative. Species outside the kingdom of Bacteria will return a value `NA`. Functions [mo_is_gram_negative()] and [mo_is_gram_positive()] always return `TRUE` or `FALSE` (or `NA` when the input is `NA` or the MO code is `UNKNOWN`), thus always return `FALSE` for species outside the taxonomic kingdom of Bacteria.
+Determination of human pathogenicity (\code{\link[=mo_pathogenicity]{mo_pathogenicity()}}) is strongly based on Bartlett \emph{et al.} (2022, \doi{10.1099/mic.0.001269}). This function returns a \link{factor} with the levels \emph{Pathogenic}, \emph{Potentially pathogenic}, \emph{Non-pathogenic}, and \emph{Unknown}.
 
-Determination of yeasts ([mo_is_yeast()]) will be based on the taxonomic kingdom and class. *Budding yeasts* are yeasts that reproduce asexually through a process called budding, where a new cell develops from a small protrusion on the parent cell. Taxonomically, these are members of the phylum Ascomycota, class Saccharomycetes (also called Hemiascomycetes) or Pichiomycetes. *True yeasts* quite specifically refers to yeasts in the underlying order Saccharomycetales (such as *Saccharomyces cerevisiae*). Thus, for all microorganisms that are member of the taxonomic class Saccharomycetes or Pichiomycetes, the function will return `TRUE`. It returns `FALSE` otherwise (or `NA` when the input is `NA` or the MO code is `UNKNOWN`).
+Determination of the Gram stain (\code{\link[=mo_gramstain]{mo_gramstain()}} is based on the taxonomic kingdom and phylum. Originally, Cavalier-Smith defined the so-called subkingdoms Negibacteria and Posibacteria (2002, \href{https://pubmed.ncbi.nlm.nih.gov/11837318/}{PMID 11837318}), and only considered these phyla as Posibacteria: Actinobacteria, Chloroflexi, Firmicutes, and Tenericutes. These phyla were later renamed to Actinomycetota, Chloroflexota, Bacillota, and Mycoplasmatota (2021, \href{https://pubmed.ncbi.nlm.nih.gov/34694987/}{PMID 34694987}). Bacteria in these phyla are considered Gram-positive in this \code{AMR} package, except for members of the class Negativicutes (within phylum Bacillota) which are Gram-negative. All other bacteria are considered Gram-negative. Species outside the kingdom of Bacteria will return a value \code{NA}. Functions \code{\link[=mo_is_gram_negative]{mo_is_gram_negative()}} and \code{\link[=mo_is_gram_positive]{mo_is_gram_positive()}} always return \code{TRUE} or \code{FALSE} (or \code{NA} when the input is \code{NA} or the MO code is \code{UNKNOWN}), thus always return \code{FALSE} for species outside the taxonomic kingdom of Bacteria.
 
-Determination of intrinsic resistance ([mo_is_intrinsic_resistant()]) will be based on the [intrinsic_resistant] data set, which is based on `r format_eucast_version_nr(names(EUCAST_VERSION_EXPECTED_PHENOTYPES[1]))`. The [mo_is_intrinsic_resistant()] function can be vectorised over both argument `x` (input for microorganisms) and `ab` (input for antimicrobials).
+Determination of yeasts (\code{\link[=mo_is_yeast]{mo_is_yeast()}}) is based on the taxonomic kingdom and class. \emph{Budding yeasts} are yeasts that reproduce asexually through a process called budding, where a new cell develops from a small protrusion on the parent cell. Taxonomically, these are members of the phylum Ascomycota, class Saccharomycetes (also called Hemiascomycetes) or Pichiomycetes. \emph{True yeasts} quite specifically refers to yeasts in the underlying order Saccharomycetales (such as \emph{Saccharomyces cerevisiae}). Thus, for all microorganisms that are member of the taxonomic class Saccharomycetes or Pichiomycetes, the function will return \code{TRUE}. It returns \code{FALSE} otherwise (or \code{NA} when the input is \code{NA} or the MO code is \code{UNKNOWN}).
 
-Determination of bacterial oxygen tolerance ([mo_oxygen_tolerance()]) will be based on BacDive, see *Source*. The function [mo_is_anaerobic()] only returns `TRUE` if the oxygen tolerance is `"anaerobe"`, indicting an obligate anaerobic species or genus. It always returns `FALSE` for species outside the taxonomic kingdom of Bacteria.
+Determination of intrinsic resistance (\code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}}) is based on the \link{intrinsic_resistant} data set, which is based on \href{https://www.eucast.org/bacteria/important-additional-information/expert-rules/}{'EUCAST Expected Resistant Phenotypes' v1.2} (2023). The \code{\link[=mo_is_intrinsic_resistant]{mo_is_intrinsic_resistant()}} function can be vectorised over both argument \code{x} (input for microorganisms) and \code{ab} (input for antimicrobials).
 
-The function [mo_url()] will return the direct URL to the online database entry, which also shows the scientific reference of the concerned species. [This MycoBank URL](`r TAXONOMY_VERSION$MycoBank$url`) will be used for fungi wherever available , [this LPSN URL](`r TAXONOMY_VERSION$MycoBank$url`) for bacteria wherever available, and [this GBIF link](`r TAXONOMY_VERSION$GBIF$url`) otherwise.
+Determination of both bacterial oxygen tolerance (\code{\link[=mo_oxygen_tolerance]{mo_oxygen_tolerance()}}) and morphology (\code{\link[=mo_morphology]{mo_morphology()}}) are  based on BacDive, see \emph{Source}. The function \code{\link[=mo_is_anaerobic]{mo_is_anaerobic()}} only returns \code{TRUE} if the oxygen tolerance is \code{"anaerobe"}, indicating an obligate anaerobic species or genus. It always returns \code{FALSE} for species outside the taxonomic kingdom of Bacteria.
 
-SNOMED codes ([mo_snomed()]) was last updated on `r documentation_date(TAXONOMY_VERSION$SNOMED$accessed_date)`. See *Source* and the [microorganisms] data set for more info.
+The function \code{\link[=mo_url]{mo_url()}} will return the direct URL to the online database entry, which also shows the scientific reference of the concerned species. \href{https://www.mycobank.org}{This MycoBank URL} is used for fungi wherever available , \href{https://www.mycobank.org}{this LPSN URL} for bacteria wherever available, and \href{https://www.gbif.org}{this GBIF link} otherwise.
 
-Old taxonomic names (so-called 'synonyms') can be retrieved with [mo_synonyms()] (which will have the scientific reference as [name][base::names()]), the current taxonomic name can be retrieved with [mo_current()]. Both functions return full names.
+SNOMED codes (\code{\link[=mo_snomed]{mo_snomed()}}) was last updated on 16th of July, 2024. See \emph{Source} and the \link{microorganisms} data set for more info.
 
-All output [will be translated][translate] where possible.
+Old taxonomic names (so-called 'synonyms') can be retrieved with \code{\link[=mo_synonyms]{mo_synonyms()}} (which will have the scientific reference as \link[base:names]{name}), the current taxonomic name can be retrieved with \code{\link[=mo_current]{mo_current()}}. Both functions return full names.
+
+All output \link[=translate]{will be translated} where possible.
 }
 \section{Matching Score for Microorganisms}{
 
@@ -8023,10 +8084,10 @@ This function uses \code{\link[=as.mo]{as.mo()}} internally, which uses an advan
 
 \itemize{
 \item Berends MS \emph{et al.} (2022). \strong{AMR: An R Package for Working with Antimicrobial Resistance Data}. \emph{Journal of Statistical Software}, 104(3), 1-31; \doi{10.18637/jss.v104.i03}
-\item Parte, AC \emph{et al.} (2020). \strong{List of Prokaryotic names with Standing in Nomenclature (LPSN) moves to the DSMZ.} International Journal of Systematic and Evolutionary Microbiology, 70, 5607-5612; \doi{10.1099/ijsem.0.004332}. Accessed from \url{https://lpsn.dsmz.de} on June 24th, 2024.
-\item Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on June 24th, 2024.
-\item GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset \doi{10.15468/39omei}. Accessed from \url{https://www.gbif.org} on June 24th, 2024.
-\item Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on July 16th, 2024.
+\item Freese, HM \emph{et al.} (2026). \strong{TYGS and LPSN in 2025: a Global Core Biodata Resource for genome-based classification and nomenclature of prokaryotes within DSMZ Digital Diversity.} Nucleic Acids Research, 54, D884–D891; \doi{10.1093/nar/gkaf1110}. Accessed from \url{https://lpsn.dsmz.de} on 7th of May, 2026.
+\item Vincent, R \emph{et al} (2013). \strong{MycoBank gearing up for new horizons.} IMA Fungus, 4(2), 371-9; \doi{10.5598/imafungus.2013.04.02.16}. Accessed from \url{https://www.mycobank.org} on 7th of May, 2026.
+\item Banki, O. \emph{et al.} (2026). Catalogue of Life (2026-04-18 XR). Catalogue of Life Foundation, Amsterdam, Netherlands. \doi{10.48580/dgxjw}. Accessed from \url{https://www.gbif.org} on 7th of May, 2026.
+\item Reimer, LC \emph{et al.} (2022). \strong{\emph{BacDive} in 2022: the knowledge base for standardized bacterial and archaeal data.} Nucleic Acids Res., 50(D1):D741-D74; \doi{10.1093/nar/gkab961}. Accessed from \url{https://bacdive.dsmz.de} on 7th of May, 2026.
 \item Public Health Information Network Vocabulary Access and Distribution System (PHIN VADS). US Edition of SNOMED CT from 1 September 2020. Value Set Name 'Microorganism', OID 2.16.840.1.114222.4.11.1009 (v12). URL: \url{https://www.cdc.gov/phin/php/phinvads/}
 \item Bartlett A \emph{et al.} (2022). \strong{A comprehensive list of bacterial pathogens infecting humans} \emph{Microbiology} 168:001269; \doi{10.1099/mic.0.001269}
 }
@@ -8063,8 +8124,10 @@ mo_shortname("Klebsiella pneumoniae")
 
 # other properties ---------------------------------------------------------
 
-mo_pathogenicity("Klebsiella pneumoniae")
+mo_morphology("Klebsiella pneumoniae")
 mo_gramstain("Klebsiella pneumoniae")
+mo_gramstain("Klebsiella pneumoniae", add_morphology = TRUE)
+mo_pathogenicity("Klebsiella pneumoniae")
 mo_snomed("Klebsiella pneumoniae")
 mo_type("Klebsiella pneumoniae")
 mo_rank("Klebsiella pneumoniae")
@@ -8759,9 +8822,6 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/proportion.Rd':
 \alias{proportion_df}
 \alias{sir_df}
 \title{Calculate Antimicrobial Resistance}
-\source{
-\strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
-}
 \usage{
 resistance(..., minimum = 30, as_percent = FALSE,
   only_all_tested = FALSE, guideline = getOption("AMR_guideline",
@@ -9019,6 +9079,9 @@ if (require("dplyr")) {
     sir_df(translate = FALSE)
 }
 }
+}
+\references{
+\strong{M39 Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data, 5th Edition}, 2022, \emph{Clinical and Laboratory Standards Institute (CLSI)}. \url{https://clsi.org/standards/products/microbiology/documents/m39/}.
 }
 \seealso{
 \code{\link[=count]{count()}} to count resistant and susceptible isolates.
@@ -9303,7 +9366,7 @@ top_n_microorganisms(x, n, property = "species", n_for_each = NULL,
 
 \item{n}{An integer specifying the maximum number of unique values of the \code{property} to include in the output.}
 
-\item{property}{A character string indicating the microorganism property to use for filtering. Must be one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. If \code{NULL}, the raw values from \code{col_mo} will be used without transformation. When using \code{"species"} (default) or \code{"subpecies"}, the genus will be added to make sure each (sub)species still belongs to the right genus.}
+\item{property}{A character string indicating the microorganism property to use for filtering. Must be one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. If \code{NULL}, the raw values from \code{col_mo} will be used without transformation. When using \code{"species"} (default) or \code{"subpecies"}, the genus will be added to make sure each (sub)species still belongs to the right genus.}
 
 \item{n_for_each}{An optional integer specifying the maximum number of rows to retain for each value of the selected property. If \code{NULL}, all rows within the top \emph{n} groups will be included.}
 
@@ -11050,12 +11113,12 @@ But in real data, incidence and susceptibility are **estimated from samples**, s
 Let:
 
 - $K$ be the number of pathogens,
-- $\alpha = (1, 1, \ldots, 1)$ be a **Dirichlet** prior (uniform),
-- $n = (n_1, \ldots, n_K)$ be the observed counts per species.
+- $\boldsymbol{\alpha} = (1, 1, \ldots, 1)$ be a $\text{Dirichlet}$ prior (uniform),
+- $\boldsymbol{n} = (n_1, \ldots, n_K)$ be the observed counts per species.
 
 Then the posterior incidence is:
 
-$$p \sim \text{Dirichlet}(\alpha_1 + n_1, \ldots, \alpha_K + n_K)$$
+$$\boldsymbol{p} \sim \text{Dirichlet}(\alpha_1 + n_1, \ldots, \alpha_K + n_K)$$
 
 To simulate from this, we use:
 
@@ -11063,12 +11126,13 @@ $$x_i \sim \text{Gamma}(\alpha_i + n_i,\ 1), \quad p_i = \frac{x_i}{\sum_{j=1}^{
 
 ### Susceptibility
 
-Each pathogen–regimen pair has a prior and data:
+Each pathogen--regimen pair has a prior and data:
 
-- Prior: $\text{Beta}(\alpha_0, \beta_0)$, with default $\alpha_0 = \beta_0 = 1$
+- Default prior: $\text{Beta}(0.5, 0.5)$ (Jeffreys prior)
+- Intrinsically resistant pairs: $\text{Beta}(1, 9999)$, forcing near-zero susceptibility regardless of observed data (based on EUCAST Expected Resistant Phenotypes)
 - Data: $S$ susceptible out of $N$ tested
 
-The $S$ category could also include values SDD (susceptible, dose-dependent) and I (intermediate [CLSI], or susceptible, increased exposure [EUCAST]).
+The $S$ category could also include values SDD (susceptible, dose-dependent) and I (intermediate \[CLSI\], or susceptible, increased exposure \[EUCAST\]).
 
 Then the posterior is:
 
@@ -11079,15 +11143,15 @@ $$\theta \sim \text{Beta}(\alpha_0 + S,\ \beta_0 + N - S)$$
 Putting it together:
 
 1. Simulate pathogen incidence: $\boldsymbol{p} \sim \text{Dirichlet}$
-2. Simulate susceptibility: $\theta_i \sim \text{Beta}(1 + S_i,\ 1 + R_i)$
+2. Simulate susceptibility: $\theta_i \sim \text{Beta}(\alpha_0 + S_i,\ \beta_0 + N_i - S_i)$
 3. Combine:
 
 $$\text{Coverage} = \sum_{i=1}^{K} p_i \cdot \theta_i$$
 
-Repeat this simulation (e.g. 1000×) and summarise:
+Repeat this simulation (e.g., 1000 times) and summarise:
 
 - **Mean** = expected coverage
-- **Quantiles** = credible interval
+- **Quantiles** = credible interval (95% by default)
 
 ## Practical use in the `AMR` package
 
