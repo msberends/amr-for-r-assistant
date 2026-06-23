@@ -588,7 +588,7 @@ License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
-Roxygen: list(markdown = TRUE, old_usage = TRUE)
+Roxygen: list(markdown = TRUE)
 
 
 
@@ -624,9 +624,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 <div style="display: flex; font-size: 0.8em;">
 
 <p style="text-align:left; width: 50%;">
+
 <small><a href="https://amr-for-r.org/">amr-for-r.org</a></small>
 </p>
+
 <p style="text-align:right; width: 50%;">
+
 <small><a href="https://doi.org/10.18637/jss.v104.i03" target="_blank">doi.org/10.18637/jss.v104.i03</a></small>
 </p>
 
@@ -769,26 +772,24 @@ example_isolates %>%
 #> ℹ Using column mo as input for `mo_fullname()`
 #> ℹ Using column mo as input for `mo_is_gram_negative()`
 #> ℹ Using column mo as input for `mo_is_intrinsic_resistant()`
-#> ℹ Determining intrinsic resistance based on 'EUCAST Expected
-#>   Resistant Phenotypes' v1.2 (2023). This note will be shown
-#>   once per session.
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB
-#>   (tobramycin), AMK (amikacin), and KAN (kanamycin)
-#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM
-#>   (meropenem)
+#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant
+#>   Phenotypes' v1.2 (2023). This note will be shown once per session.
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 #> # A tibble: 35 × 7
-#>    bacteria         GEN   TOB   AMK   KAN   IPM   MEM  
-#>    <chr>            <sir> <sir> <sir> <sir> <sir> <sir>
-#>  1 Pseudomonas aer… I     S     NA    R     S     NA   
-#>  2 Pseudomonas aer… I     S     NA    R     S     NA   
-#>  3 Pseudomonas aer… I     S     NA    R     S     NA   
-#>  4 Pseudomonas aer… S     S     S     R     NA    S    
-#>  5 Pseudomonas aer… S     S     S     R     S     S    
-#>  6 Pseudomonas aer… S     S     S     R     S     S    
-#>  7 Stenotrophomona… R     R     R     R     R     R    
-#>  8 Pseudomonas aer… S     S     S     R     NA    S    
-#>  9 Pseudomonas aer… S     S     S     R     NA    S    
-#> 10 Pseudomonas aer… S     S     S     R     S     S    
+#>    bacteria                     GEN   TOB   AMK   KAN   IPM   MEM  
+#>    <chr>                        <sir> <sir> <sir> <sir> <sir> <sir>
+#>  1 Pseudomonas aeruginosa       I     S     NA    R     S     NA   
+#>  2 Pseudomonas aeruginosa       I     S     NA    R     S     NA   
+#>  3 Pseudomonas aeruginosa       I     S     NA    R     S     NA   
+#>  4 Pseudomonas aeruginosa       S     S     S     R     NA    S    
+#>  5 Pseudomonas aeruginosa       S     S     S     R     S     S    
+#>  6 Pseudomonas aeruginosa       S     S     S     R     S     S    
+#>  7 Stenotrophomonas maltophilia R     R     R     R     R     R    
+#>  8 Pseudomonas aeruginosa       S     S     S     R     NA    S    
+#>  9 Pseudomonas aeruginosa       S     S     S     R     NA    S    
+#> 10 Pseudomonas aeruginosa       S     S     S     R     S     S    
 #> # ℹ 25 more rows
 ```
 
@@ -812,24 +813,23 @@ output format automatically (such as markdown, LaTeX, HTML, etc.).
 ``` r
 antibiogram(example_isolates,
             antimicrobials = c(aminoglycosides(), carbapenems()))
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB
-#>   (tobramycin), AMK (amikacin), and KAN (kanamycin)
-#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM
-#>   (meropenem)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 ```
 
-| Pathogen         | Amikacin             | Gentamicin          | Imipenem             | Kanamycin       | Meropenem            | Tobramycin          |
-|:-----------------|:---------------------|:--------------------|:---------------------|:----------------|:---------------------|:--------------------|
-| CoNS             | 0% (0-8%,N=43)       | 86% (82-90%,N=309)  | 52% (37-67%,N=48)    | 0% (0-8%,N=43)  | 52% (37-67%,N=48)    | 22% (12-35%,N=55)   |
-| *E. coli*        | 100% (98-100%,N=171) | 98% (96-99%,N=460)  | 100% (99-100%,N=422) | NA              | 100% (99-100%,N=418) | 97% (96-99%,N=462)  |
-| *E. faecalis*    | 0% (0-9%,N=39)       | 0% (0-9%,N=39)      | 100% (91-100%,N=38)  | 0% (0-9%,N=39)  | NA                   | 0% (0-9%,N=39)      |
-| *K. pneumoniae*  | NA                   | 90% (79-96%,N=58)   | 100% (93-100%,N=51)  | NA              | 100% (93-100%,N=53)  | 90% (79-96%,N=58)   |
-| *P. aeruginosa*  | NA                   | 100% (88-100%,N=30) | NA                   | 0% (0-12%,N=30) | NA                   | 100% (88-100%,N=30) |
-| *P. mirabilis*   | NA                   | 94% (80-99%,N=34)   | 94% (79-99%,N=32)    | NA              | NA                   | 94% (80-99%,N=34)   |
-| *S. aureus*      | NA                   | 99% (97-100%,N=233) | NA                   | NA              | NA                   | 98% (92-100%,N=86)  |
-| *S. epidermidis* | 0% (0-8%,N=44)       | 79% (71-85%,N=163)  | NA                   | 0% (0-8%,N=44)  | NA                   | 51% (40-61%,N=89)   |
-| *S. hominis*     | NA                   | 92% (84-97%,N=80)   | NA                   | NA              | NA                   | 85% (74-93%,N=62)   |
-| *S. pneumoniae*  | 0% (0-3%,N=117)      | 0% (0-3%,N=117)     | NA                   | 0% (0-3%,N=117) | NA                   | 0% (0-3%,N=117)     |
+| Pathogen | Amikacin | Gentamicin | Imipenem | Kanamycin | Meropenem | Tobramycin |
+|:---|:---|:---|:---|:---|:---|:---|
+| CoNS | 0% (0-8%,N=43) | 86% (82-90%,N=309) | 52% (37-67%,N=48) | 0% (0-8%,N=43) | 52% (37-67%,N=48) | 22% (12-35%,N=55) |
+| *E. coli* | 100% (98-100%,N=171) | 98% (96-99%,N=460) | 100% (99-100%,N=422) | NA | 100% (99-100%,N=418) | 97% (96-99%,N=462) |
+| *E. faecalis* | 0% (0-9%,N=39) | 0% (0-9%,N=39) | 100% (91-100%,N=38) | 0% (0-9%,N=39) | NA | 0% (0-9%,N=39) |
+| *K. pneumoniae* | NA | 90% (79-96%,N=58) | 100% (93-100%,N=51) | NA | 100% (93-100%,N=53) | 90% (79-96%,N=58) |
+| *P. aeruginosa* | NA | 100% (88-100%,N=30) | NA | 0% (0-12%,N=30) | NA | 100% (88-100%,N=30) |
+| *P. mirabilis* | NA | 94% (80-99%,N=34) | 94% (79-99%,N=32) | NA | NA | 94% (80-99%,N=34) |
+| *S. aureus* | NA | 99% (97-100%,N=233) | NA | NA | NA | 98% (92-100%,N=86) |
+| *S. epidermidis* | 0% (0-8%,N=44) | 79% (71-85%,N=163) | NA | 0% (0-8%,N=44) | NA | 51% (40-61%,N=89) |
+| *S. hominis* | NA | 92% (84-97%,N=80) | NA | NA | NA | 85% (74-93%,N=62) |
+| *S. pneumoniae* | 0% (0-3%,N=117) | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) |
 
 In combination antibiograms, it is clear that combined antimicrobials
 yield higher empiric coverage:
@@ -840,10 +840,10 @@ antibiogram(example_isolates,
             mo_transform = "gramstain")
 ```
 
-| Pathogen      | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
-|:--------------|:------------------------|:-------------------------------------|:-------------------------------------|
-| Gram-negative | 88% (85-91%,N=641)      | 99% (97-99%,N=691)                   | 98% (97-99%,N=693)                   |
-| Gram-positive | 86% (82-89%,N=345)      | 98% (96-98%,N=1044)                  | 95% (93-97%,N=550)                   |
+| Pathogen | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
+|:---|:---|:---|:---|
+| Gram-negative | 88% (85-91%,N=641) | 99% (97-99%,N=691) | 98% (97-99%,N=693) |
+| Gram-positive | 86% (82-89%,N=345) | 98% (96-98%,N=1044) | 95% (93-97%,N=550) |
 
 Like many other functions in this package, `antibiogram()` comes with
 support for 28 languages that are often detected automatically based on
@@ -916,18 +916,16 @@ example_isolates %>%
   summarise(across(c(GEN, TOB),
                    list(total_R = resistance,
                         conf_int = function(x) sir_confidence_interval(x, collapse = "-"))))
-#> ℹ `resistance()` assumes the EUCAST guideline and thus
-#>   considers the 'I' category susceptible. Set the `guideline`
-#>   argument or the `AMR_guideline` option to either "CLSI" or
-#>   "EUCAST", see `?AMR-options`.
+#> ℹ `resistance()` assumes the EUCAST guideline and thus considers the 'I'
+#>   category susceptible. Set the `guideline` argument or the `AMR_guideline`
+#>   option to either "CLSI" or "EUCAST", see `?AMR-options`.
 #> ℹ This message will be shown once per session.
 #> # A tibble: 3 × 5
-#>   ward       GEN_total_R GEN_conf_int TOB_total_R
-#>   <chr>            <dbl> <chr>              <dbl>
-#> 1 Clinical         0.229 0.205-0.254        0.315
-#> 2 ICU              0.290 0.253-0.33         0.400
-#> 3 Outpatient       0.2   0.131-0.285        0.368
-#> # ℹ 1 more variable: TOB_conf_int <chr>
+#>   ward       GEN_total_R GEN_conf_int TOB_total_R TOB_conf_int
+#>   <chr>            <dbl> <chr>              <dbl> <chr>       
+#> 1 Clinical         0.229 0.205-0.254        0.315 0.284-0.347 
+#> 2 ICU              0.290 0.253-0.33         0.400 0.353-0.449 
+#> 3 Outpatient       0.2   0.131-0.285        0.368 0.254-0.493
 ```
 
 Or use [antimicrobial
@@ -944,16 +942,15 @@ out <- example_isolates %>%
   # calculate AMR using resistance(), over all aminoglycosides and polymyxins:
   summarise(across(c(aminoglycosides(), polymyxins()),
             resistance))
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB
-#>   (tobramycin), AMK (amikacin), and KAN (kanamycin)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
+#>   (amikacin), and KAN (kanamycin)
 #> ℹ For `polymyxins()` using column COL (colistin)
 #> Warning: There was 1 warning in `summarise()`.
-#> ℹ In argument: `across(c(aminoglycosides(), polymyxins()),
-#>   resistance)`.
+#> ℹ In argument: `across(c(aminoglycosides(), polymyxins()), resistance)`.
 #> ℹ In group 3: `ward = "Outpatient"`.
 #> Caused by warning:
-#> ! Introducing NA: only 23 results available for KAN in group:
-#> ward = "Outpatient" (whilst `minimum = 30`).
+#> ! Introducing NA: only 23 results available for KAN in group: ward = "Outpatient"
+#> (whilst `minimum = 30`).
 out
 #> # A tibble: 3 × 6
 #>   ward         GEN   TOB   AMK   KAN   COL
@@ -967,12 +964,11 @@ out
 # transform the antibiotic columns to names:
 out %>% set_ab_names()
 #> # A tibble: 3 × 6
-#>   ward       gentamicin tobramycin amikacin kanamycin
-#>   <chr>           <dbl>      <dbl>    <dbl>     <dbl>
-#> 1 Clinical        0.229      0.315    0.626         1
-#> 2 ICU             0.290      0.400    0.662         1
-#> 3 Outpatient      0.2        0.368    0.605        NA
-#> # ℹ 1 more variable: colistin <dbl>
+#>   ward       gentamicin tobramycin amikacin kanamycin colistin
+#>   <chr>           <dbl>      <dbl>    <dbl>     <dbl>    <dbl>
+#> 1 Clinical        0.229      0.315    0.626         1    0.780
+#> 2 ICU             0.290      0.400    0.662         1    0.857
+#> 3 Outpatient      0.2        0.368    0.605        NA    0.889
 ```
 
 ``` r
@@ -1435,9 +1431,15 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/ab_from_text.Rd':
 \alias{ab_from_text}
 \title{Retrieve Antimicrobial Drug Names and Doses from Clinical Text}
 \usage{
-ab_from_text(text, type = c("drug", "dose", "administration"),
-  collapse = NULL, translate_ab = FALSE, thorough_search = NULL,
-  info = interactive(), ...)
+ab_from_text(
+  text,
+  type = c("drug", "dose", "administration"),
+  collapse = NULL,
+  translate_ab = FALSE,
+  thorough_search = NULL,
+  info = interactive(),
+  ...
+)
 }
 \arguments{
 \item{text}{Text to analyse.}
@@ -1579,8 +1581,13 @@ ab_url(x, open = FALSE, ...)
 
 ab_property(x, property = "name", language = get_AMR_locale(), ...)
 
-set_ab_names(data, ..., property = "name", language = get_AMR_locale(),
-  snake_case = NULL)
+set_ab_names(
+  data,
+  ...,
+  property = "name",
+  language = get_AMR_locale(),
+  snake_case = NULL
+)
 }
 \arguments{
 \item{x}{Any (vector of) text that can be coerced to a valid antibiotic drug code with \code{\link[=as.ab]{as.ab()}}.}
@@ -2006,8 +2013,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/age_groups.Rd':
 \alias{age_groups}
 \title{Split Ages into Age Groups}
 \usage{
-age_groups(x, split_at = c(0, 12, 25, 55, 75), names = NULL,
-  na.rm = FALSE)
+age_groups(x, split_at = c(0, 12, 25, 55, 75), names = NULL, na.rm = FALSE)
 }
 \arguments{
 \item{x}{Age, e.g. calculated with \code{\link[=age]{age()}}.}
@@ -2113,11 +2119,25 @@ all_disk()
 
 all_disk_predictors()
 
-step_mic_log2(recipe, ..., role = NA, trained = FALSE, columns = NULL,
-  skip = FALSE, id = recipes::rand_id("mic_log2"))
+step_mic_log2(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  columns = NULL,
+  skip = FALSE,
+  id = recipes::rand_id("mic_log2")
+)
 
-step_sir_numeric(recipe, ..., role = NA, trained = FALSE, columns = NULL,
-  skip = FALSE, id = recipes::rand_id("sir_numeric"))
+step_sir_numeric(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  columns = NULL,
+  skip = FALSE,
+  id = recipes::rand_id("sir_numeric")
+)
 }
 \arguments{
 \item{recipe}{A recipe object. The step will be added to the sequence of
@@ -2285,37 +2305,78 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/antibiogram.Rd':
 \alias{knit_print.antibiogram}
 \title{Generate Traditional, Combination, Syndromic, or WISCA Antibiograms}
 \usage{
-antibiogram(x, antimicrobials = where(is.sir), mo_transform = "shortname",
-  ab_transform = "name", syndromic_group = NULL, add_total_n = FALSE,
-  only_all_tested = FALSE, digits = ifelse(wisca, 1, 0),
-  formatting_type = getOption("AMR_antibiogram_formatting_type",
-  ifelse(wisca, 14, 18)), col_mo = NULL, language = get_AMR_locale(),
-  minimum = 30, combine_SI = TRUE, sep = " + ", sort_columns = TRUE,
-  wisca = FALSE, simulations = 1000, conf_interval = 0.95,
-  interval_side = "two-tailed", info = interactive(), parallel = FALSE,
-  ...)
-
-wisca(x, antimicrobials = where(is.sir), ab_transform = "name",
-  syndromic_group = NULL, only_all_tested = FALSE, digits = 1,
+wisca(
+  x,
+  antimicrobials = where(is.sir),
+  ab_transform = "name",
+  syndromic_group = NULL,
+  only_all_tested = FALSE,
+  digits = 1,
   formatting_type = getOption("AMR_antibiogram_formatting_type", 14),
-  col_mo = NULL, language = get_AMR_locale(), combine_SI = TRUE,
-  sep = " + ", sort_columns = TRUE, simulations = 1000,
-  conf_interval = 0.95, interval_side = "two-tailed",
-  info = interactive(), parallel = FALSE, ...)
+  col_mo = NULL,
+  language = get_AMR_locale(),
+  combine_SI = TRUE,
+  sep = " + ",
+  sort_columns = TRUE,
+  simulations = 1000,
+  conf_interval = 0.95,
+  interval_side = "two-tailed",
+  info = interactive(),
+  parallel = FALSE,
+  ...
+)
+
+antibiogram(
+  x,
+  antimicrobials = where(is.sir),
+  mo_transform = "shortname",
+  ab_transform = "name",
+  syndromic_group = NULL,
+  add_total_n = FALSE,
+  only_all_tested = FALSE,
+  digits = ifelse(wisca, 1, 0),
+  formatting_type = getOption("AMR_antibiogram_formatting_type", ifelse(wisca, 14, 18)),
+  col_mo = NULL,
+  language = get_AMR_locale(),
+  minimum = 30,
+  combine_SI = TRUE,
+  sep = " + ",
+  sort_columns = TRUE,
+  wisca = FALSE,
+  simulations = 1000,
+  conf_interval = 0.95,
+  interval_side = "two-tailed",
+  info = interactive(),
+  parallel = FALSE,
+  ...
+)
 
 retrieve_wisca_parameters(wisca_model, ...)
 
 \method{plot}{antibiogram}(x, ...)
 
-\method{autoplot}{antibiogram}(object, geom = c("pointrange", "point", "col",
-  "bar", "errorbar"), ci = TRUE, sort = TRUE, flip = NULL,
-  caption = NULL, ...)
+\method{autoplot}{antibiogram}(
+  object,
+  geom = c("pointrange", "point", "col", "bar", "errorbar"),
+  ci = TRUE,
+  sort = TRUE,
+  flip = NULL,
+  caption = NULL,
+  ...
+)
 
-wisca_plot(wisca_model, wisca_plot_type = c("susceptibility_incidence",
-  "posterior_coverage"), ...)
+wisca_plot(
+  wisca_model,
+  wisca_plot_type = c("susceptibility_incidence", "posterior_coverage"),
+  ...
+)
 
-\method{knit_print}{antibiogram}(x, italicise = TRUE,
-  na = getOption("knitr.kable.NA", default = ""), ...)
+\method{knit_print}{antibiogram}(
+  x,
+  italicise = TRUE,
+  na = getOption("knitr.kable.NA", default = ""),
+  ...
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} containing at least a column with microorganisms and columns with antimicrobial results (class 'sir', see \code{\link[=as.sir]{as.sir()}}).}
@@ -2341,13 +2402,9 @@ wisca_plot(wisca_model, wisca_plot_type = c("susceptibility_incidence",
 }
 }}
 
-\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
-
 \item{ab_transform}{A character to transform antimicrobial input - must be one of the column names of the \link{antimicrobials} data set (defaults to \code{"name"}): \code{"ab"}, \code{"cid"}, \code{"name"}, \code{"group"}, \code{"atc"}, \code{"atc_group1"}, \code{"atc_group2"}, \code{"abbreviations"}, \code{"synonyms"}, \code{"oral_ddd"}, \code{"oral_units"}, \code{"iv_ddd"}, \code{"iv_units"}, or \code{"loinc"}. Can also be \code{NULL} to not transform the input.}
 
 \item{syndromic_group}{A column name of \code{x}, or values calculated to split rows of \code{x}, e.g. by using \code{\link[=ifelse]{ifelse()}} or \code{\link[dplyr:case-and-replace-when]{case_when()}}. See \emph{Examples}.}
-
-\item{add_total_n}{\emph{(deprecated in favour of \code{formatting_type})} A \link{logical} to indicate whether \code{n_tested} available numbers per pathogen should be added to the table (default is \code{TRUE}). This will add the lowest and highest number of available isolates per antimicrobial (e.g, if for \emph{E. coli} 200 isolates are available for ciprofloxacin and 150 for amoxicillin, the returned number will be "150-200"). This option is unavailable when \code{wisca = TRUE}; in that case, use \code{\link[=retrieve_wisca_parameters]{retrieve_wisca_parameters()}} to get the parameters used for WISCA.}
 
 \item{only_all_tested}{(for combination antibiograms): a \link{logical} to indicate that isolates must be tested for all antimicrobials, see \emph{Details}.}
 
@@ -2359,17 +2416,11 @@ wisca_plot(wisca_model, wisca_plot_type = c("susceptibility_incidence",
 
 \item{language}{Language to translate text, which defaults to the system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}).}
 
-\item{minimum}{The minimum allowed number of available (tested) isolates. Any isolate count lower than \code{minimum} will return \code{NA} with a warning. The default number of \code{30} isolates is advised by the Clinical and Laboratory Standards Institute (CLSI) as best practice, see \emph{Source}.}
-
 \item{combine_SI}{A \link{logical} to indicate whether all susceptibility should be determined by results of either S, SDD, or I, instead of only S (default is \code{TRUE}).}
 
 \item{sep}{A separating character for antimicrobial columns in combination antibiograms.}
 
 \item{sort_columns}{A \link{logical} to indicate whether the antimicrobial columns must be sorted on name.}
-
-\item{wisca}{A \link{logical} to indicate whether a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) must be generated (default is \code{FALSE}). This will use a Bayesian decision model to estimate regimen coverage probabilities using \href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo simulations}. Per \doi{10.1093/jac/dkv397}, susceptibility priors are \eqn{\beta(0.5, 0.5)} (Jeffreys) and intrinsically resistant pairs (based on \link{intrinsic_resistant}) use \eqn{\beta(1, 9999)}.
-
-Set \code{simulations}, \code{conf_interval}, and \code{interval_side} to adjust.}
 
 \item{simulations}{(for WISCA) a numerical value to set the number of Monte Carlo simulations.}
 
@@ -2382,6 +2433,16 @@ Set \code{simulations}, \code{conf_interval}, and \code{interval_side} to adjust
 \item{parallel}{A \link{logical} to indicate if parallel computing must be used, defaults to \code{FALSE}. Requires the \code{\link[future.apply:future_lapply]{future.apply}} package. For WISCA, Monte Carlo simulations are distributed across workers; for grouped antibiograms, each group is processed by a separate worker. \strong{A non-sequential \code{\link[future:plan]{future::plan()}} must already be active before setting \code{parallel = TRUE}} -- for example, \code{future::plan(future::multisession)}. An error is thrown if \code{parallel = TRUE} is used without a plan set by the user.}
 
 \item{...}{Currently unused.}
+
+\item{mo_transform}{A character to transform microorganism input - must be \code{"name"}, \code{"shortname"} (default), \code{"gramstain"}, or one of the column names of the \link{microorganisms} data set: \code{"mo"}, \code{"fullname"}, \code{"status"}, \code{"domain"}, \code{"kingdom"}, \code{"phylum"}, \code{"class"}, \code{"order"}, \code{"family"}, \code{"genus"}, \code{"species"}, \code{"subspecies"}, \code{"rank"}, \code{"ref"}, \code{"oxygen_tolerance"}, \code{"morphology"}, \code{"source"}, \code{"lpsn"}, \code{"lpsn_parent"}, \code{"lpsn_renamed_to"}, \code{"mycobank"}, \code{"mycobank_parent"}, \code{"mycobank_renamed_to"}, \code{"gbif"}, \code{"gbif_parent"}, \code{"gbif_renamed_to"}, \code{"prevalence"}, or \code{"snomed"}. Can also be \code{NULL} to not transform the input or \code{NA} to consider all microorganisms 'unknown'.}
+
+\item{add_total_n}{\emph{(deprecated in favour of \code{formatting_type})} A \link{logical} to indicate whether \code{n_tested} available numbers per pathogen should be added to the table (default is \code{TRUE}). This will add the lowest and highest number of available isolates per antimicrobial (e.g, if for \emph{E. coli} 200 isolates are available for ciprofloxacin and 150 for amoxicillin, the returned number will be "150-200"). This option is unavailable when \code{wisca = TRUE}; in that case, use \code{\link[=retrieve_wisca_parameters]{retrieve_wisca_parameters()}} to get the parameters used for WISCA.}
+
+\item{minimum}{The minimum allowed number of available (tested) isolates. Any isolate count lower than \code{minimum} will return \code{NA} with a warning. The default number of \code{30} isolates is advised by the Clinical and Laboratory Standards Institute (CLSI) as best practice, see \emph{Source}.}
+
+\item{wisca}{A \link{logical} to indicate whether a Weighted-Incidence Syndromic Combination Antibiogram (WISCA) must be generated (default is \code{FALSE}). This will use a Bayesian decision model to estimate regimen coverage probabilities using \href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo simulations}. Per \doi{10.1093/jac/dkv397}, susceptibility priors are \eqn{\beta(0.5, 0.5)} (Jeffreys) and intrinsically resistant pairs (based on \link{intrinsic_resistant}) use \eqn{\beta(1, 9999)}.
+
+Set \code{simulations}, \code{conf_interval}, and \code{interval_side} to adjust.}
 
 \item{wisca_model}{The outcome of \code{\link[=wisca]{wisca()}} or \code{\link[=antibiogram]{antibiogram(..., wisca = TRUE)}}.}
 
@@ -2795,8 +2856,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/antimicrobial_selectors.Rd':
 \alias{not_intrinsic_resistant}
 \title{Antimicrobial Selectors}
 \usage{
-aminoglycosides(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+aminoglycosides(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 aminopenicillins(only_sir_columns = FALSE, return_all = TRUE, ...)
 
@@ -2804,41 +2869,68 @@ antifungals(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 antimycobacterials(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-betalactams(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+betalactams(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
-betalactams_with_inhibitor(only_sir_columns = FALSE, return_all = TRUE,
-  ...)
+betalactams_with_inhibitor(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-carbapenems(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+carbapenems(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
-cephalosporins(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+cephalosporins(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 cephalosporins_1st(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 cephalosporins_2nd(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-cephalosporins_3rd(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+cephalosporins_3rd(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 cephalosporins_4th(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 cephalosporins_5th(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-fluoroquinolones(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+fluoroquinolones(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 glycopeptides(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 ionophores(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-isoxazolylpenicillins(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+isoxazolylpenicillins(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
-lincosamides(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+lincosamides(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 lipoglycopeptides(only_sir_columns = FALSE, return_all = TRUE, ...)
 
@@ -2858,11 +2950,19 @@ phenicols(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 phosphonics(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-polymyxins(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+polymyxins(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
-quinolones(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+quinolones(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 rifamycins(only_sir_columns = FALSE, return_all = TRUE, ...)
 
@@ -2872,25 +2972,43 @@ streptogramins(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 sulfonamides(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-tetracyclines(only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+tetracyclines(
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 trimethoprims(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 ureidopenicillins(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-amr_class(amr_class, only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+amr_class(
+  amr_class,
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
-amr_selector(filter, only_sir_columns = FALSE, only_treatable = TRUE,
-  return_all = TRUE, ...)
+amr_selector(
+  filter,
+  only_sir_columns = FALSE,
+  only_treatable = TRUE,
+  return_all = TRUE,
+  ...
+)
 
 administrable_per_os(only_sir_columns = FALSE, return_all = TRUE, ...)
 
 administrable_iv(only_sir_columns = FALSE, return_all = TRUE, ...)
 
-not_intrinsic_resistant(only_sir_columns = FALSE, col_mo = NULL,
-  version_expected_phenotypes = 1.2, ...)
+not_intrinsic_resistant(
+  only_sir_columns = FALSE,
+  col_mo = NULL,
+  version_expected_phenotypes = 1.2,
+  ...
+)
 }
 \arguments{
 \item{only_sir_columns}{A \link{logical} to indicate whether only antimicrobial columns must be included that were transformed to class \link[=as.sir]{sir} on beforehand. Defaults to \code{FALSE}.}
@@ -3297,8 +3415,13 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.ab.Rd':
 \alias{NA_ab_}
 \title{Transform Input to an Antibiotic ID}
 \usage{
-as.ab(x, flag_multiple_results = TRUE, language = get_AMR_locale(),
-  info = interactive(), ...)
+as.ab(
+  x,
+  flag_multiple_results = TRUE,
+  language = get_AMR_locale(),
+  info = interactive(),
+  ...
+)
 
 is.ab(x)
 
@@ -3606,15 +3729,19 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.mic.Rd':
 \alias{droplevels.mic}
 \title{Transform Input to Minimum Inhibitory Concentrations (MIC)}
 \usage{
-as.mic(x, na.rm = FALSE, keep_operators = "all",
-  round_to_next_log2 = FALSE)
+as.mic(x, na.rm = FALSE, keep_operators = "all", round_to_next_log2 = FALSE)
 
 is.mic(x)
 
 NA_mic_
 
-rescale_mic(x, mic_range, keep_operators = "edges", as.mic = TRUE,
-  round_to_next_log2 = FALSE)
+rescale_mic(
+  x,
+  mic_range,
+  keep_operators = "edges",
+  as.mic = TRUE,
+  round_to_next_log2 = FALSE
+)
 
 mic_p50(x, na.rm = FALSE, ...)
 
@@ -3767,14 +3894,20 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/as.mo.Rd':
 \alias{NA_mo_}
 \title{Transform Arbitrary Input to Valid Microbial Taxonomy}
 \usage{
-as.mo(x, Becker = FALSE, Lancefield = FALSE,
+as.mo(
+  x,
+  Becker = FALSE,
+  Lancefield = FALSE,
   minimum_matching_score = NULL,
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
   reference_df = get_mo_source(),
   ignore_pattern = getOption("AMR_ignore_pattern", NULL),
   cleaning_regex = getOption("AMR_cleaning_regex", mo_cleaning_regex()),
   only_fungi = getOption("AMR_only_fungi", FALSE),
-  language = get_AMR_locale(), info = interactive(), ...)
+  language = get_AMR_locale(),
+  info = interactive(),
+  ...
+)
 
 is.mo(x)
 
@@ -4054,48 +4187,86 @@ is.sir(x)
 
 is_sir_eligible(x, threshold = 0.05)
 
-\method{as.sir}{default}(x, S = "^(S|U|1)+$", I = "^(I|2)+$",
-  R = "^(R|3)+$", NI = "^(N|NI|V|4)+$", SDD = "^(SDD|D|H|5)+$",
-  WT = "^(WT|6)+$", NWT = "^(NWT|7)+$", NS = "^(NS|8)+$",
-  info = interactive(), ...)
+\method{as.sir}{default}(
+  x,
+  S = "^(S|U|1)+$",
+  I = "^(I|2)+$",
+  R = "^(R|3)+$",
+  NI = "^(N|NI|V|4)+$",
+  SDD = "^(SDD|D|H|5)+$",
+  WT = "^(WT|6)+$",
+  NWT = "^(NWT|7)+$",
+  NS = "^(NS|8)+$",
+  info = interactive(),
+  ...
+)
 
-\method{as.sir}{mic}(x, mo = NULL, ab = deparse(substitute(x)),
-  guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
+\method{as.sir}{mic}(
+  x,
+  mo = NULL,
+  ab = deparse(substitute(x)),
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  uti = NULL,
   capped_mic_handling = getOption("AMR_capped_mic_handling", "standard"),
   as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
-  FALSE), include_screening = getOption("AMR_include_screening", FALSE),
+    FALSE),
+  include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
-  conserve_capped_values = NULL, ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  host = NULL,
+  language = get_AMR_locale(),
+  verbose = FALSE,
+  info = interactive(),
+  conserve_capped_values = NULL,
+  ...
+)
 
-\method{as.sir}{disk}(x, mo = NULL, ab = deparse(substitute(x)),
-  guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
+\method{as.sir}{disk}(
+  x,
+  mo = NULL,
+  ab = deparse(substitute(x)),
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  uti = NULL,
   as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
-  FALSE), include_screening = getOption("AMR_include_screening", FALSE),
+    FALSE),
+  include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
-  ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  host = NULL,
+  language = get_AMR_locale(),
+  verbose = FALSE,
+  info = interactive(),
+  ...
+)
 
-\method{as.sir}{data.frame}(x, ..., col_mo = NULL,
-  guideline = getOption("AMR_guideline", "EUCAST"), uti = NULL,
+\method{as.sir}{data.frame}(
+  x,
+  ...,
+  col_mo = NULL,
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  uti = NULL,
   capped_mic_handling = getOption("AMR_capped_mic_handling", "standard"),
   as_wt_nwt = identical(breakpoint_type, "ECOFF"),
   add_intrinsic_resistance = FALSE,
   reference_data = AMR::clinical_breakpoints,
   substitute_missing_r_breakpoint = getOption("AMR_substitute_missing_r_breakpoint",
-  FALSE), include_screening = getOption("AMR_include_screening", FALSE),
+    FALSE),
+  include_screening = getOption("AMR_include_screening", FALSE),
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), host = NULL,
-  language = get_AMR_locale(), verbose = FALSE, info = interactive(),
-  parallel = FALSE, conserve_capped_values = NULL)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  host = NULL,
+  language = get_AMR_locale(),
+  verbose = FALSE,
+  info = interactive(),
+  parallel = FALSE,
+  conserve_capped_values = NULL
+)
 
 sir_interpretation_history(clean = FALSE)
 }
@@ -4532,9 +4703,13 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/atc_online.Rd':
 \url{https://atcddd.fhi.no/atc_ddd_alterations__cumulative/ddd_alterations/abbrevations/}
 }
 \usage{
-atc_online_property(atc_code, property, administration = "O",
+atc_online_property(
+  atc_code,
+  property,
+  administration = "O",
   url = "https://atcddd.fhi.no/atc_ddd_index/?code=\%s&showdescription=no",
-  url_vet = "https://atcddd.fhi.no/atcvet/atcvet_index/?code=\%s&showdescription=no")
+  url_vet = "https://atcddd.fhi.no/atcvet/atcvet_index/?code=\%s&showdescription=no"
+)
 
 atc_online_groups(atc_code, ...)
 
@@ -4614,9 +4789,15 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/av_from_text.Rd':
 \alias{av_from_text}
 \title{Retrieve Antiviral Drug Names and Doses from Clinical Text}
 \usage{
-av_from_text(text, type = c("drug", "dose", "administration"),
-  collapse = NULL, translate_av = FALSE, thorough_search = NULL,
-  info = interactive(), ...)
+av_from_text(
+  text,
+  type = c("drug", "dose", "administration"),
+  collapse = NULL,
+  translate_av = FALSE,
+  thorough_search = NULL,
+  info = interactive(),
+  ...
+)
 }
 \arguments{
 \item{text}{Text to analyse.}
@@ -4847,14 +5028,26 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/bug_drug_combinations.Rd':
 \alias{format.bug_drug_combinations}
 \title{Determine Bug-Drug Combinations}
 \usage{
-bug_drug_combinations(x, col_mo = NULL, FUN = mo_shortname,
-  include_n_rows = FALSE, ...)
+bug_drug_combinations(
+  x,
+  col_mo = NULL,
+  FUN = mo_shortname,
+  include_n_rows = FALSE,
+  ...
+)
 
-\method{format}{bug_drug_combinations}(x, translate_ab = "name (ab, atc)",
-  language = get_AMR_locale(), minimum = 30, combine_SI = TRUE,
-  add_ab_group = TRUE, remove_intrinsic_resistant = FALSE,
-  decimal.mark = getOption("OutDec"), big.mark = ifelse(decimal.mark ==
-  ",", ".", ","), ...)
+\method{format}{bug_drug_combinations}(
+  x,
+  translate_ab = "name (ab, atc)",
+  language = get_AMR_locale(),
+  minimum = 30,
+  combine_SI = TRUE,
+  add_ab_group = TRUE,
+  remove_intrinsic_resistant = FALSE,
+  decimal.mark = getOption("OutDec"),
+  big.mark = ifelse(decimal.mark == ",", ".", ","),
+  ...
+)
 }
 \arguments{
 \item{x}{A data set with antimicrobials columns, such as \code{amox}, \code{AMX} and \code{AMC}.}
@@ -5031,11 +5224,17 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/count.Rd':
 \alias{count_df}
 \title{Count Available Isolates}
 \usage{
-count_resistant(..., only_all_tested = FALSE,
-  guideline = getOption("AMR_guideline", "EUCAST"))
+count_resistant(
+  ...,
+  only_all_tested = FALSE,
+  guideline = getOption("AMR_guideline", "EUCAST")
+)
 
-count_susceptible(..., only_all_tested = FALSE,
-  guideline = getOption("AMR_guideline", "EUCAST"))
+count_susceptible(
+  ...,
+  only_all_tested = FALSE,
+  guideline = getOption("AMR_guideline", "EUCAST")
+)
 
 count_S(..., only_all_tested = FALSE)
 
@@ -5051,8 +5250,12 @@ count_all(..., only_all_tested = FALSE)
 
 n_sir(..., only_all_tested = FALSE)
 
-count_df(data, translate_ab = "name", language = get_AMR_locale(),
-  combine_SI = TRUE)
+count_df(
+  data,
+  translate_ab = "name",
+  language = get_AMR_locale(),
+  combine_SI = TRUE
+)
 }
 \arguments{
 \item{...}{One or more vectors (or columns) with antibiotic interpretations. They will be transformed internally with \code{\link[=as.sir]{as.sir()}} if needed.}
@@ -5734,9 +5937,13 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/export_ncbi_biosample.Rd':
 \alias{export_ncbi_biosample}
 \title{Export Data Set as NCBI BioSample Antibiogram}
 \usage{
-export_ncbi_biosample(x, filename = paste0("biosample_", format(Sys.time(),
-  "\%Y-\%m-\%d-\%H\%M\%S"), ".xlsx"), type = "pathogen MIC",
-  columns = where(is.mic), save_as_xlsx = TRUE)
+export_ncbi_biosample(
+  x,
+  filename = paste0("biosample_", format(Sys.time(), "\%Y-\%m-\%d-\%H\%M\%S"), ".xlsx"),
+  type = "pathogen MIC",
+  columns = where(is.mic),
+  save_as_xlsx = TRUE
+)
 }
 \arguments{
 \item{x}{A data set.}
@@ -5763,18 +5970,38 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/first_isolate.Rd':
 \alias{filter_first_isolate}
 \title{Determine First Isolates}
 \usage{
-first_isolate(x = NULL, col_date = NULL, col_patient_id = NULL,
-  col_mo = NULL, col_testcode = NULL, col_specimen = NULL,
-  col_icu = NULL, col_keyantimicrobials = NULL, episode_days = 365,
-  testcodes_exclude = NULL, icu_exclude = FALSE, specimen_group = NULL,
-  type = "points", method = c("phenotype-based", "episode-based",
-  "patient-based", "isolate-based"), ignore_I = TRUE, points_threshold = 2,
-  info = interactive(), include_unknown = FALSE,
-  include_untested_sir = TRUE, ...)
+first_isolate(
+  x = NULL,
+  col_date = NULL,
+  col_patient_id = NULL,
+  col_mo = NULL,
+  col_testcode = NULL,
+  col_specimen = NULL,
+  col_icu = NULL,
+  col_keyantimicrobials = NULL,
+  episode_days = 365,
+  testcodes_exclude = NULL,
+  icu_exclude = FALSE,
+  specimen_group = NULL,
+  type = "points",
+  method = c("phenotype-based", "episode-based", "patient-based", "isolate-based"),
+  ignore_I = TRUE,
+  points_threshold = 2,
+  info = interactive(),
+  include_unknown = FALSE,
+  include_untested_sir = TRUE,
+  ...
+)
 
-filter_first_isolate(x = NULL, col_date = NULL, col_patient_id = NULL,
-  col_mo = NULL, episode_days = 365, method = c("phenotype-based",
-  "episode-based", "patient-based", "isolate-based"), ...)
+filter_first_isolate(
+  x = NULL,
+  col_date = NULL,
+  col_patient_id = NULL,
+  col_mo = NULL,
+  episode_days = 365,
+  method = c("phenotype-based", "episode-based", "patient-based", "isolate-based"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} containing isolates. Can be left blank for automatic determination, see \emph{Examples}.}
@@ -5994,7 +6221,7 @@ A list with class \code{"htest"} containing the following
     \code{(observed - expected) / sqrt(expected)}.}
   \item{stdres}{standardized residuals,
     \code{(observed - expected) / sqrt(V)}, where \code{V} is the
-    residual cell variance {(\if{html}{\out{<a href="#reference+chisq.test.Rd+R+3AAgresti+3A2007" class="citation">}}Agresti 2007\if{html}{\out{</a>}}, section 2.4.5)}
+    residual cell variance (Agresti, 2007, section 2.4.5
     for the case where \code{x} is a matrix, \code{n * p * (1 - p)} otherwise).}
 }
 \description{
@@ -6313,13 +6540,30 @@ As per their GPL-2 licence that demands documentation of code changes, the chang
 }
 }
 \usage{
-ggplot_pca(x, choices = 1:2, scale = 1, pc.biplot = TRUE,
-  labels = NULL, labels_textsize = 3, labels_text_placement = 1.5,
-  groups = NULL, ellipse = TRUE, ellipse_prob = 0.68,
-  ellipse_size = 0.5, ellipse_alpha = 0.5, points_size = 2,
-  points_alpha = 0.25, arrows = TRUE, arrows_colour = "darkblue",
-  arrows_size = 0.5, arrows_textsize = 3, arrows_textangled = TRUE,
-  arrows_alpha = 0.75, base_textsize = 10, ...)
+ggplot_pca(
+  x,
+  choices = 1:2,
+  scale = 1,
+  pc.biplot = TRUE,
+  labels = NULL,
+  labels_textsize = 3,
+  labels_text_placement = 1.5,
+  groups = NULL,
+  ellipse = TRUE,
+  ellipse_prob = 0.68,
+  ellipse_size = 0.5,
+  ellipse_alpha = 0.5,
+  points_size = 2,
+  points_alpha = 0.25,
+  arrows = TRUE,
+  arrows_colour = "darkblue",
+  arrows_size = 0.5,
+  arrows_textsize = 3,
+  arrows_textangled = TRUE,
+  arrows_alpha = 0.75,
+  base_textsize = 10,
+  ...
+)
 }
 \arguments{
 \item{x}{An object returned by \code{\link[=pca]{pca()}}, \code{\link[=prcomp]{prcomp()}} or \code{\link[=princomp]{princomp()}}.}
@@ -6338,9 +6582,8 @@ ggplot_pca(x, choices = 1:2, scale = 1, pc.biplot = TRUE,
   }
 
 \item{pc.biplot}{
-    If true, use what {\if{html}{\cite{}\out{<a href="#reference+biplot.princomp.Rd+R+3AGabriel+3A1971" class="citation">}}Gabriel (1971)\if{html}{\out{</a>}}} refers to as a
-    \dQuote{principal component biplot},
-    with \code{lambda = 1} and observations scaled up by sqrt(n) and
+    If true, use what Gabriel (1971) refers to as a "principal component
+    biplot", with \code{lambda = 1} and observations scaled up by sqrt(n) and
     variables scaled down by sqrt(n).  Then inner products between
     variables approximate covariances and distances between observations
     approximate Mahalanobis distance.
@@ -6440,18 +6683,42 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/ggplot_sir.Rd':
 \alias{geom_sir}
 \title{AMR Plots with \code{ggplot2}}
 \usage{
-ggplot_sir(data, position = NULL, x = "antibiotic",
-  fill = "interpretation", facet = NULL, breaks = seq(0, 1, 0.1),
-  limits = NULL, translate_ab = "name", combine_SI = TRUE,
-  minimum = 30, language = get_AMR_locale(), nrow = NULL, colours = c(S
-  = "#3CAEA3", SDD = "#8FD6C4", SI = "#3CAEA3", I = "#F6D55C", IR = "#ED553B",
-  R = "#ED553B"), datalabels = TRUE, datalabels.size = 2.5,
-  datalabels.colour = "grey15", title = NULL, subtitle = NULL,
-  caption = NULL, x.title = "Antimicrobial", y.title = "Proportion", ...)
+ggplot_sir(
+  data,
+  position = NULL,
+  x = "antibiotic",
+  fill = "interpretation",
+  facet = NULL,
+  breaks = seq(0, 1, 0.1),
+  limits = NULL,
+  translate_ab = "name",
+  combine_SI = TRUE,
+  minimum = 30,
+  language = get_AMR_locale(),
+  nrow = NULL,
+  colours = c(S = "#3CAEA3", SDD = "#8FD6C4", SI = "#3CAEA3", I = "#F6D55C", IR =
+    "#ED553B", R = "#ED553B"),
+  datalabels = TRUE,
+  datalabels.size = 2.5,
+  datalabels.colour = "grey15",
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  x.title = "Antimicrobial",
+  y.title = "Proportion",
+  ...
+)
 
-geom_sir(position = NULL, x = c("antibiotic", "interpretation"),
-  fill = "interpretation", translate_ab = "name", minimum = 30,
-  language = get_AMR_locale(), combine_SI = TRUE, ...)
+geom_sir(
+  position = NULL,
+  x = c("antibiotic", "interpretation"),
+  fill = "interpretation",
+  translate_ab = "name",
+  minimum = 30,
+  language = get_AMR_locale(),
+  combine_SI = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{A \link{data.frame} with column(s) of class \code{\link{sir}} (see \code{\link[=as.sir]{as.sir()}}).}
@@ -6629,8 +6896,12 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/guess_ab_col.Rd':
 \alias{guess_ab_col}
 \title{Guess Antibiotic Column}
 \usage{
-guess_ab_col(x = NULL, search_string = NULL, verbose = FALSE,
-  only_sir_columns = FALSE)
+guess_ab_col(
+  x = NULL,
+  search_string = NULL,
+  verbose = FALSE,
+  only_sir_columns = FALSE
+)
 }
 \arguments{
 \item{x}{A \link{data.frame}.}
@@ -6687,21 +6958,42 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/interpretive_rules.Rd':
 \alias{eucast_dosage}
 \title{Apply Interpretive Rules}
 \usage{
-interpretive_rules(x, col_mo = NULL, info = interactive(),
+interpretive_rules(
+  x,
+  col_mo = NULL,
+  info = interactive(),
   rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
-  "expected_phenotypes")), guideline = getOption("AMR_guideline", "EUCAST"),
-  verbose = FALSE, version_breakpoints = 16,
-  version_expected_phenotypes = 1.2, version_expertrules = 3.3,
-  ampc_cephalosporin_resistance = NA, only_sir_columns = any(is.sir(x)),
-  custom_rules = NULL, overwrite = FALSE, add_if_missing = TRUE, ...)
+    "expected_phenotypes")),
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  verbose = FALSE,
+  version_breakpoints = 16,
+  version_expected_phenotypes = 1.2,
+  version_expertrules = 3.3,
+  ampc_cephalosporin_resistance = NA,
+  only_sir_columns = any(is.sir(x)),
+  custom_rules = NULL,
+  overwrite = FALSE,
+  add_if_missing = TRUE,
+  ...
+)
 
-eucast_rules(x, col_mo = NULL, info = interactive(),
+eucast_rules(
+  x,
+  col_mo = NULL,
+  info = interactive(),
   rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
-  "expected_phenotypes")), ...)
+    "expected_phenotypes")),
+  ...
+)
 
-clsi_rules(x, col_mo = NULL, info = interactive(),
+clsi_rules(
+  x,
+  col_mo = NULL,
+  info = interactive(),
   rules = getOption("AMR_interpretive_rules", default = c("breakpoints",
-  "expected_phenotypes")), ...)
+    "expected_phenotypes")),
+  ...
+)
 
 eucast_dosage(ab, administration = "iv", version_breakpoints = 15)
 }
@@ -7024,19 +7316,31 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/key_antimicrobials.Rd':
 \alias{antimicrobials_equal}
 \title{(Key) Antimicrobials for First Weighted Isolates}
 \usage{
-key_antimicrobials(x = NULL, col_mo = NULL, universal = c("ampicillin",
-  "amoxicillin/clavulanic acid", "cefuroxime", "piperacillin/tazobactam",
-  "ciprofloxacin", "trimethoprim/sulfamethoxazole"),
-  gram_negative = c("gentamicin", "tobramycin", "colistin", "cefotaxime",
-  "ceftazidime", "meropenem"), gram_positive = c("vancomycin", "teicoplanin",
-  "tetracycline", "erythromycin", "oxacillin", "rifampin"),
-  antifungal = c("anidulafungin", "caspofungin", "fluconazole", "miconazole",
-  "nystatin", "voriconazole"), only_sir_columns = any(is.sir(x)), ...)
+key_antimicrobials(
+  x = NULL,
+  col_mo = NULL,
+  universal = c("ampicillin", "amoxicillin/clavulanic acid", "cefuroxime",
+    "piperacillin/tazobactam", "ciprofloxacin", "trimethoprim/sulfamethoxazole"),
+  gram_negative = c("gentamicin", "tobramycin", "colistin", "cefotaxime", "ceftazidime",
+    "meropenem"),
+  gram_positive = c("vancomycin", "teicoplanin", "tetracycline", "erythromycin",
+    "oxacillin", "rifampin"),
+  antifungal = c("anidulafungin", "caspofungin", "fluconazole", "miconazole", "nystatin",
+    "voriconazole"),
+  only_sir_columns = any(is.sir(x)),
+  ...
+)
 
 all_antimicrobials(x = NULL, only_sir_columns = any(is.sir(x)), ...)
 
-antimicrobials_equal(y, z, type = c("points", "keyantimicrobials"),
-  ignore_I = TRUE, points_threshold = 2, ...)
+antimicrobials_equal(
+  y,
+  z,
+  type = c("points", "keyantimicrobials"),
+  ignore_I = TRUE,
+  points_threshold = 2,
+  ...
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} with antimicrobials columns, like \code{AMX} or \code{amox}. Can be left blank to determine automatically.}
@@ -7299,11 +7603,24 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/mdro.Rd':
 \alias{eucast_exceptional_phenotypes}
 \title{Determine Multidrug-Resistant Organisms (MDRO)}
 \usage{
-mdro(x = NULL, guideline = "CMI 2012", col_mo = NULL, esbl = NA,
-  carbapenemase = NA, mecA = NA, mecC = NA, vanA = NA, vanB = NA,
-  info = interactive(), pct_required_classes = 0.5, combine_SI = TRUE,
-  verbose = FALSE, only_sir_columns = any(is.sir(x)),
-  infer_from_combinations = TRUE, ...)
+mdro(
+  x = NULL,
+  guideline = "CMI 2012",
+  col_mo = NULL,
+  esbl = NA,
+  carbapenemase = NA,
+  mecA = NA,
+  mecC = NA,
+  vanA = NA,
+  vanB = NA,
+  info = interactive(),
+  pct_required_classes = 0.5,
+  combine_SI = TRUE,
+  verbose = FALSE,
+  only_sir_columns = any(is.sir(x)),
+  infer_from_combinations = TRUE,
+  ...
+)
 
 brmo(x = NULL, only_sir_columns = any(is.sir(x)), ...)
 
@@ -7311,11 +7628,14 @@ mrgn(x = NULL, only_sir_columns = any(is.sir(x)), verbose = FALSE, ...)
 
 mdr_tb(x = NULL, only_sir_columns = any(is.sir(x)), verbose = FALSE, ...)
 
-mdr_cmi2012(x = NULL, only_sir_columns = any(is.sir(x)), verbose = FALSE,
-  ...)
+mdr_cmi2012(x = NULL, only_sir_columns = any(is.sir(x)), verbose = FALSE, ...)
 
-eucast_exceptional_phenotypes(x = NULL, only_sir_columns = any(is.sir(x)),
-  verbose = FALSE, ...)
+eucast_exceptional_phenotypes(
+  x = NULL,
+  only_sir_columns = any(is.sir(x)),
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} with antimicrobials columns, like \code{AMX} or \code{amox}. Can be left blank for automatic determination.}
@@ -7896,119 +8216,270 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/mo_property.Rd':
 \alias{mo_url}
 \title{Get Properties of a Microorganism}
 \usage{
-mo_name(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_fullname(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_shortname(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_subspecies(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_species(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_genus(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_family(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_order(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_class(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_phylum(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_kingdom(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_domain(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_type(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_status(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_pathogenicity(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
-
-mo_gramstain(x, language = get_AMR_locale(),
+mo_name(
+  x,
+  language = get_AMR_locale(),
   keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
-  add_morphology = FALSE, ...)
+  ...
+)
 
-mo_is_gram_negative(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_fullname(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_is_gram_positive(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_shortname(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_is_yeast(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_subspecies(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_is_intrinsic_resistant(x, ab, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_species(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_oxygen_tolerance(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_genus(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_is_anaerobic(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_family(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_morphology(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_order(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_snomed(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_class(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_ref(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_phylum(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_authors(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_kingdom(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_year(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_domain(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_lpsn(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_type(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_mycobank(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_status(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_gbif(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_pathogenicity(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_rank(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_gramstain(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  add_morphology = FALSE,
+  ...
+)
 
-mo_taxonomy(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_is_gram_negative(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_synonyms(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_is_gram_positive(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_is_yeast(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_is_intrinsic_resistant(
+  x,
+  ab,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_oxygen_tolerance(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_is_anaerobic(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_morphology(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_snomed(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_ref(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_authors(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_year(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_lpsn(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_mycobank(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_gbif(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_rank(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_taxonomy(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
+
+mo_synonyms(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
 mo_current(x, language = get_AMR_locale(), ...)
 
-mo_group_members(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_group_members(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_info(x, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_info(
+  x,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_url(x, open = FALSE, language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_url(
+  x,
+  open = FALSE,
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 
-mo_property(x, property = "fullname", language = get_AMR_locale(),
-  keep_synonyms = getOption("AMR_keep_synonyms", FALSE), ...)
+mo_property(
+  x,
+  property = "fullname",
+  language = get_AMR_locale(),
+  keep_synonyms = getOption("AMR_keep_synonyms", FALSE),
+  ...
+)
 }
 \arguments{
 \item{x}{Any \link{character} (vector) that can be coerced to a valid microorganism code with \code{\link[=as.mo]{as.mo()}}. Can be left blank for auto-guessing the column containing microorganism codes if used in a data set, see \emph{Examples}.}
@@ -8247,8 +8718,10 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/mo_source.Rd':
 \alias{get_mo_source}
 \title{User-Defined Reference Data Set for Microorganisms}
 \usage{
-set_mo_source(path, destination = getOption("AMR_mo_source",
-  "~/mo_source.rds"))
+set_mo_source(
+  path,
+  destination = getOption("AMR_mo_source", "~/mo_source.rds")
+)
 
 get_mo_source(destination = getOption("AMR_mo_source", "~/mo_source.rds"))
 }
@@ -8359,8 +8832,15 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/pca.Rd':
 \alias{pca}
 \title{Principal Component Analysis (for AMR)}
 \usage{
-pca(x, ..., retx = TRUE, center = TRUE, scale. = TRUE, tol = NULL,
-  rank. = NULL)
+pca(
+  x,
+  ...,
+  retx = TRUE,
+  center = TRUE,
+  scale. = TRUE,
+  tol = NULL,
+  rank. = NULL
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} containing \link{numeric} columns.}
@@ -8485,80 +8965,135 @@ scale_colour_mic(keep_operators = "edges", mic_range = NULL, ...)
 
 scale_fill_mic(keep_operators = "edges", mic_range = NULL, ...)
 
-scale_x_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
-  = "#ED553B"), language = get_AMR_locale(),
-  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
+scale_x_sir(
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST",
+  ...
+)
 
-scale_colour_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I =
-  "#F6D55C", R = "#ED553B"), language = get_AMR_locale(),
-  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
+scale_colour_sir(
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST",
+  ...
+)
 
-scale_fill_sir(colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C",
-  R = "#ED553B"), language = get_AMR_locale(),
-  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST", ...)
+scale_fill_sir(
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  eucast_I = getOption("AMR_guideline", "EUCAST") == "EUCAST",
+  ...
+)
 
-\method{plot}{mic}(x, mo = NULL, ab = NULL,
+\method{plot}{mic}(
+  x,
+  mo = NULL,
+  ab = NULL,
   guideline = getOption("AMR_guideline", "EUCAST"),
-  main = deparse(substitute(x)), ylab = translate_AMR("Frequency", language
-  = language),
-  xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language =
-  language), colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
-  = "#ED553B"), language = get_AMR_locale(), expand = TRUE,
+  main = deparse(substitute(x)),
+  ylab = translate_AMR("Frequency", language = language),
+  xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language = language),
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  ...
+)
 
-\method{autoplot}{mic}(object, mo = NULL, ab = NULL,
+\method{autoplot}{mic}(
+  object,
+  mo = NULL,
+  ab = NULL,
   guideline = getOption("AMR_guideline", "EUCAST"),
-  title = deparse(substitute(object)), ylab = translate_AMR("Frequency",
-  language = language),
-  xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language =
-  language), colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R
-  = "#ED553B"), language = get_AMR_locale(), expand = TRUE,
+  title = deparse(substitute(object)),
+  ylab = translate_AMR("Frequency", language = language),
+  xlab = translate_AMR("Minimum Inhibitory Concentration (mg/L)", language = language),
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  ...
+)
 
-\method{plot}{disk}(x, main = deparse(substitute(x)),
+\method{plot}{disk}(
+  x,
+  main = deparse(substitute(x)),
   ylab = translate_AMR("Frequency", language = language),
   xlab = translate_AMR("Disk diffusion diameter (mm)", language = language),
-  mo = NULL, ab = NULL, guideline = getOption("AMR_guideline", "EUCAST"),
-  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R =
-  "#ED553B"), language = get_AMR_locale(), expand = TRUE,
+  mo = NULL,
+  ab = NULL,
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  ...
+)
 
-\method{autoplot}{disk}(object, mo = NULL, ab = NULL,
-  title = deparse(substitute(object)), ylab = translate_AMR("Frequency",
-  language = language), xlab = translate_AMR("Disk diffusion diameter (mm)",
-  language = language), guideline = getOption("AMR_guideline", "EUCAST"),
-  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R =
-  "#ED553B"), language = get_AMR_locale(), expand = TRUE,
+\method{autoplot}{disk}(
+  object,
+  mo = NULL,
+  ab = NULL,
+  title = deparse(substitute(object)),
+  ylab = translate_AMR("Frequency", language = language),
+  xlab = translate_AMR("Disk diffusion diameter (mm)", language = language),
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  expand = TRUE,
   include_PKPD = getOption("AMR_include_PKPD", TRUE),
-  breakpoint_type = getOption("AMR_breakpoint_type", "human"), ...)
+  breakpoint_type = getOption("AMR_breakpoint_type", "human"),
+  ...
+)
 
-\method{plot}{sir}(x, ylab = translate_AMR("Percentage", language =
-  language), xlab = translate_AMR("Antimicrobial Interpretation", language =
-  language), main = deparse(substitute(x)), language = get_AMR_locale(),
-  ...)
-
-\method{autoplot}{sir}(object, title = deparse(substitute(object)),
+\method{plot}{sir}(
+  x,
+  ylab = translate_AMR("Percentage", language = language),
   xlab = translate_AMR("Antimicrobial Interpretation", language = language),
-  ylab = translate_AMR("Frequency", language = language), colours_SIR = c(S
-  = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
-  language = get_AMR_locale(), ...)
+  main = deparse(substitute(x)),
+  language = get_AMR_locale(),
+  ...
+)
+
+\method{autoplot}{sir}(
+  object,
+  title = deparse(substitute(object)),
+  xlab = translate_AMR("Antimicrobial Interpretation", language = language),
+  ylab = translate_AMR("Frequency", language = language),
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B"),
+  language = get_AMR_locale(),
+  ...
+)
 
 facet_sir(facet = c("interpretation", "antibiotic"), nrow = NULL)
 
-scale_y_percent(breaks = function(x) seq(0, max(x, na.rm = TRUE), 0.1),
-  limits = c(0, NA))
+scale_y_percent(
+  breaks = function(x) seq(0, max(x, na.rm = TRUE), 0.1),
+  limits = c(0, NA)
+)
 
-scale_sir_colours(..., aesthetics, colours_SIR = c(S = "#3CAEA3", SDD =
-  "#8FD6C4", I = "#F6D55C", R = "#ED553B"))
+scale_sir_colours(
+  ...,
+  aesthetics,
+  colours_SIR = c(S = "#3CAEA3", SDD = "#8FD6C4", I = "#F6D55C", R = "#ED553B")
+)
 
 theme_sir()
 
-labels_sir_count(position = NULL, x = "antibiotic",
-  translate_ab = "name", minimum = 30, language = get_AMR_locale(),
-  combine_SI = TRUE, datalabels.size = 3, datalabels.colour = "grey15")
+labels_sir_count(
+  position = NULL,
+  x = "antibiotic",
+  translate_ab = "name",
+  minimum = 30,
+  language = get_AMR_locale(),
+  combine_SI = TRUE,
+  datalabels.size = 3,
+  datalabels.colour = "grey15"
+)
 }
 \arguments{
 \item{keep_operators}{A \link{character} specifying how to handle operators (such as \code{>} and \code{<=}) in the input. Accepts one of three values: \code{"all"} (or \code{TRUE}) to keep all operators, \code{"none"} (or \code{FALSE}) to remove all operators, or \code{"edges"} to keep operators only at both ends of the range.}
@@ -8823,40 +9358,62 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/proportion.Rd':
 \alias{sir_df}
 \title{Calculate Antimicrobial Resistance}
 \usage{
-resistance(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE, guideline = getOption("AMR_guideline",
-  "EUCAST"))
+resistance(
+  ...,
+  minimum = 30,
+  as_percent = FALSE,
+  only_all_tested = FALSE,
+  guideline = getOption("AMR_guideline", "EUCAST")
+)
 
-susceptibility(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE, guideline = getOption("AMR_guideline",
-  "EUCAST"))
+susceptibility(
+  ...,
+  minimum = 30,
+  as_percent = FALSE,
+  only_all_tested = FALSE,
+  guideline = getOption("AMR_guideline", "EUCAST")
+)
 
-sir_confidence_interval(..., ab_result = "R", minimum = 30,
-  as_percent = FALSE, only_all_tested = FALSE, confidence_level = 0.95,
-  side = "both", collapse = FALSE)
+sir_confidence_interval(
+  ...,
+  ab_result = "R",
+  minimum = 30,
+  as_percent = FALSE,
+  only_all_tested = FALSE,
+  confidence_level = 0.95,
+  side = "both",
+  collapse = FALSE
+)
 
-proportion_R(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE)
+proportion_R(..., minimum = 30, as_percent = FALSE, only_all_tested = FALSE)
 
-proportion_IR(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE)
+proportion_IR(..., minimum = 30, as_percent = FALSE, only_all_tested = FALSE)
 
-proportion_I(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE)
+proportion_I(..., minimum = 30, as_percent = FALSE, only_all_tested = FALSE)
 
-proportion_SI(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE)
+proportion_SI(..., minimum = 30, as_percent = FALSE, only_all_tested = FALSE)
 
-proportion_S(..., minimum = 30, as_percent = FALSE,
-  only_all_tested = FALSE)
+proportion_S(..., minimum = 30, as_percent = FALSE, only_all_tested = FALSE)
 
-proportion_df(data, translate_ab = "name", language = get_AMR_locale(),
-  minimum = 30, as_percent = FALSE, combine_SI = TRUE,
-  confidence_level = 0.95)
+proportion_df(
+  data,
+  translate_ab = "name",
+  language = get_AMR_locale(),
+  minimum = 30,
+  as_percent = FALSE,
+  combine_SI = TRUE,
+  confidence_level = 0.95
+)
 
-sir_df(data, translate_ab = "name", language = get_AMR_locale(),
-  minimum = 30, as_percent = FALSE, combine_SI = TRUE,
-  confidence_level = 0.95)
+sir_df(
+  data,
+  translate_ab = "name",
+  language = get_AMR_locale(),
+  minimum = 30,
+  as_percent = FALSE,
+  combine_SI = TRUE,
+  confidence_level = 0.95
+)
 }
 \arguments{
 \item{...}{One or more vectors (or columns) with antibiotic interpretations. They will be transformed internally with \code{\link[=as.sir]{as.sir()}} if needed. Use multiple columns to calculate (the lack of) co-resistance: the probability where one of two drugs have a resistant or susceptible result. See \emph{Examples}.}
@@ -9102,11 +9659,23 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/random.Rd':
 \alias{random_sir}
 \title{Random MIC Values/Disk Zones/SIR Generation}
 \usage{
-random_mic(size = NULL, mo = NULL, ab = NULL, skew = "right",
-  severity = 1, ...)
+random_mic(
+  size = NULL,
+  mo = NULL,
+  ab = NULL,
+  skew = "right",
+  severity = 1,
+  ...
+)
 
-random_disk(size = NULL, mo = NULL, ab = NULL, skew = "left",
-  severity = 1, ...)
+random_disk(
+  size = NULL,
+  mo = NULL,
+  ab = NULL,
+  skew = "left",
+  severity = 1,
+  ...
+)
 
 random_sir(size = NULL, prob_SIR = c(0.33, 0.33, 0.33), ...)
 }
@@ -9177,22 +9746,51 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/resistance_predict.Rd':
 \alias{autoplot.resistance_predict}
 \title{Predict Antimicrobial Resistance}
 \usage{
-resistance_predict(x, col_ab, col_date = NULL, year_min = NULL,
-  year_max = NULL, year_every = 1, minimum = 30, model = NULL,
-  I_as_S = TRUE, preserve_measurements = TRUE, info = interactive(), ...)
+resistance_predict(
+  x,
+  col_ab,
+  col_date = NULL,
+  year_min = NULL,
+  year_max = NULL,
+  year_every = 1,
+  minimum = 30,
+  model = NULL,
+  I_as_S = TRUE,
+  preserve_measurements = TRUE,
+  info = interactive(),
+  ...
+)
 
-sir_predict(x, col_ab, col_date = NULL, year_min = NULL, year_max = NULL,
-  year_every = 1, minimum = 30, model = NULL, I_as_S = TRUE,
-  preserve_measurements = TRUE, info = interactive(), ...)
+sir_predict(
+  x,
+  col_ab,
+  col_date = NULL,
+  year_min = NULL,
+  year_max = NULL,
+  year_every = 1,
+  minimum = 30,
+  model = NULL,
+  I_as_S = TRUE,
+  preserve_measurements = TRUE,
+  info = interactive(),
+  ...
+)
 
-\method{plot}{resistance_predict}(x, main = paste("Resistance Prediction of",
-  x_name), ...)
+\method{plot}{resistance_predict}(x, main = paste("Resistance Prediction of", x_name), ...)
 
-ggplot_sir_predict(x, main = paste("Resistance Prediction of", x_name),
-  ribbon = TRUE, ...)
+ggplot_sir_predict(
+  x,
+  main = paste("Resistance Prediction of", x_name),
+  ribbon = TRUE,
+  ...
+)
 
-\method{autoplot}{resistance_predict}(object,
-  main = paste("Resistance Prediction of", x_name), ribbon = TRUE, ...)
+\method{autoplot}{resistance_predict}(
+  object,
+  main = paste("Resistance Prediction of", x_name),
+  ribbon = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \link{data.frame} containing isolates. Can be left blank for automatic determination, see \emph{Examples}.}
@@ -9358,8 +9956,14 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/top_n_microorganisms.Rd':
 \alias{top_n_microorganisms}
 \title{Filter Top \emph{n} Microorganisms}
 \usage{
-top_n_microorganisms(x, n, property = "species", n_for_each = NULL,
-  col_mo = NULL, ...)
+top_n_microorganisms(
+  x,
+  n,
+  property = "species",
+  n_for_each = NULL,
+  col_mo = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{A data frame containing microbial data.}
@@ -9741,24 +10345,69 @@ our_data_1st[all(betalactams() == "R"), ]
 
 ## Generate antibiograms
 
-Since AMR v2.0 (March 2023), it is very easy to create different types of antibiograms, with support for 20 different languages.
+The `AMR` package supports `r length(AMR:::LANGUAGES_SUPPORTED)` different languages for antibiograms and provides four types, as proposed by Klinker *et al.* (2021, [DOI 10.1177/20499361211011373](https://doi.org/10.1177/20499361211011373)):
 
-There are four antibiogram types, as proposed by Klinker *et al.* (2021, [DOI 10.1177/20499361211011373](https://doi.org/10.1177/20499361211011373)), and they are all supported by the new `antibiogram()` function:
+1. **Traditional Antibiogram (TA)** -- susceptibility of a species to individual antibiotics
+2. **Combination Antibiogram (CA)** -- susceptibility of a species to combination regimens
+3. **Syndromic Antibiogram (SA)** -- susceptibility of a species, stratified by clinical syndrome or setting
+4. **Weighted-Incidence Syndromic Combination Antibiogram (WISCA)** -- estimated empirical coverage of a *regimen* for a *syndrome*, weighted by pathogen incidence and with quantified uncertainty
 
-1. **Traditional Antibiogram (TA)** e.g, for the susceptibility of *Pseudomonas aeruginosa* to piperacillin/tazobactam (TZP)
-2. **Combination Antibiogram (CA)** e.g, for the sdditional susceptibility of *Pseudomonas aeruginosa* to TZP + tobramycin versus TZP alone
-3. **Syndromic Antibiogram (SA)** e.g, for the susceptibility of *Pseudomonas aeruginosa* to TZP among respiratory specimens (obtained among ICU patients only)
-4. **Weighted-Incidence Syndromic Combination Antibiogram (WISCA)** e.g, for the susceptibility of *Pseudomonas aeruginosa* to TZP among respiratory specimens (obtained among ICU patients only) for male patients age >=65 years with heart failure
+**If your goal is to guide empirical therapy, WISCA should be your default.** The reason is simple: when you start empirical treatment, you do not know which pathogen is causing the infection. Your next patient will not present with a species label attached to them. What matters is the probability that the *regimen* you choose will cover *whatever pathogen turns out to be the cause*, given the local epidemiology of the syndrome. Traditional antibiograms do not answer that question. They fragment information by species, ignore how frequently each species causes the syndrome, do not evaluate combination regimens, and provide no measure of uncertainty. WISCA addresses all of these limitations using a Bayesian framework (Hebert *et al.*, 2012; Bielicki *et al.*, 2016). See the [WISCA vignette](https://amr-for-r.org/articles/WISCA.html) for the full explanation.
 
-In this section, we show how to use the `antibiogram()` function to create any of the above antibiogram types. For starters, this is what the included `example_isolates` data set looks like:
+Traditional, combination, and syndromic antibiograms remain useful for **surveillance** purposes, i.e., tracking resistance trends per species over time. But if you care about clinical impact, about choosing the right empirical regimen for your patient, use WISCA.
+
+For starters, this is what the included `example_isolates` data set looks like:
 
 ```{r}
 example_isolates
 ```
 
+### WISCA (recommended for empirical therapy guidance)
+
+Use the `wisca()` function, or equivalently `antibiogram(..., wisca = TRUE)`. WISCA produces a single coverage estimate per regimen for the entire syndrome, weighted by pathogen incidence, with a 95% credible interval from Bayesian Monte Carlo simulation:
+
+```{r wisca}
+wisca_result <- example_isolates %>%
+  wisca(
+    antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
+    minimum = 10
+  ) # Recommended threshold: ≥30
+wisca_result
+```
+
+The output tells you: *"given the species distribution in your data, there is an estimated X% probability that this regimen covers the infection, with 95% credible interval [lower, upper]"*. That is the clinically relevant question.
+
+For **syndrome-specific** or **patient-specific WISCA**, use the `syndromic_group` argument or group your data first. You can stratify by anything: ward, age group, risk profile, acquisition type. The `syndromic_group` argument accepts any column or expression:
+
+```{r wisca_grouped}
+wisca_out <- example_isolates %>%
+  top_n_microorganisms(n = 10) %>%
+  group_by(
+    age_group = age_groups(age, c(25, 50, 75)),
+    gender
+  ) %>%
+  wisca(antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"))
+
+wisca_out
+```
+
+Keep in mind that more granular stratification produces more relevant estimates for each subgroup, but with wider credible intervals due to smaller sample sizes. There is always a trade-off between granularity and precision. If local numbers are small, consider pooling data from multiple sites (Bielicki *et al.*, 2016).
+
+For reliable WISCA results, ensure your data includes **only first isolates** (use `first_isolate()`) and consider filtering for **the top *n* species** (use `top_n_microorganisms()`), since rare contaminants can distort coverage estimates.
+
+After creating the WISCA model, assessments can be done on the distributions of the Monte Carlo simulations that WISCA carried out:
+
+```{r wisca_plots}
+wisca_plot(wisca_out)
+wisca_plot(wisca_out, wisca_plot_type = "posterior_coverage")
+
+# a ggplot2 extension for WISCAs and other antibiograms:
+ggplot2::autoplot(wisca_out)
+```
+
 ### Traditional Antibiogram
 
-To create a traditional antibiogram, simply state which antibiotics should be used. The `antibiotics` argument in the `antibiogram()` function supports any (combination) of the previously mentioned antibiotic class selectors:
+If you need per-species susceptibility rates, e.g., for AMR surveillance reports, the traditional antibiogram remains the right tool. It reports the proportion of susceptible isolates per species per antibiotic:
 
 ```{r trad}
 antibiogram(example_isolates,
@@ -9779,9 +10428,9 @@ antibiogram(example_isolates,
 )
 ```
 
-### Combined Antibiogram
+### Combination Antibiogram
 
-To create a combined antibiogram, use antibiotic codes or names with a plus `+` character like this:
+A combination antibiogram shows how much additional susceptibility a second agent adds for a given species. This is useful for surveillance of combination regimens, but note that it is still species-stratified and does not account for pathogen incidence in the syndrome:
 
 ```{r comb}
 combined_ab <- antibiogram(example_isolates,
@@ -9793,7 +10442,7 @@ combined_ab
 
 ### Syndromic Antibiogram
 
-To create a syndromic antibiogram, the `syndromic_group` argument must be used. This can be any column in the data, or e.g. an `ifelse()` with calculations based on certain columns:
+A syndromic antibiogram stratifies per-species susceptibility by clinical context (ward, specimen type, etc.). It adds clinical context to the traditional antibiogram but is still species-level, without incidence weighting or uncertainty quantification. For surveillance by setting this is fine; for empirical therapy guidance, WISCA is preferred:
 
 ```{r synd}
 antibiogram(example_isolates,
@@ -9802,40 +10451,12 @@ antibiogram(example_isolates,
 )
 ```
 
-### Weighted-Incidence Syndromic Combination Antibiogram (WISCA)
-
-To create a **Weighted-Incidence Syndromic Combination Antibiogram (WISCA)**, simply set `wisca = TRUE` in the `antibiogram()` function, or use the dedicated `wisca()` function. Unlike traditional antibiograms, WISCA provides syndrome-based susceptibility estimates, weighted by pathogen incidence and antimicrobial susceptibility patterns.
-
-```{r wisca}
-example_isolates %>%
-  wisca(
-    antibiotics = c("TZP", "TZP+TOB", "TZP+GEN"),
-    minimum = 10
-  ) # Recommended threshold: ≥30
-```
-
-WISCA uses a **Bayesian decision model** to integrate data from multiple pathogens, improving empirical therapy guidance, especially for low-incidence infections. It is **pathogen-agnostic**, meaning results are syndrome-based rather than stratified by microorganism.
-
-For reliable results, ensure your data includes **only first isolates** (use `first_isolate()`) and consider filtering for **the top *n* species** (use `top_n_microorganisms()`), as WISCA outcomes are most meaningful when based on robust incidence estimates.
-
-For **patient- or syndrome-specific WISCA**, run the function on a grouped `tibble`, i.e., using `group_by()` first:
-
-```{r wisca_grouped}
-example_isolates %>%
-  top_n_microorganisms(n = 10) %>%
-  group_by(
-    age_group = age_groups(age, c(25, 50, 75)),
-    gender
-  ) %>%
-  wisca(antibiotics = c("TZP", "TZP+TOB", "TZP+GEN"))
-```
-
 ### Plotting antibiograms
 
-Antibiograms can be plotted using `autoplot()` from the `ggplot2` packages, since this `AMR` package provides an extension to that function:
+All antibiogram types, including WISCA, can be plotted using `autoplot()` from the `ggplot2` package, since this `AMR` package provides an extension to that function:
 
 ```{r}
-autoplot(combined_ab)
+autoplot(wisca_result)
 ```
 
 To calculate antimicrobial resistance in a more sensible way, also by correcting for too few results, we use the `resistance()` and `susceptibility()` functions.
@@ -9911,7 +10532,7 @@ autoplot(mic_values, mo = "K. pneumoniae", ab = "cipro", guideline = "EUCAST 202
 
 ----
 
-*Author: Dr. Matthijs Berends, 23rd Feb 2025*
+*Author: Dr. Matthijs Berends, 23rd June 2026*
 
 
 
@@ -11046,75 +11667,58 @@ knitr::opts_chunk$set(
 )
 ```
 
-> This explainer was largely written by our [AMR for R Assistant](https://chat.amr-for-r.org), a ChatGPT manually-trained model able to answer any question about the `AMR` package.
+## Why WISCA?
 
-## Introduction
+When a clinician starts empirical antimicrobial therapy, the causative pathogen is unknown. The question they need answered is not *"what proportion of* E. coli *is susceptible to ciprofloxacin?"* but rather *"what is the probability that this regimen will adequately cover whatever pathogen turns out to be causing my patient's infection?"*
 
-Clinical guidelines for empirical antimicrobial therapy require *probabilistic reasoning*: what is the chance that a regimen will cover the likely infecting organisms, before culture results are available?
+The traditional cumulative antibiogram, as standardised by CLSI M39, cannot answer that question. It presents susceptibility percentages per species per antibiotic, but:
 
-This is the purpose of **WISCA**, or **Weighted-Incidence Syndromic Combination Antibiogram**.
+- **It fragments information by organism.** The clinician must mentally combine susceptibility rates across multiple species, weighting by how often each species causes the syndrome, a calculation nobody does at the bedside.
+- **It ignores pathogen incidence.** A species that causes 2% of infections is given the same visual weight as one that causes 60%.
+- **It does not evaluate combination regimens.** Much empirical therapy consists of two or more agents, but the traditional antibiogram only shows monotherapy per organism.
+- **It provides no measure of uncertainty.** A reported "90% susceptible" based on 50 isolates has a 95% confidence interval of roughly 78-97% (Clopper-Pearson), yet the antibiogram presents it as a point estimate without context.
 
-WISCA is a Bayesian approach that integrates:
+**WISCA** (Weighted-Incidence Syndromic Combination Antibiogram) resolves all four limitations. It estimates the probability that a regimen will provide adequate empirical coverage for a given infection syndrome, weighted by local pathogen incidence, with full uncertainty quantification via Bayesian inference.
 
-- **Pathogen prevalence** (how often each species causes the syndrome),
-- **Regimen susceptibility** (how often a regimen works *if* the pathogen is known),
+The concept was introduced by Hebert *et al.* (2012), who demonstrated that traditional antibiogram susceptibility rates could be misleading: ciprofloxacin appeared 84% effective against *E. coli* in the traditional antibiogram, but WISCA revealed only 62% coverage for UTI and 37% for abdominal infections, because enterococci (intrinsically resistant) and other species contribute substantially to these syndromes. Randhawa *et al.* (2014) showed that WISCA-guided regimen selection could improve time-to-adequate-coverage on the ICU by over 40%. Bielicki *et al.* (2016) introduced the Bayesian framework now used in this package, enabling credible intervals and multi-centre pooling. Cook *et al.* (2022) applied it globally across 52 hospitals in 23 countries.
 
-to estimate the **overall empirical coverage** of antimicrobial regimens, with quantified uncertainty.
-
-This vignette explains how WISCA works, why it is useful, and how to apply it using the `AMR` package.
-
-## Why traditional antibiograms fall short
-
-A standard antibiogram gives you:
-
-```
-Species → Antibiotic → Susceptibility %
-```
-
-But clinicians don’t know the species *a priori*. They need to choose a regimen that covers the **likely pathogens**, without knowing which one is present.
-
-Traditional antibiograms calculate the susceptibility % as just the number of resistant isolates divided by the total number of tested isolates. Therefore, traditional antibiograms:
-
-- Fragment information by organism,
-- Do not weight by real-world prevalence,
-- Do not account for combination therapy or sample size,
-- Do not provide uncertainty.
-
-## The idea of WISCA
+## The idea
 
 WISCA asks:
 
 > "What is the **probability** that this regimen **will cover** the pathogen, given the syndrome?"
 
-This means combining two things:
+This means combining two quantities:
 
-- **Incidence** of each pathogen in the syndrome,
+- **Pathogen incidence** in the syndrome (how often each species causes it),
 - **Susceptibility** of each pathogen to the regimen.
 
 We can write this as:
 
 $$\text{Coverage} = \sum_i (\text{Incidence}_i \times \text{Susceptibility}_i)$$
 
-For example, suppose:
+For example, suppose in your hospital:
 
-- *E. coli* causes 60% of cases, and 90% of *E. coli* are susceptible to a drug.
-- *Klebsiella* causes 40% of cases, and 70% of *Klebsiella* are susceptible.
+- *E. coli* causes 60% of UTIs, and 90% of *E. coli* are susceptible to a drug.
+- *Klebsiella* causes 40% of UTIs, and 70% of *Klebsiella* are susceptible.
 
 Then:
 
 $$\text{Coverage} = (0.6 \times 0.9) + (0.4 \times 0.7) = 0.82$$
 
-But in real data, incidence and susceptibility are **estimated from samples**, so they carry uncertainty. WISCA models this **probabilistically**, using conjugate Bayesian distributions.
+That 82% is a far more clinically meaningful number than the species-level "90% of *E. coli*" and "70% of *Klebsiella*" reported separately in a traditional antibiogram, because it directly answers the question the clinician actually faces.
 
-## The Bayesian engine behind WISCA
+But in real data, both incidence and susceptibility are **estimated from finite samples**, so they carry uncertainty. A sample of 50 isolates is not a census. WISCA models this uncertainty **probabilistically**, using conjugate Bayesian distributions.
+
+## The Bayesian engine
 
 ### Pathogen incidence
 
 Let:
 
 - $K$ be the number of pathogens,
-- $\boldsymbol{\alpha} = (1, 1, \ldots, 1)$ be a $\text{Dirichlet}$ prior (uniform),
-- $\boldsymbol{n} = (n_1, \ldots, n_K)$ be the observed counts per species.
+- $\boldsymbol{\alpha} = (1, 1, \ldots, 1)$ be a $\text{Dirichlet}$ prior (uniform, non-informative),
+- $\boldsymbol{n} = (n_1, \ldots, n_K)$ be the observed isolate counts per species.
 
 Then the posterior incidence is:
 
@@ -11124,15 +11728,17 @@ To simulate from this, we use:
 
 $$x_i \sim \text{Gamma}(\alpha_i + n_i,\ 1), \quad p_i = \frac{x_i}{\sum_{j=1}^{K} x_j}$$
 
+The Dirichlet is the conjugate prior for multinomial data. With the non-informative prior $\text{Dirichlet}(1, 1, \ldots, 1)$, the posterior is dominated by the data once sample sizes are reasonable. With small samples, the posterior is appropriately more diffuse, reflecting genuine uncertainty, and the resulting credible intervals will be wider.
+
 ### Susceptibility
 
-Each pathogen--regimen pair has a prior and data:
+Each pathogen-regimen pair has a prior and observed data:
 
 - Default prior: $\text{Beta}(0.5, 0.5)$ (Jeffreys prior)
 - Intrinsically resistant pairs: $\text{Beta}(1, 9999)$, forcing near-zero susceptibility regardless of observed data (based on EUCAST Expected Resistant Phenotypes)
 - Data: $S$ susceptible out of $N$ tested
 
-The $S$ category could also include values SDD (susceptible, dose-dependent) and I (intermediate \[CLSI\], or susceptible, increased exposure \[EUCAST\]).
+The $S$ category could also include values SDD (susceptible, dose-dependent) and I (intermediate [CLSI], or susceptible, increased exposure [EUCAST]).
 
 Then the posterior is:
 
@@ -11153,9 +11759,25 @@ Repeat this simulation (e.g., 1000 times) and summarise:
 - **Mean** = expected coverage
 - **Quantiles** = credible interval (95% by default)
 
+Because each simulation draws from the full posterior, the resulting distribution of coverage estimates naturally captures the joint uncertainty in both pathogen incidence and susceptibility. The credible interval tells you how confident you can be in the coverage estimate, something a traditional antibiogram never provides.
+
+## When to use WISCA vs. traditional antibiograms
+
+| Goal | Recommended approach |
+|------|---------------------|
+| Guide empirical therapy decisions | **WISCA** |
+| Compare regimens for a syndrome | **WISCA** |
+| Evaluate combination regimens | **WISCA** |
+| Antimicrobial stewardship (A-team) | **WISCA** |
+| Track resistance trends per species | Traditional / Combination |
+| AMR surveillance reporting | Traditional / Syndromic |
+| Understand species-level epidemiology | Traditional |
+
+In short: if the end goal involves a *patient* who does not yet have a culture result, WISCA is the appropriate tool. If the end goal is *surveillance* of resistance at the species level, the traditional antibiogram remains fit for purpose.
+
 ## Practical use in the `AMR` package
 
-### Prepare data and simulate synthetic syndrome
+### Prepare data
 
 ```{r}
 library(AMR)
@@ -11164,11 +11786,11 @@ data <- example_isolates
 # Structure of our data
 data
 
-# Add a fake syndrome column
-data$syndrome <- ifelse(data$mo %like% "coli", "UTI", "No UTI")
+# Add a synthetic syndrome column for demonstration
+data$syndrome <- ifelse(data$mo %like% "coli", "UTI", "Non-UTI")
 ```
 
-### Basic WISCA antibiogram
+### Basic WISCA
 
 ```{r}
 wisca(data,
@@ -11178,6 +11800,8 @@ wisca(data,
 
 ### Use combination regimens
 
+Combination regimens are specified with a `+` separator. WISCA evaluates whether *at least one* agent in the combination covers the pathogen:
+
 ```{r}
 wisca(data,
   antimicrobials = c("AMC", "AMC + CIP", "AMC + GEN")
@@ -11185,6 +11809,8 @@ wisca(data,
 ```
 
 ### Stratify by syndrome
+
+Use `syndromic_group` to produce separate WISCA estimates per clinical stratum. You can pass a column name or any expression:
 
 ```{r}
 wisca(data,
@@ -11203,6 +11829,12 @@ wisca(data,
 )
 ```
 
+### Interpreting the output
+
+Each row shows the estimated empirical coverage for a regimen, with a 95% credible interval. When comparing regimens:
+
+- **Overlapping credible intervals** mean there is no statistically significant difference in coverage. If a narrower-spectrum regimen overlaps with a broader one, the narrower-spectrum option can be preferred on stewardship grounds.
+- **Non-overlapping credible intervals** indicate a clinically meaningful difference in coverage.
 
 ## Sensible defaults, which can be customised
 
@@ -11210,19 +11842,26 @@ wisca(data,
 - `conf_interval = 0.95`: coverage interval width
 - `combine_SI = TRUE`: count "I" and "SDD" as susceptible
 
+## Practical considerations
+
+- **First isolates only**: always deduplicate using `first_isolate()` before running WISCA. Repeat isolates introduce bias.
+- **Pathogen selection**: consider filtering with `top_n_microorganisms()`. Including rare contaminants (e.g. CoNS without clinical context) can distort estimates and may artificially lower coverage (Cook *et al.*, 2022).
+- **Sample size**: coverage estimates become reliable with approximately 100+ isolates. For smaller datasets, consider pooling data from multiple sites, but only after verifying that pathogen distributions are sufficiently similar (Bielicki *et al.*, 2016).
+- **Culture request bias**: WISCA is only as good as the data it is based on. If cultures are selectively requested (e.g. only after treatment failure), the dataset will be biased towards resistant isolates. A robust culture policy is essential for reliable estimates.
+
 ## Limitations
 
-- It assumes your data are representative
-- No adjustment for patient-level covariates, although these could be passed onto the `syndromic_group` argument
-- WISCA does not model resistance over time, you might want to use `tidymodels` for that, for which we [wrote a basic introduction](https://amr-for-r.org/articles/AMR_with_tidymodels.html)
+- It assumes your data are representative of the patient population you are treating
+- No direct adjustment for patient-level covariates, although these can be passed onto the `syndromic_group` argument for stratification
+- WISCA does not model resistance trends over time; for that, you might want to use `tidymodels`, for which we [wrote a basic introduction](https://amr-for-r.org/articles/AMR_with_tidymodels.html)
 
 ## Summary
 
 WISCA enables:
 
-- Empirical regimen comparison,
-- Syndrome-specific coverage estimation,
-- Fully probabilistic interpretation.
+- **Empirical regimen comparison**, answering the clinician's actual question
+- **Syndrome-specific coverage estimation**, stratifiable by any clinical variable
+- **Fully probabilistic interpretation**, with credible intervals that honestly communicate uncertainty
 
 It is available in the `AMR` package via either:
 
@@ -11232,9 +11871,12 @@ wisca(...)
 antibiogram(..., wisca = TRUE)
 ```
 
-## Reference
+## References
 
-Bielicki, JA, et al. (2016). *Selecting appropriate empirical antibiotic regimens for paediatric bloodstream infections: application of a Bayesian decision model to local and pooled antimicrobial resistance surveillance data.* **J Antimicrob Chemother**. 71(3):794-802. https://doi.org/10.1093/jac/dkv397
+1. Hebert C, Ridgway J, Vekhter B, Brown EC, Weber SG, Robicsek A. Demonstration of the weighted-incidence syndromic combination antibiogram: an empiric prescribing decision aid. *Infect Control Hosp Epidemiol.* 2012;33(4):381-388. https://doi.org/10.1086/664768
+2. Randhawa V, Sarwar S, Walker S, Elligsen M, Palmay L, Daneman N. Weighted-incidence syndromic combination antibiograms to guide empiric treatment of critical care infections: a retrospective cohort study. *Crit Care.* 2014;18(3):R112. https://doi.org/10.1186/cc13901
+3. Bielicki JA, Sharland M, Johnson AP, Henderson KL, Cromwell DA. Selecting appropriate empirical antibiotic regimens for paediatric bloodstream infections: application of a Bayesian decision model to local and pooled antimicrobial resistance surveillance data. *J Antimicrob Chemother.* 2016;71(3):794-802. https://doi.org/10.1093/jac/dkv397
+4. Cook A, Sharland M, Yau Y, Bielicki J. Improving empiric antibiotic prescribing in pediatric bloodstream infections: a potential application of weighted-incidence syndromic combination antibiograms (WISCA). *Expert Rev Anti Infect Ther.* 2022;20(3):445-456. https://doi.org/10.1080/14787210.2021.1967145
 
 
 
