@@ -514,7 +514,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9063
+Version: 3.0.1.9065
 Date: 2026-06-24
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -603,7 +603,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 
 - Provides an **all-in-one solution** for antimicrobial resistance (AMR)
   data analysis in a One Health approach
-- Peer-reviewed, used in over 175 countries, available in 28 languages
+- **Peer-reviewed**, used in over 175 countries, available in 28
+  languages
 - Generates **antibiograms** - WISCA for empiric coverage estimates, or
   traditional/syndromic for AMR surveillance
 - Provides the **full microbiological taxonomy** of ~97 000 distinct
@@ -618,8 +619,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'index.md':
 - 100% free of costs and dependencies, highly suitable for places with
   **limited resources**
 
-> Now available for Python too! [Click
-> here](./articles/AMR_for_Python.html) to read more.
+> Available for Python too! [Click here](./articles/AMR_for_Python.html)
+> to read more.
 
 <div style="display: flex; font-size: 0.8em;">
 
@@ -661,7 +662,7 @@ formed the basis of two PhD theses ([DOI
 [DOI 10.33612/diss.192486375](https://doi.org/10.33612/diss.192486375)).
 
 After installing this package, R knows [**~97 000 distinct microbial
-species**](./reference/microorganisms.html) (updated June 2024) and all
+species**](./reference/microorganisms.html) (updated May 2026) and all
 [**~620 antimicrobial and antiviral
 drugs**](./reference/antimicrobials.html) by name and code (including
 ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all
@@ -803,41 +804,71 @@ make sure you get what you meant.
 
 ### Generating antibiograms
 
-The `AMR` package supports generating traditional, combined, syndromic,
-and even weighted-incidence syndromic combination antibiograms (WISCA).
-
-If used inside [R Markdown](https://rmarkdown.rstudio.com) or
-[Quarto](https://quarto.org), the table will be printed in the right
+The `AMR` package supports four types of antibiograms, with support for
+28 languages. If used inside [R Markdown](https://rmarkdown.rstudio.com)
+or [Quarto](https://quarto.org), the table will be printed in the right
 output format automatically (such as markdown, LaTeX, HTML, etc.).
+
+**For empirical therapy guidance (i.e., coverage estimates), use WISCA**
+(Weighted-Incidence Syndromic Combination Antibiogram). When a clinician
+starts empirical treatment, the causative pathogen is unknown. The
+relevant question is not *“what percentage of E. coli is susceptible?”*
+but *“what is the probability that this regimen will cover whatever
+pathogen is causing the infection?”*. WISCA answers that question
+directly, weighting susceptibility by pathogen incidence and providing
+credible intervals via Bayesian simulation. See `vignette("WISCA")` for
+the full explanation.
+
+``` r
+wisca(example_isolates,
+      antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
+      minimum = 10) # Recommended threshold: >=30
+#> Warning: invalid microorganism code, NA generated
+```
+
+| Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
+|:---|:---|:---|
+| 70.1% (64.9-75.7%) | 93.6% (92.2-95%) | 89.8% (86.7-92.3%) |
+
+WISCA supports stratification by any clinical variable, so you can
+generate syndrome-specific or ward-specific coverage estimates:
+
+``` r
+wisca(example_isolates,
+      antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
+      syndromic_group = "ward",
+      minimum = 10) # Recommended threshold: >=30
+#> Warning: invalid microorganism code, NA generated
+```
+
+| Syndromic Group | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
+|:---|:---|:---|:---|
+| Clinical | 74.5% (69.3-80.1%) | 93.7% (92-95.1%) | 90.5% (87.1-93.1%) |
+| ICU | 56.7% (48-65.5%) | 86.7% (83.4-89.8%) | 82.9% (78.2-87.3%) |
+| Outpatient | 57.8% (46.4-69.7%) | 76.5% (70.1-82.2%) | 67.9% (57.9-77.5%) |
+
+**For AMR surveillance**, traditional antibiograms remain the right tool
+for tracking resistance per species over time:
 
 ``` r
 antibiogram(example_isolates,
-            antimicrobials = c(aminoglycosides(), carbapenems()))
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK
-#>   (amikacin), and KAN (kanamycin)
+            mo_transform = "gramstain",
+            antimicrobials = c("AMC", carbapenems(), "TZP"))
 #> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 ```
 
-| Pathogen | Amikacin | Gentamicin | Imipenem | Kanamycin | Meropenem | Tobramycin |
-|:---|:---|:---|:---|:---|:---|:---|
-| CoNS | 0% (0-8%,N=43) | 86% (82-90%,N=309) | 52% (37-67%,N=48) | 0% (0-8%,N=43) | 52% (37-67%,N=48) | 22% (12-35%,N=55) |
-| *E. coli* | 100% (98-100%,N=171) | 98% (96-99%,N=460) | 100% (99-100%,N=422) | NA | 100% (99-100%,N=418) | 97% (96-99%,N=462) |
-| *E. faecalis* | 0% (0-9%,N=39) | 0% (0-9%,N=39) | 100% (91-100%,N=38) | 0% (0-9%,N=39) | NA | 0% (0-9%,N=39) |
-| *K. pneumoniae* | NA | 90% (79-96%,N=58) | 100% (93-100%,N=51) | NA | 100% (93-100%,N=53) | 90% (79-96%,N=58) |
-| *P. aeruginosa* | NA | 100% (88-100%,N=30) | NA | 0% (0-12%,N=30) | NA | 100% (88-100%,N=30) |
-| *P. mirabilis* | NA | 94% (80-99%,N=34) | 94% (79-99%,N=32) | NA | NA | 94% (80-99%,N=34) |
-| *S. aureus* | NA | 99% (97-100%,N=233) | NA | NA | NA | 98% (92-100%,N=86) |
-| *S. epidermidis* | 0% (0-8%,N=44) | 79% (71-85%,N=163) | NA | 0% (0-8%,N=44) | NA | 51% (40-61%,N=89) |
-| *S. hominis* | NA | 92% (84-97%,N=80) | NA | NA | NA | 85% (74-93%,N=62) |
-| *S. pneumoniae* | 0% (0-3%,N=117) | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) | NA | 0% (0-3%,N=117) |
+| Pathogen | Amoxicillin/clavulanic acid | Imipenem | Meropenem | Piperacillin/tazobactam |
+|:---|:---|:---|:---|:---|
+| Gram-negative | 76% (73-79%,N=726) | 99% (98-100%,N=631) | 100% (99-100%,N=626) | 88% (85-91%,N=641) |
+| Gram-positive | 76% (74-79%,N=1138) | 81% (75-85%,N=257) | 77% (70-82%,N=203) | 86% (82-89%,N=345) |
 
-In combination antibiograms, it is clear that combined antimicrobials
-yield higher empiric coverage:
+Combination antibiograms show the additional coverage gained by adding a
+second agent, stratified by species:
 
 ``` r
 antibiogram(example_isolates,
-            antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
-            mo_transform = "gramstain")
+            mo_transform = "gramstain",
+            antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"))
 ```
 
 | Pathogen | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
@@ -845,9 +876,9 @@ antibiogram(example_isolates,
 | Gram-negative | 88% (85-91%,N=641) | 99% (97-99%,N=691) | 98% (97-99%,N=693) |
 | Gram-positive | 86% (82-89%,N=345) | 98% (96-98%,N=1044) | 95% (93-97%,N=550) |
 
-Like many other functions in this package, `antibiogram()` comes with
-support for 28 languages that are often detected automatically based on
-system language:
+Like many other functions in this package, `antibiogram()` and `wisca()`
+come with support for 28 languages that are often detected automatically
+based on system language:
 
 ``` r
 antibiogram(example_isolates,
@@ -1239,7 +1270,7 @@ The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyrigh
 
 This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
-After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~97 000 distinct microbial species}} (updated June 2024) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
+After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~97 000 distinct microbial species}} (updated May 2026) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~620 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
 
 The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 }
@@ -7813,8 +7844,8 @@ A \link[tibble:tibble]{tibble} with 96 982 observations and 28 variables:
 \item \code{domain}, \code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{subspecies}\cr Taxonomic rank of the microorganism. Note that for fungi, \emph{phylum} is used for their taxonomic \emph{division}. Also, for fungi, \emph{subkingdom} and \emph{subdivision} were left out since they do not occur in the bacterial taxonomy. For all species outside the domains of Bacteria and Archaea, the \code{domain} and \code{kingdom} are identical.
 \item \code{rank}\cr Text of the taxonomic rank of the microorganism, such as \code{"species"} or \code{"genus"}
 \item \code{ref}\cr Abbreviated authority citation for the nomenclatural act that established the current name combination, following ICNP conventions. For species described in their current genus (\emph{sp. nov.}), this is the original description author(s) and year. For species transferred to a different genus (\emph{comb. nov.}), this is the reclassification author(s) and year. Emendations are excluded. For synonyms, this is the authority under which the synonym was originally published. This field is directly retrieved from the source specified in the column \code{source}. Diacritics were removed to comply with CRAN, that only allows ASCII characters.
-\item \code{oxygen_tolerance} \cr Oxygen tolerance, either \code{"aerobe"}, \code{"anaerobe"}, \code{"anaerobe/microaerophile"}, \code{"facultative anaerobe"}, \code{"likely facultative anaerobe"}, \code{"microaerophile"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 1.3784 × 10\if{html}{\out{<sup>}}6\if{html}{\out{</sup>}}\% of all 2 bacteria in the data set contain an oxygen tolerance.
-\item \code{morphology} \cr Morphology (cell shape), either \code{"cocci"}, \code{"coccobacilli"}, \code{"filamentous"}, \code{"likely cocci"}, \code{"likely coccobacilli"}, \code{"likely filamentous"}, \code{"likely rods"}, \code{"likely spirilla"}, \code{"rods"}, \code{"spirilla"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Genera that are clinically established as coccobacilli (the HACEK group and beyond, such as \emph{Haemophilus} and \emph{Acinetobacter}) are classified as such regardless of BacDive majority vote. Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus. Currently 1.3232 × 10\if{html}{\out{<sup>}}6\if{html}{\out{</sup>}}\% of all 2 bacteria in the data set contain a morphology.
+\item \code{oxygen_tolerance} \cr Oxygen tolerance, either \code{"aerobe"}, \code{"anaerobe"}, \code{"anaerobe/microaerophile"}, \code{"facultative anaerobe"}, \code{"likely facultative anaerobe"}, \code{"microaerophile"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus to guess the oxygen tolerance. Currently 59.5\% of all ~46 000 bacteria in the data set contain an oxygen tolerance.
+\item \code{morphology} \cr Morphology (cell shape), either \code{"cocci"}, \code{"coccobacilli"}, \code{"filamentous"}, \code{"likely cocci"}, \code{"likely coccobacilli"}, \code{"likely filamentous"}, \code{"likely rods"}, \code{"likely spirilla"}, \code{"rods"}, \code{"spirilla"}, or NA. These data were retrieved from BacDive (see \emph{Source}). Genera that are clinically established as coccobacilli (the HACEK group and beyond, such as \emph{Haemophilus} and \emph{Acinetobacter}) are classified as such regardless of BacDive majority vote. Items that contain "likely" are missing from BacDive and were extrapolated from other species within the same genus. Currently 57.1\% of all ~46 000 bacteria in the data set contain a morphology.
 \item \code{source}\cr Either \code{"GBIF"}, \code{"LPSN"}, \code{"MycoBank"}, or \code{"manually added"} (see \emph{Source})
 \item \code{lpsn}\cr Identifier ('Record number') of List of Prokaryotic names with Standing in Nomenclature (LPSN). This will be the first/highest LPSN identifier to keep one identifier per row. For example, \emph{Acetobacter ascendens} has LPSN Record number 7864 and 11011. Only the first is available in the \code{microorganisms} data set. \emph{\strong{This is a unique identifier}}, though available for only ~36 000 records.
 \item \code{lpsn_parent}\cr LPSN identifier of the parent taxon
@@ -7833,7 +7864,7 @@ A \link[tibble:tibble]{tibble} with 96 982 observations and 28 variables:
 microorganisms
 }
 \description{
-A data set containing the full microbial taxonomy (\strong{last updated: 7th of May, 2026}) of 15 kingdoms. This data set is the backbone of this \code{AMR} package. MO codes can be looked up using \code{\link[=as.mo]{as.mo()}} and microorganism properties can be looked up using any of the \code{\link[=mo_property]{mo_*}} functions.
+A data set containing the full microbial taxonomy (\strong{last updated: 7th of May, 2026}) of seven domains. This data set is the backbone of this \code{AMR} package. MO codes can be looked up using \code{\link[=as.mo]{as.mo()}} and microorganism properties can be looked up using any of the \code{\link[=mo_property]{mo_*}} functions.
 
 This data set is carefully crafted, yet made 100\% reproducible from public and authoritative taxonomic sources (using \href{https://github.com/msberends/AMR/blob/main/data-raw/_reproduction_scripts/reproduction_of_microorganisms.R}{this script}), namely: \emph{List of Prokaryotic names with Standing in Nomenclature (LPSN)} for bacteria, \emph{MycoBank} for fungi, and \emph{Global Biodiversity Information Facility (GBIF), via Catalogue of Life (COL)} for all others taxons.
 }
@@ -7846,12 +7877,12 @@ For example, \emph{Staphylococcus pettenkoferi} was described for the first time
 
 Included taxonomic data from \href{https://lpsn.dsmz.de}{LPSN}, \href{https://www.mycobank.org}{MycoBank}, and \href{https://www.gbif.org}{GBIF} are:
 \itemize{
-\item All 2 (sub)species from the kingdoms of Archaea and Bacteria
+\item All ~46 000 (sub)species from the domains of Archaea and Bacteria
 \item ~36 000 species from the kingdom of Fungi. The kingdom of Fungi is a very large taxon with almost 300,000 different (sub)species, of which most are not microbial (but rather macroscopic, like mushrooms). Because of this, not all fungi fit the scope of this package. Only relevant fungi are covered (such as all species of \emph{Aspergillus}, \emph{Candida}, \emph{Cryptococcus}, \emph{Histoplasma}, \emph{Pneumocystis}, \emph{Saccharomyces} and \emph{Trichophyton}).
 \item ~11 000 (sub)species from the kingdom of Protozoa
 \item ~2 000 (sub)species from ~60 other relevant genera from the kingdom of Animalia (such as \emph{Strongyloides} and \emph{Taenia})
 \item All ~31 000 previously accepted names of all included (sub)species (these were taxonomically renamed)
-\item The complete taxonomic tree of all included (sub)species: from kingdom to subspecies
+\item The complete taxonomic tree of all included (sub)species: from domain to subspecies
 \item The identifier of the parent taxons
 \item The year and first author of the related scientific publication
 }
@@ -11712,6 +11743,9 @@ data
 
 # Add a synthetic syndrome column for demonstration
 data$syndrome <- ifelse(data$mo %like% "coli", "UTI", "Non-UTI")
+
+# Keep only 10 most common microorganisms
+data <- top_n_microorganisms(data, n = 10, property = "species")
 ```
 
 ### Basic WISCA
@@ -11737,10 +11771,11 @@ wisca(data,
 Use `syndromic_group` to produce separate WISCA estimates per clinical stratum. You can pass a column name or any expression:
 
 ```{r}
-wisca(data,
+wisca_out <- wisca(data,
   antimicrobials = c("AMC", "AMC + CIP", "AMC + GEN"),
   syndromic_group = "syndrome"
 )
+wisca_out
 ```
 
 The `AMR` package is available in `r length(AMR:::LANGUAGES_SUPPORTED)` languages, which can all be used for the `wisca()` function too:
@@ -11759,6 +11794,36 @@ Each row shows the estimated empirical coverage for a regimen, with a 95% credib
 
 - **Overlapping credible intervals** mean there is no statistically significant difference in coverage. If a narrower-spectrum regimen overlaps with a broader one, the narrower-spectrum option can be preferred on stewardship grounds.
 - **Non-overlapping credible intervals** indicate a clinically meaningful difference in coverage.
+
+### Plotting
+
+WISCA results can be visualised in several ways. All plot functions work on the output of `wisca()` (or `antibiogram(..., wisca = TRUE)`).
+
+Below we use the `wisca_out` object that was generated above.
+
+#### Coverage with credible intervals
+
+The extended `autoplot()` method from the `ggplot2()` package produces a point-and-interval plot showing the coverage estimate and 95% credible interval for each regimen, grouped by syndromic stratum. This is the most direct way to compare regimens: overlapping intervals suggest clinical non-inferiority, non-overlapping intervals indicate a meaningful difference.
+
+```{r, fig.width = 7.5, fig.height = 4.5}
+ggplot2::autoplot(wisca_out)
+```
+
+#### Susceptibility vs. incidence weight
+
+`wisca_plot()` produces a scatter plot of the Monte Carlo simulation draws, showing each pathogen's susceptibility (x-axis) against its incidence weight (y-axis) for each regimen. Each dot represents one of 1,000 simulated draws, so the spread reflects posterior uncertainty. This plot reveals *why* a regimen achieves its coverage: you can see which pathogens dominate the syndrome (high on the y-axis), how susceptible they are (position on the x-axis), and how uncertain both estimates are (spread of the cloud). The dashed vertical lines denote the point estimates, i.e., the coverage percentages. The ribbon behind the dashed lines denote the credible interval, which is 95% at default.
+
+```{r, fig.width = 7.5, fig.height = 5}
+wisca_plot(wisca_out)
+```
+
+#### Posterior coverage distributions
+
+Setting `wisca_plot_type = "posterior_coverage"` shows the full posterior distribution of coverage for each regimen as a density curve. This is the most complete representation of what the Bayesian model produces: each curve shows the relative likelihood of each coverage value across all 1,000 simulations. Narrow, tall peaks indicate high certainty; wide, flat curves indicate greater uncertainty. Where two curves overlap, the regimens cannot be confidently distinguished.
+
+```{r, fig.width = 7.5, fig.height = 4.5}
+wisca_plot(wisca_out, wisca_plot_type = "posterior_coverage")
+```
 
 ## Sensible defaults, which can be customised
 
@@ -12160,7 +12225,7 @@ The `AMR` package is a peer-reviewed, [free and open-source](https://amr-for-r.o
 
 This work was published in the Journal of Statistical Software (Volume 104(3); [DOI 10.18637/jss.v104.i03](https://doi.org/10.18637/jss.v104.i03)) and formed the basis of two PhD theses ([DOI 10.33612/diss.177417131](https://doi.org/10.33612/diss.177417131) and [DOI 10.33612/diss.192486375](https://doi.org/10.33612/diss.192486375)).
 
-After installing this package, R knows [**`r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species**](https://amr-for-r.org/reference/microorganisms.html) (updated June 2024) and all [**`r AMR:::format_included_data_number(NROW(AMR::antimicrobials) + NROW(AMR::antivirals))` antimicrobial and antiviral drugs**](https://amr-for-r.org/reference/antimicrobials.html) by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))` and EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))` are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl) and the [University Medical Center Groningen](https://www.umcg.nl).
+After installing this package, R knows [**`r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species**](https://amr-for-r.org/reference/microorganisms.html) (updated `r format(AMR:::TAXONOMY_VERSION$GBIF$accessed_date, "%B %Y")`) and all [**`r AMR:::format_included_data_number(NROW(AMR::antimicrobials) + NROW(AMR::antivirals))` antimicrobial and antiviral drugs**](https://amr-for-r.org/reference/antimicrobials.html) by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))` and EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))` are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl) and the [University Medical Center Groningen](https://www.umcg.nl).
 
 The `AMR` package is available in `r AMR:::vector_and(vapply(FUN.VALUE = character(1), AMR:::LANGUAGES_SUPPORTED_NAMES, function(x) x$exonym), quotes = FALSE, sort = FALSE)`. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 
