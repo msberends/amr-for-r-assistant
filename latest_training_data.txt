@@ -514,7 +514,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9065
+Version: 3.0.1.9066
 Date: 2026-06-24
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -828,7 +828,7 @@ wisca(example_isolates,
 
 | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
 |:---|:---|:---|
-| 70.1% (64.9-75.7%) | 93.6% (92.2-95%) | 89.8% (86.7-92.3%) |
+| 69.9% (64.7-75.2%) | 93.7% (92.2-95.1%) | 89.8% (86.8-92.3%) |
 
 WISCA supports stratification by any clinical variable, so you can
 generate syndrome-specific or ward-specific coverage estimates:
@@ -843,9 +843,9 @@ wisca(example_isolates,
 
 | Syndromic Group | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
 |:---|:---|:---|:---|
-| Clinical | 74.5% (69.3-80.1%) | 93.7% (92-95.1%) | 90.5% (87.1-93.1%) |
-| ICU | 56.7% (48-65.5%) | 86.7% (83.4-89.8%) | 82.9% (78.2-87.3%) |
-| Outpatient | 57.8% (46.4-69.7%) | 76.5% (70.1-82.2%) | 67.9% (57.9-77.5%) |
+| Clinical | 74.6% (69-80.1%) | 93.6% (91.9-95.1%) | 90.5% (86.9-93%) |
+| ICU | 57% (48.7-65.8%) | 86.7% (83.7-89.7%) | 82.8% (77.9-87.2%) |
+| Outpatient | 57.5% (46.5-68.7%) | 76.7% (70.6-82.4%) | 67.5% (57.2-76.7%) |
 
 **For AMR surveillance**, traditional antibiograms remain the right tool
 for tracking resistance per species over time:
@@ -7890,11 +7890,10 @@ Included taxonomic data from \href{https://lpsn.dsmz.de}{LPSN}, \href{https://ww
 
 For convenience, some entries were added manually:
 \itemize{
+\item All 37 groups and complexes of the \link{microorganisms.groups} data set, for cross-reference (examples include beta-haemolytic \emph{Streptococcus} groups A to K, coagulase-negative \emph{Staphylococcus} (CoNS), \emph{Mycobacterium tuberculosis} complex, etc.)
 \item ~1 500 entries of \emph{Salmonella}, such as the city-like serovars and groups A to H
-\item 37 species groups (such as the beta-haemolytic \emph{Streptococcus} groups A to K, coagulase-negative \emph{Staphylococcus} (CoNS), \emph{Mycobacterium tuberculosis} complex, etc.), of which the group compositions are stored in the \link{microorganisms.groups} data set
 \item 1 entry of \emph{Blastocystis} (\emph{B.  hominis}), although it officially does not exist (Noel \emph{et al.} 2005, PMID 15634993)
-\item 1 entry of \emph{Moraxella} (\emph{M. catarrhalis}), which was formally named \emph{Branhamella catarrhalis} (Catlin, 1970) though this change was never accepted within the field of clinical microbiology
-\item 8 other 'undefined' entries (unknown, unknown Gram-negatives, unknown Gram-positives, unknown yeast, unknown fungus, and unknown anaerobic Gram-pos/Gram-neg bacteria)
+\item 9 other 'undefined' entries (unknown, unknown Gram-negatives, unknown Gram-positives, unknown yeast, unknown fungus, and unknown anaerobic Gram-pos/Gram-neg bacteria)
 }
 
 The syntax used to transform the original data to a cleansed \R format, can be \href{https://github.com/msberends/AMR/blob/main/data-raw/_reproduction_scripts/reproduction_of_microorganisms.R}{found here}.
@@ -8531,6 +8530,7 @@ Visit \href{https://amr-for-r.org/articles/datasets.html}{our website for direct
 \examples{
 # taxonomic tree -----------------------------------------------------------
 
+mo_domain("Klebsiella pneumoniae")
 mo_kingdom("Klebsiella pneumoniae")
 mo_phylum("Klebsiella pneumoniae")
 mo_class("Klebsiella pneumoniae")
@@ -8540,6 +8540,8 @@ mo_genus("Klebsiella pneumoniae")
 mo_species("Klebsiella pneumoniae")
 mo_subspecies("Klebsiella pneumoniae")
 
+# all in one go
+mo_taxonomy("Klebsiella pneumoniae")
 
 # full names and short names -----------------------------------------------
 
@@ -8560,6 +8562,7 @@ mo_rank("Klebsiella pneumoniae")
 mo_url("Klebsiella pneumoniae")
 mo_is_yeast(c("Candida", "Trichophyton", "Klebsiella"))
 
+mo_group_members("Streptococcus group A")
 mo_group_members(c(
   "Streptococcus group A",
   "Streptococcus group C",
@@ -8603,6 +8606,7 @@ mo_shortname("K. pneu rh")
 
 mo_fullname("Staph epidermidis")
 mo_fullname("Staph epidermidis", Becker = TRUE)
+
 mo_shortname("Staph epidermidis")
 mo_shortname("Staph epidermidis", Becker = TRUE)
 
@@ -8611,6 +8615,7 @@ mo_shortname("Staph epidermidis", Becker = TRUE)
 
 mo_fullname("Strep agalactiae")
 mo_fullname("Strep agalactiae", Lancefield = TRUE)
+
 mo_shortname("Strep agalactiae")
 mo_shortname("Strep agalactiae", Lancefield = TRUE)
 
@@ -8623,10 +8628,10 @@ mo_gramstain("Klebsiella pneumoniae", language = "es") # Spanish
 mo_gramstain("Klebsiella pneumoniae", language = "el") # Greek
 mo_gramstain("Klebsiella pneumoniae", language = "uk") # Ukrainian
 
-# mo_type is equal to mo_kingdom, but mo_kingdom will remain untranslated
-mo_kingdom("Klebsiella pneumoniae")
+# mo_type is equal to mo_domain, but mo_domain will remain untranslated
+mo_domain("Klebsiella pneumoniae")
 mo_type("Klebsiella pneumoniae")
-mo_kingdom("Klebsiella pneumoniae", language = "zh") # Chinese, no effect
+mo_domain("Klebsiella pneumoniae", language = "zh") # Chinese, no effect
 mo_type("Klebsiella pneumoniae", language = "zh") # Chinese, translated
 
 mo_fullname("S. pyogenes", Lancefield = TRUE, language = "de")
