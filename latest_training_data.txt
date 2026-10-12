@@ -524,7 +524,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9120
+Version: 3.0.1.9121
 Date: 2026-10-12
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -778,13 +778,9 @@ example_isolates %>%
 #> ℹ Using column mo as input for `mo_fullname()`
 #> ℹ Using column mo as input for `mo_is_gram_negative()`
 #> ℹ Using column mo as input for `mo_is_intrinsic_resistant()`
-#> ℹ Determining intrinsic resistance based on 'EUCAST Expected
-#>   Resistant Phenotypes' v1.2 (2023). This note will be shown
-#>   once per session.
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB
-#>   (tobramycin), AMK (amikacin), and KAN (kanamycin)
-#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM
-#>   (meropenem)
+#> ℹ Determining intrinsic resistance based on 'EUCAST Expected Resistant Phenotypes' v1.2 (2023). This note will be shown once per session.
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK (amikacin), and KAN (kanamycin)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 #> # A tibble: 35 × 7
 #>    bacteria                     GEN   TOB   AMK   KAN   IPM   MEM  
 #>    <chr>                        <sir> <sir> <sir> <sir> <sir> <sir>
@@ -861,8 +857,7 @@ for tracking resistance per species over time:
 antibiogram(example_isolates,
             mo_transform = "gramstain",
             antimicrobials = c("AMC", carbapenems(), "TZP"))
-#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM
-#>   (meropenem)
+#> ℹ For `carbapenems()` using columns IPM (imipenem) and MEM (meropenem)
 ```
 
 | Pathogen      | Amoxicillin/clavulanic acid | Imipenem            | Meropenem            | Piperacillin/tazobactam |
@@ -977,16 +972,13 @@ out <- example_isolates %>%
   # calculate AMR using resistance(), over all aminoglycosides and polymyxins:
   summarise(across(c(aminoglycosides(), polymyxins()),
             resistance))
-#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB
-#>   (tobramycin), AMK (amikacin), and KAN (kanamycin)
+#> ℹ For `aminoglycosides()` using columns GEN (gentamicin), TOB (tobramycin), AMK (amikacin), and KAN (kanamycin)
 #> ℹ For `polymyxins()` using column COL (colistin)
 #> Warning: There was 1 warning in `summarise()`.
-#> ℹ In argument: `across(c(aminoglycosides(), polymyxins()),
-#>   resistance)`.
+#> ℹ In argument: `across(c(aminoglycosides(), polymyxins()), resistance)`.
 #> ℹ In group 3: `ward = "Outpatient"`.
 #> Caused by warning:
-#> ! Introducing NA: only 23 results available for KAN in group:
-#> ward = "Outpatient" (whilst `minimum = 30`).
+#> ! Introducing NA: only 23 results available for KAN in group: ward = "Outpatient" (whilst `minimum = 30`).
 out
 #> # A tibble: 3 × 6
 #>   ward         GEN   TOB   AMK   KAN   COL
@@ -2684,7 +2676,8 @@ if (requireNamespace("dplyr")) {
     top_n_microorganisms(n = 10) \%>\%
     group_by(
       age_group = age_groups(age, c(25, 50, 75)),
-      gender) \%>\%
+      gender
+    ) \%>\%
     wisca(antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"))
 }
 
@@ -3110,7 +3103,6 @@ carbapenems()
 # Though they are primarily intended to use for selections and filters.
 # Examples sections below are split into 'dplyr', 'base R', and 'data.table':
 
-\donttest{
 \dontrun{
 # dplyr -------------------------------------------------------------------
 
@@ -3131,8 +3123,10 @@ example_isolates \%>\% select(administrable_per_os())
 # get AMR for all aminoglycosides e.g., per ward:
 example_isolates \%>\%
   group_by(ward) \%>\%
-  summarise(across(aminoglycosides(),
-                   resistance))
+  summarise(across(
+    aminoglycosides(),
+    resistance
+  ))
 
 # You can combine selectors with '&' to be more specific:
 example_isolates \%>\%
@@ -3142,8 +3136,10 @@ example_isolates \%>\%
 example_isolates \%>\%
   filter(mo_genus() \%in\% c("Escherichia", "Klebsiella")) \%>\%
   group_by(ward) \%>\%
-  summarise_at(not_intrinsic_resistant(),
-               resistance)
+  summarise_at(
+    not_intrinsic_resistant(),
+    resistance
+  )
 
 # get susceptibility for antimicrobials whose name contains "trim":
 example_isolates \%>\%
@@ -3196,8 +3192,9 @@ x <- example_isolates[carbapenems() == "R", ]
 y <- example_isolates \%>\% filter(carbapenems() == "R")
 z <- example_isolates \%>\% filter(if_all(carbapenems(), ~ .x == "R"))
 identical(x, y) && identical(y, z)
-
 }
+
+\donttest{
 # base R ------------------------------------------------------------------
 
 # select columns 'IPM' (imipenem) and 'MEM' (meropenem)
