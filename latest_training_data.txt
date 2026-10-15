@@ -524,7 +524,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9137
+Version: 3.0.1.9138
 Date: 2026-10-15
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -667,7 +667,7 @@ times](https://scholar.google.com/citations?view_op=view_citation&hl=en&citation
 in scientific research.
 
 After installing this package, R knows [**~103 000 distinct microbial
-species**](./reference/microorganisms.html) (updated april 2026) and all
+species**](./reference/microorganisms.html) (updated April 2026) and all
 [**~630 antimicrobial and antiviral
 drugs**](./reference/antimicrobials.html) by name and code (including
 ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all
@@ -828,12 +828,11 @@ the full explanation.
 wisca(example_isolates,
       antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
       minimum = 10) # Recommended threshold: >=30
-#> Warning: invalid microorganism code, NA generated
 ```
 
 | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
 |:------------------------|:-------------------------------------|:-------------------------------------|
-| 69.8% (64.5-74.7%)      | 93.6% (92.1-95%)                     | 89.9% (87-92.5%)                     |
+| 70.2% (65-75.4%)        | 93.6% (92-95.1%)                     | 89.9% (87-92.5%)                     |
 
 WISCA supports stratification by any clinical variable, so you can
 generate syndrome-specific or ward-specific coverage estimates:
@@ -843,14 +842,13 @@ wisca(example_isolates,
       antimicrobials = c("TZP", "TZP+TOB", "TZP+GEN"),
       syndromic_group = "ward",
       minimum = 10) # Recommended threshold: >=30
-#> Warning: invalid microorganism code, NA generated
 ```
 
 | Syndromic Group | Piperacillin/tazobactam | Piperacillin/tazobactam + Gentamicin | Piperacillin/tazobactam + Tobramycin |
 |:----------------|:------------------------|:-------------------------------------|:-------------------------------------|
-| Clinical        | 74.6% (69.1-80.1%)      | 93.7% (92.1-95.1%)                   | 90.3% (87-93.1%)                     |
-| ICU             | 56.9% (48.3-66%)        | 86.7% (83.5-89.8%)                   | 83% (77.9-87.4%)                     |
-| Outpatient      | 57.7% (46.5-69.3%)      | 76.6% (70.5-82.2%)                   | 67.8% (56.9-77.5%)                   |
+| Clinical        | 74.8% (69-80.3%)        | 93.7% (92.1-95.1%)                   | 90.4% (86.8-93.3%)                   |
+| ICU             | 56.7% (48.2-65.4%)      | 86.6% (83.3-89.6%)                   | 83.1% (78.2-87.5%)                   |
+| Outpatient      | 57.6% (46-69%)          | 76.4% (69.8-81.7%)                   | 68% (57.7-77.5%)                     |
 
 **For AMR surveillance**, traditional antibiograms remain the right tool
 for tracking resistance per species over time:
@@ -1201,7 +1199,7 @@ This is an overview of all the package-specific options you can set in the \code
 \item \code{AMR_custom_ab} \cr A file location to an RDS file, to use custom antimicrobial drugs with this package. This is explained in \code{\link[=add_custom_antimicrobials]{add_custom_antimicrobials()}}.
 \item \code{AMR_custom_mo} \cr A file location to an RDS file, to use custom microorganisms with this package. This is explained in \code{\link[=add_custom_microorganisms]{add_custom_microorganisms()}}.
 \item \code{AMR_eucastrules} \cr A \link{character} to set the default types of rules for \code{\link[=eucast_rules]{eucast_rules()}} function, must be one or more of: \code{"breakpoints"}, \code{"expert"}, \code{"other"}, \code{"custom"}, \code{"all"}, and defaults to \code{c("breakpoints", "expert")}.
-\item \code{AMR_guideline} \cr A \link{character} to set the default guideline used throughout the \code{AMR} package wherever a \code{guideline} argument is available. This option is used as the default in e.g. \code{\link[=as.sir]{as.sir()}}, \code{\link[=resistance]{resistance()}}, \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=interpretive_rules]{interpretive_rules()}} and many plotting functions. \strong{While unset}, the AMR package uses the latest implemented EUCAST guideline (currently EUCAST 2026).
+\item \code{AMR_guideline} \cr A \link{character} to set the default guideline used throughout the \code{AMR} package wherever a \code{guideline} argument is available. This option is used as the default in e.g. \code{\link[=as.sir]{as.sir()}}, \code{\link[=resistance]{resistance()}}, \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=interpretive_rules]{interpretive_rules()}} and many plotting functions. \strong{While unset}, the AMR package uses the latest implemented EUCAST guideline (currently EUCAST 2026). In aggregated analyses, this option determines whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI), see section \emph{Interpretation of SIR} in \code{\link[=as.sir]{as.sir()}}; setting it also silences the message that EUCAST is assumed.
 \itemize{
 \item For \code{\link[=as.sir]{as.sir()}}, this determines which clinical breakpoint guideline is used to interpret MIC values and disk diffusion diameters. It can be either the guideline name (e.g., \code{"CLSI"} or \code{"EUCAST"}) or the name including a year (e.g., \code{"CLSI 2019"}). Supported guidelines are EUCAST 2011 to 2026, and CLSI 2011 to 2026.
 \item For \code{\link[=resistance]{resistance()}} and \code{\link[=susceptibility]{susceptibility()}}, this setting determines how the \code{"I"} (Intermediate / Increased exposure) category is handled in calculations. Under CLSI, \code{"I"} is considered \emph{resistant} in susceptibility calculations; under EUCAST, \code{"I"} is considered \emph{susceptible} in susceptibility calculations. Explicitly setting this option ensures reproducible AMR proportion estimates.
@@ -1271,7 +1269,7 @@ The \code{AMR} package is a peer-reviewed, \href{https://amr-for-r.org/#copyrigh
 
 This work was published in the Journal of Statistical Software (Volume 104(3); \doi{10.18637/jss.v104.i03}) and formed the basis of two PhD theses (\doi{10.33612/diss.177417131} and \doi{10.33612/diss.192486375}).
 
-After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~103 000 distinct microbial species}} (updated april 2026) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~630 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
+After installing this package, R knows \href{https://amr-for-r.org/reference/microorganisms.html}{\strong{~103 000 distinct microbial species}} (updated April 2026) and all \href{https://amr-for-r.org/reference/antimicrobials.html}{\strong{~630 antimicrobial and antiviral drugs}} by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI 2011-2026 and EUCAST 2011-2026 are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). \strong{It was designed to work in any setting, including those with very limited resources}. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the \href{https://www.rug.nl}{University of Groningen} and the \href{https://www.umcg.nl}{University Medical Center Groningen}.
 
 The \code{AMR} package is available in English, Arabic, Bengali, Chinese, Czech, Danish, Dutch, Finnish, French, German, Greek, Hindi, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Urdu, and Vietnamese. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 }
@@ -2366,7 +2364,8 @@ wisca(
   formatting_type = getOption("AMR_antibiogram_formatting_type", 14),
   col_mo = NULL,
   language = get_AMR_locale(),
-  combine_SI = TRUE,
+  combine_SI,
+  guideline = getOption("AMR_guideline", "EUCAST"),
   sep = " + ",
   sort_columns = TRUE,
   simulations = 1000,
@@ -2390,7 +2389,8 @@ antibiogram(
   col_mo = NULL,
   language = get_AMR_locale(),
   minimum = 30,
-  combine_SI = TRUE,
+  combine_SI,
+  guideline = getOption("AMR_guideline", "EUCAST"),
   sep = " + ",
   sort_columns = TRUE,
   wisca = FALSE,
@@ -2467,7 +2467,9 @@ wisca_plot(
 
 \item{language}{Language to translate text, which defaults to the system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}).}
 
-\item{combine_SI}{A \link{logical} to indicate whether all susceptibility should be determined by results of either S, SDD, or I, instead of only S (default is \code{TRUE}).}
+\item{combine_SI}{\emph{(deprecated in favour of \code{guideline})} A \link{logical}. If set, it takes precedence over \code{guideline}: \code{TRUE} considers S, SDD, and I susceptible, and \code{FALSE} only S.}
+
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI). 'SDD' is always considered susceptible. The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. See section \emph{Interpretation of SIR} below.}
 
 \item{sep}{A separating character for antimicrobial columns in combination antibiograms.}
 
@@ -2589,7 +2591,7 @@ your_data \%>\%
 
 \subsection{Inclusion in Combination Antibiograms}{
 
-For combination antibiograms, the results of the antimicrobials are combined using the same rules as \code{\link[=sir_combine]{sir_combine()}}, see the section \emph{Combination Therapy} below. Whether isolates must be tested for all antimicrobials can be set with the \code{only_all_tested} argument (default is \code{FALSE}). The 'I' and 'SDD' categories are considered susceptible if \code{combine_SI = TRUE} (default), which also determines whether a missing result can be ignored. To use a combination in other analyses as well, create a new variable with \code{\link[=sir_combine]{sir_combine()}}.
+For combination antibiograms, the results of the antimicrobials are combined using the same rules as \code{\link[=sir_combine]{sir_combine()}}, see the section \emph{Combination Therapy} below. Whether isolates must be tested for all antimicrobials can be set with the \code{only_all_tested} argument (default is \code{FALSE}). Whether the 'I' category is considered susceptible follows the \code{guideline} argument, which also determines whether a missing result can be ignored. To use a combination in other analyses as well, create a new variable with \code{\link[=sir_combine]{sir_combine()}}.
 }
 
 \subsection{Plotting}{
@@ -2656,7 +2658,33 @@ With \code{only_all_tested = TRUE}, all these functions count the result of the 
   proportion_S() + proportion_I() + proportion_R() = 1
 }\if{html}{\out{</div>}}
 
-In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' and 'SDD' categories are considered susceptible if \code{combine_SI = TRUE} (default), and the result is then reduced to S or R.
+In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' category is considered susceptible or not following the \code{guideline} argument ('SDD' is always considered susceptible), and the result is then reduced to S or R.
+}
+
+\section{Interpretation of SIR}{
+
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
+
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \examples{
@@ -4462,7 +4490,26 @@ The function \code{\link[=is_sir_eligible]{is_sir_eligible()}} returns \code{TRU
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
-This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \section{Download Our Reference Data}{
@@ -5036,6 +5083,7 @@ bug_drug_combinations(
   col_mo = NULL,
   FUN = mo_shortname,
   include_n_rows = FALSE,
+  guideline = getOption("AMR_guideline", "EUCAST"),
   ...
 )
 
@@ -5044,7 +5092,8 @@ bug_drug_combinations(
   translate_ab = "name (ab, atc)",
   language = get_AMR_locale(),
   minimum = 30,
-  combine_SI = TRUE,
+  combine_SI,
+  guideline = attr(x, "guideline"),
   add_ab_group = TRUE,
   remove_intrinsic_resistant = FALSE,
   decimal.mark = getOption("OutDec"),
@@ -5061,6 +5110,8 @@ bug_drug_combinations(
 
 \item{include_n_rows}{A \link{logical} to indicate if the total number of rows must be included in the output.}
 
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI) when calculating resistance with \code{\link[=format]{format()}}. The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. In \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, this can also be \code{NULL} or \code{FALSE}, after which \code{\link[=format]{format()}} requires its own \code{guideline} to be set. In \code{\link[=format]{format()}}, the default is the guideline used in \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, which can be overridden by setting it. See section \emph{Interpretation of SIR} below.}
+
 \item{...}{Arguments passed on to \code{FUN}.}
 
 \item{translate_ab}{A \link{character} of length 1 containing column names of the \link{antimicrobials} data set.}
@@ -5069,7 +5120,7 @@ bug_drug_combinations(
 
 \item{minimum}{The minimum allowed number of available (tested) isolates. Any isolate count lower than \code{minimum} will return \code{NA} with a warning. The default number of \code{30} isolates is advised by the Clinical and Laboratory Standards Institute (CLSI) as best practice, see \emph{Source}.}
 
-\item{combine_SI}{A \link{logical} to indicate whether values S, SDD, and I should be summed, so resistance will be based on only R - the default is \code{TRUE}.}
+\item{combine_SI}{\emph{(deprecated in favour of \code{guideline})} A \link{logical}. If set, it takes precedence over \code{guideline}: \code{TRUE} bases resistance on R only, and \code{FALSE} on SDD, I, and R.}
 
 \item{add_ab_group}{A \link{logical} to indicate where the group of the antimicrobials must be included as a first column.}
 
@@ -5083,14 +5134,40 @@ bug_drug_combinations(
     decimal point.}
 }
 \value{
-The function \code{\link[=bug_drug_combinations]{bug_drug_combinations()}} returns a \link{data.frame} with columns "mo", "ab", "S", "SDD", "I", "R", "WT, "NWT", and "total".
+The function \code{\link[=bug_drug_combinations]{bug_drug_combinations()}} returns a \link{data.frame} with columns "mo", "ab", "S", "SDD", "I", "R", "NI", "WT", "NWT", "NS", and "total".
 }
 \description{
 Determine antimicrobial resistance (AMR) of all bug-drug combinations in your data set where at least 30 (default) isolates are available per species. Use \code{\link[=format]{format()}} on the result to prettify it to a publishable/printable format, see \emph{Examples}.
 }
 \details{
-The function \code{\link[=format]{format()}} calculates the resistance per bug-drug combination and returns a table ready for reporting/publishing. Use \code{combine_SI = TRUE} (default) to test R vs. S+I and \code{combine_SI = FALSE} to test R+I vs. S. This table can also directly be used in R Markdown / Quarto without the need for e.g. \code{\link[knitr:kable]{knitr::kable()}}.
+The function \code{\link[=format]{format()}} calculates the resistance per bug-drug combination and returns a table ready for reporting/publishing. Following the \code{guideline}, resistance is based on R (EUCAST) or on I and R (CLSI), see section \emph{Interpretation of SIR} below. This table can also directly be used in R Markdown / Quarto without the need for e.g. \code{\link[knitr:kable]{knitr::kable()}}.
 }
+\section{Interpretation of SIR}{
+
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
+
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
+}
+
 \examples{
 # example_isolates is a data set available in the AMR package.
 # run ?example_isolates for more info.
@@ -5138,11 +5215,11 @@ A \link[tibble:tibble]{tibble} with 60 237 observations and 15 variables:
 \item \code{method}\cr Testing method, either \code{"DISK"} or \code{"MIC"}
 \item \code{site}\cr Body site for which the breakpoint must be applied, e.g. "Oral" or "Respiratory"
 \item \code{mo}\cr Microbial ID, see \code{\link[=as.mo]{as.mo()}}
-\item \code{rank_index}\cr Taxonomic rank index of \code{mo} from 1 (subspecies/infraspecies) to 7 (non-species related breakpoints), used to choose the most specific breakpoint; blocking rows (see \emph{Details}) have the rank index of their organism + 0.1
+\item \code{rank_index}\cr Taxonomic rank index of \code{mo}, used to choose the most specific breakpoint (the lowest index): 1 for subspecies and infraspecies, 2 for species, 2.5 for species groups (e.g., \emph{Streptococcus} group A), 3 for genus, 4 for family, 5 for order, 6 for other groups (e.g., Gram-negative or anaerobic bacteria), and 7 for non-species related (PK-PD) breakpoints. Blocking rows (see \emph{Details}) have the rank index of their organism + 0.1, e.g., 2.6 for a species group, so that a breakpoint for the same organism always takes precedence.
 \item \code{ab}\cr Antimicrobial code as used by this package, EARS-Net and WHONET, see \code{\link[=as.ab]{as.ab()}}
 \item \code{ref_tbl}\cr Info about where the guideline rule can be found
 \item \code{disk_dose}\cr Dose of the used disk diffusion method
-\item \code{breakpoint_S}\cr Lowest MIC value or highest number of millimetres that leads to "S", is \code{NA} for blocking rows (see \emph{Details})
+\item \code{breakpoint_S}\cr Lowest MIC value or highest number of millimetres that leads to "S", is \code{NA} for blocking rows (see \emph{Details}). EUCAST's off-scale MIC breakpoint of 0.001 mg/L, which indicates that there is no S category, is stored as 0.0001 to keep all isolates out of "S".
 \item \code{breakpoint_R}\cr Highest MIC value or lowest number of millimetres that leads to "R", can be \code{NA}
 \item \code{uti}\cr A \link{logical} value (\code{TRUE}/\code{FALSE}) to indicate whether the rule applies to a urinary tract infection (UTI)
 \item \code{is_SDD}\cr A \link{logical} value (\code{TRUE}/\code{FALSE}) to indicate whether the intermediate range between "S" and "R" should be interpreted as "SDD", instead of "I". This currently applies to 72 breakpoints.
@@ -5273,7 +5350,7 @@ count_df(
   data,
   translate_ab = "name",
   language = get_AMR_locale(),
-  combine_SI = TRUE,
+  combine_SI,
   guideline = getOption("AMR_guideline", "EUCAST")
 )
 }
@@ -5282,13 +5359,7 @@ count_df(
 
 \item{only_all_tested}{(for combination therapies, i.e. using more than one variable for \code{...}): a \link{logical} to indicate that isolates must be tested for all antimicrobials, see section \emph{Combination Therapy} below. Use \code{\link[=sir_combine]{sir_combine()}} to create a new variable for a combination therapy.}
 
-\item{guideline}{Either \code{"EUCAST"} (default) or \code{"CLSI"}. With EUCAST, the 'I' category will be considered as susceptible (see \href{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}{EUCAST website}), but with with CLSI, it will be considered resistant. Therefore:
-\itemize{
-\item EUCAST: \code{\link[=count_susceptible]{count_susceptible()}} \eqn{= N_{S} + N_{I}}, \code{\link[=count_resistant]{count_resistant()}} \eqn{= N_{R}}
-\item CLSI: \code{\link[=count_susceptible]{count_susceptible()}} \eqn{= N_{S} + N_{SDD}}, \code{\link[=count_resistant]{count_resistant()}} \eqn{= N_{I} + N_{R}}
-}
-
-You can also use e.g. \code{\link[=count_R]{count_R()}} or \code{\link[=count_S]{count_S()}} instead, to be explicit.}
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI). The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. For functions that return results per category, i.e., \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, and \code{\link[=labels_sir_count]{labels_sir_count()}}, this can also be \code{NULL} or \code{FALSE} to keep S, I, and R separate. See section \emph{Interpretation of SIR} below.}
 
 \item{data}{A \link{data.frame} containing columns with class \code{\link{sir}} (see \code{\link[=as.sir]{as.sir()}}).}
 
@@ -5296,7 +5367,7 @@ You can also use e.g. \code{\link[=count_R]{count_R()}} or \code{\link[=count_S]
 
 \item{language}{Language of the returned text - the default is the current system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}) and can also be set with the package option \code{\link[=AMR-options]{AMR_locale}}. Use \code{language = NULL} or \code{language = ""} to prevent translation.}
 
-\item{combine_SI}{A \link{logical} to indicate whether the 'I' category must be merged with another category, so the output only consists of susceptible vs. resistant - the default is \code{TRUE}. Following the \code{guideline} argument, the output then consists of \code{"SI"} (S+SDD+I) vs. \code{"R"} with EUCAST, and of \code{"S"} (S+SDD) vs. \code{"IR"} (I+R) with CLSI.}
+\item{combine_SI}{\emph{(deprecated in favour of \code{guideline})} A \link{logical}. If set, it takes precedence over \code{guideline}: \code{TRUE} merges S, SDD, and I into \code{"SI"} vs. \code{"R"}, and \code{FALSE} keeps S, I, and R separate.}
 }
 \value{
 An \link{integer}
@@ -5317,7 +5388,26 @@ The function \code{\link[=count_df]{count_df()}} takes any variable from \code{d
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
-This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \section{Combination Therapy}{
@@ -5361,7 +5451,7 @@ With \code{only_all_tested = TRUE}, all these functions count the result of the 
   proportion_S() + proportion_I() + proportion_R() = 1
 }\if{html}{\out{</div>}}
 
-In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' and 'SDD' categories are considered susceptible if \code{combine_SI = TRUE} (default), and the result is then reduced to S or R.
+In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' category is considered susceptible or not following the \code{guideline} argument ('SDD' is always considered susceptible), and the result is then reduced to S or R.
 }
 
 \examples{
@@ -6695,10 +6785,11 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/ggplot_sir.Rd':
 
 
 % Generated by roxygen2: do not edit by hand
-% Please edit documentation in R/ggplot_sir.R
+% Please edit documentation in R/ggplot_sir.R, R/plotting.R
 \name{ggplot_sir}
 \alias{ggplot_sir}
 \alias{geom_sir}
+\alias{labels_sir_count}
 \title{AMR Plots with \code{ggplot2}}
 \usage{
 ggplot_sir(
@@ -6710,7 +6801,7 @@ ggplot_sir(
   breaks = seq(0, 1, 0.1),
   limits = NULL,
   translate_ab = "name",
-  combine_SI = TRUE,
+  combine_SI,
   minimum = 30,
   language = get_AMR_locale(),
   guideline = getOption("AMR_guideline", "EUCAST"),
@@ -6735,9 +6826,21 @@ geom_sir(
   translate_ab = "name",
   minimum = 30,
   language = get_AMR_locale(),
-  combine_SI = TRUE,
+  combine_SI,
   guideline = getOption("AMR_guideline", "EUCAST"),
   ...
+)
+
+labels_sir_count(
+  position = NULL,
+  x = "antibiotic",
+  translate_ab = "name",
+  minimum = 30,
+  language = get_AMR_locale(),
+  combine_SI,
+  guideline = getOption("AMR_guideline", "EUCAST"),
+  datalabels.size = 3,
+  datalabels.colour = "grey15"
 )
 }
 \arguments{
@@ -6757,19 +6860,13 @@ geom_sir(
 
 \item{translate_ab}{A column name of the \link{antimicrobials} data set to translate the antibiotic abbreviations to, using \code{\link[=ab_property]{ab_property()}}.}
 
-\item{combine_SI}{A \link{logical} to indicate whether the 'I' category must be merged with another category, so the output only consists of susceptible vs. resistant - the default is \code{TRUE}. Following the \code{guideline} argument, the output then consists of \code{"SI"} (S+SDD+I) vs. \code{"R"} with EUCAST, and of \code{"S"} (S+SDD) vs. \code{"IR"} (I+R) with CLSI.}
+\item{combine_SI}{\emph{(deprecated in favour of \code{guideline})} A \link{logical}. If set, it takes precedence over \code{guideline}: \code{TRUE} merges S, SDD, and I into \code{"SI"} vs. \code{"R"}, and \code{FALSE} keeps S, I, and R separate.}
 
 \item{minimum}{The minimum allowed number of available (tested) isolates. Any isolate count lower than \code{minimum} will return \code{NA} with a warning. The default number of \code{30} isolates is advised by the Clinical and Laboratory Standards Institute (CLSI) as best practice, see \emph{Source}.}
 
 \item{language}{Language of the returned text - the default is the current system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}) and can also be set with the package option \code{\link[=AMR-options]{AMR_locale}}. Use \code{language = NULL} or \code{language = ""} to prevent translation.}
 
-\item{guideline}{Either \code{"EUCAST"} (default) or \code{"CLSI"}. With EUCAST, the 'I' category will be considered as susceptible (see \href{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}{EUCAST website}), but with with CLSI, it will be considered resistant. Therefore:
-\itemize{
-\item EUCAST: \code{\link[=susceptibility]{susceptibility()}} \eqn{= \%S + \%I}, \code{\link[=resistance]{resistance()}} \eqn{= \%R}
-\item CLSI: \code{\link[=susceptibility]{susceptibility()}} \eqn{= \%S + \%SDD}, \code{\link[=resistance]{resistance()}} \eqn{= \%I + \%R}
-}
-
-You can also use e.g. \code{\link[=proportion_R]{proportion_R()}} or \code{\link[=proportion_S]{proportion_S()}} instead, to be explicit. For \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=count_df]{count_df()}}, and \code{\link[=sir_df]{sir_df()}}, the guideline determines how 'I' is merged when \code{combine_SI = TRUE}.}
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI). The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. For functions that return results per category, i.e., \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, and \code{\link[=labels_sir_count]{labels_sir_count()}}, this can also be \code{NULL} or \code{FALSE} to keep S, I, and R separate. See section \emph{Interpretation of SIR} below.}
 
 \item{nrow}{(when using \code{facet}) number of rows.}
 
@@ -6812,6 +6909,32 @@ Additional functions include:
 
 \code{\link[=ggplot_sir]{ggplot_sir()}} is a wrapper around all above functions that uses data as first input. This makes it possible to use this function after a pipe (\verb{\%>\%}). See \emph{Examples}.
 }
+\section{Interpretation of SIR}{
+
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
+
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
+}
+
 \examples{
 \donttest{
 if (require("ggplot2") && require("dplyr")) {
@@ -7685,7 +7808,7 @@ eucast_exceptional_phenotypes(
 
 \item{pct_required_classes}{Minimal required percentage of antimicrobial classes that must be available per isolate, rounded down. For example, with the default guideline, 17 antimicrobial classes must be available for \emph{S. aureus}. Setting this \code{pct_required_classes} argument to \code{0.5} (default) means that for every \emph{S. aureus} isolate at least 8 different classes must be available. Any lower number of available classes will return \code{NA} for that isolate.}
 
-\item{combine_SI}{A \link{logical} to indicate whether all values of S and I must be merged into one, so resistance is only considered when isolates are R, not I. As this is the default behaviour of the \code{\link[=mdro]{mdro()}} function, it follows the redefinition by EUCAST about the interpretation of I (increased exposure) in 2019, see section 'Interpretation of S, I and R' below. When using \code{combine_SI = FALSE}, resistance is considered when isolates are R or I.}
+\item{combine_SI}{A \link{logical} to indicate whether all values of S and I must be merged into one, so resistance is only considered when isolates are R, not I. As this is the default behaviour of the \code{\link[=mdro]{mdro()}} function, it follows the redefinition by EUCAST about the interpretation of I (increased exposure) in 2019, see section 'Interpretation of S, I and R' below. When using \code{combine_SI = FALSE}, resistance is considered when isolates are R or I. In a future version, the handling of 'I' will follow the selected MDRO guideline (\href{https://github.com/msberends/AMR/issues/323}{#323}).}
 
 \item{verbose}{A \link{logical} to turn Verbose mode on and off (default is off). In Verbose mode, the function returns a data set with the MDRO results in logbook form with extensive info about which isolates would be MDRO-positive, or why they are not.}
 
@@ -7770,7 +7893,26 @@ Custom guidelines can be set with the \code{\link[=custom_mdro_guideline]{custom
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
-This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \examples{
@@ -8984,7 +9126,6 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/plot.Rd':
 \alias{scale_sir_colours}
 \alias{scale_sir_colors}
 \alias{theme_sir}
-\alias{labels_sir_count}
 \title{Plotting Helpers for AMR Data Analysis}
 \usage{
 scale_x_mic(keep_operators = "edges", mic_range = NULL, ...)
@@ -9113,18 +9254,6 @@ scale_sir_colours(
 )
 
 theme_sir()
-
-labels_sir_count(
-  position = NULL,
-  x = "antibiotic",
-  translate_ab = "name",
-  minimum = 30,
-  language = get_AMR_locale(),
-  combine_SI = TRUE,
-  guideline = getOption("AMR_guideline", "EUCAST"),
-  datalabels.size = 3,
-  datalabels.colour = "grey15"
-)
 }
 \arguments{
 \item{keep_operators}{A \link{character} specifying how to handle operators (such as \code{>} and \code{<=}) in the input. Accepts one of three values: \code{"all"} (or \code{TRUE}) to keep all operators, \code{"none"} (or \code{FALSE}) to remove all operators, or \code{"edges"} to keep operators only at both ends of the range.}
@@ -9166,18 +9295,6 @@ labels_sir_count(
 \item{limits}{A \link{numeric} vector of length two providing limits of the scale, use \code{NA} to refer to the existing minimum or maximum.}
 
 \item{aesthetics}{Aesthetics to apply the colours to - the default is "fill" but can also be (a combination of) "alpha", "colour", "fill", "linetype", "shape" or "size".}
-
-\item{position}{Position adjustment of bars, either \code{"fill"}, \code{"stack"} or \code{"dodge"}.}
-
-\item{translate_ab}{A column name of the \link{antimicrobials} data set to translate the antibiotic abbreviations to, using \code{\link[=ab_property]{ab_property()}}.}
-
-\item{minimum}{The minimum allowed number of available (tested) isolates. Any isolate count lower than \code{minimum} will return \code{NA} with a warning. The default number of \code{30} isolates is advised by the Clinical and Laboratory Standards Institute (CLSI) as best practice, see \emph{Source}.}
-
-\item{combine_SI}{A \link{logical} to indicate whether the 'I' category must be merged with another category, so the output only consists of susceptible vs. resistant - the default is \code{TRUE}. Following the \code{guideline} argument, the output then consists of \code{"SI"} (S+SDD+I) vs. \code{"R"} with EUCAST, and of \code{"S"} (S+SDD) vs. \code{"IR"} (I+R) with CLSI.}
-
-\item{datalabels.size}{Size of the datalabels.}
-
-\item{datalabels.colour}{Colour of the datalabels.}
 }
 \value{
 The \code{autoplot()} functions return a \code{\link[ggplot2:ggplot]{ggplot}} model that is extendible with any \code{ggplot2} function.
@@ -9432,7 +9549,7 @@ proportion_df(
   language = get_AMR_locale(),
   minimum = 30,
   as_percent = FALSE,
-  combine_SI = TRUE,
+  combine_SI,
   confidence_level = 0.95,
   guideline = getOption("AMR_guideline", "EUCAST")
 )
@@ -9443,7 +9560,7 @@ sir_df(
   language = get_AMR_locale(),
   minimum = 30,
   as_percent = FALSE,
-  combine_SI = TRUE,
+  combine_SI,
   confidence_level = 0.95,
   guideline = getOption("AMR_guideline", "EUCAST")
 )
@@ -9457,13 +9574,7 @@ sir_df(
 
 \item{only_all_tested}{(for combination therapies, i.e. using more than one variable for \code{...}): a \link{logical} to indicate that isolates must be tested for all antimicrobials, see section \emph{Combination Therapy} below. Use \code{\link[=sir_combine]{sir_combine()}} to create a new variable for a combination therapy.}
 
-\item{guideline}{Either \code{"EUCAST"} (default) or \code{"CLSI"}. With EUCAST, the 'I' category will be considered as susceptible (see \href{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}{EUCAST website}), but with with CLSI, it will be considered resistant. Therefore:
-\itemize{
-\item EUCAST: \code{\link[=susceptibility]{susceptibility()}} \eqn{= \%S + \%I}, \code{\link[=resistance]{resistance()}} \eqn{= \%R}
-\item CLSI: \code{\link[=susceptibility]{susceptibility()}} \eqn{= \%S + \%SDD}, \code{\link[=resistance]{resistance()}} \eqn{= \%I + \%R}
-}
-
-You can also use e.g. \code{\link[=proportion_R]{proportion_R()}} or \code{\link[=proportion_S]{proportion_S()}} instead, to be explicit. For \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=count_df]{count_df()}}, and \code{\link[=sir_df]{sir_df()}}, the guideline determines how 'I' is merged when \code{combine_SI = TRUE}.}
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI). The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. For functions that return results per category, i.e., \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, and \code{\link[=labels_sir_count]{labels_sir_count()}}, this can also be \code{NULL} or \code{FALSE} to keep S, I, and R separate. See section \emph{Interpretation of SIR} below.}
 
 \item{ab_result}{Antibiotic results to test against, must be one or more values of "S", "SDD", "I", or "R".}
 
@@ -9479,7 +9590,7 @@ You can also use e.g. \code{\link[=proportion_R]{proportion_R()}} or \code{\link
 
 \item{language}{Language of the returned text - the default is the current system language (see \code{\link[=get_AMR_locale]{get_AMR_locale()}}) and can also be set with the package option \code{\link[=AMR-options]{AMR_locale}}. Use \code{language = NULL} or \code{language = ""} to prevent translation.}
 
-\item{combine_SI}{A \link{logical} to indicate whether the 'I' category must be merged with another category, so the output only consists of susceptible vs. resistant - the default is \code{TRUE}. Following the \code{guideline} argument, the output then consists of \code{"SI"} (S+SDD+I) vs. \code{"R"} with EUCAST, and of \code{"S"} (S+SDD) vs. \code{"IR"} (I+R) with CLSI.}
+\item{combine_SI}{\emph{(deprecated in favour of \code{guideline})} A \link{logical}. If set, it takes precedence over \code{guideline}: \code{TRUE} merges S, SDD, and I into \code{"SI"} vs. \code{"R"}, and \code{FALSE} keeps S, I, and R separate.}
 }
 \value{
 A \link{double} or, when \code{as_percent = TRUE}, a \link{character}.
@@ -9506,7 +9617,26 @@ The function \code{\link[=proportion_df]{proportion_df()}} takes any variable fr
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
-This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \section{Combination Therapy}{
@@ -9550,7 +9680,7 @@ With \code{only_all_tested = TRUE}, all these functions count the result of the 
   proportion_S() + proportion_I() + proportion_R() = 1
 }\if{html}{\out{</div>}}
 
-In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' and 'SDD' categories are considered susceptible if \code{combine_SI = TRUE} (default), and the result is then reduced to S or R.
+In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' category is considered susceptible or not following the \code{guideline} argument ('SDD' is always considered susceptible), and the result is then reduced to S or R.
 }
 
 \examples{
@@ -9898,7 +10028,26 @@ Valid options for the statistical model (argument \code{model}) are:
 
 In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
 
-This AMR package follows insight; use \code{\link[=susceptibility]{susceptibility()}} (equal to \code{\link[=proportion_SI]{proportion_SI()}}) to determine antimicrobial susceptibility and \code{\link[=count_susceptible]{count_susceptible()}} (equal to \code{\link[=count_SI]{count_SI()}}) to count susceptible isolates.
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \examples{
@@ -9974,7 +10123,7 @@ sir_combine(
 
 \item{only_all_tested}{A \link{logical} to indicate that isolates must be tested for all antimicrobials. If \code{TRUE}, the result is \code{NA} for isolates with a missing result for any of the antimicrobials. If \code{FALSE} (default), a missing result only leads to \code{NA} if a result for the missing antimicrobial could have changed the result, see \emph{Combination Therapy} below.}
 
-\item{guideline}{Either \code{"EUCAST"} (default) or \code{"CLSI"}, to determine whether the 'I' category is considered susceptible. This only affects isolates with a missing result for any of the antimicrobials when \code{only_all_tested = FALSE}, see \emph{Combination Therapy} below. The default can be changed with the \code{AMR_guideline} option, see \link{AMR-options}.}
+\item{guideline}{A guideline name, \code{"EUCAST"} or \code{"CLSI"} (or any version thereof, e.g. \code{"CLSI 2025"}), to determine whether the 'I' category is considered susceptible (EUCAST) or resistant (CLSI). This only affects isolates with a missing result for any of the antimicrobials when \code{only_all_tested = FALSE}, see \emph{Combination Therapy} below. The default is the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if it is not set. See section \emph{Interpretation of SIR} below.}
 }
 \value{
 A \code{\link{sir}} vector with the same length as the input.
@@ -10029,7 +10178,33 @@ With \code{only_all_tested = TRUE}, all these functions count the result of the 
   proportion_S() + proportion_I() + proportion_R() = 1
 }\if{html}{\out{</div>}}
 
-In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' and 'SDD' categories are considered susceptible if \code{combine_SI = TRUE} (default), and the result is then reduced to S or R.
+In \code{\link[=antibiogram]{antibiogram()}} and \code{\link[=wisca]{wisca()}}, the result of the combination therapy (\code{"most_susceptible"}) is used, the 'I' category is considered susceptible or not following the \code{guideline} argument ('SDD' is always considered susceptible), and the result is then reduced to S or R.
+}
+
+\section{Interpretation of SIR}{
+
+In 2019, the European Committee on Antimicrobial Susceptibility Testing (EUCAST) has decided to change the definitions of susceptibility testing categories S, I, and R (\url{https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/definition-of-s-i-and-r/}).
+
+In aggregated analyses, such as proportions, counts, antibiograms, and plots, the 'I' category must be considered either susceptible or resistant. In epidemiological AMR data analysis, this follows the guideline: EUCAST considers 'I' susceptible, while CLSI considers 'I' resistant. The dose-dependent susceptibility of CLSI ('SDD') is always considered susceptible, as it equals what EUCAST defines as 'I'. All functions with a \code{guideline} argument for this purpose use these categories:\tabular{lll}{
+   \code{guideline} \tab Susceptible \tab Resistant \cr
+   \code{"EUCAST"} \tab S, SDD, I, WT \tab R, NWT, NS \cr
+   \code{"CLSI"} \tab S, SDD, WT \tab I, R, NWT, NS \cr
+}
+
+
+The values 'WT' (wild type) and 'NWT' (non-wild type) result from epidemiological cut-off values (ECOFFs) instead of clinical breakpoints. Since they are no clinical categories, 'WT' is always considered susceptible and 'NWT' always resistant, regardless of the guideline. The value 'NS' (non-susceptible) is always considered resistant, and 'NI' (non-interpretable) is always considered a missing result.
+
+The \code{guideline} argument can be:
+\itemize{
+\item \strong{Left unset}, to use the package option \code{\link[=AMR-options]{AMR_guideline}}, or \code{"EUCAST"} if this option is not set. In the latter case, a message is shown once per session (but not in R Markdown or Quarto documents); set the option to silence it.
+\item \strong{\code{"EUCAST"}}, or any EUCAST version such as \code{"EUCAST 2025"}, to consider 'I' susceptible, e.g., to return \code{"SI"} vs. \code{"R"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{"CLSI"}}, or any CLSI version such as \code{"CLSI 2025"}, to consider 'I' resistant, e.g., to return \code{"S"} vs. \code{"IR"} in \code{\link[=proportion_df]{proportion_df()}}.
+\item \strong{\code{NULL} or \code{FALSE}}, to keep S, I, and R separate. This is only possible in functions that return results per category: \code{\link[=count_df]{count_df()}}, \code{\link[=proportion_df]{proportion_df()}}, \code{\link[=sir_df]{sir_df()}}, \code{\link[=ggplot_sir]{ggplot_sir()}}, \code{\link[=geom_sir]{geom_sir()}}, \code{\link[=labels_sir_count]{labels_sir_count()}}, and \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}. Functions that return a single proportion or count, such as \code{\link[=susceptibility]{susceptibility()}}, \code{\link[=count_resistant]{count_resistant()}}, \code{\link[=antibiogram]{antibiogram()}}, \code{\link[=wisca]{wisca()}}, and \code{\link[=format]{format()}} on the result of \code{\link[=bug_drug_combinations]{bug_drug_combinations()}}, require 'I' to be considered either susceptible or resistant, and return an error.
+}
+
+Use \code{\link[=susceptibility]{susceptibility()}} and \code{\link[=resistance]{resistance()}} (or \code{\link[=count_susceptible]{count_susceptible()}} and \code{\link[=count_resistant]{count_resistant()}}) to follow the guideline, or e.g. \code{\link[=proportion_SI]{proportion_SI()}} and \code{\link[=proportion_R]{proportion_R()}} to be explicit regardless of the guideline.
+
+The \code{combine_SI} argument of the functions that return results per category, \code{\link[=antibiogram]{antibiogram()}}, and \code{\link[=wisca]{wisca()}} is deprecated in favour of \code{guideline}. If set, it is followed literally and takes precedence over \code{guideline}.
 }
 
 \examples{
@@ -12108,7 +12283,7 @@ wisca_plot(wisca_out, wisca_plot_type = "posterior_coverage")
 
 - `simulations = 1000`: number of Monte Carlo draws
 - `conf_interval = 0.95`: coverage interval width
-- `combine_SI = TRUE`: count "I" and "SDD" as susceptible
+- `guideline = "EUCAST"` (or the `AMR_guideline` option): count "I" and "SDD" as covered; use `guideline = "CLSI"` to count only "SDD" as covered
 
 ## Practical considerations
 
@@ -12505,7 +12680,7 @@ The `AMR` package is a peer-reviewed, [free and open-source](https://amr-for-r.o
 
 This work was published in the Journal of Statistical Software (Volume 104(3); [DOI 10.18637/jss.v104.i03](https://doi.org/10.18637/jss.v104.i03)) and formed the basis of two PhD theses ([DOI 10.33612/diss.177417131](https://doi.org/10.33612/diss.177417131) and [DOI 10.33612/diss.192486375](https://doi.org/10.33612/diss.192486375)).
 
-After installing this package, R knows [**`r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species**](https://amr-for-r.org/reference/microorganisms.html) (updated `r format(AMR:::TAXONOMY_VERSION$GBIF$accessed_date, "%B %Y")`) and all [**`r AMR:::format_included_data_number(NROW(AMR::antimicrobials) + NROW(AMR::antivirals))` antimicrobial and antiviral drugs**](https://amr-for-r.org/reference/antimicrobials.html) by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))` and EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))` are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl) and the [University Medical Center Groningen](https://www.umcg.nl).
+After installing this package, R knows [**`r AMR:::format_included_data_number(AMR::microorganisms)` distinct microbial species**](https://amr-for-r.org/reference/microorganisms.html) (updated `r paste(month.name[as.integer(format(AMR:::TAXONOMY_VERSION$GBIF$accessed_date, "%m"))], format(AMR:::TAXONOMY_VERSION$GBIF$accessed_date, "%Y"))`) and all [**`r AMR:::format_included_data_number(NROW(AMR::antimicrobials) + NROW(AMR::antivirals))` antimicrobial and antiviral drugs**](https://amr-for-r.org/reference/antimicrobials.html) by name and code (including ATC, EARS-Net, ASIARS-Net, PubChem, LOINC and SNOMED CT), and knows all about valid SIR and MIC values. The integral clinical breakpoint guidelines from CLSI `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("CLSI", guideline))$guideline)))` and EUCAST `r min(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))`-`r max(as.integer(gsub("[^0-9]", "", subset(AMR::clinical_breakpoints, grepl("EUCAST", guideline))$guideline)))` are included, even with epidemiological cut-off (ECOFF) values. It supports and can read any data format, including WHONET data. This package works on Windows, macOS and Linux with all versions of R since R-3.0 (April 2013). **It was designed to work in any setting, including those with very limited resources**. It was created for both routine data analysis and academic research at the Faculty of Medical Sciences of the [University of Groningen](https://www.rug.nl) and the [University Medical Center Groningen](https://www.umcg.nl).
 
 The `AMR` package is available in `r AMR:::vector_and(vapply(FUN.VALUE = character(1), AMR:::LANGUAGES_SUPPORTED_NAMES, function(x) x$exonym), quotes = FALSE, sort = FALSE)`. Antimicrobial drug (group) names and colloquial microorganism names are provided in these languages.
 
