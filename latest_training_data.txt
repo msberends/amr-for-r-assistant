@@ -524,7 +524,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.0.1.9148
+Version: 3.0.1.9150
 Date: 2026-10-15
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -5207,7 +5207,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/clinical_breakpoints.Rd':
 \alias{clinical_breakpoints}
 \title{Data Set with Clinical Breakpoints for SIR Interpretation}
 \format{
-A \link[tibble:tibble]{tibble} with 61 393 observations and 15 variables:
+A \link[tibble:tibble]{tibble} with 61 389 observations and 15 variables:
 \itemize{
 \item \code{guideline}\cr Name of the guideline
 \item \code{type}\cr Breakpoint type, either \code{"ECOFF"}, \code{"animal"}, or \code{"human"}
@@ -8163,12 +8163,13 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/microorganisms.codes.Rd':
 \docType{data}
 \name{microorganisms.codes}
 \alias{microorganisms.codes}
-\title{Data Set with 6 022 Common Microorganism Codes}
+\title{Data Set with 6 293 Common Microorganism Codes}
 \format{
-A \link[tibble:tibble]{tibble} with 6 022 observations and 2 variables:
+A \link[tibble:tibble]{tibble} with 6 293 observations and 3 variables:
 \itemize{
 \item \code{code}\cr Commonly used code of a microorganism. \emph{\strong{This is a unique identifier.}}
-\item \code{mo}\cr ID of the microorganism in the \link{microorganisms} data set
+\item \code{mo}\cr ID of the microorganism in the \link{microorganisms} data set. This is the record of the name that the code was named after, also if that name is outdated, so that the code and the microorganism ID remain relatable: e.g., the WHONET code \code{EAE} refers to \emph{Enterobacter aerogenes} (\code{B_ENTRBC_AERG}). \code{\link[=as.mo]{as.mo()}} returns the current name, here \emph{Klebsiella aerogenes}. Codes for organisms that are not in the \link{microorganisms} data set, such as viruses, refer to \code{UNKNOWN}.
+\item \code{source}\cr Source of the code, with the name it refers to, e.g. \code{"WHONET (Enterobacter aerogenes)"}, or \code{NA} if the source is unknown
 }
 }
 \usage{
