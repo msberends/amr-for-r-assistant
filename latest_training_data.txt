@@ -524,7 +524,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.1.0.9012
+Version: 3.1.0.9013
 Date: 2026-10-30
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
@@ -7308,7 +7308,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/intrinsic_resistant.Rd':
 \alias{intrinsic_resistant}
 \title{Data Set Denoting Bacterial Intrinsic Resistance}
 \format{
-A \link[tibble:tibble]{tibble} with 307 684 observations and 3 variables:
+A \link[tibble:tibble]{tibble} with 307 746 observations and 3 variables:
 \itemize{
 \item \code{mo}\cr Microorganism ID which occurs in \code{\link[=microorganisms]{microorganisms$mo}}. Names can be retrieved using \code{\link[=mo_name]{mo_name()}}.
 \item \code{ab}\cr Antimicrobial ID which occurs in \code{\link[=antimicrobials]{antimicrobials$ab}}. Names can be retrieved using \code{\link[=ab_name]{ab_name()}}.
