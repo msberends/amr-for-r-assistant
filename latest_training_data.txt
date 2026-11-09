@@ -283,6 +283,7 @@ export(italicize_taxonomy)
 export(key_antimicrobials)
 export(kurtosis)
 export(labels_sir_count)
+export(labels_taxonomy)
 export(left_join_microorganisms)
 export(like)
 export(lincosamides)
@@ -524,8 +525,8 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'DESCRIPTION':
 
 
 Package: AMR
-Version: 3.1.0.9015
-Date: 2026-11-04
+Version: 3.1.0.9017
+Date: 2026-11-09
 Title: Antimicrobial Resistance Data Analysis
 Description: Functions to simplify and standardise antimicrobial resistance (AMR)
   data analysis and to work with microbial and antimicrobial properties by
@@ -7358,30 +7359,41 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/italicise_taxonomy.Rd':
 \alias{italicize_taxonomy}
 \title{Italicise Taxonomic Families, Genera, Species, and Subspecies}
 \usage{
-italicise_taxonomy(string, type = c("markdown", "ansi", "html"))
+italicise_taxonomy(string, type = c("markdown", "ansi", "html", "plotmath"))
 
-italicize_taxonomy(string, type = c("markdown", "ansi", "html"))
+italicize_taxonomy(string, type = c("markdown", "ansi", "html", "plotmath"))
 }
 \arguments{
 \item{string}{A \link{character} (vector).}
 
-\item{type}{Type of conversion of the taxonomic names, either "markdown", "html" or "ansi", see \emph{Details}.}
+\item{type}{Type of conversion of the taxonomic names, either "markdown", "html", "ansi" or "plotmath", see \emph{Details}.}
+}
+\value{
+For "markdown", "html" and "ansi", a \link{character} vector. For "plotmath", an \link{expression} vector. Both have the same length as \code{string} and keep \code{NA} values.
 }
 \description{
 According to the binomial nomenclature, the lowest four taxonomic levels (family, genus, species, subspecies) should be printed in italics. This function finds taxonomic names within strings and makes them italic.
 }
 \details{
-This function finds the taxonomic names and makes them italic based on the \link{microorganisms} data set.
+This function finds the taxonomic names and makes them italic based on the \link{microorganisms} data set. Family and genus names are italicised anywhere in the text. Species and subspecies names are only italicised when they follow a genus, an abbreviated genus (such as "E." in "E. coli"), or another species or subspecies name, so that ordinary words that are also species names (such as "coli" or "major") stay upright. Subspecies may also follow "subsp.", "ssp." or "var.", which stay upright themselves, e.g., "\emph{K. pneumoniae} subsp. \emph{ozaenae}". \emph{Salmonella} serovars (such as Typhimurium) and groups are not italicised, as is the convention. Punctuation around the names, such as brackets and commas, stays outside the italics.
 
 The taxonomic names can be italicised using markdown (the default) by adding \code{*} before and after the taxonomic names, or \verb{<i>} and \verb{</i>} when using html. When using 'ansi', ANSI colours will be added using \verb{\\033[3m} before and \verb{\\033[23m} after the taxonomic names. If multiple ANSI colours are not available, no conversion will occur.
 
-This function also supports abbreviation of the genus if it is followed by a species, such as "E. coli" and "K. pneumoniae ozaenae".
+Use \code{type = "plotmath"} to get an \link{expression} vector for plots (see \link[grDevices:plotmath]{plotmath}), which works for titles, axes and legends in both base \R and \code{ggplot2}. For axis and legend labels, the function \code{\link[=labels_taxonomy]{labels_taxonomy()}} does exactly this and can directly be used as labeller, e.g., \code{ggplot2::scale_x_discrete(labels = labels_taxonomy)}.
 }
 \examples{
 italicise_taxonomy("An overview of Staphylococcus aureus isolates")
 italicise_taxonomy("An overview of S. aureus isolates")
+italicise_taxonomy("Infections with E. coli (and coli bacteria in general)")
 
 cat(italicise_taxonomy("An overview of S. aureus isolates", type = "ansi"))
+
+# for plots:
+italicise_taxonomy("An overview of S. aureus isolates", type = "plotmath")
+plot(1:10, main = italicise_taxonomy("Growth of S. aureus", type = "plotmath"))
+}
+\seealso{
+\code{\link[=labels_taxonomy]{labels_taxonomy()}} to italicise taxonomic names in plot labels.
 }
 
 
@@ -9143,6 +9155,7 @@ THE PART HEREAFTER CONTAINS CONTENTS FROM FILE 'man/plot.Rd':
 \alias{scale_sir_colours}
 \alias{scale_sir_colors}
 \alias{theme_sir}
+\alias{labels_taxonomy}
 \title{Plotting Helpers for AMR Data Analysis}
 \usage{
 scale_x_mic(keep_operators = "edges", mic_range = NULL, ...)
@@ -9271,6 +9284,8 @@ scale_sir_colours(
 )
 
 theme_sir()
+
+labels_taxonomy(x, ...)
 }
 \arguments{
 \item{keep_operators}{A \link{character} specifying how to handle operators (such as \code{>} and \code{<=}) in the input. Accepts one of three values: \code{"all"} (or \code{TRUE}) to keep all operators, \code{"none"} (or \code{FALSE}) to remove all operators, or \code{"edges"} to keep operators only at both ends of the range.}
@@ -9285,7 +9300,7 @@ theme_sir()
 
 \item{eucast_I}{A \link{logical} to indicate whether the 'I' must be interpreted as "Susceptible, under increased exposure". Will be \code{TRUE} if the default \link[=as.sir]{AMR interpretation guideline} is set to EUCAST 2019 or later (which is the default). With \code{FALSE}, it will be interpreted as "Intermediate".}
 
-\item{x, object}{Values created with \code{\link[=as.mic]{as.mic()}}, \code{\link[=as.disk]{as.disk()}} or \code{\link[=as.sir]{as.sir()}} (or their \verb{random_*} variants, such as \code{\link[=random_mic]{random_mic()}}).}
+\item{x, object}{Values created with \code{\link[=as.mic]{as.mic()}}, \code{\link[=as.disk]{as.disk()}} or \code{\link[=as.sir]{as.sir()}} (or their \verb{random_*} variants, such as \code{\link[=random_mic]{random_mic()}}). For \code{\link[=labels_taxonomy]{labels_taxonomy()}}, any values to use as labels, such as the breaks of an axis.}
 
 \item{mo}{Any (vector of) text that can be coerced to a valid microorganism code with \code{\link[=as.mo]{as.mo()}}.}
 
@@ -9350,6 +9365,11 @@ This package contains more functions that extend the \code{ggplot2} package, to 
 \item \code{\link[=theme_sir]{theme_sir()}} is a \link[ggplot2:theme]{ggplot2 theme} with minimal distraction.
 \item \code{\link[=labels_sir_count]{labels_sir_count()}} prints data labels on the bars with percentage and number of isolates, using \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
 }
+}
+
+\subsection{Taxonomic Names in Labels}{
+
+The function \code{\link[=labels_taxonomy]{labels_taxonomy()}} prints taxonomic names in axis and legend labels in italics, as is the convention in microbiology, e.g., \emph{E. coli} and \emph{Klebsiella pneumoniae}. It can directly be used as labeller in \code{ggplot2}, e.g., \code{scale_x_discrete(labels = labels_taxonomy)}, and in base \R, e.g., \code{axis(1, at = 1:3, labels = labels_taxonomy(names))}. Other words, such as "Other" or "CoNS", stay upright. It uses \code{\link[=italicise_taxonomy]{italicise_taxonomy()}} with \code{type = "plotmath"}, which also works for titles. It returns an \link{expression} vector of the same length as \code{x}; other arguments in \code{...} are ignored.
 
 The interpretation of "I" will be named "Susceptible, incr. exp." (susceptible, increased exposure) for all EUCAST guidelines since 2019, and will be named "Intermediate" in all other cases.
 
@@ -9498,6 +9518,18 @@ plot(some_disk_values, mo = "Escherichia coli", ab = "cipro")
 plot(some_disk_values, mo = "Escherichia coli", ab = "cipro", language = "nl")
 
 plot(some_sir_values)
+
+# Taxonomic names in italics using labels_taxonomy() ------------------
+bacteria <- data.frame(
+  name = c("E. coli", "Klebsiella pneumoniae", "CoNS", "Other"),
+  n = c(25, 18, 9, 6)
+)
+barplot(bacteria$n, names.arg = labels_taxonomy(bacteria$name))
+if (require("ggplot2")) {
+  ggplot(bacteria, aes(name, n)) +
+    geom_col() +
+    scale_x_discrete(labels = labels_taxonomy)
+}
 }
 
 
@@ -10913,6 +10945,17 @@ autoplot(mic_values)
 
 # by providing `mo` and `ab`, colours will indicate the SIR interpretation:
 autoplot(mic_values, mo = "K. pneumoniae", ab = "cipro", guideline = "EUCAST")
+```
+
+Taxonomic names are printed in italics by convention. Use `labels_taxonomy()` for this in axis and legend labels, and `italicise_taxonomy(..., type = "plotmath")` for titles:
+
+```{r labels_taxonomy}
+our_data_1st %>%
+  count(species = mo_name(bacteria)) %>%
+  ggplot(aes(x = species, y = n)) +
+  geom_col() +
+  scale_x_discrete(labels = labels_taxonomy) +
+  labs(title = italicise_taxonomy("First isolates of E. coli and other species", type = "plotmath"))
 ```
 
 ----
